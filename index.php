@@ -171,6 +171,12 @@ if($userPuntualmente->iniciar_sesion()){
             case 'chat/admingrupos':
                 $userPuntualmente->admingrupos();
                 break;
+            case 'chat/grupos/header':
+                    $userPuntualmente->getgruposheader();
+                    break;
+            case 'chat/grupos/chat':
+                    $userPuntualmente->getchatgrupos();
+                    break;
 
             //TICKETS
                 
@@ -238,6 +244,12 @@ if($userPuntualmente->iniciar_sesion()){
                 break;
             case 'chat/admingrupos':
                 $userPuntualmente->admingrupos();
+                break;
+            case 'chat/grupos/header':
+                $userPuntualmente->getgruposheader();
+                break;
+            case 'chat/grupos/chat':
+                $userPuntualmente->getchatgrupos();
                 break;
 
                 //TICKETS
