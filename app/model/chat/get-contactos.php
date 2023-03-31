@@ -34,7 +34,7 @@
 
                         <ul class="list-unstyled chat-list">
                             <li>
-                                <a type="button" id="' . $esta['id'] . '" onclick="hola(this.id)">
+                                <a type="button" id="' . $esta['id'] . '" onclick="holausers(this.id)">
                                     <h5 class="font-size-14 mb-0">'.$esta['n_user']." ".$esta['l_user'].'</h5>
                                 </a>
                             </li>

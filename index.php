@@ -121,6 +121,10 @@ if($userPuntualmente->iniciar_sesion()){
 
         switch ($_GET["action"]){
 
+            case "/":
+                $userPuntualmente->chat();
+                break;
+
             case 'notify':
                 $userPuntualmente->notify();
                 break;
@@ -199,6 +203,11 @@ if($userPuntualmente->iniciar_sesion()){
 
         switch ($_GET["action"]){
 
+
+            case "/":
+                $userPuntualmente->chat();
+                break;
+
             case 'notify':
                 $userPuntualmente->notify();
                 break;
@@ -245,12 +254,7 @@ if($userPuntualmente->iniciar_sesion()){
             case 'chat/admingrupos':
                 $userPuntualmente->admingrupos();
                 break;
-            case 'chat/grupos/header':
-                $userPuntualmente->getgruposheader();
-                break;
-            case 'chat/grupos/chat':
-                $userPuntualmente->getchatgrupos();
-                break;
+          
 
                 //TICKETS
                 
@@ -270,7 +274,12 @@ if($userPuntualmente->iniciar_sesion()){
                 break;
         }
     }else{
-        $userPuntualmente->home()||$userPuntualmente->chat();
+        if($_SESSION['rol']==1){
+            $userPuntualmente->home();
+        }elseif($_SESSION['rol']==2||$_SESSION['rol']==3){
+            $userPuntualmente->chat();
+        }
+        
     }
 
     // Usuario regular
