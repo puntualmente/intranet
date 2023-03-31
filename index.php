@@ -67,6 +67,12 @@ if($userPuntualmente->iniciar_sesion()){
             case 'chat/admingrupos':
                 $userPuntualmente->admingrupos();
                 break;
+            case 'chat/grupos/header':
+                $userPuntualmente->getgruposheader();
+                break;
+            case 'chat/grupos/chat':
+                $userPuntualmente->getchatgrupos();
+                break;
 
                 //TABLAS
 

@@ -103,6 +103,11 @@ class controlador{
         include_once(__dir__."/../model/chat/get-contactos.php");
 
     }
+
+  
+
+
+    
 // ------------------------------------ GRUPOS-------------------------------
 
     public function addusersgroup(){
@@ -119,6 +124,13 @@ class controlador{
     }
     public function admingrupos(){
         include_once(__dir__."/../model/grupo/admingrupos.php");
+    }
+    public function getgruposheader(){
+        include_once(__dir__."/../model/grupo/getheadergrupos.php");
+    }
+
+    public function getchatgrupos(){
+        include_once(__dir__."/../model/grupo/getchatgrupo.php");
     }
 
 

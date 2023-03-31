@@ -131,7 +131,7 @@
             $output .= '
                             <li '.$class2.'>
 
-                                <a type="button" id="' . $row8['id'] . '" onclick="hola(this.id)">
+                                <a type="button" id="' . $row8['id'] . '" onclick="holausers(this.id)">
                                     <div class="d-flex align-items-start">
                                         
                                         <div class="flex-shrink-0 user-img '. $class .' align-self-center me-3">

@@ -71,7 +71,7 @@ mostrarcosas = setInterval(() =>{
 }, 1000);
 
 
-function hola(id){
+function holausers(id){
 
   document.getElementById('botonopciones').disabled=false;
   document.getElementById('enviar').disabled=false;
@@ -100,7 +100,7 @@ function hola(id){
     }
   }
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.send("id_out=" + id);
+  xhr.send("id_user=" + id);
 
 
   chat=setInterval(() =>{
@@ -115,7 +115,7 @@ function hola(id){
     }
   }
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.send("id_out=" + id);
+  xhr.send("id_user=" + id);
 }, 500);
 setTimeout(function(){
   document.getElementById('final').scrollIntoView(true);
@@ -123,5 +123,59 @@ setTimeout(function(){
 
 
 }
+
+function holagrupos(id){
+
+  document.getElementById('botonopciones').disabled=false;
+  document.getElementById('enviar').disabled=false;
+  document.getElementById('msg').disabled=false;
+  document.getElementById('contenidodeenvio').hidden=false;
+  document.getElementById('iniciodelchat').hidden=true;
+
+
+  
+  
+  clearInterval(chat);
+  contenidochat = document.querySelector("#contenidochat");
+  headerchat = document.querySelector("#headerchat");
+  
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "chat/grupos/header", true);
+  xhr.onload = ()=>{
+    if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status === 200){
+          let data2 = xhr.response;
+          headerchat.innerHTML = data2;
+       
+
+        }
+    }
+  }
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("id_grupo=" + id);
+
+
+  chat=setInterval(() =>{
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "chat/grupos/chat", true);
+  xhr.onload = ()=>{
+    if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status === 200){
+          let data = xhr.response;
+          contenidochat.innerHTML = data;
+        }
+    }
+  }
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("id_grupo=" + id);
+}, 500);
+setTimeout(function(){
+  document.getElementById('final').scrollIntoView(true);
+}, 600);
+
+
+}
+
 
 

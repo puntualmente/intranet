@@ -26,7 +26,7 @@ if(mysqli_num_rows($sql2) == 0){
     $output .= 
     '
     <li>
-    <a id="' . $id_grupo . '" type="button" id="' . $row['id'] . '" onclick="hola(this.id)" >
+    <a id="' . $id_grupo . '" type="button" id="' . $row['id'] . '" onclick="holagrupos(this.id)" >
         <div class="d-flex align-items-center">
             <div class="flex-shrink-0 avatar-sm me-3">
                 <span class="avatar-title rounded-circle  bg-primary-subtle text-primary">
