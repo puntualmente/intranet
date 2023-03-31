@@ -1,7 +1,7 @@
 <?php
 
 class controlador{
-    public static $rutaAPP="/proy_puntualmente/";
+    public static $rutaAPP="/intranet/";
 
     public function iniciar_sesion(){
 
