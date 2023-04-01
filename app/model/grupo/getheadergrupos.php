@@ -30,6 +30,9 @@ function headerchatgrupo($letra, $nombre, $id_grupo, $soyadmin){
     $output='
         <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value ="'.$id_grupo.'">
     <div class="row">
+    <input type="text" id="esgrupo" name="esgrupo" hidden dissabled value ="true">
+    <div class="row">
+
             
             <div class="col-xl-4 col-7">
 

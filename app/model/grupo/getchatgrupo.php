@@ -12,7 +12,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
 
        
         $visto=mysqli_query($conn, $vistos);
-        $sql3 = "SELECT * FROM messages LEFT JOIN users ON id = messages.outgoing_msg_id
+        $sql3 = "SELECT * FROM messages_grupos LEFT JOIN users ON id = messages_grupos.outgoing_msg_id
                 WHERE (incoming_msg_id = {$incoming_id}) ORDER BY msg_id";
         $query3 = mysqli_query($conn, $sql3);
         $unavez=false;
@@ -144,7 +144,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <ul class="list-inline message-img mt-3  mb-0">
                                                             <li class="list-inline-item message-img-list">
                                                                 <a class="d-inline-block m-1" href="">
-                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail">
+                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="" class="rounded img-thumbnail">
                                                                 </a>                                                                  
                                                             </li>
     
@@ -168,7 +168,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <ul class="list-inline message-img mt-3  mb-0">
                                                             <li class="list-inline-item message-img-list">
                                                                 <a class="d-inline-block m-1" href="">
-                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail">
+                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="" class="rounded img-thumbnail">
                                                                 </a>                                                                  
                                                             </li>
     
