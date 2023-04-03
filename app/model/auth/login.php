@@ -32,6 +32,7 @@ if (!empty($cedula) && !empty($password)) {
                 $_SESSION['username'] = $row['n_user'] . " " . $row['l_user'];
                 $_SESSION['rol'] = $row['rol'];
                 $_SESSION['img'] = $row['img'];
+                $_SESSION['id_area']=$row['id_area'];
                 
                 $status = mysqli_query($conn, "SELECT (status) FROM users WHERE cedula = '{$cedula}'");
                 $row3 = mysqli_fetch_assoc($status);

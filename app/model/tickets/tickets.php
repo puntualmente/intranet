@@ -67,19 +67,23 @@ if($estado==3){
                 $status = mysqli_query($conn, $sql);
                 foreach($status as $value){
                     $output='
-                        <textarea name="des_etiqueta" id="des_etiqueta" cols="20" rows="2" value="'. $value['descrip_etiq'] .'">'. $value['descrip_etiq'] .'</textarea>
-                        <br>
-                        <span for="t_estimado">Tiempo estimado respuesta de la tarea: </span>
-                        <input type="number" name="t_estimado" id="t_estimado" value= '. $value['t_estimado'].'>
-                        <select name="tipo_t" id="tipo_t">
-                            <option value="'.$value['tipo_t'].'" selected disabled>'.$value['tipo_t'].'</option>
-                            <option value="horas">Horas</option>
-                            <option value="dias">Dias</option>
-                        </select>
-                        <select name="area_etiqueta" id="area_etiqueta">
-                            '.selectareas($areas, $value['id_area']).'
-                        </select>
-                        <button type="button" id="'. $value['id_etiqueta'] .'" class="btn-borde" onclick="actualizaretiqueta(this.id)">Actualizar</button>
+
+                <tr>
+                    <td>'.$etiqueta['id_etiqueta'].'</td>
+                    <td>'.$etiqueta['id_area'].'</td>
+                    <td>'.$etiqueta['descrip_etiq'].'</td>
+                    <td>'.$etiqueta['t_estimado'].'</td>
+                    <td>'.$etiqueta['tipo_t'].'</td>
+                    <td>
+                    <a type="button" id="'.$etiqueta['id_etiqueta'].'" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
+                    <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a type="button" id="'.$etiqueta['id_etiqueta'].'" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
+                    <i class=" fas fa-trash-alt"></i>
+                    </a>
+                </td>
+                </tr>
+
                     ';
                 }
                 echo $output;
@@ -105,23 +109,20 @@ function tablaetiquetas($etiquetas, $area_etiq){
              
         $output .= '
         <tr>
-            <td>
-                <span>' . $value['descrip_etiq'] . '</span>
-            </td>
-            <td>
-                <span>' . $narea .'</span>
-            </td>
-            <td>
-                <span>' .$value['t_estimado'] . " " . $value['tipo_t'] .'</span>
-            </td>
-            <td>
-            <button type="button" id="' . $value['id_etiqueta'] . '" onclick="editaretiqueta(this.id)" class="btn-borde"><i class="fa-solid fa-pen-to-square"></i></button>
-            </td>
-            <td>
-            <button type="button" id="' . $value['id_etiqueta'] . '" onclick="borraretiqueta(this.id)" class="btn-borde"><i class="fa-solid fa-xmark"></i></button>
-            </td>
-                                
-        </tr>
+                    <td>'.$value['id_etiqueta'].'</td>
+                    <td>'.$value['id_area'].'</td>
+                    <td>'.$value['descrip_etiq'].'</td>
+                    <td>'.$value['t_estimado'].'</td>
+                    <td>'.$value['tipo_t'].'</td>
+                    <td>
+                    <a type="button" id="'.$value['id_etiqueta'].'" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
+                    <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a type="button" id="'.$value['id_etiqueta'].'" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
+                    <i class=" fas fa-trash-alt"></i>
+                    </a>
+                </td>
+                </tr>
         ';
             }
     }}

@@ -417,7 +417,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
                                                     </div>
                                                     <div class="modal-body">
-
+                                                    
                                                     <div class="mb-3">
                                                         <label for="area" class="form-label font-size-13 text-muted">Area destino ticket:</label>
                                                         <select class="form-control" data-trigger name="area" id="area" onchange="areaselect(this.value)">
@@ -436,8 +436,8 @@
                                                         <label for="descripticket">Descripción</label>
                                                         <textarea class="form-control" name="descripticket" id="descripticket"></textarea>
                                                     </div>
-                                                    
-                                
+                                                    <span id="mensajeticket"></span>            
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>

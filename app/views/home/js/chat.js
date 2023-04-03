@@ -160,21 +160,25 @@ function limpiar(){
         areaDestTkt=document.getElementById('area').value;
         select_etk=document.getElementById('sel_etiqueta').value;
         descrip=document.getElementById('descripticket').value;
+        mensajetkt=document.getElementById('mensajeticket');
 
         obj = [{ "area_dest_tkt": areaDestTkt, "etiqueta": select_etk, "descrip": descrip, "estado": 0 }];
         console.log(obj)
         dbParam = JSON.stringify(obj);
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "chat/tkt/creartkt", true);
-        xhr.onload = ()=>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
-                let data = xhr.response;
-                mostrar_etiqueta.innerHTML = data;
+        let enviarticket = new XMLHttpRequest();
+        enviarticket.open("POST", "chat/tkt/creartkt", true);
+        enviarticket.onload = ()=>{
+        if(enviarticket.readyState === XMLHttpRequest.DONE){
+            if(enviarticket.status === 200){
+                let data = enviarticket.response;
+                mensajetkt.innerHTML = data;
             }else{
+                mensajetkt.innerHTML = data;
             }
         }
     }
+    enviarticket.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    enviarticket.send("x=" + dbParam);
 
     }
 

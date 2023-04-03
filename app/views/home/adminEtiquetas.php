@@ -66,7 +66,7 @@
                                     </thead>
 
 
-                                    <tbody>
+                                    <tbody id="mensaje_etiqueta">
 
                                     <?php foreach($etiquetas as $etiqueta){?>
 
@@ -77,10 +77,10 @@
                                             <td><?php echo $etiqueta['t_estimado']?></td>
                                             <td><?php echo $etiqueta['tipo_t']?></td>
                                             <td>
-                                                <a type="button" id="<?php //echo $empresa['id_etiqueta']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
+                                                <a type="button" id="<?php echo $empresa['id_etiqueta']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
                                                 <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a type="button" id="<?php //echo $empresa['id_etiqueta']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
+                                                <a type="button" id="<?php echo $empresa['id_etiqueta']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
                                                 <i class=" fas fa-trash-alt"></i>
                                                 </a>
                                             </td>
@@ -131,7 +131,6 @@
                                                             <option value="Dias">Dias</option>
                                                         </select>
                                                     </div>
-                                                <div id="mensaje_etiqueta"></div>
                                                     
                                                 </div>
 

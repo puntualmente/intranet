@@ -7,7 +7,7 @@ if(!isset($_POST['x'])){
     if(getnoti($consulnotis)>0){
         echo getnoti($consulnotis);
     }else{
-        echo "";
+        echo getnoti($consulnotis);
     }
     
 
@@ -19,7 +19,15 @@ if(!isset($_POST['x'])){
         if(getnoti($consulnotis)>0){
             echo getnoti($noty_grupos);
         }else{
-            echo "";
+            echo getnoti($noty_grupos);
+        }
+    }elseif($estado==2){
+        $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE id_area = '{$_SESSION['id_area']}' and estado = 1");
+
+        if(getnotitickets($tickets)>0){
+            echo getnotitickets($tickets);
+        }else{
+            echo getnotitickets($tickets);
         }
     }
 }
@@ -42,6 +50,15 @@ if(!isset($_POST['x'])){
         return $cont;
     }
 
+    function getnotitickets($notis){
+        $cont=0;
+        foreach($notis as $noti){
+            if($noti['estado']==1){
+                $cont=$cont+1;
+            }
+        }
+        return $cont;
+    }
 
 
 
