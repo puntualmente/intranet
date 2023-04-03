@@ -152,6 +152,10 @@ class controlador{
         include_once(__dir__."/../model/tickets/crearTicket.php");
     }
 
+    public function mistickets(){
+        include_once(__dir__."/../views/home/mistickets.php");
+    }
+
 
 // -----------------Admin users----------------
 

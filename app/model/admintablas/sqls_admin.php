@@ -10,6 +10,9 @@ $consulnotis=mysqli_query($conn,"SELECT * FROM messages WHERE ( incoming_msg_id 
 $grupos_chat=mysqli_query($conn, "SELECT * FROM grupos_chat");
 $etiquetas=mysqli_query($conn, "SELECT * FROM etiquetas");
 
+
+$mistickets = mysqli_query($conn, "SELECT * FROM tickets WHERE id_propietario_tck = '{$_SESSION['unique_id']}'");
+
 $noty_grupos = mysqli_query($conn, "SELECT * FROM mensajes_grupos WHERE id_persona = '{$_SESSION['unique_id']}' AND estado='0'");
 
 //Consultas para funciones

@@ -101,6 +101,10 @@ if($userPuntualmente->iniciar_sesion()){
             case 'chat/tkt/creartkt':
                 $userPuntualmente->creartkt();
                 break;
+            
+            case 'mistickets':
+                $userPuntualmente->mistickets();
+                break;
 
 
 
@@ -188,6 +192,10 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->creartkt();
                 break;
 
+            case 'mistickets':
+                $userPuntualmente->mistickets();
+                break;
+
 
             
 
@@ -266,6 +274,9 @@ if($userPuntualmente->iniciar_sesion()){
                 
             case 'chat/tkt/creartkt':
                 $userPuntualmente->creartkt();
+                break;
+            case 'mistickets':
+                $userPuntualmente->mistickets();
                 break;
 
 

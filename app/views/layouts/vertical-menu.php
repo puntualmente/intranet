@@ -236,6 +236,25 @@
                     
                     <?php }?>
 
+                    <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="mdi mdi-ticket-account"></i>
+                        <span data-key="t-apps">Tickets</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="mistickets">
+                                <span data-key="m-tickets">Mis Tickets</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span data-key="tickets">Tickets</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->
