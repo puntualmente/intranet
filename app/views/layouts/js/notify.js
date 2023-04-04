@@ -76,7 +76,7 @@ if(xhr3.readyState === XMLHttpRequest.DONE){
         numnotys=parseInt(numnotys)+parseInt(data3);
 
       }else{
-        notitickets.innerHTML= `Tienes ${data3} mensajes nuevos`;
+        notitickets.innerHTML= `Tienes ${data3} Tickets por resolver`;
         numnotys=parseInt(numnotys)+parseInt(data3);
 
       }

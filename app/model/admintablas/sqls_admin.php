@@ -12,6 +12,7 @@ $etiquetas=mysqli_query($conn, "SELECT * FROM etiquetas");
 
 
 $mistickets = mysqli_query($conn, "SELECT * FROM tickets WHERE id_propietario_tck = '{$_SESSION['unique_id']}'");
+$ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE id_area = '{$_SESSION['id_area']}'");
 
 $noty_grupos = mysqli_query($conn, "SELECT * FROM mensajes_grupos WHERE id_persona = '{$_SESSION['unique_id']}' AND estado='0'");
 

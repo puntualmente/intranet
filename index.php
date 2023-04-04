@@ -106,6 +106,11 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->mistickets();
                 break;
 
+            case 'tickets':
+                $userPuntualmente->tickets();
+                break;
+
+
 
 
 
@@ -196,6 +201,11 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->mistickets();
                 break;
 
+            case 'tickets':
+                $userPuntualmente->tickets();
+                break;
+
+
 
             
 
@@ -277,6 +287,9 @@ if($userPuntualmente->iniciar_sesion()){
                 break;
             case 'mistickets':
                 $userPuntualmente->mistickets();
+                break;
+            case 'tickets':
+                $userPuntualmente->tickets();
                 break;
 
 

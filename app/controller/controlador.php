@@ -156,6 +156,11 @@ class controlador{
         include_once(__dir__."/../views/home/mistickets.php");
     }
 
+    public function tickets(){
+        include_once(__dir__."/../views/home/tickets.php");
+    }
+
+
 
 // -----------------Admin users----------------
 
