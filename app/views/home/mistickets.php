@@ -58,6 +58,7 @@
                                             <th>Etiqueta</th>
                                             <th>Descrip</th>
                                             <th>Estado</th>
+                                            <th></th>
                                             <!-- <th>Detalles</th> -->
                                         </tr>
                                     </thead>
@@ -90,14 +91,13 @@
                                             <td><?php echo $etiq['descrip_etiq']?></td>
                                             <td><?php echo $ticket['descrip']?></td>
                                             <td class="<?php echo $class?>"> <?php echo $estado?></td>
+                                            <td>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resuelto" onclick="traerresuelto(this.id)">
+                                                        <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        
+                                                    </td>
 
-
-
-                                            <!-- <td>
-                                                <a type="button" id="<?php //echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal1" data-bs-target="#staticBackdrop2">
-                                                <i class="fas fa-eye"></i>
-                                                </a>
-                                            </td> -->
                                         </tr>
                                     <?php } ?>
                                     </tbody>
@@ -110,55 +110,30 @@
                 </div>
                                         </div>
                                     </div>
-                <!-- Scrollable modal -->
-                                <form method="post" id="formetiqueta">
-                                        <div class="modal fade" id="crearetiqueta" tabindex="-1" role="dialog"
+ <!-- MODAL TICKET RESUELTO -->
+
+                                    <form method="post" id="formetiqueta">
+                                        <div class="modal fade" id="resuelto" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Crear Etiqueta</h5>
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Detalles Ticket Cerrado</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                <div class="modal-body">
-                                                    
-                                                    <div class="mb-3">
-                                                <label for="area" class="form-label font-size-13 text-muted">Area:</label>
-                                                <select class="form-control" data-trigger name="area_etiqueta" id="area_etiqueta">
-                                                    <option value="0" selected disabled require>1. Elige un area</option>
-                                                    <?php foreach($areas as $value){?>
-                                                        <option value="<?php echo $value['id_area']?>"><?php echo $value['n_area']?></option>
-                                                    <?php }?>
-                                                </select>
-                                                <label for="descripetic">Descripción:</label>
-                                                <textarea name="descripetic" id="descripetic" class="form-control"></textarea>
-                                                </div>
-                                                <label class="form-label font-size-13 text-muted">Tiempo Estimado: </label>
-                                                <div class="d-flex justify-content-center" >
-                                                    <div>
-                                                        <input type="number" id="t_estimado" class="form-control">
-                                                    </div>
-                                                    <div>
-                                                        <select class="form-select" name="tipo_t" id="tipo_t">
-                                                            <option value="Minutos">Minutos</option>
-                                                            <option value="Horas">Horas</option>
-                                                            <option value="Dias">Dias</option>
-                                                        </select>
-                                                    </div>
-                                                    
-                                                </div>
+                                                <div class="modal-body" id="idticketresuelto">
 
-                                <div id="mensaje"></div>
-                                                    </div>
+                                                
+
+                                                
+                                                </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
-                                                        <button type="button" onclick="agregaretiqueta()"  class="btn btn-primary">Guardar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
-
-                                        </form>
+                                </form>
 
 </div>
 <!-- END layout-wrapper -->
@@ -201,6 +176,7 @@
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/form-advanced.init.js"></script>
 
 <script src="<?php echo controlador::$rutaAPP?>app/views/home/js/adminetiquetas.js"></script>
+
 
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/app.js"></script>
 

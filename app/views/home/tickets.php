@@ -58,7 +58,7 @@
                                             <th>Etiqueta</th>
                                             <!-- <th>Descrip</th> -->
                                             <th>Estado</th>
-                                            <th>Accion</th>
+                                            <th></th>
                                             <!-- <th>Detalles</th> -->
                                         </tr>
                                     </thead>
@@ -79,29 +79,53 @@
                                             $estado= "Pendiente";
                                             $disabled="";
                                         }elseif($ticket['estado']==2){
+                                            $class="text-danger";
+                                            $estado="Redireccionado";
+                                            $disabled="Redireccionado";
+                                        }elseif($ticket['estado']==3){
                                             $class="text-success";
                                             $estado="Resuelto";
-                                            $disabled="disabled";
+                                            $disabled="Resuelto";
                                         }
                                         
                                         ?>
 
                                         <tr>
                                             <td><?php echo $ticket['id_ticket']?></td>
-                                            <td><?php echo $dato['n_user']?></td>
+                                            <td><?php echo $dato['n_user'] ." ". $dato['l_user'] ?></td>
                                             <td><?php echo $ticket['fecha_hora']?></td>
                                             <td><?php echo $etiq['descrip_etiq']?></td>
                                             <!-- <td><?php //echo $ticket['descrip']?></td> -->
                                             <td class="<?php echo $class?>"> <?php echo $estado?></td>
 
-                                            <td>
-                                                <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resolver" <?php echo $disabled?> >
-                                                <i class="far fa-check-circle"></i>
-                                                </button>
-                                                <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#reasignar" <?php echo $disabled?> >
-                                                <i class=" fas fa-share"></i>
-                                                </button>
-                                            </td>
+                                            <?php 
+
+                                                if($ticket['estado']==1){ ?>
+                                                    <td>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resolver" onclick="traerReasignartk(this.id)" <?php echo $disabled?> >
+                                                        <i class="far fa-check-circle"></i>
+                                                        </button>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#reasignar" onclick="traeridreasignar(this.id)" <?php echo $disabled?> >
+                                                        <i class=" fas fa-share"></i>
+                                                        </button>
+                                                    </td>
+                                            <?php }elseif($ticket['estado']==2){ ?>
+                                                    <td>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resolver" onclick="traeridreasignar(this.id)" <?php echo $disabled?> >
+                                                        <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        
+                                                    </td>
+
+                                            <?php }elseif($ticket['estado']==3){ ?>
+                                                <td>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resuelto" onclick="traerresuelto(this.id)" <?php echo $disabled?> >
+                                                        <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        
+                                                    </td>
+                                            <?php } ?>
+                                            
                                         </tr>
                                     <?php } ?>
                                     </tbody>
@@ -125,35 +149,20 @@
                                                         <h5 class="modal-title" id="exampleModalScrollableTitle">Resolver Ticket</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                <div class="modal-body">
-                                                    
-                                                <div class="mb-3">
-                                                <label for="area" class="form-label font-size-13 text-muted">Selecciona la acción que deseas realizar para resolver el ticket:</label>
-                                                <select class="form-control" id="accionarealizar" onchange="aparecerselect(this.value)">
-                                                    <option value="0" selected disabled require>Selecciona una accion</option>
-                                                    <option value="2">Resolver</option>
-                                                    <option value="1">Reasignar Ticket</option>
-                                                    
-                                                <div id="selectapar">
+                                                <div class="modal-body" id="idticket">
 
-                                                </div>
-                                                
-                                                <label for="descripetic">Descripción:</label>
-                                                <textarea name="descripetic" id="descripetic" class="form-control"></textarea>
-                                                </div>
                                                 
 
-                                <div id="mensaje"></div>
-                                                    </div>
+                                                
+                                                </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
-                                                        <button type="button" onclick=""  class="btn btn-primary">Guardar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cancelar</button>
+                                                        <button type="button" onclick="resolver()"  class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
-
-                                        </form>
+                                </form>
 
 
                                         <form method="post" id="formetiqueta">
@@ -162,38 +171,71 @@
                                             <div class="modal-dialog modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Resolver Ticket</h5>
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Reasignar Ticket</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                                        
+
                                                     </div>
                                                 <div class="modal-body">
+                                                <div id="idtkredireccion"></div>
                                                     
                                                 <div class="mb-3">
-                                                <label for="area" class="form-label font-size-13 text-muted">Selecciona la acción que deseas realizar para resolver el ticket:</label>
-                                                <select class="form-control" id="accionarealizar" onchange="aparecerselect(this.value)">
-                                                    <option value="0" selected disabled require>Selecciona una accion</option>
-                                                    <option value="2">Resolver</option>
-                                                    <option value="1">Reasignar Ticket</option>
+
+                                                <label for="area" class="form-label font-size-13 text-muted">Area a la que quieres reasignar el ticket:</label>
+                                                <select class="form-control" data-trigger name="area_redireccion" id="area_redireccion">
+                                                    <option value="0" selected disabled require>1. Elige un area</option>
+                                                    <?php foreach($areas as $value){?>
+                                                        <option value="<?php echo $value['id_area']?>"><?php echo $value['n_area']?></option>
+                                                    <?php }?>
+                                                </select>
                                                     
                                                 <div id="selectapar">
 
                                                 </div>
                                                 
                                                 <label for="descripetic">Descripción:</label>
-                                                <textarea name="descripetic" id="descripetic" class="form-control"></textarea>
+                                                <textarea name="descripetic" id="descrip_reasig" class="form-control"></textarea>
                                                 </div>
                                                 
 
-                                <div id="mensaje"></div>
+                                         <div id="mensaje"></div>
+
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
-                                                        <button type="button" onclick=""  class="btn btn-primary">Guardar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cancelar</button>
+                                                        <button type="button" onclick="reasignar()"  class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
 
                                         </form>
+
+                                        <!-- MODAL TICKET RESUELTO -->
+
+                                        <form method="post" id="formetiqueta">
+                                        <div class="modal fade" id="resuelto" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Detalles Ticket Cerrado</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                <div class="modal-body" id="idticketresuelto">
+
+                                                
+
+                                                
+                                                </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                </form>
                                         
 
 </div>

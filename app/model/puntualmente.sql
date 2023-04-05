@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2023 a las 23:56:42
+-- Tiempo de generación: 05-04-2023 a las 23:50:36
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -359,7 +359,9 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `
 (485, 27, 28, 'hey', '', 0, 1, '2023-04-04', '08:50:45', '::1'),
 (486, 28, 26, 'Hey', '', 0, 1, '2023-04-04', '08:58:15', '172.16.3.80'),
 (487, 28, 26, 'Jshhs', '', 0, 1, '2023-04-04', '08:58:23', '172.16.3.80'),
-(488, 28, 26, 'Jshs', '', 0, 1, '2023-04-04', '08:58:31', '172.16.3.80');
+(488, 28, 26, 'Jshs', '', 0, 1, '2023-04-04', '08:58:31', '172.16.3.80'),
+(489, 28, 27, 'Hola', '', 0, 0, '2023-04-05', '12:57:56', '::1'),
+(490, 28, 27, '', '1680717486puntual.jpg', 1, 0, '2023-04-05', '12:58:06', '::1');
 
 -- --------------------------------------------------------
 
@@ -456,10 +458,10 @@ CREATE TABLE `tickets` (
   `id_etiqueta` int(10) NOT NULL,
   `descrip` varchar(500) NOT NULL,
   `estado` int(3) NOT NULL,
-  `redireccion` tinyint(1) NOT NULL,
+  `descrip_solucion` varchar(1000) NOT NULL,
   `id_area_redireccion` int(10) NOT NULL,
   `f_h_cierre` datetime NOT NULL,
-  `ip_cierre` int(15) NOT NULL,
+  `ip_cierre` varchar(15) NOT NULL,
   `id_user_cierre` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -467,11 +469,12 @@ CREATE TABLE `tickets` (
 -- Volcado de datos para la tabla `tickets`
 --
 
-INSERT INTO `tickets` (`id_ticket`, `fecha_hora`, `ip_origen`, `id_empresa`, `id_grupo_proyecto`, `id_propietario_tck`, `id_area`, `id_etiqueta`, `descrip`, `estado`, `redireccion`, `id_area_redireccion`, `f_h_cierre`, `ip_cierre`, `id_user_cierre`) VALUES
-(11, '2023-04-04 09:16:55', '::1', 3, 7, 28, 21, 6, 'Holaa', 2, 0, 0, '0000-00-00 00:00:00', 0, 0),
-(12, '2023-04-04 09:19:16', '::1', 3, 7, 28, 21, 10, 'hey', 1, 0, 0, '0000-00-00 00:00:00', 0, 0),
-(14, '2023-04-04 09:43:41', '::1', 3, 7, 28, 21, 12, 'por favor', 1, 0, 0, '0000-00-00 00:00:00', 0, 0),
-(15, '2023-04-04 10:54:14', '::1', 6, 7, 27, 21, 12, 'adfhkhsdgf', 1, 0, 0, '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `tickets` (`id_ticket`, `fecha_hora`, `ip_origen`, `id_empresa`, `id_grupo_proyecto`, `id_propietario_tck`, `id_area`, `id_etiqueta`, `descrip`, `estado`, `descrip_solucion`, `id_area_redireccion`, `f_h_cierre`, `ip_cierre`, `id_user_cierre`) VALUES
+(11, '2023-04-04 09:16:55', '::1', 3, 7, 28, 21, 6, 'Holaa', 2, '0', 0, '0000-00-00 00:00:00', '0', 0),
+(12, '2023-04-04 09:19:16', '::1', 3, 7, 28, 21, 10, 'hey', 3, 'ok, ok', 0, '2023-04-05 10:55:04', '0', 28),
+(14, '2023-04-04 09:43:41', '::1', 3, 7, 28, 21, 12, 'por favor', 3, '', 0, '2023-04-05 03:02:40', '::1', 28),
+(15, '2023-04-04 10:54:14', '::1', 6, 7, 27, 21, 12, 'adfhkhsdgf', 3, 'Listo, resuelto', 0, '2023-04-05 12:42:56', '::1', 28),
+(16, '2023-04-05 12:45:34', '::1', 6, 7, 27, 21, 12, 'Por favor', 1, '0', 0, '0000-00-00 00:00:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -482,6 +485,7 @@ INSERT INTO `tickets` (`id_ticket`, `fecha_hora`, `ip_origen`, `id_empresa`, `id
 CREATE TABLE `ticket_redireccion` (
   `id_redireccion` int(10) NOT NULL,
   `id_ticket` int(10) NOT NULL,
+  `descrip_redirec` varchar(1000) NOT NULL,
   `area_redireccion` int(10) NOT NULL,
   `user_redireccion` int(10) NOT NULL,
   `f_h_redireccion` date NOT NULL,
@@ -648,7 +652,7 @@ ALTER TABLE `mensajes_grupos`
 -- AUTO_INCREMENT de la tabla `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=489;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=491;
 
 --
 -- AUTO_INCREMENT de la tabla `sedes`
@@ -660,7 +664,7 @@ ALTER TABLE `sedes`
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_ticket` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `ticket_redireccion`
