@@ -91,6 +91,9 @@ if($estado==3){
     
     }
 }elseif($estado==4){
+
+    if(!isset($data[0]->redireccion)){
+
     $id = $data[0]->id;
     $ticket=mysqli_query($conn, "SELECT * FROM tickets WHERE id_ticket = '{$id}'");
     $tick = mysqli_fetch_assoc($ticket);
@@ -134,7 +137,117 @@ if($estado==3){
         <h6 class="d-flex justify-content-around aling align-items-center"> **Al guardar, el ticket cambiara de estado a resuelto** </h6> 
 
     
+    ';}else{
+
+        $id_redirig = $data[0]->id;
+        $ticket_redirigido=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_redireccion = '{$id_redirig}'");
+        $redirigido = mysqli_fetch_assoc($ticket_redirigido);
+        $id=$redirigido['id_ticket'];
+
+        
+
+
+        $output='
+
+            <h4>Tabla de Reasignaciones</h4>
+        
+        <table class="table table-striped mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Area Redirec.</th>
+                        <th>Reasignado Por</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+
+            <tbody>';
+  
+
+    $ticket=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket = '{$id}'");
+    $tick = mysqli_fetch_assoc($ticket);
+
+    if($tick['estado']==1){
+        $class="text-warning";
+        $estado="Pendiente";
+    }elseif($tick['estado']==2){
+        $class="text-danger";
+        $estado="Redireccionado";
+    }elseif($tick['estado']==3){
+        $class="text-success";
+        $estado="Resuelto";
+    }
+
+
+    foreach($ticket as $tickjs){
+    
+        $user = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tickjs['user_redireccion']}'");
+        $us=mysqli_fetch_assoc($user);
+        $area = mysqli_query($conn, "SELECT * FROM areas WHERE id_area= '{$tickjs['area_redireccion']}'");
+        $are=mysqli_fetch_assoc($area);
+    $output .='
+                                    
+                                            <tr>
+                                                <th>'.$are['n_area'].'</th>
+                                                <td>'.$us['n_user']." ".$us['l_user'].'</td>
+                                                <td>'.$tick['f_h_redireccion'].'</td>
+                                                <td class="'.$class.'">'.$estado.'</td>
+                                            </tr>
+                                       
+                                                
     ';
+    }
+    $output.='
+            </tbody>
+        </table>';
+
+        $ticket=mysqli_query($conn, "SELECT * FROM tickets WHERE id_ticket = '{$id}'");
+        $tick = mysqli_fetch_assoc($ticket);
+        $grupo = mysqli_query($conn, "SELECT *FROM grupos WHERE id_grupo= '{$tick['id_grupo_proyecto']}'");
+        $grup=mysqli_fetch_assoc($grupo);
+        $user = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tick['id_propietario_tck']}'");
+        $us=mysqli_fetch_assoc($user);
+        $area = mysqli_query($conn, "SELECT * FROM areas WHERE id_area= '{$tick['id_area']}'");
+        $are=mysqli_fetch_assoc($area);
+        $etiqueta = mysqli_query($conn, "SELECT * FROM etiquetas WHERE id_etiqueta= '{$tick['id_etiqueta']}'");
+        $etique=mysqli_fetch_assoc($etiqueta);
+
+        
+    $output.= '
+    <div class="d-flex justify-content-around aling align-items-center">
+        <label for="id_tk" class="label-control">Ticket No. '.$id.'</label>
+        <input type="text" class="form-control" id="tkt" value="'.$id.'" disabled hidden>
+            </div>
+            </div>
+            <div class="mb-3">
+                                                
+    <h3>Datos del Ticket</h3>
+    
+            <div class="bg-secondary text-white">
+                <p> 
+                    <b>Ticket ID:</b> '.$id.', <br>
+                    <b>Fecha y Hora: </b> '.$tick['fecha_hora'].',<br>
+                    <b>Proyecto: </b> '.$grup['n_grupo'].',<br>
+                    <b>Usuario: </b>'.$us['n_user']. " " . $us['l_user'].',<br>
+                    <b>Area Destino: </b>'.$are['n_area'].',<br>
+                    <b>Etiqueta: </b>'.$etique['descrip_etiq'].',<br>
+                    <b>Descripcion: </b>'.$tick['descrip'].' 
+                    <br>
+            </div>
+                <label for="descripetic">Descripción:</label>
+                <textarea name="descripetic" id="descrip_resuelto" class="form-control"></textarea>
+            </div>
+                                                
+            <div id="response"></div>
+
+        <div id="mensaje"></div>
+        <h6 class="d-flex justify-content-around aling align-items-center"> **Al guardar, el ticket cambiara de estado a resuelto** </h6> 
+
+    
+    ';
+    echo $output;
+    }
 
 }elseif($estado==5){
     $id = $data[0]->id;
@@ -152,6 +265,8 @@ if($estado==3){
 
     $usercierre = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tick['id_user_cierre']}'");
     $uscierre=mysqli_fetch_assoc($usercierre);
+
+    
 
     echo '
     <div class="d-flex justify-content-around aling align-items-center">
@@ -194,8 +309,14 @@ if($estado==3){
 
 }elseif($estado==6){
 
+    if(isset($data[0]->redireccion)){
+
     $id = $data[0]->id;
     echo '<input type="text" id="id_tk_redirec" value="'.$id.'" dissabled hidden>';
+
+    }else{
+        // AQUI VAN COSAS
+    }
 
 }elseif($estado==7){
 
@@ -215,20 +336,32 @@ if($estado==3){
 
     $ticket=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket = '{$id}'");
     $tick = mysqli_fetch_assoc($ticket);
-    $user = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tick['user_redireccion']}'");
-    $us=mysqli_fetch_assoc($user);
-    $area = mysqli_query($conn, "SELECT * FROM areas WHERE id_area= '{$tick['area_redireccion']}'");
-    $are=mysqli_fetch_assoc($area);
+
+    if($tick['estado']==1){
+        $class="text-warning";
+        $estado="Pendiente";
+    }elseif($tick['estado']==2){
+        $class="text-danger";
+        $estado="Redireccionado";
+    }elseif($tick['estado']==3){
+        $class="text-success";
+        $estado="Resuelto";
+    }
 
 
     foreach($ticket as $tickjs){
+    
+        $user = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tickjs['user_redireccion']}'");
+        $us=mysqli_fetch_assoc($user);
+        $area = mysqli_query($conn, "SELECT * FROM areas WHERE id_area= '{$tickjs['area_redireccion']}'");
+        $are=mysqli_fetch_assoc($area);
     $output .='
                                     
                                             <tr>
                                                 <th>'.$are['n_area'].'</th>
                                                 <td>'.$us['n_user']." ".$us['l_user'].'</td>
                                                 <td>'.$tick['f_h_redireccion'].'</td>
-                                                <td>'.$tick['estado'].'</td>
+                                                <td class="'.$class.'">'.$estado.'</td>
                                             </tr>
                                        
                                                 

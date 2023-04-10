@@ -82,7 +82,7 @@
 
                                         if($redirigidos['estado']==1){
                                             $class="text-warning";
-                                            $estado= "Pendiente";
+                                            $estado= "Redir-Pendiente";
                                             $disabled="";
                                         }elseif($redirigidos['estado']==2){
                                             $class="text-danger";
@@ -90,7 +90,7 @@
                                             $disabled="Redireccionado";
                                         }elseif($redirigidos['estado']==3){
                                             $class="text-success";
-                                            $estado="Resuelto";
+                                            $estado="Redir-Resuelto";
                                             $disabled="Resuelto";
                                         }
                                         
@@ -108,16 +108,16 @@
 
                                                 if($redirigidos['estado']==1){ ?>
                                                     <td>
-                                                        <button type="button" id="<?php echo $ticket1['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resolver" onclick="traerReasignartk(this.id)" <?php echo $disabled?> >
+                                                        <button type="button" id="<?php echo $redirigidos['id_redireccion']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resolver" onclick="traerReasignartk2(this.id)" <?php echo $disabled?> >
                                                         <i class="far fa-check-circle"></i>
                                                         </button>
-                                                        <button type="button" id="<?php echo $ticket1['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#reasignar" onclick="traeridreasignar(this.id)" <?php echo $disabled?> >
+                                                        <button type="button" id="<?php echo $redirigidos['id_redireccion']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#reasignar" onclick="traeridreasignar2(this.id)" <?php echo $disabled?> >
                                                         <i class=" fas fa-share"></i>
                                                         </button>
                                                     </td>
                                             <?php }elseif($redirigidos['estado']==2){ ?>
                                                     <td>
-                                                        <button type="button" id="<?php echo $ticket1['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#mostrarRedirects" onclick="verReasigna(this.id)" <?php echo $disabled?> >
+                                                        <button type="button" id="<?php echo $redirigidos['id_redireccion']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#mostrarRedirects" onclick="verReasigna(this.id)" <?php echo $disabled?> >
                                                         <i class="fas fa-eye"></i>
                                                         </button>
                                                         
@@ -140,7 +140,12 @@
                                 
                                     <?php foreach($ticketsPorArea as $ticket){
 
-                                        $usuario = mysqli_query($conn, "SELECT * FROM users Where id ='{$ticket['id_propietario_tck']}'");
+                                        $validarHayRedire=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket = '{$ticket['id_ticket']}'");
+
+                                        if(mysqli_num_rows($validarHayRedire)>0){
+
+                                        }else{
+                                            $usuario = mysqli_query($conn, "SELECT * FROM users Where id ='{$ticket['id_propietario_tck']}'");
                                         $dato = mysqli_fetch_assoc($usuario);
 
                                         $etiquita = mysqli_query($conn, "SELECT * FROM etiquetas Where id_etiqueta='{$ticket['id_etiqueta']}'");
@@ -199,7 +204,10 @@
                                             <?php } ?>
                                             
                                         </tr>
-                                    <?php } ?>
+                                    <?php } }?>
+                                        
+
+                                        
                                     </tbody>
                                 </table>
 

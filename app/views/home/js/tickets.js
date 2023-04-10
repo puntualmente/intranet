@@ -19,6 +19,27 @@ function traerReasignartk(id){
     xhr4.send("x=" + traerReasig);
 }
 
+function traerReasignartk2(id){
+    idticket=document.getElementById('idticket');
+
+      obj = [{ "estado": 4, "id": id, "redireccion": true }];
+        traerReasig = JSON.stringify(obj);
+      let xhr4 = new XMLHttpRequest();
+      xhr4.open("POST", "adetiquetas/guardaretiqueta", true);
+      xhr4.onload = ()=>{
+      if(xhr4.readyState === XMLHttpRequest.DONE){
+          if(xhr4.status === 200){
+            let data4 = xhr4.response;
+            idticket.innerHTML = data4;
+          }
+      }
+      }
+      xhr4.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr4.send("x=" + traerReasig);
+}
+
+
+
 function traerresuelto(id){
     idticket2=document.getElementById('idticketresuelto');
 
@@ -38,9 +59,9 @@ function traerresuelto(id){
     xhr5.send("x=" + traertickresuel);
 }
 
+
 function traeridreasignar(id){
     ok=document.getElementById('idtkredireccion');
-    console.log(id)
     obj = [{ "estado": 6, "id": id }];
       traerid = JSON.stringify(obj);
     let xhr6 = new XMLHttpRequest();
@@ -50,13 +71,31 @@ function traeridreasignar(id){
         if(xhr6.status === 200){
           let data6 = xhr6.response;
           ok.innerHTML = data6;
-          console.log(data6)
        
         }
     }
     }
     xhr6.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr6.send("x=" + traerid);
+}
+
+function traeridreasignar2(id){
+  ok=document.getElementById('idtkredireccion');
+  obj = [{ "estado": 6, "id": id, "redireccion": true }];
+    traerid = JSON.stringify(obj);
+  let xhr6 = new XMLHttpRequest();
+  xhr6.open("POST", "adetiquetas/guardaretiqueta", true);
+  xhr6.onload = ()=>{
+  if(xhr6.readyState === XMLHttpRequest.DONE){
+      if(xhr6.status === 200){
+        let data6 = xhr6.response;
+        ok.innerHTML = data6;
+     
+      }
+  }
+  }
+  xhr6.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr6.send("x=" + traerid);
 }
 
 function resolver(){
@@ -123,7 +162,6 @@ function verReasigna(id){
       if(xhr7.status === 200){
         let data7 = xhr7.response;
         mostrarReasig.innerHTML = data7;
-        console.log(data7);
       }
   }
   }

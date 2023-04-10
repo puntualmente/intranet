@@ -44,14 +44,26 @@ if(isset($_POST['x'])){
         $descrip_sol = $data[0]->descrip_sol; 
         $id_tkt = $data[0]->id_tkt;
 
+        $esredireccion=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket='{$id_tkt}'");
 
-        $solucionticket=mysqli_query($conn, "UPDATE tickets SET estado = '{$estado}', descrip_solucion = '{$descrip_sol}', f_h_cierre ='{$f_h_actual}', ip_cierre = '{$ip}', id_user_cierre = '{$_SESSION['unique_id']}' WHERE id_ticket = '{$id_tkt}'");
-
-        if($solucionticket){
-            echo "Ticket Resuelto";
+        if(mysqli_num_rows($esredireccion)>0){
+            echo mysqli_num_rows($esredireccion);
         }else{
-            echo "No resuelto";
+
+            $solucionticket=mysqli_query($conn, "UPDATE tickets SET estado = '{$estado}', descrip_solucion = '{$descrip_sol}', f_h_cierre ='{$f_h_actual}', ip_cierre = '{$ip}', id_user_cierre = '{$_SESSION['unique_id']}' WHERE id_ticket = '{$id_tkt}'");
+
+            if($solucionticket){
+                echo "Ticket Resuelto";
+            }else{
+                echo "No resuelto";
+            }
+
         }
+        
+
+
+
+       
 
     }elseif($estado==2){
         $estado = 1;

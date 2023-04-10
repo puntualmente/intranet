@@ -76,12 +76,15 @@
                                         if($ticket['estado']==1){
                                             $class="text-warning";
                                             $estado= "Pendiente";
+                                            $disabled="";
                                         }elseif($ticket['estado']==2){
                                             $class="text-danger";
                                             $estado="Redireccionado";
+                                            $disabled="Redireccionado";
                                         }elseif($ticket['estado']==3){
                                             $class="text-success";
                                             $estado="Resuelto";
+                                            $disabled="Resuelto";
                                         }
                                         
                                         ?>
@@ -92,15 +95,34 @@
                                             <td><?php echo $dato['n_area']?></td>
                                             <td><?php echo $etiq['descrip_etiq']?></td>
                                             <td class="<?php echo $class?>"> <?php echo $estado?></td>
-                                            <td>
-                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resuelto" onclick="traerresuelto(this.id)">
+                                            <?php 
+
+                                                if($ticket['estado']==1){ ?>
+                                                    <td>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#mostrarRedirects" onclick="verReasigna(this.id)" <?php echo $disabled?> >
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                    </td>
+                                            <?php }elseif($ticket['estado']==2){ ?>
+                                                    <td>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#mostrarRedirects" onclick="verReasigna(this.id)" <?php echo $disabled?> >
                                                         <i class="fas fa-eye"></i>
                                                         </button>
                                                         
                                                     </td>
 
+                                            <?php }elseif($ticket['estado']==3){ ?>
+                                                <td>
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resuelto" onclick="traerresuelto(this.id)" <?php echo $disabled?> >
+                                                        <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        
+                                                    </td>
+                                            <?php } ?>
+                                            
                                         </tr>
                                     <?php } ?>
+
                                     </tbody>
                                 </table>
 
@@ -130,6 +152,32 @@
                                                 </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                </form>
+
+                <!-- Mostrar Redirect -->
+
+
+                                <form method="post" id="formetiqueta">
+                                        <div class="modal fade" id="mostrarRedirects" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle"> Tabla de Reasignaciones del Ticket</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                <div class="modal-body" id="mostrarReasig">
+
+                                                
+
+                                                
+                                                </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
@@ -175,6 +223,9 @@
 
 <!-- init js -->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/form-advanced.init.js"></script>
+
+<script src="<?php echo controlador::$rutaAPP?>app/views/home/js/tickets.js"></script>
+
 
 <script src="<?php echo controlador::$rutaAPP?>app/views/home/js/adminetiquetas.js"></script>
 
