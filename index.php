@@ -92,9 +92,6 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->adminEtiquetas();
                 break;
 
-            case 'adetiquetas/guardaretiqueta':
-                $userPuntualmente->guardar_etiqueta();
-                break;
 
                 //TICKETS
 
@@ -110,6 +107,10 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->tickets();
                 break;
 
+            case 'adetiquetas/guardaretiqueta':
+                $userPuntualmente->guardar_etiqueta();
+                break;
+            
 
 
 
@@ -193,16 +194,21 @@ if($userPuntualmente->iniciar_sesion()){
 
             //TICKETS
                 
+            
             case 'chat/tkt/creartkt':
                 $userPuntualmente->creartkt();
                 break;
-
+            
             case 'mistickets':
                 $userPuntualmente->mistickets();
                 break;
 
             case 'tickets':
                 $userPuntualmente->tickets();
+                break;
+
+            case 'adetiquetas/guardaretiqueta':
+                $userPuntualmente->guardar_etiqueta();
                 break;
 
 
@@ -282,15 +288,22 @@ if($userPuntualmente->iniciar_sesion()){
 
                 //TICKETS
                 
-            case 'chat/tkt/creartkt':
-                $userPuntualmente->creartkt();
-                break;
-            case 'mistickets':
-                $userPuntualmente->mistickets();
-                break;
-            case 'tickets':
-                $userPuntualmente->tickets();
-                break;
+            
+                case 'chat/tkt/creartkt':
+                    $userPuntualmente->creartkt();
+                    break;
+                
+                case 'mistickets':
+                    $userPuntualmente->mistickets();
+                    break;
+    
+                case 'tickets':
+                    $userPuntualmente->tickets();
+                    break;
+                    
+                case 'adetiquetas/guardaretiqueta':
+                    $userPuntualmente->guardar_etiqueta();
+                    break;
 
 
 

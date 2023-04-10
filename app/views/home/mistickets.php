@@ -49,14 +49,13 @@
                             </div>
                             <div class="card-body">
 
-                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100 " style="width:auto;" >
                                     <thead>
                                         <tr>
                                             <th>ID Ticket</th>
                                             <th>Fecha y Hora</th>
                                             <th>Area</th>
                                             <th>Etiqueta</th>
-                                            <th>Descrip</th>
                                             <th>Estado</th>
                                             <th></th>
                                             <!-- <th>Detalles</th> -->
@@ -78,6 +77,9 @@
                                             $class="text-warning";
                                             $estado= "Pendiente";
                                         }elseif($ticket['estado']==2){
+                                            $class="text-danger";
+                                            $estado="Redireccionado";
+                                        }elseif($ticket['estado']==3){
                                             $class="text-success";
                                             $estado="Resuelto";
                                         }
@@ -89,7 +91,6 @@
                                             <td><?php echo $ticket['fecha_hora']?></td>
                                             <td><?php echo $dato['n_area']?></td>
                                             <td><?php echo $etiq['descrip_etiq']?></td>
-                                            <td><?php echo $ticket['descrip']?></td>
                                             <td class="<?php echo $class?>"> <?php echo $estado?></td>
                                             <td>
                                                         <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resuelto" onclick="traerresuelto(this.id)">

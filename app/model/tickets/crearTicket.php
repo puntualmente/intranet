@@ -24,7 +24,7 @@ if(isset($_POST['x'])){
         $etiqueta = $data[0]->etiqueta;
         $descrip = $data[0]->descrip;
         $estado = 1;
-        $redireccion = 0;
+        $redireccion = "";
         $id_redireccion = "";
         $f_cierre="";
         $ip_cierre="";
@@ -54,7 +54,19 @@ if(isset($_POST['x'])){
         }
 
     }elseif($estado==2){
-        
+        $estado = 1;
+        $descrip_reasig = $data[0]->descrip_reasig; 
+        $id_tkt = $data[0]->id_tkt_reasig;
+        $area_redirec = $data[0]->area_redirec;
+
+        $reasignar=mysqli_query($conn, "INSERT INTO ticket_redireccion(id_ticket, descrip_redirec, area_redireccion, user_redireccion, f_h_redireccion, estado) VALUES ('{$id_tkt}','{$descrip_reasig}','{$area_redirec}','{$_SESSION['unique_id']}','{$f_h_actual}','{$estado}')");
+
+        if($reasignar==0){
+            echo "Error";
+        }else{
+            $estado_tck=mysqli_query($conn, "UPDATE tickets SET estado = 2 WHERE id_ticket = '{$id_tkt}'");
+            echo "Reasignado con exito";
+        }
     }
 }else{
     echo "wtf";

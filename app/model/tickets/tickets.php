@@ -193,9 +193,57 @@ if($estado==3){
     ';
 
 }elseif($estado==6){
+
     $id = $data[0]->id;
     echo '<input type="text" id="id_tk_redirec" value="'.$id.'" dissabled hidden>';
+
+}elseif($estado==7){
+
+    $output='<table class="table table-striped mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Area Redirec.</th>
+                        <th>Reasignado Por</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+
+            <tbody>';
+    $id = $data[0]->id;
+
+    $ticket=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket = '{$id}'");
+    $tick = mysqli_fetch_assoc($ticket);
+    $user = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tick['user_redireccion']}'");
+    $us=mysqli_fetch_assoc($user);
+    $area = mysqli_query($conn, "SELECT * FROM areas WHERE id_area= '{$tick['area_redireccion']}'");
+    $are=mysqli_fetch_assoc($area);
+
+
+    foreach($ticket as $tickjs){
+    $output .='
+                                    
+                                            <tr>
+                                                <th>'.$are['n_area'].'</th>
+                                                <td>'.$us['n_user']." ".$us['l_user'].'</td>
+                                                <td>'.$tick['f_h_redireccion'].'</td>
+                                                <td>'.$tick['estado'].'</td>
+                                            </tr>
+                                       
+                                                
+    ';
+    }
+    $output.='
+            </tbody>
+        </table>';
+
+    echo $output;
+
 }
+
+
+
 }else{
     echo "no hay datos de envio";
 }
