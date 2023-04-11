@@ -149,7 +149,9 @@ if($estado==3){
 
         $output='
 
-            <h4>Tabla de Reasignaciones</h4>
+        <h4 for="id_tk" class="label-control d-flex  justify-content-center">Ticket No. '.$id.'</h4>
+
+            <h5>Tabla de Reasignaciones</h5>
         
         <table class="table table-striped mb-0">
 
@@ -168,20 +170,22 @@ if($estado==3){
     $ticket=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket = '{$id}'");
     $tick = mysqli_fetch_assoc($ticket);
 
-    if($tick['estado']==1){
-        $class="text-warning";
-        $estado="Pendiente";
-    }elseif($tick['estado']==2){
-        $class="text-danger";
-        $estado="Redireccionado";
-    }elseif($tick['estado']==3){
-        $class="text-success";
-        $estado="Resuelto";
-    }
+    
 
 
     foreach($ticket as $tickjs){
     
+        if($tickjs['estado']==1){
+            $class="text-warning";
+            $estado="Pendiente";
+        }elseif($tickjs['estado']==2){
+            $class="text-danger";
+            $estado="Redireccionado";
+        }elseif($tickjs['estado']==3){
+            $class="text-success";
+            $estado="Resuelto";
+        }
+
         $user = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tickjs['user_redireccion']}'");
         $us=mysqli_fetch_assoc($user);
         $area = mysqli_query($conn, "SELECT * FROM areas WHERE id_area= '{$tickjs['area_redireccion']}'");
@@ -200,7 +204,8 @@ if($estado==3){
     }
     $output.='
             </tbody>
-        </table>';
+        </table>
+        <br>';
 
         $ticket=mysqli_query($conn, "SELECT * FROM tickets WHERE id_ticket = '{$id}'");
         $tick = mysqli_fetch_assoc($ticket);
@@ -216,13 +221,12 @@ if($estado==3){
         
     $output.= '
     <div class="d-flex justify-content-around aling align-items-center">
-        <label for="id_tk" class="label-control">Ticket No. '.$id.'</label>
         <input type="text" class="form-control" id="tkt" value="'.$id.'" disabled hidden>
             </div>
             </div>
             <div class="mb-3">
                                                 
-    <h3>Datos del Ticket</h3>
+    <h5>Datos del Ticket</h5>
     
             <div class="bg-secondary text-white">
                 <p> 
@@ -270,7 +274,6 @@ if($estado==3){
 
     echo '
     <div class="d-flex justify-content-around aling align-items-center">
-        <label for="id_tk" class="label-control">Ticket No. '.$id.'</label>
         <input type="text" class="form-control" id="tkt" value="'.$id.'" disabled hidden>
             </div>
             </div>
@@ -309,14 +312,10 @@ if($estado==3){
 
 }elseif($estado==6){
 
-    if(isset($data[0]->redireccion)){
 
     $id = $data[0]->id;
     echo '<input type="text" id="id_tk_redirec" value="'.$id.'" dissabled hidden>';
 
-    }else{
-        // AQUI VAN COSAS
-    }
 
 }elseif($estado==7){
 

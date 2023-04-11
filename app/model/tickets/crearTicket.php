@@ -40,19 +40,26 @@ if(isset($_POST['x'])){
     }
     }elseif($estado==1){
 
-        $estado = 3;
+        $estadot = 3;
         $descrip_sol = $data[0]->descrip_sol; 
         $id_tkt = $data[0]->id_tkt;
 
         $esredireccion=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket='{$id_tkt}'");
 
         if(mysqli_num_rows($esredireccion)>0){
-            echo mysqli_num_rows($esredireccion);
+            $resolverRedirec=mysqli_query($conn, "UPDATE ticket_redireccion SET estado = '{$estadot}' WHERE id_ticket= '{$id_tkt}' AND area_redireccion = '{$_SESSION['id_area']}'" );
+
+            if($resolverRedirec){
+                echo "Ticket redirec resuelto";
+                $solucionticket=mysqli_query($conn, "UPDATE tickets SET estado = '{$estadot}', descrip_solucion = '{$descrip_sol}', f_h_cierre ='{$f_h_actual}', ip_cierre = '{$ip}', id_user_cierre = '{$_SESSION['unique_id']}' WHERE id_ticket = '{$id_tkt}'");
+            }else{
+                echo "No resuelto";
+            }
         }else{
 
-            $solucionticket=mysqli_query($conn, "UPDATE tickets SET estado = '{$estado}', descrip_solucion = '{$descrip_sol}', f_h_cierre ='{$f_h_actual}', ip_cierre = '{$ip}', id_user_cierre = '{$_SESSION['unique_id']}' WHERE id_ticket = '{$id_tkt}'");
+            $solucionticket2=mysqli_query($conn, "UPDATE tickets SET estado = '{$estadot}', descrip_solucion = '{$descrip_sol}', f_h_cierre ='{$f_h_actual}', ip_cierre = '{$ip}', id_user_cierre = '{$_SESSION['unique_id']}' WHERE id_ticket = '{$id_tkt}'");
 
-            if($solucionticket){
+            if($solucionticket2){
                 echo "Ticket Resuelto";
             }else{
                 echo "No resuelto";
@@ -71,6 +78,22 @@ if(isset($_POST['x'])){
         $id_tkt = $data[0]->id_tkt_reasig;
         $area_redirec = $data[0]->area_redirec;
 
+        $validarRedireccion=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket = '{$id_tkt}'");
+
+        if(mysqli_num_rows($validarRedireccion)>0){
+
+        foreach($validarRedireccion as $redireccion){
+
+            $ponerRedirAnteriores=mysqli_query($conn, "UPDATE ticket_redireccion SET estado = 2 WHERE id_ticket = '{$id_tkt}'");
+
+        }
+
+        $reasignar=mysqli_query($conn, "INSERT INTO ticket_redireccion(id_ticket, descrip_redirec, area_redireccion, user_redireccion, f_h_redireccion, estado) VALUES ('{$id_tkt}','{$descrip_reasig}','{$area_redirec}','{$_SESSION['unique_id']}','{$f_h_actual}','{$estado}')");
+
+
+        }else{
+      
+
         $reasignar=mysqli_query($conn, "INSERT INTO ticket_redireccion(id_ticket, descrip_redirec, area_redireccion, user_redireccion, f_h_redireccion, estado) VALUES ('{$id_tkt}','{$descrip_reasig}','{$area_redirec}','{$_SESSION['unique_id']}','{$f_h_actual}','{$estado}')");
 
         if($reasignar==0){
@@ -79,6 +102,7 @@ if(isset($_POST['x'])){
             $estado_tck=mysqli_query($conn, "UPDATE tickets SET estado = 2 WHERE id_ticket = '{$id_tkt}'");
             echo "Reasignado con exito";
         }
+    }
     }
 }else{
     echo "wtf";

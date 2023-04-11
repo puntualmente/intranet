@@ -111,7 +111,7 @@
                                                         <button type="button" id="<?php echo $redirigidos['id_redireccion']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#resolver" onclick="traerReasignartk2(this.id)" <?php echo $disabled?> >
                                                         <i class="far fa-check-circle"></i>
                                                         </button>
-                                                        <button type="button" id="<?php echo $redirigidos['id_redireccion']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#reasignar" onclick="traeridreasignar2(this.id)" <?php echo $disabled?> >
+                                                        <button type="button" id="<?php echo $ticket1['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#reasignar" onclick="traeridreasignar2(this.id)" <?php echo $disabled?> >
                                                         <i class=" fas fa-share"></i>
                                                         </button>
                                                     </td>
