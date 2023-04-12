@@ -118,3 +118,22 @@ function agregaretiqueta(){
     xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr5.send("x=" + traertickresuel);
 }
+
+ function verdetalles(id){
+    idticket2=document.getElementById('mostrardetall');
+
+    obj = [{ "estado": 8, "id": id }];
+      traertickresuel = JSON.stringify(obj);
+    let xhr5 = new XMLHttpRequest();
+    xhr5.open("POST", "adetiquetas/guardaretiqueta", true);
+    xhr5.onload = ()=>{
+    if(xhr5.readyState === XMLHttpRequest.DONE){
+        if(xhr5.status === 200){
+          let data5 = xhr5.response;
+          idticket2.innerHTML = data5;
+        }
+    }
+    }
+    xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr5.send("x=" + traertickresuel);
+ }

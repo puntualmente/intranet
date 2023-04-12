@@ -372,6 +372,49 @@ if($estado==3){
 
     echo $output;
 
+}elseif($estado==8){
+    $id = $data[0]->id;
+    $ticket=mysqli_query($conn, "SELECT * FROM tickets WHERE id_ticket = '{$id}'");
+    $tick = mysqli_fetch_assoc($ticket);
+    $grupo = mysqli_query($conn, "SELECT *FROM grupos WHERE id_grupo= '{$tick['id_grupo_proyecto']}'");
+    $grup=mysqli_fetch_assoc($grupo);
+    $user = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tick['id_propietario_tck']}'");
+    $us=mysqli_fetch_assoc($user);
+    $area = mysqli_query($conn, "SELECT * FROM areas WHERE id_area= '{$tick['id_area']}'");
+    $are=mysqli_fetch_assoc($area);
+    $etiqueta = mysqli_query($conn, "SELECT * FROM etiquetas WHERE id_etiqueta= '{$tick['id_etiqueta']}'");
+    $etique=mysqli_fetch_assoc($etiqueta);
+
+
+    $usercierre = mysqli_query($conn, "SELECT * FROM users WHERE id= '{$tick['id_user_cierre']}'");
+    $uscierre=mysqli_fetch_assoc($usercierre);
+
+    
+
+    echo '
+
+            <div class="mb-3">
+    
+            <div class="bg-secondary text-white">
+                <p> 
+                    <b>Ticket ID:</b> '.$id.', <br>
+                    <b>Fecha y Hora: </b> '.$tick['fecha_hora'].',<br>
+                    <b>Proyecto: </b> '.$grup['n_grupo'].',<br>
+                    <b>Usuario: </b>'.$us['n_user']. " " . $us['l_user'].',<br>
+                    <b>Area Destino: </b>'.$are['n_area'].',<br>
+                    <b>Etiqueta: </b>'.$etique['descrip_etiq'].',<br>
+                    <b>Descripcion: </b>'.$tick['descrip'].' 
+                </p>
+            </div>
+
+            </div>
+                                                
+
+        
+    ';
+
+
+
 }
 
 

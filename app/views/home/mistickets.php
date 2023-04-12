@@ -99,7 +99,7 @@
 
                                                 if($ticket['estado']==1){ ?>
                                                     <td>
-                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#mostrarRedirects" onclick="verReasigna(this.id)" <?php echo $disabled?> >
+                                                        <button type="button" id="<?php echo $ticket['id_ticket']?>" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#mostrarpendiente" onclick="verdetalles(this.id)" <?php echo $disabled?> >
                                                             <i class="fas fa-eye"></i>
                                                         </button>
                                                     </td>
@@ -171,6 +171,32 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                 <div class="modal-body" id="mostrarReasig">
+
+                                                
+
+                                                
+                                                </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                </form>
+
+                    <!-- Mostrar Pendiente -->
+
+
+                    <form method="post" id="formetiqueta">
+                                        <div class="modal fade" id="mostrarpendiente" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle"> Detalles del Ticket</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                <div class="modal-body" id="mostrardetall">
 
                                                 
 

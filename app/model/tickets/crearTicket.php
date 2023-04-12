@@ -32,9 +32,14 @@ if(isset($_POST['x'])){
 
 
     $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_cierre}','{$ip_cierre}','{$id_user_cierre}')");
+    $id_ultimo_insert = mysqli_insert_id ($conn);
+
+    $infoetiq=mysqli_query($conn, "SELECT * FROM etiquetas WHERE id_etiqueta='{$etiqueta}'");
+    $nueva=mysqli_fetch_assoc($infoetiq);
 
     if($guardartkt){
-        echo "guardado con exito";
+        echo 'Ticket: '.$id_ultimo_insert.' Creado 👍...
+              Tiempo estimado: '.$nueva['t_estimado']. " " .$nueva['tipo_t'].'';
     }else{
         echo "error al guardar";
     }

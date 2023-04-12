@@ -171,9 +171,15 @@ function limpiar(){
         if(enviarticket.readyState === XMLHttpRequest.DONE){
             if(enviarticket.status === 200){
                 let data = enviarticket.response;
-                mensajetkt.innerHTML = data;
-            }else{
-                mensajetkt.innerHTML = data;
+                Swal.fire(
+                    {
+                        title: 'Ticket Creado con Exito!',
+                        text: data,
+                        icon: 'success',
+                        confirmButtonColor: '#5156be'
+                    }
+                )
+                document.getElementById('cerrarmodalticket').click();
             }
         }
     }
@@ -182,6 +188,7 @@ function limpiar(){
 
     }
 
+  
 //     function areaselect2(id){
 
 //         mostrar_etiqueta=document.getElementById('etiqueta2');
