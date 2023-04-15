@@ -147,6 +147,77 @@ function limpiar(){
           if(xhr.status === 200){
             let data = xhr.response;
             mostrar_etiqueta.innerHTML = data;
+                var genericExamples = document.querySelectorAll('[data-trigger]');
+                for (i = 0; i < genericExamples.length; ++i) {
+                    var element = genericExamples[i];
+                    new Choices(element, {
+                        placeholderValue: 'This is a placeholder set in the config',
+                        searchPlaceholderValue: 'This is a search placeholder',
+                    });
+                }
+            
+                // singleNoSearch
+                var singleNoSearch = new Choices('#choices-single-no-search', {
+                    searchEnabled: false,
+                    removeItemButton: true,
+                    choices: [
+                        { value: 'One', label: 'Label One' },
+                        { value: 'Two', label: 'Label Two', disabled: true },
+                        { value: 'Three', label: 'Label Three' },
+                    ],
+                }).setChoices(
+                    [
+                        { value: 'Four', label: 'Label Four', disabled: true },
+                        { value: 'Five', label: 'Label Five' },
+                        { value: 'Six', label: 'Label Six', selected: true },
+                    ],
+                    'value',
+                    'label',
+                    false
+                );
+            
+                // singleNoSorting
+                var singleNoSorting = new Choices('#choices-single-no-sorting', {
+                    shouldSort: false,
+                });
+            
+            
+                // multiple Remove CancelButton
+                var multipleCancelButton = new Choices(
+                    '#choices-multiple-remove-button',
+                    {
+                        removeItemButton: true,
+                    }
+                );
+            
+                //choices-multiple-groups
+                var multipleDefault = new Choices(
+                    document.getElementById('choices-multiple-groups')
+                );
+            
+                // text inputs example
+                var textRemove = new Choices(
+                    document.getElementById('choices-text-remove-button'),
+                    {
+                        delimiter: ',',
+                        editItems: true,
+                        maxItemCount: 5,
+                        removeItemButton: true,
+                    }
+                );
+            
+                // choices-text-unique-values
+                var textUniqueVals = new Choices('#choices-text-unique-values', {
+                    paste: false,
+                    duplicateItemsAllowed: false,
+                    editItems: true,
+                });
+            
+                //choices-text-disabled
+                var textDisabled = new Choices('#choices-text-disabled', {
+                    addItems: false,
+                    removeItems: false,
+                }).disable();
           }else{
           }
       }
