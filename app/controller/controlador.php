@@ -26,7 +26,6 @@ class controlador{
 
     public function home(){
         include_once(__dir__."/../views/home/index.php");
-
     }
 
     public function admint(){
@@ -104,10 +103,6 @@ class controlador{
 
     }
 
-  
-
-
-    
 // ------------------------------------ GRUPOS-------------------------------
 
     public function addusersgroup(){
@@ -180,9 +175,6 @@ class controlador{
         $status="Desconectado";
         $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE id = {$_SESSION['unique_id']}");
         header('Location: '.controlador::$rutaAPP);
-        
-
-
     }
 
     public function index(){

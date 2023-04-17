@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-04-2023 a las 23:50:36
+-- Tiempo de generación: 12-04-2023 a las 19:52:32
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -257,22 +257,22 @@ INSERT INTO `mensajes_grupos` (`id`, `id_msg`, `id_persona`, `id_grupo`, `estado
 (240, 0, 25, 60, 1),
 (241, 0, 28, 60, 1),
 (242, 0, 26, 60, 1),
-(243, 0, 25, 60, 0),
+(243, 0, 25, 60, 1),
 (244, 0, 28, 60, 1),
 (245, 0, 26, 60, 1),
-(246, 0, 25, 60, 0),
+(246, 0, 25, 60, 1),
 (247, 0, 28, 60, 1),
 (248, 0, 26, 60, 1),
-(249, 0, 25, 60, 0),
+(249, 0, 25, 60, 1),
 (250, 0, 28, 60, 1),
 (251, 0, 26, 60, 1),
-(252, 0, 25, 60, 0),
+(252, 0, 25, 60, 1),
 (253, 0, 28, 60, 1),
 (254, 0, 26, 60, 1),
-(255, 0, 25, 60, 0),
+(255, 0, 25, 60, 1),
 (256, 0, 28, 60, 1),
 (257, 0, 26, 60, 1),
-(258, 0, 25, 60, 0),
+(258, 0, 25, 60, 1),
 (259, 0, 28, 60, 1),
 (260, 0, 26, 60, 1);
 
@@ -360,8 +360,10 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `
 (486, 28, 26, 'Hey', '', 0, 1, '2023-04-04', '08:58:15', '172.16.3.80'),
 (487, 28, 26, 'Jshhs', '', 0, 1, '2023-04-04', '08:58:23', '172.16.3.80'),
 (488, 28, 26, 'Jshs', '', 0, 1, '2023-04-04', '08:58:31', '172.16.3.80'),
-(489, 28, 27, 'Hola', '', 0, 0, '2023-04-05', '12:57:56', '::1'),
-(490, 28, 27, '', '1680717486puntual.jpg', 1, 0, '2023-04-05', '12:58:06', '::1');
+(489, 28, 27, 'Hola', '', 0, 1, '2023-04-05', '12:57:56', '::1'),
+(490, 28, 27, '', '1680717486puntual.jpg', 1, 1, '2023-04-05', '12:58:06', '::1'),
+(491, 27, 28, 'Hola', '', 0, 1, '2023-04-10', '11:22:07', '::1'),
+(492, 27, 28, '', '16811437391680010369Kevin.jpg', 1, 1, '2023-04-10', '11:22:19', '::1');
 
 -- --------------------------------------------------------
 
@@ -470,11 +472,15 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id_ticket`, `fecha_hora`, `ip_origen`, `id_empresa`, `id_grupo_proyecto`, `id_propietario_tck`, `id_area`, `id_etiqueta`, `descrip`, `estado`, `descrip_solucion`, `id_area_redireccion`, `f_h_cierre`, `ip_cierre`, `id_user_cierre`) VALUES
-(11, '2023-04-04 09:16:55', '::1', 3, 7, 28, 21, 6, 'Holaa', 2, '0', 0, '0000-00-00 00:00:00', '0', 0),
-(12, '2023-04-04 09:19:16', '::1', 3, 7, 28, 21, 10, 'hey', 3, 'ok, ok', 0, '2023-04-05 10:55:04', '0', 28),
-(14, '2023-04-04 09:43:41', '::1', 3, 7, 28, 21, 12, 'por favor', 3, '', 0, '2023-04-05 03:02:40', '::1', 28),
-(15, '2023-04-04 10:54:14', '::1', 6, 7, 27, 21, 12, 'adfhkhsdgf', 3, 'Listo, resuelto', 0, '2023-04-05 12:42:56', '::1', 28),
-(16, '2023-04-05 12:45:34', '::1', 6, 7, 27, 21, 12, 'Por favor', 1, '0', 0, '0000-00-00 00:00:00', '', 0);
+(55, '2023-04-12 11:03:50', '::1', 3, 7, 28, 21, 12, 'ok', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(56, '2023-04-12 11:20:41', '::1', 3, 7, 28, 21, 12, 'ok', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(57, '2023-04-12 11:23:27', '::1', 3, 7, 28, 21, 12, 'ok', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(58, '2023-04-12 11:26:30', '::1', 3, 7, 28, 21, 12, 'por favor', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(59, '2023-04-12 11:27:57', '::1', 3, 7, 28, 21, 12, 'please', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(60, '2023-04-12 11:28:53', '::1', 3, 7, 28, 21, 12, 'ok', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(61, '2023-04-12 11:47:50', '::1', 3, 7, 25, 20, 13, 'ok', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(62, '2023-04-12 11:49:55', '::1', 3, 7, 25, 21, 10, 'ok', 1, '', 0, '0000-00-00 00:00:00', '', 0),
+(63, '2023-04-12 11:56:46', '::1', 3, 7, 28, 21, 12, 'otro mas', 1, '', 0, '0000-00-00 00:00:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -521,8 +527,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `n_user`, `l_user`, `tel_user`, `cedula`, `password`, `f_nacimiento`, `id_area`, `id_empresa`, `f_ingreso_empre`, `id_grupo`, `rol`, `img`, `status`) VALUES
 (25, 'Usuario ', 'admin', '111', '111', 'c93ccd78b2076528346216b3b2f701e6', '1999-04-30', 21, 3, '1999-04-30', 7, 1, '1680531423puntual.jpg', 'Disponible'),
-(26, 'Usuario ', 'privis', '222', '222', 'c93ccd78b2076528346216b3b2f701e6', '1999-04-30', 20, 6, '1999-04-30', 7, 2, '1680531472logo.jpeg', 'Disponible'),
-(27, 'Usuario ', 'regular', '333', '333', 'c93ccd78b2076528346216b3b2f701e6', '1999-04-30', 22, 6, '1999-04-30', 7, 3, '1680531512clab.jpeg', 'Disponible'),
+(26, 'Usuario ', 'privis', '222', '222', 'c93ccd78b2076528346216b3b2f701e6', '1999-04-30', 20, 6, '1999-04-30', 7, 2, '1680531472logo.jpeg', 'Desconectado'),
+(27, 'Usuario ', 'regular', '333', '333', 'c93ccd78b2076528346216b3b2f701e6', '1999-04-30', 22, 6, '1999-04-30', 7, 3, '1680531512clab.jpeg', 'Desconectado'),
 (28, 'Jhoan', 'Duarte', '999', '1069766798', 'c93ccd78b2076528346216b3b2f701e6', '1999-04-30', 21, 3, '1999-04-30', 7, 1, '1680532213img1.jpg', 'Disponible');
 
 --
@@ -652,7 +658,7 @@ ALTER TABLE `mensajes_grupos`
 -- AUTO_INCREMENT de la tabla `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=491;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=493;
 
 --
 -- AUTO_INCREMENT de la tabla `sedes`
@@ -664,13 +670,13 @@ ALTER TABLE `sedes`
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_ticket` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `ticket_redireccion`
 --
 ALTER TABLE `ticket_redireccion`
-  MODIFY `id_redireccion` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_redireccion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

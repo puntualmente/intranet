@@ -25,7 +25,7 @@ input[type=number] { -moz-appearance:textfield; }
               <strong>
                 <div>
                   <p class="text-center">
-                    **Por politicas de seguridad cada 3 meses se solicitará el cambio de contraseña**
+                    **Por politicas de seguridad cada 3 meses se solicitará su cambio de contraseña**
                   </p>
                 </div>
               </strong>

@@ -2,12 +2,15 @@
       include_once(__dir__."/../admintablas/sqls_admin.php");
       include_once (__dir__."/../config.php");
 
+      $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE id_area = '{$_SESSION['id_area']}' and estado = 1");
+
 if(!isset($_POST['x'])){
 
-    if(getnoti($consulnotis)>0){
-        echo getnoti($consulnotis);
+    if(getnoti($consulnotis)>0||getnoti($noty_grupos)>0||getnotitickets($tickets)>0){
+        $total= getnoti($consulnotis) + getnoti($noty_grupos) + getnotitickets($tickets);
+        echo $total;
     }else{
-        echo getnoti($consulnotis);
+        echo 0;
     }
     
 
@@ -15,29 +18,21 @@ if(!isset($_POST['x'])){
     $data = json_decode($_POST['x']);
     $estado = $data[0]->estado;
 
-    if($estado==1){
-        if(getnoti($consulnotis)>0){
-            echo getnoti($noty_grupos);
-        }else{
-            echo getnoti($noty_grupos);
-        }
-    }elseif($estado==2){
-        $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE id_area = '{$_SESSION['id_area']}' and estado = 1");
+    if($estado==0){
 
-        if(getnotitickets($tickets)>0){
-            echo getnotitickets($tickets);
-        }else{
-            echo getnotitickets($tickets);
-        }
+        echo getnoti($consulnotis);
+
+    }elseif($estado==1){
+
+        echo getnoti($noty_grupos);
+
+    }elseif($estado==2){
+
+        echo getnotitickets($tickets);
+
     }
 }
 
-
-
-
-    
-
-      
 
 
       function getnoti($notis){
