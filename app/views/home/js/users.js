@@ -4,17 +4,11 @@ listagrupos = document.querySelector("#lista-grupos");
 listadeusuarios=document.querySelector("#listadeusuarios");
 contentsearch=document.querySelector("#contentsearch");
 
-
-
-
-
-
 searchBar.onkeyup = ()=>{
   let searchTerm = searchBar.value;
     document.getElementById('botonbuscar').click();
    // clearInterval(mostrarcosas);
   
-
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "chat/busqueda", true);
   xhr.onload = ()=>{
@@ -68,7 +62,7 @@ mostrarcosas = setInterval(() =>{
   xhr3.send();
 
 
-}, 1000);
+}, 1500);
 
 
 function holausers(id){
@@ -94,8 +88,6 @@ function holausers(id){
         if(xhr.status === 200){
           let data2 = xhr.response;
           headerchat.innerHTML = data2;
-       
-
         }
     }
   }
@@ -116,11 +108,10 @@ function holausers(id){
   }
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send("id_user=" + id);
-}, 500);
+}, 800);
 setTimeout(function(){
   document.getElementById('final').scrollIntoView(true);
-}, 600);
-
+}, 950);
 
 }
 
@@ -131,9 +122,6 @@ function holagrupos(id){
   document.getElementById('msg').disabled=false;
   document.getElementById('contenidodeenvio').hidden=false;
   document.getElementById('iniciodelchat').hidden=true;
-
-
-  
   
   clearInterval(chat);
   contenidochat = document.querySelector("#contenidochat");
@@ -147,8 +135,6 @@ function holagrupos(id){
         if(xhr.status === 200){
           let data2 = xhr.response;
           headerchat.innerHTML = data2;
-       
-
         }
     }
   }
@@ -169,10 +155,10 @@ function holagrupos(id){
   }
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send("id_grupo=" + id);
-}, 500);
+}, 800);
 setTimeout(function(){
   document.getElementById('final').scrollIntoView(true);
-}, 600);
+}, 950);
 
 
 }

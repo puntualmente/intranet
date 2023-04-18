@@ -113,7 +113,15 @@ function resolver(){
         if(xhr.status === 200){
           let data = xhr.response;
           response.innerHTML=data;
-            
+          Swal.fire(
+            {
+                title: 'Ticket Resuelto Con Exito!',
+                icon: 'success',
+            }
+        )
+        setTimeout(() => {
+          window.location.reload()            
+        }, 2000);
         }
     }
     }
@@ -121,9 +129,6 @@ function resolver(){
     xhr.send("x=" + resol);
     
 }
-
-
-
 
 function reasignar(){
     descrip_sol=document.getElementById('descrip_reasig').value;
@@ -140,6 +145,15 @@ function reasignar(){
         if(xhr.status === 200){
           let data = xhr.response;
           response.innerHTML=data;
+          Swal.fire(
+            {
+                title: 'Reasignado Con Exito!',
+                icon: 'success',
+            }
+        )
+        setTimeout(() => {
+          window.location.reload()            
+        }, 2000);
             
         }
     }
@@ -162,6 +176,7 @@ function verReasigna(id){
       if(xhr7.status === 200){
         let data7 = xhr7.response;
         mostrarReasig.innerHTML = data7;
+
       }
   }
   }

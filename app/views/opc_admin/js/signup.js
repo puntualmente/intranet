@@ -17,19 +17,35 @@ continueBtn.onclick = ()=>{
               if(data === "success"){
                 location.href="registrar";
               }else{
-                errorText.innerHTML = data;
-              }
+
+                if(data==="¡Todos los campos de entrada son obligatorios!"){
+                  alertify.error(data);
+                }else{
+                  alertify.success(data);
+                  limpiarFormulario();
+                }
+              
           }
       }
     }
-
+  }
 
     let formData = new FormData(form);
-    console.log(formData);
     xhr.send(formData);
   }
 
-  
+
+  function limpiarFormulario() {
+    document.getElementById('nombre').innerHTML="";
+    document.getElementById('apellido').innerHTML="";
+    document.getElementById('cedula').innerHTML="";
+    document.getElementById('telefono').innerHTML="";
+    document.getElementById('foto').innerHTML="";
+    document.getElementById('nacimiento').innerHTML="";
+    document.getElementById('contraseña').innerHTML="";
+    document.getElementById('f_ingreso').innerHTML="";
+  }
+
 
 // Determinar peso de las imagenes
 /*

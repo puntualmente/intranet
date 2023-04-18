@@ -24,6 +24,13 @@
     <?php include(__dir__."/../layouts/head.php");  ?>
     <?php include(__dir__."/../layouts/head-style.php");?>
 
+    <!-- alertifyjs Css -->
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 
 
@@ -65,7 +72,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body p-4">
-                            <form action="#" id="signupform" method="POST" enctype="multipart/form-data" autocomplete="off">
+                            <form id="signupform" method="POST" enctype="multipart/form-data" autocomplete="off">
 
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -217,6 +224,11 @@
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/form-advanced.init.js"></script>
 
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/app.js"></script>
+
+<!-- Alertify -->
+
+<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/alertify.min.js"></script>
+
 
 </body>
 

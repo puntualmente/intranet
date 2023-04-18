@@ -24,6 +24,8 @@
 
     <?php include(__dir__."/../layouts/head-style.php");  ?>
 
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <?php  include(__dir__."/../layouts/body.php");  ?>
@@ -236,8 +238,8 @@
                                                 
                                                 </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cancelar</button>
-                                                        <button type="button" onclick="resolver()"  class="btn btn-primary">Guardar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarresolvertkc">Cancelar</button>
+                                                        <button type="button" onclick="resolver()"  class="btn btn-primary">Resolver</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
@@ -389,6 +391,12 @@
 <script src="<?php echo controlador::$rutaAPP?>app/views/home/js/tickets.js"></script>
 
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/app.js"></script>
+
+<!-- Sweet Alerts js -->
+<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+<!-- Sweet alert init js-->
+<script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/sweetalert.init.js"></script>
 
 
 </body>

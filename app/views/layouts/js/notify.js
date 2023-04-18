@@ -22,7 +22,7 @@ setInterval(() =>{
     }
   }
   xhr.send();
-}, 1000);
+}, 1500);
 
 function mostrarnotify(){
   
@@ -56,10 +56,8 @@ function mostrarnotify(){
           let data2 = xhr2.response;
           if(data2==0){
             notycontentgrupo.innerHTML= `No tienes mensajes nuevos`;
-            numnotys=parseInt(numnotys)+parseInt(data2);
           }else{
             notycontentgrupo.innerHTML= `Tienes ${data2} mensajes nuevos`;
-            numnotys=parseInt(numnotys)+parseInt(data2);
           } 
         }
     }
@@ -67,28 +65,24 @@ function mostrarnotify(){
 xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr2.send("x=" + dbParam);
 
-notitickets=document.getElementById('notitickes');
+  notitickets=document.getElementById('notitickes');
 
-obj = [{ "estado": 2 }];
-notickt = JSON.stringify(obj);
-  let xhr3 = new XMLHttpRequest();
-  xhr3.open("POST", "notify", true);
-  xhr3.onload = ()=>{
-  if(xhr3.readyState === XMLHttpRequest.DONE){
-      if(xhr3.status === 200){
-        let data3 = xhr3.response;
-        if(data3==0){
-          notitickets.innerHTML= `No hay tickets por resolver`;
-          numnotys=parseInt(numnotys)+parseInt(data3);
-
-        }else{
-          notitickets.innerHTML= `Tienes ${data3} Tickets por resolver`;
-          numnotys=parseInt(numnotys)+parseInt(data3);
-
+  obj = [{ "estado": 2 }];
+  notickt = JSON.stringify(obj);
+    let xhr3 = new XMLHttpRequest();
+    xhr3.open("POST", "notify", true);
+    xhr3.onload = ()=>{
+    if(xhr3.readyState === XMLHttpRequest.DONE){
+        if(xhr3.status === 200){
+          let data3 = xhr3.response;
+          if(data3==0){
+            notitickets.innerHTML= `No hay tickets por resolver`;
+          }else{
+            notitickets.innerHTML= `Tienes ${data3} Tickets por resolver`;
+          }
         }
-      }
+    }
   }
-}
 xhr3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr3.send("x=" + notickt);
 
