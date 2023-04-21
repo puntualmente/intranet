@@ -7,4 +7,4 @@
 <script src="<?php echo controlador::$rutaAPP?>app/assets/libs/feather-icons/feather.min.js"></script>
 
 <!-- pace js -->
-<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/pace-js/pace.min.js"></script>
+<!-- <script src="<?php //echo controlador::$rutaAPP?>app/assets/libs/pace-js/pace.min.js"></script> -->

@@ -3,12 +3,12 @@
     $outgoing_id = $_SESSION['unique_id'];
     $sql = "SELECT * FROM users WHERE NOT id = {$outgoing_id} ORDER BY id DESC";
     $query = mysqli_query($conn, $sql);
-
  
     $mensajes=[];
     $noestan=[];
     $estan=[];
     $orden=[];
+    $mensajes2=[];
     $mayor=0;
    
     foreach($query as $row){
@@ -17,6 +17,16 @@
         OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1";
         $query2 = mysqli_query($conn, $sql2);
         $row2 = mysqli_fetch_assoc($query2);
+
+        foreach($query2 as $msg){
+
+            array_push($mensajes2, [
+                "msg_id" => $msg['msg_id'],
+                "us_id" => $row['id']
+            ]);
+        }
+
+
 
         if(empty($row2['msg_id'])){
             array_push($noestan, $row['id']);
@@ -28,15 +38,24 @@
             }else{
                 array_push($orden, $row['id']);
             }
-        }
+        }   
     }
 
-    
+    RSORT($mensajes2);
+
+
+
+    $ordenado = [];
   
-    //$ordenado=$orden + $noestan;
-    $ordenado=$orden;
-   
-   
+    $ordenado = array_map(function($mensajes2) {
+        return $mensajes2['us_id'];
+      }, $mensajes2);
+    
+
+    
+ 
+
+      
 
     $output = "";
     $class="";
@@ -55,12 +74,10 @@
         }
         return $cont;
     }
+
     function formatohora($hora){
 
-        
-
             return date("g:i a",strtotime($hora));;
-        
         
     }
    
