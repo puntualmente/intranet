@@ -24,26 +24,10 @@
                 "msg_id" => $msg['msg_id'],
                 "us_id" => $row['id']
             ]);
-        }
-
-
-
-        if(empty($row2['msg_id'])){
-            array_push($noestan, $row['id']);
-        }else{
-            array_push($mensajes, $row2['msg_id']);
-            if($mayor<$row2['msg_id']){
-                $mayor=$row2['msg_id'];
-                array_unshift($orden, $row['id']);
-            }else{
-                array_push($orden, $row['id']);
-            }
-        }   
+        }  
     }
 
     RSORT($mensajes2);
-
-
 
     $ordenado = [];
   
@@ -51,18 +35,8 @@
         return $mensajes2['us_id'];
       }, $mensajes2);
     
-
-    
- 
-
-      
-
     $output = "";
     $class="";
-    $sql9 = "SELECT * FROM users WHERE NOT id = {$outgoing_id} ORDER BY id DESC";
-    $query9 = mysqli_query($conn, $sql9);
-
-    $row9=mysqli_fetch_assoc($query9);
        
 
     function getnoti($notis){
@@ -84,7 +58,7 @@
 
 
     if(mysqli_num_rows($query) == 0){
-        $output .= "No users are available to chat";
+        $output .= "No tienes chats";
     }elseif(mysqli_num_rows($query) > 0){
 
         foreach($ordenado as $esta) {

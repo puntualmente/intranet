@@ -1,4 +1,5 @@
 <?php
+
       include_once(__dir__."/../admintablas/sqls_admin.php");
       include_once (__dir__."/../config.php");
 

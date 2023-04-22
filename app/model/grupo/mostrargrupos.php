@@ -21,7 +21,28 @@ if(mysqli_num_rows($sql2) == 0){
     }else{
         $notify="";
     }
+
+    $chat_grupo = mysqli_query($conn, "SELECT * FROM messages_grupos INNER JOIN users ON messages_grupos.outgoing_msg_id = users.id WHERE incoming_msg_id = '$id_grupo' ORDER BY msg_id DESC LIMIT 1");
+
+    $info_chat = mysqli_fetch_assoc($chat_grupo);
+
     
+    if(empty($info_chat['n_user']) || empty($info_chat['msg'])){
+        $nombre="No hay mensajes";
+        $msg = "";
+        $hora = "";
+    }else{
+        $nombre = $info_chat['n_user']. ":";
+        $msg = $info_chat['msg'];
+
+            $f_actual=date("Y-m-d");
+                if($info_chat['fecha']===$f_actual){
+                    $tiempo=formatohora($info_chat['hora']);
+                }else{
+                    $newDate = date("d-m-Y", strtotime($info_chat['fecha']));
+                    $tiempo=$newDate;
+                }
+    }
 
     $output .= 
     '
@@ -36,10 +57,14 @@ if(mysqli_num_rows($sql2) == 0){
             
             <div class="flex-grow-1">
                 <h5 class="font-size-14 mb-0">'.$row2['n_grupo'].'</h5>
+                <p class="text-truncate mb-0">'.$nombre.' '.$msg.'</p>
             </div>
-           
+            <div class="flex-shrink-0">
+                <div class="font-size-11"> '.$tiempo.'</div>
+            </div>
             <div class="unread-message">
                 <span class="badge bg-danger rounded-pill">'.$notify.'</span>
+            </div>
             </div>
         </div>
     </a>
@@ -47,6 +72,14 @@ if(mysqli_num_rows($sql2) == 0){
 ';
 }
 }
+
+function formatohora($hora){
+
+    return date("g:i a",strtotime($hora));;
+
+} 
+
+
 echo $output;
 
 
