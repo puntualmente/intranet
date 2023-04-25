@@ -26,16 +26,31 @@ if(mysqli_num_rows($sql2) == 0){
 
     $info_chat = mysqli_fetch_assoc($chat_grupo);
 
+    $f_actual=date("Y-m-d");
+
+
     
     if(empty($info_chat['n_user']) || empty($info_chat['msg'])){
-        $nombre="No hay mensajes";
-        $msg = "";
-        $hora = "";
+
+        if(!empty($info_chat['imagen'])){
+            $nombre = $info_chat['n_user']. ":";
+            $msg= '<i class="fas fa-image">  Foto </i>';
+            if($info_chat['fecha']==$f_actual){
+                $tiempo = formatohora($info_chat['hora']);
+            }else{
+                $newDate = date("d-m-Y", strtotime($info_chat['fecha']));
+                $tiempo = $newDate;
+                $msg = "";
+            }
+        }else{
+            $tiempo = "";
+            $nombre="No hay mensajes";
+            $msg = "";
+        }
     }else{
         $nombre = $info_chat['n_user']. ":";
         $msg = $info_chat['msg'];
 
-            $f_actual=date("Y-m-d");
                 if($info_chat['fecha']===$f_actual){
                     $tiempo=formatohora($info_chat['hora']);
                 }else{
