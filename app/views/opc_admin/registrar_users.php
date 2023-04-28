@@ -30,6 +30,8 @@
     <!-- alertifyjs default themes  Css -->
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- dropzone css -->
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -187,6 +189,41 @@
                 </div>
                 <!-- end row -->
 
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">O Carga un archivo</h4>
+                                <p class="card-title-desc">El archivo debe ser.............
+                                </p>
+                            </div>
+                            <div class="card-body">
+
+                                <div>
+                                    <form action="#" class="dropzone">
+                                        <div class="fallback">
+                                            <input name="file" type="file" multiple="multiple">
+                                        </div>
+                                        <div class="dz-message needsclick">
+                                            <div class="mb-3">
+                                                <i class="display-4 text-muted bx bx-cloud-upload"></i>
+                                            </div>
+
+                                            <h5> Pon el documento aqui !!.</h5>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light">Subir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
@@ -219,6 +256,10 @@
 
 <!-- datepicker js -->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/libs/flatpickr/flatpickr.min.js"></script>
+
+<!-- dropzone js -->
+<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/dropzone/min/dropzone.min.js"></script>
+
 
 <!-- init js -->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/form-advanced.init.js"></script>
