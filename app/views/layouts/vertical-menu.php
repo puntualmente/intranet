@@ -173,6 +173,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="updListado">
+                                <span data-key="t-regisuser">Actualizar Listado</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="adminusers">
                                 <span data-key="t-admin">Tabla Usuarios</span>
                             </a>

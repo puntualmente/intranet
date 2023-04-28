@@ -31,6 +31,10 @@ class controlador{
     public function admint(){
         include_once(__dir__."/../views/home/admint.php");
     }
+
+    public function updListado(){
+        include_once(__dir__."/../views/opc_admin/actualizar_listado.php");
+    }
   
 
 
