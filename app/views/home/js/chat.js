@@ -30,6 +30,7 @@ sendBtn.onclick = ()=>{
           if(xhr.status === 200){
               inputField.value = "";
               let data = xhr.response;
+              document.getElementById('texto_error').innerHTML=data;
               limpiar();
               setTimeout(function(){
                 document.getElementById('final').scrollIntoView(true);
@@ -41,7 +42,48 @@ sendBtn.onclick = ()=>{
     xhr.send(formData);
 }
 
-  
+var divImagen = document.getElementById("imagen");
+
+document.addEventListener("paste", function(event){
+   var items = event.clipboardData.items;
+   for (var i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf("image") !== -1) {
+         var blob = items[i].getAsFile();
+         var url = URL.createObjectURL(blob);
+         var img = new Image();
+         img.src = url;
+         //divImagen.appendChild(img);
+         console.log(blob);
+         //enviarImagenAlServidor(blob);
+         enviarImagen(blob);
+      }
+   }
+});
+
+function enviarImagen(imagen){
+    var formData = new FormData(form);
+   formData.append("image", imagen);
+   var xhr = new XMLHttpRequest();
+   xhr.open("POST", "chat/insertchat", true);
+   xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+         data = xhr.response;
+         console.log("Imagen guardada en el servidor");
+         document.getElementById('texto_error').innerHTML=data;
+         setTimeout(function(){
+            document.getElementById('final').scrollIntoView(true);
+          }, 500);
+
+      }
+   };
+   xhr.send(formData);
+}
+
+
+
+
+
+
 document.getElementById("inputima").addEventListener('click', function() {
     document.getElementById("file-input").click();
 });
