@@ -25,9 +25,15 @@ if($userPuntualmente->iniciar_sesion()){
             case 'signup':
                 $userPuntualmente->signup();
                 break;
+
+            //Listado de usuarios
             
             case 'updListado':
                 $userPuntualmente->updListado();
+                break;
+
+            case 'subirArchivoUs':
+                $userPuntualmente->subirArchivoUs();
                 break;
             
                 // CHAT
