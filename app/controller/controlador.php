@@ -32,8 +32,15 @@ class controlador{
         include_once(__dir__."/../views/home/admint.php");
     }
 
+
+    //Actualizar listado users
+
     public function updListado(){
         include_once(__dir__."/../views/opc_admin/actualizar_listado.php");
+    }
+
+    public function subirArchivoUs(){
+        include_once(__dir__."/../model/OtrasConfigs/subirArchivoUs.php");
     }
   
 

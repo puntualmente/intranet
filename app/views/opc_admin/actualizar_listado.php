@@ -10,14 +10,7 @@
       ?>
 
 <head>
-    <!-- choices css -->
-    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- color picker css -->
-    <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/@simonwep/pickr/themes/classic.min.css" /> <!-- 'classic' theme -->
-    <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/@simonwep/pickr/themes/monolith.min.css" /> <!-- 'monolith' theme -->
-    <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/@simonwep/pickr/themes/nano.min.css" /> <!-- 'nano' theme -->
-
+    
     <!-- datepicker css -->
     <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/flatpickr/flatpickr.min.css">
     <title>Actualizar U | Admin-Puntualmente</title>
@@ -74,29 +67,30 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Carga de archivo</h4>
-                                <p class="card-title-desc">A continuacion debes cargar un documento en excel con extencion .CSV 
+                                <h4 class="card-title">Actualiza los usuarios desde un archivo</h4>
+                                <p class="card-title-desc">Carga unicamente archivos .csv
                                 </p>
                             </div>
                             <div class="card-body">
 
                                 <div>
-                                    <form id="file_users" class="dropzone">
+                                    <form action="#" id="udt_users" class="" method="post" enctype="multipart/form-data" >
                                         <div class="fallback">
-                                            <input name="file" type="file" accept=".csv" multiple="multiple">
+                                            <input name="file_upl" class="form-control" id="file_upl" type="file" accept=".csv" required onchange="validar()">
                                         </div>
-                                        <div class="dz-message needsclick">
+                                        <!-- <div class="dz-message needsclick">
                                             <div class="mb-3">
                                                 <i class="display-4 text-muted bx bx-cloud-upload"></i>
                                             </div>
 
                                             <h5> Pon el documento aqui !!.</h5>
-                                        </div>
+
+                                        </div> -->
                                     </form>
                                 </div>
 
                                 <div class="text-center mt-4">
-                                    <button type="button" class="btn btn-primary waves-effect waves-light">Subir</button>
+                                    <button type="button" onclick="subirArchivo()" class="btn btn-primary waves-effect waves-light">Subir</button>
                                 </div>
                             </div>
                         </div>
@@ -125,15 +119,7 @@
 <?php include (__dir__."/../layouts/vendor-scripts.php") ?>
 
 
-<!-- choices js -->
-<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
 
-<!-- color picker js -->
-<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/@simonwep/pickr/pickr.min.js"></script>
-<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
-
-<!-- datepicker js -->
-<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/flatpickr/flatpickr.min.js"></script>
 
 <!-- dropzone js -->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/libs/dropzone/min/dropzone.min.js"></script>
