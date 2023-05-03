@@ -43,8 +43,14 @@ if(isset($_POST['x'])){
         $ip_cierre="";
         $id_user_cierre="0";
 
+        if($_SESSION['id_area']==3){
+            $id_jefe = $_SESSION['id_jefe'];
+        }else{
+            $id_jefe = 0;
+        }
 
-    $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_h_actual}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
+
+    $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_jefe, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$id_jefe}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_h_actual}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
 
 /*
 

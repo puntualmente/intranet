@@ -248,11 +248,14 @@
                                 <span data-key="m-tickets">Mis Tickets</span>
                             </a>
                         </li>
+                    <?php if($_SESSION['rol']==1||$_SESSION['rol']==2){?>
+
                         <li>
                             <a href="tickets">
                                 <span data-key="tickets">Tickets</span>
                             </a>
                         </li>
+                    <?php } ?>
                     </ul>
                 </li>
 

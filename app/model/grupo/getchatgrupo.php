@@ -143,7 +143,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <h5 class="conversation-name"><a href="#" class="user-name">'.$nombre.'</a> <span class="time">'.$hora.'</span></h5>
                                                         <ul class="list-inline message-img mt-3  mb-0">
                                                             <li class="list-inline-item message-img-list">
-                                                                <a class="d-inline-block m-1" href="">
+                                                                <a class="d-inline-block m-1" href="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'">
                                                                     <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="" class="rounded img-thumbnail">
                                                                 </a>                                                                  
                                                             </li>
@@ -167,7 +167,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <h5 class="conversation-name"><a href="#" class="user-name">'.$nombre.'</a> <span class="time">'.$hora.'</span></h5>
                                                         <ul class="list-inline message-img mt-3  mb-0">
                                                             <li class="list-inline-item message-img-list">
-                                                                <a class="d-inline-block m-1" href="">
+                                                                <a class="d-inline-block m-1" href="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'">
                                                                     <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="" class="rounded img-thumbnail">
                                                                 </a>                                                                  
                                                             </li>

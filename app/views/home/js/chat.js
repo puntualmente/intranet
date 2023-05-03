@@ -230,6 +230,12 @@ function limpiar(){
 
     }
 
+    function mostrarimg(src){
+        console.log(src);
+    }
+
+    
+
 
     
 

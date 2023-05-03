@@ -306,10 +306,6 @@ if($userPuntualmente->iniciar_sesion()){
                 case 'mistickets':
                     $userPuntualmente->mistickets();
                     break;
-    
-                case 'tickets':
-                    $userPuntualmente->tickets();
-                    break;
                     
                 case 'adetiquetas/guardaretiqueta':
                     $userPuntualmente->guardar_etiqueta();
