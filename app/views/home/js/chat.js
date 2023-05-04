@@ -107,7 +107,9 @@ function limpiar(){
     function areaselect(id){
 
         mostrar_etiqueta=document.getElementById('etiqueta');
-
+        mostrar_users_areas = document.getElementById('users_area');
+        console.log(id);
+     
         obj = [{ "id_area": id, "tipo": 1 }];
         console.log(obj)
         dbParam = JSON.stringify(obj);
@@ -202,9 +204,11 @@ function limpiar(){
         areaDestTkt=document.getElementById('area').value;
         select_etk=document.getElementById('sel_etiqueta').value;
         descrip=document.getElementById('descripticket').value;
+        user_destino= document.getElementById('sel_user').value;
+
         mensajetkt=document.getElementById('mensajeticket');
 
-        obj = [{ "area_dest_tkt": areaDestTkt, "etiqueta": select_etk, "descrip": descrip, "estado": 0 }];
+        obj = [{ "area_dest_tkt": areaDestTkt, "etiqueta": select_etk, "descrip": descrip, "user_destino": user_destino,"estado": 0 }];
         console.log(obj)
         dbParam = JSON.stringify(obj);
         let enviarticket = new XMLHttpRequest();

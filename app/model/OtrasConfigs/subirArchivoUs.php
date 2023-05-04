@@ -29,7 +29,7 @@ foreach ($lineas as $linea) {
 
     if ($i != 0) {
 
-        $datos = explode(";", $linea);
+        $datos = explode(",", $linea);
        
         $nombre           = !empty($datos[0])  ? ($datos[0]) : '';
 		$apellido         = !empty($datos[1])  ? ($datos[1]) : '';

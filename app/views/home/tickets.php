@@ -293,16 +293,19 @@
                                                 <div class="mb-3">
 
                                                 <label for="area" class="form-label font-size-13 text-muted">Area a la que quieres reasignar el ticket:</label>
-                                                <select class="form-control" data-trigger name="area_redireccion" id="area_redireccion">
+                                                <select class="form-control" data-trigger name="area_redireccion" id="area_redireccion" onchange="traer_users(this.value)">
                                                     <option value="0" selected disabled require>1. Elige un area</option>
                                                     <?php foreach($areas as $value){?>
                                                         <option value="<?php echo $value['id_area']?>"><?php echo $value['n_area']?></option>
                                                     <?php }?>
                                                 </select>
                                                     
-                                                <div id="response_reasig">
+                                                <div id="users_area">
 
                                                 </div>
+                                                <br>
+
+                                                <div id="response_reasig"></div>
                                                 
                                                 <label for="descrip_reasig">Descripción:</label>
                                                 <textarea name="descrip_reasig" id="descrip_reasig" rows="5" class="form-control"></textarea>

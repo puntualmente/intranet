@@ -130,13 +130,108 @@ function resolver(){
     
 }
 
+function traer_users(id){
+      mostrar_users_areas = document.getElementById('users_area');
+      console.log(id);
+
+      obj = [{ "id_area": id, "tipo": 2 }];
+      console.log(obj)
+      dbParam = JSON.stringify(obj);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "chat/otrasconsultastick", true);
+    xhr.onload = ()=>{
+    if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status === 200){
+          let data = xhr.response;
+          mostrar_users_areas.innerHTML = data;
+              var genericExamples = document.querySelectorAll('[data-trigger]');
+              for (i = 0; i < genericExamples.length; ++i) {
+                  var element = genericExamples[i];
+                  new Choices(element, {
+                      placeholderValue: 'This is a placeholder set in the config',
+                      searchPlaceholderValue: 'This is a search placeholder',
+                  });
+              }
+          
+              // singleNoSearch
+              var singleNoSearch = new Choices('#choices-single-no-search', {
+                  searchEnabled: false,
+                  removeItemButton: true,
+                  choices: [
+                      { value: 'One', label: 'Label One' },
+                      { value: 'Two', label: 'Label Two', disabled: true },
+                      { value: 'Three', label: 'Label Three' },
+                  ],
+              }).setChoices(
+                  [
+                      { value: 'Four', label: 'Label Four', disabled: true },
+                      { value: 'Five', label: 'Label Five' },
+                      { value: 'Six', label: 'Label Six', selected: true },
+                  ],
+                  'value',
+                  'label',
+                  false
+              );
+          
+              // singleNoSorting
+              var singleNoSorting = new Choices('#choices-single-no-sorting', {
+                  shouldSort: false,
+              });
+          
+          
+              // multiple Remove CancelButton
+              var multipleCancelButton = new Choices(
+                  '#choices-multiple-remove-button',
+                  {
+                      removeItemButton: true,
+                  }
+              );
+          
+              //choices-multiple-groups
+              var multipleDefault = new Choices(
+                  document.getElementById('choices-multiple-groups')
+              );
+          
+              // text inputs example
+              var textRemove = new Choices(
+                  document.getElementById('choices-text-remove-button'),
+                  {
+                      delimiter: ',',
+                      editItems: true,
+                      maxItemCount: 5,
+                      removeItemButton: true,
+                  }
+              );
+          
+              // choices-text-unique-values
+              var textUniqueVals = new Choices('#choices-text-unique-values', {
+                  paste: false,
+                  duplicateItemsAllowed: false,
+                  editItems: true,
+              });
+          
+              //choices-text-disabled
+              var textDisabled = new Choices('#choices-text-disabled', {
+                  addItems: false,
+                  removeItems: false,
+              }).disable();
+        }else{
+        }
+    }
+    }
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("x=" + dbParam);
+}
+
+
 function reasignar(){
     descrip_sol=document.getElementById('descrip_reasig').value;
     response = document.getElementById('response_reasig');
     id_tkt=document.getElementById('id_tk_redirec').value;
     area_redireccion = document.getElementById('area_redireccion').value;
+    sel_user = document.getElementById('sel_user').value;
 
-    obj = [{ "estado": 2, "descrip_reasig": descrip_sol, "id_tkt_reasig": id_tkt, "area_redirec": area_redireccion }];
+    obj = [{ "estado": 2, "descrip_reasig": descrip_sol, "id_tkt_reasig": id_tkt, "area_redirec": area_redireccion, "sel_user": sel_user }];
       resol = JSON.stringify(obj);
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "chat/tkt/creartkt", true);

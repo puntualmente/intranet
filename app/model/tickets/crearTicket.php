@@ -36,6 +36,7 @@ if(isset($_POST['x'])){
         $areaTkt = $data[0]->area_dest_tkt;
         $etiqueta = $data[0]->etiqueta;
         $descrip = $data[0]->descrip;
+        $user_destino = $data[0]->user_destino;
         $estado = 1;
         $redireccion = "";
         $id_redireccion = 0;
@@ -43,14 +44,8 @@ if(isset($_POST['x'])){
         $ip_cierre="";
         $id_user_cierre="0";
 
-        if($_SESSION['id_area']==3){
-            $id_jefe = $_SESSION['id_jefe'];
-        }else{
-            $id_jefe = 0;
-        }
 
-
-    $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_jefe, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$id_jefe}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_h_actual}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
+    $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_jefe, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$user_destino}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_h_actual}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
 
 /*
 
@@ -106,6 +101,7 @@ if(isset($_POST['x'])){
         $descrip_reasig = $data[0]->descrip_reasig; 
         $id_tkt = $data[0]->id_tkt_reasig;
         $area_redirec = $data[0]->area_redirec;
+        $sel_user = $data[0]->sel_user;
 
         $validarRedireccion=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_ticket = '{$id_tkt}'");
 
@@ -117,13 +113,13 @@ if(isset($_POST['x'])){
 
         }
 
-        $reasignar=mysqli_query($conn, "INSERT INTO ticket_redireccion(id_ticket, descrip_redirec, area_redireccion, user_redireccion, f_h_redireccion, estado) VALUES ('{$id_tkt}','{$descrip_reasig}','{$area_redirec}','{$_SESSION['unique_id']}','{$f_h_actual}','{$estado}')");
+        $reasignar=mysqli_query($conn, "INSERT INTO ticket_redireccion(id_ticket, descrip_redirec, area_redireccion, id_jefe, user_redireccion ,f_h_redireccion, estado) VALUES ('{$id_tkt}','{$descrip_reasig}','{$area_redirec}','{$sel_user}','{$_SESSION['unique_id']}','{$f_h_actual}','{$estado}')");     
 
 
         }else{
       
 
-        $reasignar=mysqli_query($conn, "INSERT INTO ticket_redireccion(id_ticket, descrip_redirec, area_redireccion, user_redireccion, f_h_redireccion, estado) VALUES ('{$id_tkt}','{$descrip_reasig}','{$area_redirec}','{$_SESSION['unique_id']}','{$f_h_actual}','{$estado}')");
+        $reasignar=mysqli_query($conn, "INSERT INTO ticket_redireccion(id_ticket, descrip_redirec, area_redireccion, id_jefe, user_redireccion, f_h_redireccion, estado) VALUES ('{$id_tkt}','{$descrip_reasig}','{$area_redirec}','{$sel_user}','{$_SESSION['unique_id']}','{$f_h_actual}','{$estado}')");
 
         if($reasignar==0){
             echo "Error";

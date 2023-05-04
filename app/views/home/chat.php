@@ -438,6 +438,11 @@
                                                             <?php }?>
                                                         </select>
                                                     </div>
+
+                                                    <div class="mb-3" id="users_area">
+                                                      
+                                                    </div>
+                                         
                                                     <div class="mb-3" id="etiqueta">
                                                         <select class="form-select" name="#" id="#">
                                                             <option value="-">< ------- ></option>
@@ -445,7 +450,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="descripticket">Descripción</label>
-                                                        <textarea class="form-control" name="descripticket" id="descripticket" rows="7"></textarea>
+                                                        <textarea class="form-control" name="descripticket" id="descripticket" rows="5"></textarea>
                                                     </div>
                                                     <span id="mensajeticket"></span>            
 
