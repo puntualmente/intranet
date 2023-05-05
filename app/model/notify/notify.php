@@ -3,7 +3,7 @@
       include_once(__dir__."/../admintablas/sqls_admin.php");
       include_once (__dir__."/../config.php");
 
-      $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE id_area = '{$_SESSION['id_area']}' OR id_jefe = '{$_SESSION['unique_id']}' and estado = 1");
+      $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE id_jefe = '{$_SESSION['unique_id']}' and estado = 1");
 
 if(!isset($_POST['x'])){
 

@@ -31,8 +31,9 @@ if(isset($_POST['tipo'])){
 
             $id_area=$data[0]->id_area;
 
-            if($_SESSION['id_area']==3){
-                $sql="SELECT * FROM users WHERE id_area= '{$id_area}' and rol = 2 or rol = 1 and id_grupo = '{$_SESSION['id_grupo']}'";
+            if($_SESSION['id_area']==3 && $id_area==3){
+
+                $sql="SELECT * FROM jefe_grupo INNER JOIN users ON jefe_grupo.id_jefe = users.id WHERE jefe_grupo.id_area= '{$id_area}' and jefe_grupo.id_grupo = '{$_SESSION['id_grupo']}'";
                 $users_area_jefes = mysqli_query($conn, $sql);
                 foreach($users_area_jefes as $jefes){
                     $output .='
@@ -40,7 +41,7 @@ if(isset($_POST['tipo'])){
                     ';
                 }
             }else{
-                $sql="SELECT * FROM users WHERE id_area= '{$id_area}' and rol = 2 OR rol = 1";
+                $sql="SELECT * FROM jefe_grupo INNER JOIN users ON jefe_grupo.id_jefe = users.id WHERE jefe_grupo.id_area= '{$id_area}'";
                 $users_area_jefes = mysqli_query($conn, $sql);
                 foreach($users_area_jefes as $jefes){
                     $output .='
@@ -76,7 +77,7 @@ if(isset($_POST['tipo'])){
 
             $id_area=$data[0]->id_area;
 
-            $sql="SELECT * FROM users WHERE id_area= '{$id_area}' and rol = 2 or rol = 1 and id_grupo = '{$_SESSION['id_grupo']}'";
+            $sql="SELECT * FROM jefe_grupo INNER JOIN users ON jefe_grupo.id_jefe = users.id WHERE jefe_grupo.id_area= '{$id_area}'";
             $jefes_area = mysqli_query($conn, $sql);
             foreach($jefes_area as $jefe){
                 $output .='
