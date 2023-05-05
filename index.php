@@ -326,7 +326,7 @@ if($userPuntualmente->iniciar_sesion()){
         if($_SESSION['rol']==1){
             $userPuntualmente->home();
         }elseif($_SESSION['rol']==2||$_SESSION['rol']==3){
-            $userPuntualmente->chat();
+            header('Location: '.controlador::$rutaAPP);
         }
         
     }
