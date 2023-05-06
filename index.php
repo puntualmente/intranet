@@ -229,8 +229,8 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->cerrar_sesion();
                 break;
             default:
-                $userPuntualmente->chat();
-                break;
+            header('Location: '.controlador::$rutaAPP.'chat');
+            break;
         }
         
     }else if (isset($_GET["action"])&&($_SESSION['rol']==3)){
@@ -319,7 +319,7 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->cerrar_sesion();
                 break;
             default:
-                $userPuntualmente->chat();
+                header('Location: '.controlador::$rutaAPP.'chat');
                 break;
         }
     }else{
