@@ -17,7 +17,12 @@
 
     <!-- datepicker css -->
     <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/flatpickr/flatpickr.min.css">
-    
+    <!-- alertifyjs Css -->
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+
     <title>Chat | Puntualmente</title>
     
     <?php include(__dir__."/../layouts/head.php");  ?>
@@ -452,7 +457,8 @@
                                                         <label for="descripticket">Descripción</label>
                                                         <textarea class="form-control" name="descripticket" id="descripticket" rows="7"></textarea>
                                                     </div>
-                                                    <span id="mensajeticket"></span>            
+
+                                                    <div id="mensajeticket"></div>           
 
                                                     </div>
                                                     <div class="modal-footer">
@@ -503,6 +509,10 @@
 
 <!-- Sweet alert init js-->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/sweetalert.init.js"></script>
+
+<!-- Alertify -->
+<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/alertify.min.js"></script>
+
 
 </body>
 

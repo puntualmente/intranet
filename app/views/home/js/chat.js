@@ -202,36 +202,49 @@ function limpiar(){
     function crearTicket(){
 
         areaDestTkt=document.getElementById('area').value;
-        select_etk=document.getElementById('sel_etiqueta').value;
         descrip=document.getElementById('descripticket').value;
-        user_destino= document.getElementById('sel_user').value;
-
         mensajetkt=document.getElementById('mensajeticket');
 
-        obj = [{ "area_dest_tkt": areaDestTkt, "etiqueta": select_etk, "descrip": descrip, "user_destino": user_destino,"estado": 0 }];
-        console.log(obj)
-        dbParam = JSON.stringify(obj);
-        let enviarticket = new XMLHttpRequest();
-        enviarticket.open("POST", "chat/tkt/creartkt", true);
-        enviarticket.onload = ()=>{
-        if(enviarticket.readyState === XMLHttpRequest.DONE){
-            if(enviarticket.status === 200){
-                let data = enviarticket.response;
-                Swal.fire(
-                    {
-                        title: 'Ticket Creado con Exito!',
-                        text: data,
-                        icon: 'success',
-                        confirmButtonColor: '#5156be'
-                    }
-                )
-                document.getElementById('cerrarmodalticket').click();
-            }
-        }
-    }
-    enviarticket.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    enviarticket.send("x=" + dbParam);
+        mensajetkt.innerHTML=" <span> Campos Obligatorios</span> ";
 
+        if(areaDestTkt==0){
+            alertify.error("Los Campos son obligatorios");
+
+        }else{
+            select_etk=document.getElementById('sel_etiqueta').value;
+            user_destino= document.getElementById('sel_user').value;
+
+            if(select_etk==0||user_destino==0){
+                alertify.error("Los Campos son obligatorios");
+            }else{
+                obj = [{ "area_dest_tkt": areaDestTkt, "etiqueta": select_etk, "descrip": descrip, "user_destino": user_destino,"estado": 0 }];
+                console.log(obj)
+                dbParam = JSON.stringify(obj);
+                let enviarticket = new XMLHttpRequest();
+                enviarticket.open("POST", "chat/tkt/creartkt", true);
+                enviarticket.onload = ()=>{
+                if(enviarticket.readyState === XMLHttpRequest.DONE){
+                    if(enviarticket.status === 200){
+                        let data = enviarticket.response;
+                        Swal.fire(
+                            {
+                                title: 'Ticket Creado con Exito!',
+                                text: data,
+                                icon: 'success',
+                                confirmButtonColor: '#5156be'
+                            }
+                        )
+                        document.getElementById('cerrarmodalticket').click();
+                    }
+                }
+            }
+            enviarticket.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            enviarticket.send("x=" + dbParam);
+    
+            }
+
+            
+        }
     }
 
     function mostrarimg(src){

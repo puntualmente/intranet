@@ -17,6 +17,15 @@ function agregaretiqueta(){
           if(xhr.status === 200){
             let data = xhr.response;
             mensaje_etiqueta.innerHTML = data;
+            Swal.fire(
+              {
+                  title: 'Etiqueta Creada con Exito!',
+                  icon: 'success',
+                  confirmButtonColor: '#5156be'
+              }
+          )
+          descrip.value="";
+          t_estimado.value="";
           }else{
             console.log(data);
           }

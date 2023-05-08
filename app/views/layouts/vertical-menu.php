@@ -113,40 +113,7 @@
                                 
                             </div>
                         </a>
-                        <a href="tickets" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 avatar-sm me-3">
-                                    <span class="avatar-title bg-warning rounded-circle font-size-16">
-                                        <i class="mdi mdi-ticket-account"></i>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">Tickets Nuevos</h6>
-                                    <div class="font-size-13 text-muted">
-                                        <p class="mb-1" id="notitickes"> 20 m de cosas</p>
-                                        <!-- <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span><?php //echo $language["3_min_ago"]; ?></span></p> -->
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </a>
-                        <a href="tickets" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 avatar-sm me-3">
-                                    <span class="avatar-title bg-warning rounded-circle font-size-16">
-                                        <i class="mdi mdi-ticket-account"></i>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">Tickets Nuevos</h6>
-                                    <div class="font-size-13 text-muted">
-                                        <p class="mb-1" id="notitickes"> 2000 m de cosas</p>
-                                        <!-- <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span><?php //echo $language["3_min_ago"]; ?></span></p> -->
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </a>
+                        
                     </div>
                     
                 </div>
