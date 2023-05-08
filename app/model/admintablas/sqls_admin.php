@@ -13,7 +13,7 @@ $etiquetas=mysqli_query($conn, "SELECT * FROM etiquetas");
 
 $mistickets = mysqli_query($conn, "SELECT * FROM tickets WHERE id_propietario_tck = '{$_SESSION['unique_id']}'");
 
-$redirigidosporarea=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE area_redireccion = '{$_SESSION['id_area']}' AND estado = 1 OR estado = 3");
+$redirigidosporarea=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE id_jefe = '{$_SESSION['unique_id']}' AND estado = 1 OR estado = 3");
 
 
 if($_SESSION['rol']==2||$_SESSION['rol']==1){
@@ -21,7 +21,7 @@ if($_SESSION['rol']==2||$_SESSION['rol']==1){
     if($_SESSION['id_area']==3){
         $ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE id_jefe='{$_SESSION['unique_id']}'");
     }else{
-        $ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE id_area = '{$_SESSION['id_area']}' OR id_jefe='{$_SESSION['unique_id']}'");
+        $ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE id_jefe = '{$_SESSION['unique_id']}'");
     }
 
     

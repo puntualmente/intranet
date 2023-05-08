@@ -21,6 +21,7 @@
 
     <!-- Responsive datatable examples -->
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
 
     <?php include(__dir__."/../layouts/head-style.php");  ?>
@@ -185,6 +186,13 @@
 
 <!-- init js -->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/form-advanced.init.js"></script>
+
+
+<!-- Sweet Alerts js -->
+<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+<!-- Sweet alert init js-->
+<script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/sweetalert.init.js"></script>
 
 <script src="<?php echo controlador::$rutaAPP?>app/views/home/js/adminetiquetas.js"></script>
 
