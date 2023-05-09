@@ -55,6 +55,12 @@ if (isset($_SESSION['unique_id'])) {
                     
                 }
 
+                if($row['estado']==1){
+                    $color='#33adff';
+                }else{
+                    $color='';
+                }
+
             
 
 
@@ -63,11 +69,11 @@ if (isset($_SESSION['unique_id'])) {
     if ($row['outgoing_msg_id'] === $outgoing_id) {
         if($row['tipo']!=1){
 
-            $output .= salida($_SESSION['username'], $row['msg'], formatohora($row['hora']));
+            $output .= salida($_SESSION['username'], $row['msg'], formatohora($row['hora']), $color);
 
 
             }else{
-            $output.=salidamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen']); 
+            $output.=salidamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen'], $color); 
             }
     } else {
         if($row['tipo']!=1){
@@ -123,7 +129,7 @@ if (isset($_SESSION['unique_id'])) {
         return $output;
     }
 
-    function salida($nombre, $mensaje, $hora){
+    function salida($nombre, $mensaje, $hora, $color){
         $output='
 
                 <li class="right">
@@ -132,6 +138,7 @@ if (isset($_SESSION['unique_id'])) {
                         <div class="ctext-wrap-content">
                             <h5 class="conversation-name"><a href="#" class="user-name">'.$nombre.'</a> <span class="time">'.$hora.'</span></h5>
                             <p class="mb-0">'.$mensaje.'</p>
+                            <i class="fas fa-check-double" style="color: '.$color.'; font-size: 10px;"></i>
                         </div>
                         
                     </div>
@@ -166,7 +173,7 @@ if (isset($_SESSION['unique_id'])) {
         return $output;
     }
 
-    function salidamostrarimagen($nombre, $hora, $imagen){
+    function salidamostrarimagen($nombre, $hora, $imagen, $color){
         $output='
         <li class="right">
                                         <div class="conversation-list">
@@ -177,7 +184,8 @@ if (isset($_SESSION['unique_id'])) {
                                                         <li class="list-inline-item message-img-list">
                                                             <a class="d-inline-block m-1" href="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" target="_blank">
                                                                 <img onclick="mostrarimg(this.src)" src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail">
-                                                            </a>                                                                  
+                                                            </a>                                                      <i class="fas fa-check-double" style="color: '.$color.'; font-size: 10px;"></i>
+           
                                                         </li>
 
                                                     </ul>

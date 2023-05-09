@@ -97,7 +97,7 @@
 
                         <div class="p-3">
                             <div class="search-box position-relative">
-                                <input type="text" class="form-control rounded border" id="buscadorusuarios" placeholder="Buscar">
+                                <input type="text" class="form-control rounded border" id="buscadorusuarios" autocomplete="off" placeholder="Buscar">
                                 <i class="bx bx-search search-icon"></i>
                             </div>
                         </div>

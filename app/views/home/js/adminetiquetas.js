@@ -16,6 +16,8 @@ function agregaretiqueta(){
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
             let data = xhr.response;
+            descrip.value="";
+            t_estimado.value="";
             mensaje_etiqueta.innerHTML = data;
             Swal.fire(
               {
@@ -24,8 +26,6 @@ function agregaretiqueta(){
                   confirmButtonColor: '#5156be'
               }
           )
-          descrip.value="";
-          t_estimado.value="";
           }else{
             console.log(data);
           }
