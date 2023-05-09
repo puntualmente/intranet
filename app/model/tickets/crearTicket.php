@@ -47,10 +47,6 @@ if(isset($_POST['x'])){
 
     $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_jefe, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$user_destino}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_h_actual}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
 
-/*
-
-    $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_cierre}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
-    */
     $id_ultimo_insert = mysqli_insert_id ($conn);
     
     $infoetiq=mysqli_query($conn, "SELECT * FROM etiquetas WHERE id_etiqueta='{$etiqueta}'");
@@ -59,6 +55,14 @@ if(isset($_POST['x'])){
     if($guardartkt){
         echo 'Ticket: '.$id_ultimo_insert.' Creado 👍...
               Tiempo estimado: '.$nueva['t_estimado']. " " .$nueva['tipo_t'].'';
+
+        $svnotyTicket=mysqli_query($conn, "INSERT INTO notificaciones (id_origen, id_destino, tipo_noty, descrip_noty, f_h, visto) VALUES ('{$_SESSION['unique_id']}', '{$user_destino}', 'tkt', 'Te fue asignado un ticket', '{$f_h_actual}', 0)");
+
+            if($svnotyTicket){
+                echo "Noty guardada";
+            }else{
+                echo "error";
+            }
     }else{
         echo "error al guardar";
     }
@@ -91,10 +95,6 @@ if(isset($_POST['x'])){
 
         }
         
-
-
-
-       
 
     }elseif($estado==2){
         $estado = 1;
