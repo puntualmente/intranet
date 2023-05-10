@@ -119,9 +119,17 @@ if (isset($_SESSION['unique_id'])) {
                                                     <h5 class="conversation-name"><a href="#" class="user-name">'.$nombre.'</a> <span class="time">'.$hora.'</span></h5>
                                                     <p class="mb-0">'.$mensaje.'</p>
                                                 </div>
-                                                
+                                                <div class="dropdown align-self-start">
+                                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                    <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Etiquetar</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        
                                         
                                     </li>
 
@@ -140,7 +148,13 @@ if (isset($_SESSION['unique_id'])) {
                             <p class="mb-0">'.$mensaje.'</p>
                             <i class="fas fa-check-double" style="color: '.$color.'; font-size: 10px;"></i>
                         </div>
-                        
+                        <div class="dropdown align-self-start">
+                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Etiquetar</a>
+                                </div>
                     </div>
                 </div>
                 
@@ -165,7 +179,14 @@ if (isset($_SESSION['unique_id'])) {
 
                                                     </ul>
                                                 </div>
-                                                
+                                                <div class="dropdown align-self-start">
+                                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Etiquetar</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>
@@ -190,6 +211,14 @@ if (isset($_SESSION['unique_id'])) {
 
                                                     </ul>
                                                 
+                                            </div>
+                                            <div class="dropdown align-self-start">
+                                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Etiquetar</a>
+                                                    </div>
                                             </div>
                                         </div>
                                     </li>

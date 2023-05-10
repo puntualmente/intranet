@@ -43,6 +43,39 @@ if(!isset($_POST['x'])){
             echo 0;
         }
 
+    }elseif($estado==3){
+        $notys_dinam=mysqli_query($conn, "SELECT * FROM notificaciones WHERE id_destino = '{$_SESSION['unique_id']}' and visto = 0");
+        $output="";
+        foreach($notys_dinam as $noty){
+
+            if($noty['tipo_noty']=="tkt-solu"){
+                $color="success";
+            }elseif($noty['tipo_noty']=="tkt-redir"){
+                $color="danger";
+            }elseif($noty['tipo_noty']=="tkt-asig"){
+                $color="warning";
+            }
+
+            $output.= '
+                <a href="tickets" class="text-reset notification-item">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 avatar-sm me-3">
+                            <span class="avatar-title bg-'.$color.' rounded-circle font-size-16">
+                                <i class="mdi mdi-ticket-account"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">Tickets</h6>
+                            <div class="font-size-13 text-muted">
+                                <p class="mb-1">'.$noty['descrip_noty'].'</p>
+                                <!-- <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span><?php //echo $language["3_min_ago"]; ?></span></p> -->
+                            </div>
+                        </div>
+                    </div>
+                </a>';
+        }
+        echo $output;
+
     }
 }
 

@@ -28,6 +28,39 @@ sendBtn.onclick = ()=>{
     xhr.onload = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
+
+            id_enviar=document.getElementById('id_enviar').value;
+            contenidochat = document.querySelector("#contenidochat");
+            let xhr2 = new XMLHttpRequest();
+            xhr2.open("POST", "chat/getchat", true);
+            xhr2.onload = ()=>{
+              if(xhr2.readyState === XMLHttpRequest.DONE){
+                  if(xhr2.status === 200){
+                    let data2 = xhr2.response;
+                    contenidochat.innerHTML = data2;
+                  }
+              }
+            }
+            xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr2.send("id_user=" + id_enviar);
+
+            
+            let xhr3 = new XMLHttpRequest();
+            xhr3.open("GET", "chat/users", true);
+            xhr3.onload = ()=>{
+              if(xhr3.readyState === XMLHttpRequest.DONE){
+                  if(xhr3.status === 200){
+                    let data = xhr3.response;
+                      usersList.innerHTML = data;
+                  }
+              }
+            }
+            xhr3.send();
+
+            setTimeout(function(){
+                document.getElementById('final').scrollIntoView(true);
+              }, 1000);
+
               inputField.value = "";
               let data = xhr.response;
               document.getElementById('texto_error').innerHTML=data;
@@ -69,7 +102,35 @@ function enviarImagen(imagen){
       if (xhr.readyState === 4 && xhr.status === 200) {
          data = xhr.response;
          console.log("Imagen guardada en el servidor");
+
          document.getElementById('texto_error').innerHTML=data;
+         id_enviar=document.getElementById('id_enviar').value;
+            contenidochat = document.querySelector("#contenidochat");
+            let xhr2 = new XMLHttpRequest();
+            xhr2.open("POST", "chat/getchat", true);
+            xhr2.onload = ()=>{
+              if(xhr2.readyState === XMLHttpRequest.DONE){
+                  if(xhr2.status === 200){
+                    let data2 = xhr2.response;
+                    contenidochat.innerHTML = data2;
+                  }
+              }
+            }
+            xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr2.send("id_user=" + id_enviar);
+
+            let xhr3 = new XMLHttpRequest();
+            xhr3.open("GET", "chat/users", true);
+            xhr3.onload = ()=>{
+              if(xhr3.readyState === XMLHttpRequest.DONE){
+                  if(xhr3.status === 200){
+                    let data3 = xhr3.response;
+                      usersList.innerHTML = data3;
+                  }
+              }
+            }
+            xhr3.send();
+
          setTimeout(function(){
             document.getElementById('final').scrollIntoView(true);
           }, 500);
@@ -208,7 +269,7 @@ function limpiar(){
         mensajetkt.innerHTML=" <span> Campos Obligatorios</span> ";
 
         if(areaDestTkt==0){
-            alertify.error("Los Campos son obligatorios");
+            alertify.error("Los Campos son obligatorios", "", 0);
 
         }else{
             select_etk=document.getElementById('sel_etiqueta').value;

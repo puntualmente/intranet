@@ -111,13 +111,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#groups" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                    <a href="#groups" onclick="actualizarGrupos()" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                         <i class="bx bx-group font-size-20 d-sm-none"></i>
                                         <span class="d-none d-sm-block">Grupos</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#contacts" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                    <a href="#contacts" data-bs-toggle="tab" aria-expanded="false" onclick="actualizarContactos()" class="nav-link">
                                         <i class="bx bx-book-content font-size-20 d-sm-none"></i>
                                         <span class="d-none d-sm-block">Contactos</span>
                                     </a>
@@ -223,7 +223,7 @@
                         <form id="typing-area" method="POST" enctype="multipart/form-data">
                         <div class="card">
                             <div class="p-3 px-lg-4 border-bottom" id="headerchat">
-                                
+                            <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value ="nada">
                                 
                             </div>
                             <div class="chat-conversation p-3 px-2" data-simplebar >
@@ -239,6 +239,7 @@
 
                             <div id="iniciodelchat">
                                 <span>Selecciona un usuario o un grupo para iniciar chat</span>
+
                             </div>
                             <div class="p-3 border-top" id="contenidodeenvio" hidden>
                                 <div class="row">
@@ -284,6 +285,15 @@
                                     </div>
                                     <div id="imagen"></div>
 
+                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                      <h5 id="offcanvasRightLabel">Mensajes Etiquetas</h5>
+                                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                      Aqui estaran las etiquetas y los mensajes...
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -358,7 +368,15 @@
                                         </div><!-- /.modal -->
 
                                         </form>
-
+                                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                      <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
+                                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                      ...
+                                    </div>
+                                </div>
 <!-- -----------------------------------------------------------------Editar grupos -->
                                 <!-- Scrollable modal -->
                         <form method="post" id="guardargrupos">
