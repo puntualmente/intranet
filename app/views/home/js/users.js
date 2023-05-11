@@ -182,6 +182,18 @@ setTimeout(function(){
   document.getElementById('final').scrollIntoView(true);
 }, 1200);
 
+let xhr3 = new XMLHttpRequest();
+xhr3.open("GET", "chat/users", true);
+xhr3.onload = ()=>{
+  if(xhr3.readyState === XMLHttpRequest.DONE){
+      if(xhr3.status === 200){
+        let data3 = xhr3.response;
+          usersList.innerHTML = data3;
+      }
+  }
+}
+xhr3.send();
+
 }
 
 function holagrupos(id){
@@ -228,6 +240,8 @@ function holagrupos(id){
 setTimeout(function(){
   document.getElementById('final').scrollIntoView(true);
 }, 950);
+
+actualizarGrupos();
 
 
 }

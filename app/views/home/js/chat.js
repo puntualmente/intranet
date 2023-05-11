@@ -29,8 +29,21 @@ sendBtn.onclick = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
 
-            id_enviar=document.getElementById('id_enviar').value;
-            contenidochat = document.querySelector("#contenidochat");
+        id_enviar=document.getElementById('id_enviar').value;
+        contenidochat = document.querySelector("#contenidochat");
+        tipo_chat = document.getElementById('tipo_chat').value;
+
+        console.log(tipo_chat);
+
+        inputField.value = "";
+        let data = xhr.response;
+        document.getElementById('texto_error').innerHTML=data;
+        limpiar();
+        setTimeout(function(){
+            document.getElementById('final').scrollIntoView(true);
+        }, 500);
+
+        if(tipo_chat=="chat_1_1"){
             let xhr2 = new XMLHttpRequest();
             xhr2.open("POST", "chat/getchat", true);
             xhr2.onload = ()=>{
@@ -44,7 +57,6 @@ sendBtn.onclick = ()=>{
             xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr2.send("id_user=" + id_enviar);
 
-            
             let xhr3 = new XMLHttpRequest();
             xhr3.open("GET", "chat/users", true);
             xhr3.onload = ()=>{
@@ -56,18 +68,47 @@ sendBtn.onclick = ()=>{
               }
             }
             xhr3.send();
+            setTimeout(function(){
+            document.getElementById('final').scrollIntoView(true);
+            }, 950);
+
+        }else if(tipo_chat=="chat_grupo"){
+            let xhr2 = new XMLHttpRequest();
+            xhr2.open("POST", "chat/grupos/chat", true);
+            xhr2.onload = ()=>{
+                if(xhr2.readyState === XMLHttpRequest.DONE){
+                    if(xhr2.status === 200){
+                    let data2 = xhr2.response;
+                    contenidochat.innerHTML = data2;
+                    }
+                }
+            }
+            xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr2.send("id_grupo=" + id_enviar);
+
+            let xhr3 = new XMLHttpRequest();
+            xhr3.open("GET", "chat/mostrargrupos", true);
+            xhr3.onload = ()=>{
+              if(xhr3.readyState === XMLHttpRequest.DONE){
+                  if(xhr3.status === 200){
+                    let data3 = xhr3.response;
+                      listagrupos.innerHTML = data3;
+                  }
+              }
+            }
+            xhr3.send();
+            //}, 800);
+            setTimeout(function(){
+            document.getElementById('final').scrollIntoView(true);
+            }, 950);
+        } 
+            
+        
 
             setTimeout(function(){
                 document.getElementById('final').scrollIntoView(true);
               }, 1000);
 
-              inputField.value = "";
-              let data = xhr.response;
-              document.getElementById('texto_error').innerHTML=data;
-              limpiar();
-              setTimeout(function(){
-                document.getElementById('final').scrollIntoView(true);
-              }, 500);
             }
       }
     }
@@ -105,36 +146,69 @@ function enviarImagen(imagen){
 
          document.getElementById('texto_error').innerHTML=data;
          id_enviar=document.getElementById('id_enviar').value;
-            contenidochat = document.querySelector("#contenidochat");
-            let xhr2 = new XMLHttpRequest();
-            xhr2.open("POST", "chat/getchat", true);
-            xhr2.onload = ()=>{
-              if(xhr2.readyState === XMLHttpRequest.DONE){
-                  if(xhr2.status === 200){
-                    let data2 = xhr2.response;
-                    contenidochat.innerHTML = data2;
+        contenidochat = document.querySelector("#contenidochat");
+        tipo_chat = document.getElementById('tipo_chat').value;
+
+
+            if(tipo_chat=="chat_1_1"){
+                let xhr2 = new XMLHttpRequest();
+                xhr2.open("POST", "chat/getchat", true);
+                xhr2.onload = ()=>{
+                  if(xhr2.readyState === XMLHttpRequest.DONE){
+                      if(xhr2.status === 200){
+                        let data2 = xhr2.response;
+                        contenidochat.innerHTML = data2;
+                      }
                   }
-              }
-            }
-            xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr2.send("id_user=" + id_enviar);
-
-            let xhr3 = new XMLHttpRequest();
-            xhr3.open("GET", "chat/users", true);
-            xhr3.onload = ()=>{
-              if(xhr3.readyState === XMLHttpRequest.DONE){
-                  if(xhr3.status === 200){
-                    let data3 = xhr3.response;
-                      usersList.innerHTML = data3;
+                }
+                xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr2.send("id_user=" + id_enviar);
+    
+                let xhr3 = new XMLHttpRequest();
+                xhr3.open("GET", "chat/users", true);
+                xhr3.onload = ()=>{
+                  if(xhr3.readyState === XMLHttpRequest.DONE){
+                      if(xhr3.status === 200){
+                        let data = xhr3.response;
+                          usersList.innerHTML = data;
+                      }
                   }
-              }
-            }
-            xhr3.send();
-
-         setTimeout(function(){
-            document.getElementById('final').scrollIntoView(true);
-          }, 500);
-
+                }
+                xhr3.send();
+                setTimeout(function(){
+                document.getElementById('final').scrollIntoView(true);
+                }, 950);
+    
+            }else if(tipo_chat=="chat_grupo"){
+                let xhr2 = new XMLHttpRequest();
+                xhr2.open("POST", "chat/grupos/chat", true);
+                xhr2.onload = ()=>{
+                    if(xhr2.readyState === XMLHttpRequest.DONE){
+                        if(xhr2.status === 200){
+                        let data2 = xhr2.response;
+                        contenidochat.innerHTML = data2;
+                        }
+                    }
+                }
+                xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr2.send("id_grupo=" + id_enviar);
+    
+                let xhr3 = new XMLHttpRequest();
+                xhr3.open("GET", "chat/mostrargrupos", true);
+                xhr3.onload = ()=>{
+                  if(xhr3.readyState === XMLHttpRequest.DONE){
+                      if(xhr3.status === 200){
+                        let data3 = xhr3.response;
+                          listagrupos.innerHTML = data3;
+                      }
+                  }
+                }
+                xhr3.send();
+                //}, 800);
+                setTimeout(function(){
+                document.getElementById('final').scrollIntoView(true);
+                }, 950);
+            } 
       }
    };
    xhr.send(formData);

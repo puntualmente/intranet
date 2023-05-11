@@ -223,7 +223,10 @@
                         <form id="typing-area" method="POST" enctype="multipart/form-data">
                         <div class="card">
                             <div class="p-3 px-lg-4 border-bottom" id="headerchat">
+                                
                             <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value ="nada">
+                            <input type="text" id="tipo_chat" name="tipo_chat" hidden dissabled value ="nada">
+
                                 
                             </div>
                             <div class="chat-conversation p-3 px-2" data-simplebar >
