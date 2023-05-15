@@ -493,6 +493,51 @@
                                         </form>
 
 
+                                        <div>
+                                    <!-- First modal dialog -->
+                                    <form id="crear_etik_msg">
+                                    <div class="modal fade" id="firstmodal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel">Crear Una Etiqueta</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label for="n_etiqueta_msg">Nombre de la Etiqueta</label>
+                                                    <input class="form-control" type="text" name="n_etiqueta_msg" id="n_etiqueta_msg">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <!-- Toogle to second dialog -->
+                                                    <button type="button" class="btn btn-primary" data-bs-target="#secondmodal" data-bs-toggle="modal" data-bs-dismiss="modal">Continuar sin crear</button>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+
+                                    <!-- Second modal dialog -->
+                                    <div class="modal fade" id="secondmodal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Hide this modal and show the first with the button below.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <!-- Toogle to first dialog, `data-bs-dismiss` attribute can be omitted - clicking on link will close dialog anyway -->
+                                                    <button class="btn btn-primary" data-bs-target="#firstmodal" data-bs-toggle="modal" data-bs-dismiss="modal">Back to First</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             
 </div>
 <!-- END layout-wrapper -->

@@ -125,6 +125,12 @@ if (isset($_SESSION['unique_id'])) {
                                                     </a>
                                                     <div class="dropdown-menu">
                                                     <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Etiquetar</button>
+
+                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#firstmodal">Crear Etiqueta</button>
+
+
+
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
