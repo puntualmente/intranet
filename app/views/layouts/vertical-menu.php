@@ -211,19 +211,6 @@
 
                 <?php }elseif($_SESSION['rol']==2){ ?>
 
-                    <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="grid"></i>
-                        <span data-key="t-apps">Usuarios</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li>
-                            <a href="registrar">
-                                <span data-key="t-regisuser">Registrar usuario</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
 
                 <li>
                     <a href="chat">
