@@ -386,6 +386,29 @@ function limpiar(){
         console.log(src);
     }
 
+    valorActivo = document.querySelector('input[name="crearMsjEtq"]:checked').value;
+    console.log(valorActivo)
+    
+
+    function validarRadio(value){
+        contenido_etiquetado=document.getElementById('contenido_etiquetado');
+        valorActivo = document.querySelector('input[name="crearMsjEtq"]:checked').value;
+        console.log(valorActivo)
+        console.log(value)
+
+        if(value==1){
+            contenido_etiquetado.innerHTML= `<label for="n_etiqueta_msg">Nombre de la Etiqueta</label>
+            <input class="form-control" type="text" name="n_etiqueta_msg" id="n_etiqueta_msg">`
+        }else if(value==0){
+            contenido_etiquetado.innerHTML=`<label for="area" class="form-label font-size-13 text-muted">Area destino ticket:</label>
+            <select class="form-control" data-trigger name="area">
+                <option value="0" selected disabled>1. Elige un area</option>
+                    <option value="<?php echo $value['id_area']?>"><?php echo $value['n_area']?></option>
+            </select>`
+        }
+    }
+
+
     
 
 

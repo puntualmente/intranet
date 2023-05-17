@@ -500,12 +500,34 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalToggleLabel">Crear Una Etiqueta</h5>
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel">Nueva Etiqueta:</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <br>    
+                                                <div class="col-md-6">
+                                                    <div class="d-flex justify-content-between">
+                                                        <h5 class="font-size-14 mb-3">Crear etiqueta:</h5>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="crearMsjEtq" value="1"
+                                                                id="formRadios1" onclick="validarRadio(this.value)">
+                                                            <label class="form-check-label" for="formRadios1">
+                                                                Si
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="crearMsjEtq" value="0"
+                                                                id="formRadios2" onclick="validarRadio(this.value)">
+                                                            <label class="form-check-label" for="formRadios2">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="modal-body">
-                                                    <label for="n_etiqueta_msg">Nombre de la Etiqueta</label>
-                                                    <input class="form-control" type="text" name="n_etiqueta_msg" id="n_etiqueta_msg">
+                                                    <div id="contenido_etiquetado">
+                                                     <!--   Se llena dependiendo la selecion de los radios -->
+                                                    </div>
+                                                    
                                                 </div>
                                                 <div class="modal-footer">
                                                     <!-- Toogle to second dialog -->
