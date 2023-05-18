@@ -124,13 +124,10 @@ if (isset($_SESSION['unique_id'])) {
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </a>
                                                     <div class="dropdown-menu">
-                                                    <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Etiquetar</button>
-
-                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#firstmodal">Crear Etiqueta</button>
-
-
-
-                                                    
+                                                   
+                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">
+                                                    Etiquetar </button>
+ 
                                                     </div>
                                                 </div>
                                             </div>
