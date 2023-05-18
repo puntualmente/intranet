@@ -58,11 +58,6 @@ if(isset($_POST['x'])){
 
         $svnotyTicket=mysqli_query($conn, "INSERT INTO notificaciones (id_origen, id_destino, tipo_noty, descrip_noty, f_h, visto) VALUES ('{$_SESSION['unique_id']}', '{$user_destino}', 'tkt', '{$_SESSION['username']} Te asigno un ticket', '{$f_h_actual}', 0)");
 
-            if($svnotyTicket){
-                echo "Noty guardada";
-            }else{
-                echo "error";
-            }
     }else{
         echo "error al guardar";
     }

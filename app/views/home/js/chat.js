@@ -360,7 +360,9 @@ function limpiar(){
                 enviarticket.onload = ()=>{
                 if(enviarticket.readyState === XMLHttpRequest.DONE){
                     if(enviarticket.status === 200){
+                        document.getElementById('cerrarTicket9').click();
                         let data = enviarticket.response;
+                     
                         Swal.fire(
                             {
                                 title: 'Ticket Creado con Exito!',
@@ -369,13 +371,18 @@ function limpiar(){
                                 confirmButtonColor: '#5156be'
                             }
                         )
-                        document.getElementById('cerrarmodalticket').click();
+
+                        setTimeout(() => {
+                            window.location.reload()
+                          }, 2000);
+                          
+
                     }
                 }
             }
             enviarticket.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             enviarticket.send("x=" + dbParam);
-    
+            
             }
 
             

@@ -514,7 +514,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalticket">Cerrar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket9">Cerrar</button>
                                                         <button type="button" id="botoncambiar" onclick="" class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->

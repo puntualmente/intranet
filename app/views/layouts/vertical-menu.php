@@ -263,6 +263,11 @@
                             </a>
                         </li>
                     <?php } ?>
+                    <li>
+                            <a>
+                                <span data-key="m-tickets" type="button" data-bs-toggle="modal" data-bs-target="#modalcrearticket">Crear Tickets</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
