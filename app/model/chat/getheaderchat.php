@@ -22,6 +22,8 @@
 function headerchatuser($imagen, $nombre, $status, $id_user){
     $output='
         <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value ="'.$id_user.'">
+        <input type="text" id="tipo_chat" name="tipo_chat" hidden dissabled value ="chat_1_1">
+
     <div class="row">
             
             <div class="col-xl-4 col-7">

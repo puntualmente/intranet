@@ -1,5 +1,7 @@
 <?php
 
+include_once (__dir__."/../model/OtrasConfigs/get-ip.php");
+
 class controlador{
     public static $rutaAPP="/intranet/";
 
@@ -186,6 +188,12 @@ class controlador{
         $status="Desconectado";
         $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE id = {$_SESSION['unique_id']}");
         header('Location: '.controlador::$rutaAPP);
+
+        $hoy = date("Y-m-d H:i:s"); 
+        $ip=getRealIP();
+
+        $log_session= mysqli_query($conn, "INSERT INTO log_session (id_user, f_h, ip , accion) VALUES ('{$_SESSION['cedula']}', '{$hoy}', '{$ip}', 'logout')");
+        
     }
 
     public function index(){

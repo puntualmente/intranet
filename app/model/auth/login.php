@@ -1,6 +1,8 @@
 <?php
     include_once (__dir__."/../config.php");
     date_default_timezone_set('America/Bogota');
+    include_once (__dir__."/../OtrasConfigs/get-ip.php");
+
 
 
 //include_once "get-ip.php";
@@ -22,11 +24,10 @@ if (!empty($cedula) && !empty($password)) {
             if ($sql2) {
 
                 
+                $hoy = date("Y-m-d H:i:s"); 
+                $ip=getRealIP();
 
-                $dia = date('Y-m-d');
-                $hora = date('H:i:s');
-                //$ip=getRealIP();
-                //$log_session= mysqli_query($conn, "INSERT INTO log_sesiones (id_usuario, fecha, hora, ip) VALUES ('{$row['unique_id']}', '{$dia}', '{$hora}', '{$ip}')");
+                $log_session= mysqli_query($conn, "INSERT INTO log_session (id_user, f_h, ip , accion) VALUES ('{$row['cedula']}', '{$hoy}', '{$ip}', 'login')");
                 
                 $_SESSION['unique_id'] = $row['id'];
                 $_SESSION['username'] = $row['n_user'] . " " . $row['l_user'];
@@ -35,6 +36,7 @@ if (!empty($cedula) && !empty($password)) {
                 $_SESSION['id_area']=$row['id_area'];
                 //$_SESSION['id_jefe']=$row['id_jefe'];
                 $_SESSION['id_grupo']=$row['id_grupo'];
+                $_SESSION['cedula']=$row['cedula'];
                 
                 $status = mysqli_query($conn, "SELECT (status) FROM users WHERE cedula = '{$cedula}'");
                 $row3 = mysqli_fetch_assoc($status);

@@ -111,13 +111,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#groups" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                    <a href="#groups" onclick="actualizarGrupos()" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                         <i class="bx bx-group font-size-20 d-sm-none"></i>
                                         <span class="d-none d-sm-block">Grupos</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#contacts" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                    <a href="#contacts" data-bs-toggle="tab" aria-expanded="false" onclick="actualizarContactos()" class="nav-link">
                                         <i class="bx bx-book-content font-size-20 d-sm-none"></i>
                                         <span class="d-none d-sm-block">Contactos</span>
                                     </a>
@@ -224,6 +224,9 @@
                         <div class="card">
                             <div class="p-3 px-lg-4 border-bottom" id="headerchat">
                                 
+                            <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value ="nada">
+                            <input type="text" id="tipo_chat" name="tipo_chat" hidden dissabled value ="nada">
+
                                 
                             </div>
                             <div class="chat-conversation p-3 px-2" data-simplebar >
@@ -239,6 +242,7 @@
 
                             <div id="iniciodelchat">
                                 <span>Selecciona un usuario o un grupo para iniciar chat</span>
+
                             </div>
                             <div class="p-3 border-top" id="contenidodeenvio" hidden>
                                 <div class="row">
@@ -284,6 +288,15 @@
                                     </div>
                                     <div id="imagen"></div>
 
+                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                      <h5 id="offcanvasRightLabel">Mensajes Etiquetas</h5>
+                                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                      Aqui estaran las etiquetas y los mensajes...
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -358,7 +371,15 @@
                                         </div><!-- /.modal -->
 
                                         </form>
-
+                                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                      <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
+                                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                      ...
+                                    </div>
+                                </div>
 <!-- -----------------------------------------------------------------Editar grupos -->
                                 <!-- Scrollable modal -->
                         <form method="post" id="guardargrupos">
@@ -470,6 +491,73 @@
                                         </div><!-- /.modal -->
 
                                         </form>
+
+
+                                        <div>
+                                    <!-- First modal dialog -->
+                                    <form id="crear_etik_msg">
+                                    <div class="modal fade" id="firstmodal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel">Nueva Etiqueta:</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <br>    
+                                                <div class="col-md-6">
+                                                    <div class="d-flex justify-content-between">
+                                                        <h5 class="font-size-14 mb-3">Crear etiqueta:</h5>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="crearMsjEtq" value="1"
+                                                                id="formRadios1" onclick="validarRadio(this.value)">
+                                                            <label class="form-check-label" for="formRadios1">
+                                                                Si
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="crearMsjEtq" value="0"
+                                                                id="formRadios2" onclick="validarRadio(this.value)">
+                                                            <label class="form-check-label" for="formRadios2">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="contenido_etiquetado">
+                                                     <!--   Se llena dependiendo la selecion de los radios -->
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <!-- Toogle to second dialog -->
+                                                    <button type="button" class="btn btn-primary" data-bs-target="#secondmodal" data-bs-toggle="modal" data-bs-dismiss="modal">Continuar sin crear</button>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+
+                                    <!-- Second modal dialog -->
+                                    <div class="modal fade" id="secondmodal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Hide this modal and show the first with the button below.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <!-- Toogle to first dialog, `data-bs-dismiss` attribute can be omitted - clicking on link will close dialog anyway -->
+                                                    <button class="btn btn-primary" data-bs-target="#firstmodal" data-bs-toggle="modal" data-bs-dismiss="modal">Back to First</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 
                             

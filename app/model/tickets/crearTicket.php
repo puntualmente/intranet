@@ -56,7 +56,7 @@ if(isset($_POST['x'])){
         echo 'Ticket: '.$id_ultimo_insert.' Creado 👍...
               Tiempo estimado: '.$nueva['t_estimado']. " " .$nueva['tipo_t'].'';
 
-        $svnotyTicket=mysqli_query($conn, "INSERT INTO notificaciones (id_origen, id_destino, tipo_noty, descrip_noty, f_h, visto) VALUES ('{$_SESSION['unique_id']}', '{$user_destino}', 'tkt', 'Te fue asignado un ticket', '{$f_h_actual}', 0)");
+        $svnotyTicket=mysqli_query($conn, "INSERT INTO notificaciones (id_origen, id_destino, tipo_noty, descrip_noty, f_h, visto) VALUES ('{$_SESSION['unique_id']}', '{$user_destino}', 'tkt', '{$_SESSION['username']} Te asigno un ticket', '{$f_h_actual}', 0)");
 
             if($svnotyTicket){
                 echo "Noty guardada";
