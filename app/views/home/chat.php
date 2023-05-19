@@ -424,7 +424,7 @@
                                         </div>
                                     </div>
                                     <span>*Si este campo lo dejas vacio el nombre sera el mismo*</span>
-                                    <input type="text" id="nuevonombre" placeholder="Nuevo nombre del grupo" class="form-control">
+                                    <input type="text" id="nuevonombre" placeholder="Nuevo nombre del grupo" class="form-control">  
 
                                     <span id="mensaje9"></span>
                                     

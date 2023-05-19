@@ -75,7 +75,7 @@
                         $img_explode = explode('.', $img_name);
                         $img_ext = end($img_explode);
         
-                        $extensions = ["jpeg", "png", "jpg"];
+                        $extensions = ["jpeg", "png", "jpg", "PNG"];
                         if (in_array($img_ext, $extensions) === true) {
                             $types = ["image/jpeg", "image/jpg", "image/png"];
                             if (in_array($img_type, $types) === true) {

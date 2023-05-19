@@ -182,7 +182,6 @@ function myfuncion2(){
     usuario_a_agreagar=document.getElementById('usuario2').value;
 
     id=usuario_a_agreagar;
-    alert(id);
     let pos = arrayagregar.indexOf(id);
     if(arrayagregar[pos]==id){
         document.getElementById(id).remove();
@@ -275,6 +274,13 @@ function myfuncion2(){
                 error: function(response) {
                     $("#mensaje9").show();
                     $("#mensaje9").html(response.responseText);
+                    
+                    Swal.fire(
+                      {
+                          title: response.responseText,
+                          icon: 'success',
+                      }
+                    )
                 }
         });
     });

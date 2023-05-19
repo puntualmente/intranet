@@ -27,6 +27,7 @@ setInterval(() =>{
 
           tipo_chat = document.getElementById('tipo_chat').value;
           total_notys=dato_notys;
+          var URLactual = window. location; alert(URLactual);
           if(tipo_chat=="chat_1_1"){
               obj = [{ "estado": 0 }];
               mensajes = JSON.stringify(obj);
@@ -179,8 +180,8 @@ setInterval(() =>{
                           }
                           xhr.send();
 
-            }
-            console.log(total_notys);
+                  }
+                          console.log(total_notys);
                         }
                     }
                 }
@@ -188,11 +189,9 @@ setInterval(() =>{
             }
               xhr.send();
             
-}, 4000);
+        }, 4000);
 
-function traerchatusers(id){
 
-}
 
 
 function mostrarnotify(){
