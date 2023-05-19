@@ -78,10 +78,8 @@ if(!isset($_POST['x'])){
 <<<<<<< Dev
         echo $output;*/
 
-=======
 
->>>>>>> Master
-    }
+    
 }
 }
 
