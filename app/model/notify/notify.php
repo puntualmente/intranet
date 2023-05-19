@@ -44,6 +44,7 @@ if(!isset($_POST['x'])){
         }
 
     }elseif($estado==3){
+        /*
         $notys_dinam=mysqli_query($conn, "SELECT * FROM notificaciones WHERE id_destino = '{$_SESSION['unique_id']}' and visto = 0");
         $output="";
         foreach($notys_dinam as $noty){
@@ -74,8 +75,12 @@ if(!isset($_POST['x'])){
                     </div>
                 </a>';
         }
+<<<<<<< Dev
         echo $output;*/
 
+=======
+
+>>>>>>> Master
     }
 }
 }
@@ -100,6 +105,7 @@ if(!isset($_POST['x'])){
             }
         }
         return $cont;
+        
     }
 
 
