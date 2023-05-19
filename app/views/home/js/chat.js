@@ -361,21 +361,29 @@ function limpiar(){
                 if(enviarticket.readyState === XMLHttpRequest.DONE){
                     if(enviarticket.status === 200){
                         let data = enviarticket.response;
+
+                     
                         Swal.fire(
                             {
                                 title: 'Ticket Creado con Exito!',
                                 text: data,
                                 icon: 'success',
                                 confirmButtonColor: '#5156be'
+                                
                             }
                         )
-                        document.getElementById('cerrarmodalticket').click();
+
+                        setTimeout(() => {
+                            window.location.reload()
+                          }, 3000);
+                          
+
                     }
                 }
             }
             enviarticket.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             enviarticket.send("x=" + dbParam);
-    
+            
             }
 
             
@@ -386,8 +394,7 @@ function limpiar(){
         console.log(src);
     }
 
-    valorActivo = document.querySelector('input[name="crearMsjEtq"]:checked').value;
-    console.log(valorActivo)
+ 
     
 
     function validarRadio(value){

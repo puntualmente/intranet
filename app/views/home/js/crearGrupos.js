@@ -118,6 +118,10 @@ function myfuncion(){
                 error: function(response) {
                     $("#mensaje").show();
                     $("#mensaje").html(response.responseText);
+                    
+                    setTimeout(() => {
+                      window.location.reload()
+                    }, 3000);
                 }
         });
     });
