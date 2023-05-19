@@ -360,8 +360,8 @@ function limpiar(){
                 enviarticket.onload = ()=>{
                 if(enviarticket.readyState === XMLHttpRequest.DONE){
                     if(enviarticket.status === 200){
-                        document.getElementById('cerrarTicket9').click();
                         let data = enviarticket.response;
+
                      
                         Swal.fire(
                             {
@@ -369,12 +369,13 @@ function limpiar(){
                                 text: data,
                                 icon: 'success',
                                 confirmButtonColor: '#5156be'
+                                
                             }
                         )
 
                         setTimeout(() => {
                             window.location.reload()
-                          }, 2000);
+                          }, 3000);
                           
 
                     }
@@ -393,8 +394,7 @@ function limpiar(){
         console.log(src);
     }
 
-    valorActivo = document.querySelector('input[name="crearMsjEtq"]:checked').value;
-    console.log(valorActivo)
+ 
     
 
     function validarRadio(value){

@@ -499,7 +499,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalScrollableTitle">Asigna Una Etiqueta</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
+                                                        <button id="closemodaltkt" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
                                                     </div>
                                                     <div class="modal-body" style="height: 300px">
                                                     
@@ -514,7 +514,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket9">Cerrar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
                                                         <button type="button" id="botoncambiar" onclick="" class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
