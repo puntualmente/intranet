@@ -27,7 +27,7 @@ setInterval(() =>{
 
           tipo_chat = document.getElementById('tipo_chat').value;
           total_notys=dato_notys;
-          var URLactual = window. location; alert(URLactual);
+          var URLactual = window. location;
           if(tipo_chat=="chat_1_1"){
               obj = [{ "estado": 0 }];
               mensajes = JSON.stringify(obj);
