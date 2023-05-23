@@ -38,6 +38,8 @@ if (!empty($cedula) && !empty($password)) {
                 $_SESSION['id_grupo']=$row['id_grupo'];
                 $_SESSION['cedula']=$row['cedula'];
                 $_SESSION['activo']=$row['activo'];
+
+                $sqlpermisochat = mysqli_query($conn, "SELECT * FROM permisos WHERE tipo_permiso = 'chat' and id_grupo = '{$row['id_grupo']}' and rol = '{$row['rol']}' and id_area = '{$row['id_area']}' and activo = '{$row['activo']}'")  ;
                 
                 $status = mysqli_query($conn, "SELECT (status) FROM users WHERE cedula = '{$cedula}'");
                 $row3 = mysqli_fetch_assoc($status);
