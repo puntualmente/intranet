@@ -118,6 +118,13 @@ function myfuncion(){
                 error: function(response) {
                     $("#mensaje").show();
                     $("#mensaje").html(response.responseText);
+
+                    Swal.fire(
+                      {
+                          title: response.responseText,
+                          icon: 'success',
+                      }
+                    )
                     
                     setTimeout(() => {
                       window.location.reload()
@@ -182,7 +189,6 @@ function myfuncion2(){
     usuario_a_agreagar=document.getElementById('usuario2').value;
 
     id=usuario_a_agreagar;
-    alert(id);
     let pos = arrayagregar.indexOf(id);
     if(arrayagregar[pos]==id){
         document.getElementById(id).remove();
@@ -209,12 +215,12 @@ function myfuncion2(){
 }
 
 
-    function borraruser2(id){
+    function borraruser2(id, cedula){
       let pos = 0;
       pos = arrayborrar.indexOf(id);
       if(arrayborrar[pos]==id){
 
-        document.getElementById(id).remove();
+        document.getElementById(cedula).remove();
    
 
         
@@ -230,7 +236,7 @@ function myfuncion2(){
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
             let data = xhr.response;
-            document.getElementById(id).remove();
+            document.getElementById(cedula).remove();
 
           }
       }
@@ -275,6 +281,17 @@ function myfuncion2(){
                 error: function(response) {
                     $("#mensaje9").show();
                     $("#mensaje9").html(response.responseText);
+                    
+                    Swal.fire(
+                      {
+                          title: response.responseText,
+                          icon: 'success',
+                      }
+                    )
+
+                    setTimeout(() => {
+                      window.location.reload()
+                    }, 3000);
                 }
         });
     });
