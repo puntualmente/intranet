@@ -57,7 +57,7 @@ if(!isset($_POST['x'])){
                 $color="warning";
             }
 
-            $output.= '
+           /* $output.= '
                 <a href="tickets" class="text-reset notification-item">
                     <div class="d-flex">
                         <div class="flex-shrink-0 avatar-sm me-3">
@@ -75,9 +75,12 @@ if(!isset($_POST['x'])){
                     </div>
                 </a>';
         }
-        echo $output;
-  */
-    }
+<<<<<<< Dev
+        echo $output;*/
+
+
+    
+}
 }
 
 

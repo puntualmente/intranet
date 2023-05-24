@@ -444,7 +444,7 @@
                 <?php } ?>
 <!------------------------------------------------------------------CREAR TICKETS -->
                                 <!-- Scrollable modal -->
-                        <form method="post" id="formcrearticket">
+                                    <form method="post" id="formcrearticket">
                                         <div class="modal fade" id="modalcrearticket" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable">
@@ -492,71 +492,41 @@
 
                                         </form>
 
+                                    <form method="post" id="form_etiq_msg">
+                                        <div class="modal fade" id="modal_etiq_msg" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Asigna Una Etiqueta</h5>
+                                                        <button id="closemodaltkt" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
+                                                    </div>
+                                                    <div class="modal-body" style="height: 300px">
+                                                    
+                                                        <div class="mb-3">
+                                                            <label for="area" class="form-label font-size-13 text-muted">Etiquetas:</label>
+                                                            <select class="form-control" data-trigger name="area" id="area">
+                                                                <option value="0" selected disabled>1. Elige una etiqueta</option>
+                                                                <?php foreach($areas as $value){?>
+                                                                    <option value="<?php echo $value['id_area']?>"><?php echo $value['n_area']?></option>
+                                                                <?php }?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
+                                                        <button type="button" id="botoncambiar" onclick="" class="btn btn-primary">Guardar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
 
-                                        <div>
-                                    <!-- First modal dialog -->
-                                    <form id="crear_etik_msg">
-                                    <div class="modal fade" id="firstmodal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalToggleLabel">Nueva Etiqueta:</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <br>    
-                                                <div class="col-md-6">
-                                                    <div class="d-flex justify-content-between">
-                                                        <h5 class="font-size-14 mb-3">Crear etiqueta:</h5>
-                                                        <div class="form-check mb-3">
-                                                            <input class="form-check-input" type="radio" name="crearMsjEtq" value="1"
-                                                                id="formRadios1" onclick="validarRadio(this.value)">
-                                                            <label class="form-check-label" for="formRadios1">
-                                                                Si
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="crearMsjEtq" value="0"
-                                                                id="formRadios2" onclick="validarRadio(this.value)">
-                                                            <label class="form-check-label" for="formRadios2">
-                                                                No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div id="contenido_etiquetado">
-                                                     <!--   Se llena dependiendo la selecion de los radios -->
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <!-- Toogle to second dialog -->
-                                                    <button type="button" class="btn btn-primary" data-bs-target="#secondmodal" data-bs-toggle="modal" data-bs-dismiss="modal">Continuar sin crear</button>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     </form>
 
-                                    <!-- Second modal dialog -->
-                                    <div class="modal fade" id="secondmodal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Hide this modal and show the first with the button below.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <!-- Toogle to first dialog, `data-bs-dismiss` attribute can be omitted - clicking on link will close dialog anyway -->
-                                                    <button class="btn btn-primary" data-bs-target="#firstmodal" data-bs-toggle="modal" data-bs-dismiss="modal">Back to First</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+
+                                        <div>
+                                    
                                 </div>
 
 
