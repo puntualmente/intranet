@@ -76,6 +76,9 @@ if(!isset($_POST['x'])){
                 </a>';
         }
     }   
+     }
+        echo $output;*/
+    }
 }
 
 
