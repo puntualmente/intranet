@@ -75,10 +75,7 @@ if(!isset($_POST['x'])){
                     </div>
                 </a>';
         }
-<<<<<<< Dev
-        echo $output;*/
-
-    }
+    }   
 }
 
 
