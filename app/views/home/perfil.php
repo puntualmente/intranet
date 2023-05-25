@@ -214,14 +214,14 @@
                                                             <h5>Certificados Academicos</h5>
                                                             <p class="card-title-desc"><strong>** Deben ser los certificados que tiene en su HV **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="certif_ac" id="certif_ac" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="certif_ac[]" id="certif_ac" accept="application/pdf" multiple required>
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
                                                             <h5>Certificados Laborales</h5>
                                                             <p class="card-title-desc"><strong>** Deben ser los certificados que tiene en su HV y tienen que venir firmados **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="certif_lab" id="certif_lab" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="certif_lab" id="certif_lab" accept="application/pdf" multiple required>
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
