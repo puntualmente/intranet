@@ -27,18 +27,6 @@ if (!file_exists($micarpeta)) {
     mkdir($micarpeta, 0777, true);
 }
 
-    // prepare query
-    /*
-    $statement = $pdo->prepare("SELECT * FROM persona");
-    $statement->execute();
-    */
-   
-    // print results
-    /*
-    while ($result = $statement->fetch()) {
-        echo $result->nombre . '<br>';
-    }*/
-
 if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_FILES['aprocu'])&&isset($_FILES['certif_ac'])&&isset($_FILES['certif_lab'])&&isset($_FILES['certif_eps'])&&isset($_FILES['certif_banco'])){
 
     if (file_exists($micarpeta)) {
@@ -50,7 +38,11 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
 
         array_push($nombreArchivos, $hv_name);
         move_uploaded_file($hv_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$hv_name.".pdf");
+        
+        $guardararchivos = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$hv_name}', '{$username}', '{$hojadevida}')");
+        $guardararchivos->execute();
 
+        
         $di = $_FILES['di']['name'];
         $di_name2 = $_FILES['di']['tmp_name'];
 
@@ -59,6 +51,8 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
         array_push($nombreArchivos, $di_name);
         move_uploaded_file($di_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$di_name.".pdf");
 
+        $guardararchivos2 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$di_name}', '{$username}', '{$documentoInden}')");
+        $guardararchivos2->execute();
 
         $apoli = $_FILES['apoli']['name'];
         $apoli_name2 = $_FILES['apoli']['tmp_name'];
@@ -67,6 +61,8 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
 
         array_push($nombreArchivos, $apoli_name);
         move_uploaded_file($apoli_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$apoli_name.".pdf");
+        $guardararchivos3 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$apoli_name}', '{$username}', '{$antecedentesPol}')");
+        $guardararchivos3->execute();
 
 
         $aprocu = $_FILES['aprocu']['name'];
@@ -76,6 +72,8 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
 
         array_push($nombreArchivos, $aprocu_name);
         move_uploaded_file($aprocu_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$aprocu_name.".pdf");
+        $guardararchivos4 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$aprocu_name}', '{$username}', '{$anteceProcu}')");
+        $guardararchivos4->execute();
 
         $totalArchivos = count($_FILES['certif_ac']['name']);
     
@@ -94,6 +92,8 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
             array_push($nombreArchivos, $certif_ac_name);
             
             move_uploaded_file($certif_ac_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$certif_ac_name.".pdf");
+            $guardararchivos5 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$certif_ac_name}', '{$username}', '{$certif_aca}')");
+            $guardararchivos5->execute();
 
         }
 
@@ -114,6 +114,8 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
             array_push($nombreArchivos, $certif_lab_name);
             
             move_uploaded_file($certif_lab_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$certif_lab_name.".pdf");
+            $guardararchivos6 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$certif_lab_name}', '{$username}', '{$certif_lab}')");
+            $guardararchivos6->execute();
 
         }
 
@@ -124,6 +126,8 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
 
         array_push($nombreArchivos, $certif_eps_name);
         move_uploaded_file($certif_eps_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$certif_eps_name.".pdf");
+        $guardararchivos7 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$certif_eps_name}', '{$username}', '{$eps}')");
+        $guardararchivos7->execute();
 
 
         $certif_banco = $_FILES['certif_banco']['name'];
@@ -133,15 +137,11 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
 
         array_push($nombreArchivos, $certif_banco_name);
         move_uploaded_file($certif_banco_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$certif_banco_name.".pdf");
+        $guardararchivos8 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$certif_banco_name}', '{$username}', '{$banco}')");
+        $guardararchivos8->execute();
 
-        print_r($nombreArchivos);
 
-        //echo  $totalArchivos ." " .$di. " " .$apoli. " " .$aprocu. " " .$certif_ac. " " .$certif_lab. " " .$certif_eps. " " .$certif_banco;
-
-        $guardararchivos = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$hv_name}', '{$username}', 'HOJADEVIDA')");
-        $guardararchivos->execute();
-
-        if($guardararchivos){
+        if($guardararchivos&&$guardararchivos2&&$guardararchivos3&&$guardararchivos4&&$guardararchivos5&&$guardararchivos6&&$guardararchivos7&&$guardararchivos8){
             echo "Guardado con exito";
         }else{
             echo "Error al guardar";
