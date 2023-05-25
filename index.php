@@ -267,7 +267,7 @@ if($userPuntualmente->iniciar_sesion()){
                 break;
             
             case 'perfildata':
-                $userPuntualmente->perfil_data();
+                $userPuntualmente->perfildata();
                 break;
     
                 // CHAT

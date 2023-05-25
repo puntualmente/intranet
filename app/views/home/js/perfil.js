@@ -1,5 +1,17 @@
-function validar(){
+function validar(id){
+    // Obtener nombre de archivo
+    let archivo = document.getElementById(id).value,
+    // Obtener extensión del archivo
+        extension = archivo.substring(archivo.lastIndexOf('.'),archivo.length);
+    // Si la extensión obtenida no está incluida en la lista de valores
+    // del atributo "accept", mostrar un error.
 
+    if(document.getElementById(id).getAttribute('accept').split(',').indexOf(extension) < 0) {
+      alert('Archivo inválido. No se permite la extensión ' + extension);
+      document.getElementById(id).value='';
+    }
+
+  
 }
 
 
@@ -14,6 +26,21 @@ form.onsubmit = (e)=>{
 
 continueBtn.onclick = ()=>{
 
+    var inputs = document.querySelectorAll('input[type="file"]');
+    var isEmpty = false;
+
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].files.length === 0) {
+        isEmpty = true;
+        break;
+      }
+    }
+
+    if (isEmpty) {
+      event.preventDefault(); // Evita el envío del formulario
+      alert("Debes llenar Todos los campos.");
+    }else{
+    
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "perfildata", true);
     xhr.onload = ()=>{
@@ -37,6 +64,7 @@ continueBtn.onclick = ()=>{
 
     let formData = new FormData(form);
     xhr.send(formData);
+    }
   }
 
 

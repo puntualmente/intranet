@@ -185,7 +185,7 @@
 
                                                             <p class="card-title-desc"><strong>** La información que tenga en la HV, debe estar actualizada y lo que en ella viaje debe coincidir con los certificados entregados, por ejemplo: si tiene experiencia en X empresa debe estar el certificado laboral de dicha empresa igual con los datos de estudio; la experiencia y la formación académica deben tener fechas de inicio y fin **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="hv" id="hv" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="hv" id="hv" accept=".pdf" onchange="validar(this.id)"required>
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
@@ -193,49 +193,49 @@
 
                                                             <p class="card-title-desc"><strong>** Debe ser fotocopia, ampliada al 150% y escaneada, no fotos, debe ser legible y verse todos los bordes del documento **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="di" id="di" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="di" id="di" accept=".pdf" onchange="validar(this.id)" required>
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
                                                             <h5>Antecedentes Policia</h5>
                                                             <p class="card-title-desc"><strong>** Descargados de la página, con fecha no mayor a 5 días **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="apoli" id="apoli" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="apoli" id="apoli" accept=".pdf" onchange="validar(this.id)" required>
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
                                                             <h5>Antecedentes Procuraduria</h5>
                                                             <p class="card-title-desc"><strong>** Descargados de la página, con fecha no mayor a 5 días **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="aprocu" id="aprocu" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="aprocu" id="aprocu" accept=".pdf" onchange="validar(this.id)" required>
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
                                                             <h5>Certificados Academicos</h5>
                                                             <p class="card-title-desc"><strong>** Deben ser los certificados que tiene en su HV **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="certif_ac[]" id="certif_ac" accept="application/pdf" multiple required>
+                                                            <input type="file" class="form-control" name="certif_ac[]" id="certif_ac" accept=".pdf" multiple required onchange="validar(this.id)">
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
                                                             <h5>Certificados Laborales</h5>
                                                             <p class="card-title-desc"><strong>** Deben ser los certificados que tiene en su HV y tienen que venir firmados **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="certif_lab" id="certif_lab" accept="application/pdf" multiple required>
+                                                            <input type="file" class="form-control" name="certif_lab[]" id="certif_lab" accept=".pdf" multiple required onchange="validar(this.id)">
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
                                                             <h5>Certificado EPS</h5>
                                                             <p class="card-title-desc"><strong>** Certificado de afiliación vigente en la EPS, con fecha de expedición no mayor a 15 días **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="certif_eps" id="certif_eps" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="certif_eps" id="certif_eps" accept=".pdf" required onchange="validar(this.id)">
                                                         </div>
                                                         <hr>
                                                         <div class="mb-3">
                                                             <h5>Certificado Cuenta Bancaria</h5>
                                                             <p class="card-title-desc"><strong>** Certificado cuenta bancaria, con fecha de expedición no mayor a 15 días **</strong></p>
                                                             <br>
-                                                            <input type="file" class="form-control" name="certif_banco" id="certif_banco" accept="application/pdf" required>
+                                                            <input type="file" class="form-control" name="certif_banco" id="certif_banco" accept=".pdf" required onchange="validar(this.id)">
                                                         </div>
                                                         </div>
 
