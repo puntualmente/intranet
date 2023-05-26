@@ -43,8 +43,6 @@ if (!empty($cedula) && !empty($password)) {
 
                 $sqlpermisochat = mysqli_query($conn, "SELECT * FROM permisos WHERE tipo_permiso = 'chat' and id_grupo = '{$row['id_grupo']}' and rol = '{$row['rol']}' and id_area = '{$row['id_area']}' and activo = '{$row['activo']}'");
 
-                print_r($sqlpermisochat);
-
                     if(mysqli_num_rows($sqlpermisochat)>0){
                         
                         $permiso = mysqli_fetch_assoc($sqlpermisochat);

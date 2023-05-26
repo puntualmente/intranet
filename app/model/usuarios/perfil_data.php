@@ -2,12 +2,112 @@
 
 require (__dir__."/../data/pdo.php");
 
+if(isset($_POST['x'])){
+
+    $data = json_decode($_POST['x']);
+
+    if($data[0]->opcion==0){
+
+        $empresa = $data[0]->empresa;
+        $cargo = $data[0]->cargo;
+        $f_ini_emp = $data[0]->f_ini_emp;
+        $f_fin_emp = $data[0]->f_fin_emp;
+        $funciones = $data[0]->funciones;
+
+        $guardarInfo = $pdo->prepare("INSERT INTO exp_laboral_persona (cedula, empresa, cargo, funciones, f_inicio, f_fin) VALUES ('{$_SESSION['cedula']}', '{$empresa}','{$cargo}', '{$funciones}', '{$f_ini_emp}', '{$f_fin_emp}')");
+
+        $guardarInfo->execute();
+
+        $consultrabajos = $pdo->prepare("SELECT * FROM exp_laboral_persona WHERE cedula = '{$_SESSION['cedula']}'");
+        $consultrabajos->execute();
+
+        $output = "";
+        foreach($consultrabajos as $trabajo){
+
+        $output .= '
+        <tr>
+            <th scope="row"> '.$trabajo->cargo.' </th>
+            <td> '.$trabajo->empresa.'</td>
+            <td> '.$trabajo->cargo.'</td>
+            <td> '.$trabajo->f_inicio.' </td>
+            <td> '.$trabajo->f_fin.' </td>
+        </tr>';
+        }
+        echo $output;
+
+    }elseif($data[0]->opcion==1){
+
+        $institucion = $data[0]->institucion;
+        $titulo = $data[0]->titulo;
+        $f_ini_escol = $data[0]->f_ini_escol;
+        $f_fin_escol = $data[0]->f_fin_escol;
+
+        $guardarInfo = $pdo->prepare("INSERT INTO formacion_ac_persona (cedula, institucion, titulo, f_inicio, f_fin) VALUES ('{$_SESSION['cedula']}', '{$institucion}','{$titulo}', '{$f_ini_escol}', '{$f_fin_escol}')");
+
+        $guardarInfo->execute();
+
+        $consulacademico = $pdo->prepare("SELECT * FROM formacion_ac_persona WHERE cedula = '{$_SESSION['cedula']}'");
+        $consulacademico->execute();
+
+        $output = "";
+        foreach($consulacademico as $trabajo){
+
+        $output .= '
+        <tr>
+            <th scope="row"> '.$trabajo->institucion.' </th>
+            <td> '.$trabajo->titulo.'</td>
+            <td> '.$trabajo->f_inicio.' </td>
+            <td> '.$trabajo->f_fin.' </td>
+        </tr>';
+        }
+        echo $output;
+
+    }elseif($data[0]->opcion==2){
+
+        $nombre_ref = $data[0]->nombre_ref;
+        $telefono = $data[0]->telefono;
+        $parentesco = $data[0]->parentesco;
+
+        $guardarInfo = $pdo->prepare("INSERT INTO referen_persona (cedula, nombre_ref, celular_ref, parentesco) VALUES ('{$_SESSION['cedula']}', '{$nombre_ref}','{$telefono}', '{$parentesco}')");
+
+        $guardarInfo->execute();
+
+        $consulref = $pdo->prepare("SELECT * FROM referen_persona WHERE cedula = '{$_SESSION['cedula']}'");
+        $consulref->execute();
+
+        $output = "";
+        foreach($consulref as $trabajo){
+
+        $output .= '
+        <tr>
+            <th scope="row"> '.$trabajo->nombre_ref.' </th>
+            <td> '.$trabajo->celular_ref.' </td>
+            <td> '.$trabajo->parentesco.' </td>
+        </tr>';
+        }
+        echo $output;
+    }
+
+}else{
+
+
+if(!empty($_POST['nombre'])&&!empty($_POST['celular'])&&!empty($_POST['direccion'])&&!empty($_POST['con_info'])&&!empty($_POST['cedula'])&&!empty($_POST['correo'])&&!empty($_POST['idiomas'])&&!empty($_POST['ap_hab'])&&!empty($_POST['perfil'])){
+
+    $guardarInfo = $pdo->prepare("INSERT INTO persona (nombre, cedula, celular, correo, direccion, idiomas, aptitudes_habili, conoci_informa, perfil) VALUES ('{$_POST['nombre']}', '{$_POST['cedula']}','{$_POST['celular']}', '{$_POST['correo']}', '{$_POST['direccion']}', '{$_POST['idiomas']}', '{$_POST['ap_hab']}', '{$_POST['con_info']}', '{$_POST['perfil']}')");
+
+    $guardarInfo->execute();
+
+}else{
+    echo "No estan los datos";
+}
+
+
 $hojadevida="HOJADEVIDA";
 $documentoInden = "DOCUMENTODEIDENTIDAD";
 $antecedentesPol = "ANTECEDENTEPOLICIA";
 $anteceProcu = "ANTECEDENTEPROCURADURIA";
 $certif_aca = "CERTIFICADOSACADEMICOS";
-$certif_lab = "CERTIFICADOSLABORALES";
+$certif_labor = "CERTIFICADOSLABORALES";
 $eps = "CERTIFICADOEPS";
 $banco = "CERTIFICADOCUENTABANCARIA";
 
@@ -27,7 +127,7 @@ if (!file_exists($micarpeta)) {
     mkdir($micarpeta, 0777, true);
 }
 
-if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_FILES['aprocu'])&&isset($_FILES['certif_ac'])&&isset($_FILES['certif_lab'])&&isset($_FILES['certif_eps'])&&isset($_FILES['certif_banco'])){
+if(!empty($_FILES['hv'])&&!empty($_FILES['di'])&&!empty($_FILES['apoli'])&&!empty($_FILES['aprocu'])&&!empty($_FILES['certif_ac'])&&!empty($_FILES['certif_lab'])&&!empty($_FILES['certif_eps'])&&!empty($_FILES['certif_banco'])){
 
     if (file_exists($micarpeta)) {
 
@@ -114,7 +214,7 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
             array_push($nombreArchivos, $certif_lab_name);
             
             move_uploaded_file($certif_lab_name2, __DIR__."/../../assets/archivosUsers/".$username."/".$certif_lab_name.".pdf");
-            $guardararchivos6 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$certif_lab_name}', '{$username}', '{$certif_lab}')");
+            $guardararchivos6 = $pdo->prepare("INSERT INTO archivos_persona (cedula, nombre_archivo, nombre_carpeta, tipo_archivo) VALUES ('{$_SESSION['cedula']}', '{$certif_lab_name}', '{$username}', '{$certif_labor}')");
             $guardararchivos6->execute();
 
         }
@@ -151,7 +251,7 @@ if(isset($_FILES['hv'])&&isset($_FILES['di'])&&isset($_FILES['apoli'])&&isset($_
 }else{
     echo "no estan";
 }
-
+}
 
 
 

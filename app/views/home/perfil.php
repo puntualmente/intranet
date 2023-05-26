@@ -1,14 +1,23 @@
 
 <?php 
       include(__dir__."/../layouts/session.php");  
-      ?>
-      <?php 
       include(__dir__."/../layouts/head-main.php");  
-      ?>
-      <?php
       include_once(__dir__."/../../model/admintablas/sqls_admin.php");
-      ?>
+      require (__dir__."/../../model/data/pdo.php");
 
+    $consultrabajos = $pdo->prepare("SELECT * FROM exp_laboral_persona WHERE cedula = '{$_SESSION['cedula']}'");
+    $consultrabajos->execute();
+
+    $consulacademico = $pdo->prepare("SELECT * FROM formacion_ac_persona WHERE cedula = '{$_SESSION['cedula']}'");
+    $consulacademico->execute();
+
+
+    $consulref = $pdo->prepare("SELECT * FROM referen_persona WHERE cedula = '{$_SESSION['cedula']}'");
+    $consulref->execute();
+
+
+?>
+    
 <head>
     <!-- choices css -->
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
@@ -97,75 +106,162 @@
                                                         <input class="form-control" name="nombre" value="<?php echo $_SESSION['username']?>" type="text" id="nombre" autocomplete="off">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="nombre" class="form-label">Celular</label>
-                                                        <input class="form-control" name="nombre" type="text" id="nombre" autocomplete="off">
+                                                        <label for="celular" class="form-label">Celular</label>
+                                                        <input class="form-control" name="celular" type="text" id="celular" autocomplete="off">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="nombre" class="form-label">Dirección</label>
-                                                        <input class="form-control" name="nombre" type="text" id="nombre" autocomplete="off">
+                                                        <label for="direccion" class="form-label">Dirección</label>
+                                                        <input class="form-control" name="direccion" type="text" id="direccion" autocomplete="off">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="con_info" class="form-label">Conocimientos Informáticos</label>
+                                                        <textarea class="form-control" name="con_info" type="text" id="con_info" autocomplete="off"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="mt-3 mt-lg-0">
                                                         <div class="mb-3">
-                                                            <label for="nombre" class="form-label">Cedula</label>
-                                                            <input class="form-control" name="nombre" type="text" id="nombre" value="<?php echo $_SESSION['cedula']?>" autocomplete="off">
+                                                            <label for="cedula" class="form-label">Cedula</label>
+                                                            <input class="form-control" name="cedula" type="text" id="cedula" value="<?php echo $_SESSION['cedula']?>" autocomplete="off">
                                                         </div>
                                                         <div class="mb-3">
-                                                        <label for="nombre" class="form-label">Correo</label>
-                                                        <input class="form-control" name="nombre" type="email" id="nombre" autocomplete="off">
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingTwo">
-                                            <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                                Perfil
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                                            data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body text-muted">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                    <h4>Formación academica</h4>
-                                                        <div class="mb-3">
-                                                            <label for="institucion" class="form-label">Institución</label>
-                                                            <input class="form-control" name="institucion" type="text" id="institucion" autocomplete="off">
+                                                            <label for="correo" class="form-label">Correo</label>
+                                                            <input class="form-control" name="correo" type="email" id="correo" autocomplete="off">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="nombre" class="form-label">Celular</label>
-                                                            <input class="form-control" name="nombre" type="text" id="nombre" autocomplete="off">
+                                                            <label for="idiomas" class="form-label">Idiomas</label>
+                                                            <input class="form-control" name="idiomas" type="text" id="idiomas" placeholder="Ingresa los idiomas separados por comas" autocomplete="off">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="nombre" class="form-label">Dirección</label>
-                                                            <input class="form-control" name="nombre" type="text" id="nombre" autocomplete="off">
+                                                            <label for="ap_hab" class="form-label">Aptitudes y Habilidades</label>
+                                                            <textarea class="form-control" name="ap_hab" type="text" id="ap_hab" autocomplete="off"></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="mt-3 mt-lg-0">
-                                                            <div class="mb-3">
-                                                                <label for="nombre" class="form-label">Cedula</label>
-                                                                <input class="form-control" name="nombre" type="text" id="nombre" value="<?php echo $_SESSION['cedula']?>" autocomplete="off">
+
+                                                </div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="perfil" class="form-label">Tu Perfil</label>
+                                                        <textarea class="form-control" name="perfil" type="text" id="perfil" autocomplete="off"></textarea>
+                                                    </div>
+                                                <div>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Ultimos Trabajos</h4>
+                                                                <p class="card-title-desc">Maximo 3 Trabajos <a type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#addtrabajo">
+                                                                Agregar</a>
+                                                                </p>
+                                                        </div>
+                                                        <div class="card-body">
+
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered mb-0">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Empresa</th>
+                                                                            <th>Cargo</th>
+                                                                            <th>Inicio</th>
+                                                                            <th>Fin</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="trabajos">
+                                                                        <?php foreach($consultrabajos as $trabajo){?>
+                                                                        <tr>
+                                                                            <th scope="row"><?php echo $trabajo->empresa?></th>
+                                                                            <td><?php echo $trabajo->cargo?></td>
+                                                                            <td><?php echo $trabajo->f_inicio?></td>
+                                                                            <td><?php echo $trabajo->f_fin?></td>
+                                                                        </tr>
+                                                                        <?php }?>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
-                                                            <div class="mb-3">
-                                                            <label for="nombre" class="form-label">Correo</label>
-                                                            <input class="form-control" name="nombre" type="text" id="nombre" autocomplete="off">
                                                         </div>
-                                                        </div>
-                                                    </div>
+                                                        <!-- end card body -->
+                                                    <!-- end card -->
                                                 </div>
 
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Escolaridad</h4>
+                                                                <p class="card-title-desc">Maximo 3 Registros <a type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#addescolaridad">
+                                                                Agregar</a>
+                                                                </p>
+                                                        </div>
+                                                        <div class="card-body">
 
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered mb-0">
 
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Institución</th>
+                                                                            <th>Titulo</th>
+                                                                            <th>Inicio</th>
+                                                                            <th>Fin</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="escolaridad">
+                                                                        <?php foreach($consulacademico as $trabajo){?>
+                                                                            <tr>
+                                                                                <th scope="row"><?php echo $trabajo->institucion?></th>
+                                                                                <td><?php echo $trabajo->titulo?></td>
+                                                                                <td><?php echo $trabajo->f_inicio?></td>
+                                                                                <td><?php echo $trabajo->f_fin?></td>
+                                                                            </tr>
+                                                                        <?php }?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end card body -->
+                                                    </div>
+                                                    <!-- end card -->
+                                                    
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Referencias Personales</h4>
+                                                                <p class="card-title-desc">Maximo 2 Referencias <a type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#addreferencias">
+                                                                Agregar</a>
+                                                                </p>
+                                                        </div>
+                                                        <div class="card-body">
+
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered mb-0">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Nombre</th>
+                                                                            <th>Telefono</th>
+                                                                            <th>Parentesco</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="referencias">
+                                                                        <?php foreach($consulref as $trabajo){?>
+                                                                            <tr>
+                                                                                <th scope="row"><?php echo $trabajo->nombre_ref?></th>
+                                                                                <td><?php echo $trabajo->celular_ref?></td>
+                                                                                <td><?php echo $trabajo->parentesco?></td>
+                                                                            </tr>
+                                                                        <?php }?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end card body -->
+                                                    </div>
+                                                    <!-- end card -->
+                    
+                    
+
+                                                </div>
+                                                
 
                                             </div>
+                                            
                                         </div>
+                                    </div>
                                     </div>
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-headingThree">
@@ -242,6 +338,7 @@
                                                     </div>
                                                 </div>
                                                 </div>
+                                                </div>
                                                 <div class="mt-2">
                                                     <button type="submit" name="submit" id="buttoninput"class="btn btn-primary w-md" >Guardar</button>
                                                     <span id="error-text"></span>
@@ -270,7 +367,102 @@
     <!-- end main content-->
 
 </div>
+
 <!-- END layout-wrapper -->
+
+
+                                    <form method="post" id="formaddtrabajo">
+                                        <div class="modal fade" id="addtrabajo" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Nueva Experiencia Laboral</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <label for="empresa" >Empresa:</label>
+                                                    <input class="form-control" type="text" id="empresa" name="empresa" autocomplete="off">
+                                                    <label for="cargo" >Cargo:</label>
+                                                    <input class="form-control" type="text" id="cargo" name="cargo" autocomplete="off">
+                                                    <label for="f_ini_emp" >Fecha Inicio:</label>
+                                                    <input class="form-control" type="date" id="f_ini_emp" name="f_ini_emp">
+                                                    <label for="f_fin_emp" >Fecha Fin:</label>
+                                                    <input class="form-control" type="date" id="f_fin_emp" name="f_fin_emp">
+                                                    <br>
+                                                    <label for="funciones" >Funciones:</label>
+                                                    <textarea class="form-control" type="text" id="funciones" name="funciones" autocomplete="off"></textarea>
+                                                    
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalticket">Cerrar</button>
+                                                        <button type="button" id="botoncambiar" onclick="agregarTrabajos()" class="btn btn-primary">Guardar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
+                                        </form>
+
+                                        <form method="post" id="formaddescolaridad">
+                                        <div class="modal fade" id="addescolaridad" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Nuevo Registro</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <label for="institucion" >Institucion:</label>
+                                                    <input class="form-control" type="text" id="institucion" name="institucion" autocomplete="off">
+                                                    <label for="titulo" >Titulo:</label>
+                                                    <input class="form-control" type="text" id="titulo" name="titulo" autocomplete="off">
+                                                    <label for="f_ini_escol" >Fecha Inicio:</label>
+                                                    <input class="form-control" type="date" id="f_ini_escol" name="f_ini_escol">
+                                                    <label for="f_fin_escol" >Fecha Fin:</label>
+                                                    <input class="form-control" type="date" id="f_fin_escol" name="f_fin_escol">
+                                                    
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalticket">Cerrar</button>
+                                                        <button type="button" id="botoncambiar" onclick="agregarEscolaridad()" class="btn btn-primary">Guardar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
+                                        </form>
+
+                                        <form method="post" id="formaddreferencias">
+                                        <div class="modal fade" id="addreferencias" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Nueva Referencia</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <label for="nombre_ref" >Nombre:</label>
+                                                    <input class="form-control" type="text" id="nombre_ref" name="nombre_ref" autocomplete="off">
+                                                    <label for="telefono" >Telefono:</label>
+                                                    <input class="form-control" type="text" id="telefono" name="telefono" autocomplete="off">
+                                                    <label for="parentesco" >Parentesco:</label>
+                                                    <input class="form-control" type="text" id="parentesco" name="parentesco" autocomplete="off">
+                                                    
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalticket">Cerrar</button>
+                                                        <button type="button" id="botoncambiar" onclick="agregarRef()" class="btn btn-primary">Guardar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
+                                        </form>
+
+
 
 <script src="<?php echo controlador::$rutaAPP?>app/views/home/js/perfil.js"></script>
 
