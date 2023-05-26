@@ -267,7 +267,11 @@
                                     </div>
 
                                     
+                                    <?php
 
+                                        if($_SESSION['permisochat']==true){
+
+                                    ?>
                                        
                                     <input id="file-input" style="display:none" type="file" name="image" accept="image/png,image/jpeg">
 
@@ -283,6 +287,25 @@
                                         <button type="submit" class="btn btn-primary chat-send w-md waves-effect waves-light" id="enviar" disabled><span class="d-none d-sm-inline-block me-2">Enviar</span> <i class="mdi mdi-send float-end"></i></button>
                                     </div>
 
+                                    <?php
+
+                                        }else{
+                                        
+                                    ?>
+                                            <div class="col">
+                                        <div class="position-relative">
+                                            <input type="text" name="msg" id="msg" class="form-control border bg-light-subtle" placeholder="Tienes deshabilitado el chat" autocomplete="off">
+                                            <input type="hidden" name="">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary chat-send w-md waves-effect waves-light" disabled><span class="d-none d-sm-inline-block me-2">Enviar</span> <i class="mdi mdi-send float-end"></i></button>
+                                    </div>
+                                    <?php
+                                        }
+                                    ?>
+                                  
                                     <div id="texto_error">
 
                                     </div>

@@ -34,6 +34,15 @@ class controlador{
         include_once(__dir__."/../views/home/admint.php");
     }
 
+    public function perfil(){
+        include_once(__dir__."/../views/home/perfil.php");
+    }
+
+    public function perfildata(){
+        include_once(__dir__."/../model/usuarios/perfil_data.php");
+    }
+
+
 
     //Actualizar listado users
 

@@ -25,6 +25,14 @@ if($userPuntualmente->iniciar_sesion()){
             case 'signup':
                 $userPuntualmente->signup();
                 break;
+            
+            case 'perfil':
+                $userPuntualmente->perfil();
+                break;
+
+            case 'perfildata':
+                $userPuntualmente->perfildata();
+                break;
 
             //Listado de usuarios
             
@@ -154,7 +162,15 @@ if($userPuntualmente->iniciar_sesion()){
             case 'signup':
                 $userPuntualmente->signup();
                 break;
-    
+            
+            case 'perfil':
+                $userPuntualmente->perfil();
+                break;
+                
+            case 'perfildata':
+                $userPuntualmente->perfildata();
+                break;
+
                 // CHAT
                 case 'chat':
                     $userPuntualmente->chat();
@@ -244,6 +260,14 @@ if($userPuntualmente->iniciar_sesion()){
 
             case 'notify':
                 $userPuntualmente->notify();
+                break;
+
+            case 'perfil':
+                $userPuntualmente->perfil();
+                break;
+            
+            case 'perfildata':
+                $userPuntualmente->perfildata();
                 break;
     
                 // CHAT
