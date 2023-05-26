@@ -26,6 +26,18 @@ form.onsubmit = (e)=>{
 
 continueBtn.onclick = ()=>{
 
+    nombre=document.getElementById('nombre').value;
+    celular=document.getElementById('celular').value;
+    direccion=document.getElementById('direccion').value;
+    con_info=document.getElementById('con_info').value;
+    cedula=document.getElementById('cedula').value;
+    correo=document.getElementById('correo').value;
+    idiomas=document.getElementById('idiomas').value;
+    ap_hab=document.getElementById('ap_hab').value;
+    perfil=document.getElementById('perfil').value;
+
+
+
     var inputs = document.querySelectorAll('input[type="file"]');
     var isEmpty = false;
 
@@ -36,7 +48,7 @@ continueBtn.onclick = ()=>{
       }
     }
 
-    if (isEmpty) {
+    if (isEmpty || nombre=="" || celular=="" || direccion=="" || con_info=="" || cedula=="" || correo=="" || idiomas=="" ||ap_hab=="" || perfil=="") {
       event.preventDefault(); // Evita el envío del formulario
       alert("Debes llenar Todos los campos.");
     }else{
@@ -68,15 +80,93 @@ continueBtn.onclick = ()=>{
   }
 
 
-  function limpiarFormulario() {
-    document.getElementById('nombre').innerHTML="";
-    document.getElementById('apellido').innerHTML="";
-    document.getElementById('cedula').innerHTML="";
-    document.getElementById('telefono').innerHTML="";
-    document.getElementById('foto').innerHTML="";
-    document.getElementById('nacimiento').innerHTML="";
-    document.getElementById('contraseña').innerHTML="";
-    document.getElementById('f_ingreso').innerHTML="";
+
+  function agregarTrabajos(){
+
+    empresa=document.getElementById('empresa').value;
+    cargo=document.getElementById('cargo').value;
+    f_ini_emp=document.getElementById('f_ini_emp').value;
+    f_fin_emp=document.getElementById('f_fin_emp').value;
+    funciones=document.getElementById('funciones').value;
+    perfil=document.getElementById('perfil').value;
+    tablatrabajo = document.getElementById('trabajos');
+
+    console.log(empresa, cargo, f_ini_emp, f_fin_emp, funciones)
+
+    obj = [{ "empresa": `${empresa}`, "cargo": `${cargo}`, "f_ini_emp": `${f_ini_emp}`,"f_fin_emp": `${f_fin_emp}`,"funciones": `${funciones}`, "perfil": `${perfil}`, "opcion": 0}];
+            console.log(obj)
+            dbParam = JSON.stringify(obj);
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "perfildata", true);
+          xhr.onload = ()=>{
+          if(xhr.readyState === XMLHttpRequest.DONE){
+              if(xhr.status === 200){
+                let data = xhr.response;
+                //document.getElementById('nombrearea').value='';
+                tablatrabajo.innerHTML = data;
+              }
+          }
+        }
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send("x=" + dbParam);
+
+
+  }
+
+  function agregarEscolaridad(){
+    institucion=document.getElementById('institucion').value;
+    titulo=document.getElementById('titulo').value;
+    f_ini_escol=document.getElementById('f_ini_escol').value;
+    f_fin_escol=document.getElementById('f_fin_escol').value;
+    tablaescolaridad = document.getElementById('escolaridad');
+
+    console.log(empresa, cargo, f_ini_emp, f_fin_emp, funciones)
+
+    obj = [{ "institucion": `${institucion}`, "titulo": `${titulo}`, "f_ini_escol": `${f_ini_escol}`,"f_fin_escol": `${f_fin_escol}`, "opcion": 1}];
+            console.log(obj)
+            dbParam = JSON.stringify(obj);
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "perfildata", true);
+          xhr.onload = ()=>{
+          if(xhr.readyState === XMLHttpRequest.DONE){
+              if(xhr.status === 200){
+                let data = xhr.response;
+                //document.getElementById('nombrearea').value='';
+                tablaescolaridad.innerHTML = data;
+              }
+          }
+        }
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send("x=" + dbParam);
+
+  }
+
+  function agregarRef(){
+
+    nombre_ref=document.getElementById('nombre_ref').value;
+    telefono=document.getElementById('telefono').value;
+    parentesco=document.getElementById('parentesco').value;
+    tablareferencias = document.getElementById('referencias');
+
+    console.log(empresa, cargo, f_ini_emp, f_fin_emp, funciones)
+
+    obj = [{ "nombre_ref": `${nombre_ref}`, "telefono": `${telefono}`, "parentesco": `${parentesco}`, "opcion": 2}];
+            console.log(obj)
+            dbParam = JSON.stringify(obj);
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "perfildata", true);
+          xhr.onload = ()=>{
+          if(xhr.readyState === XMLHttpRequest.DONE){
+              if(xhr.status === 200){
+                let data = xhr.response;
+                //document.getElementById('nombrearea').value='';
+                tablareferencias.innerHTML = data;
+              }
+          }
+        }
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send("x=" + dbParam);
+
   }
 
 
