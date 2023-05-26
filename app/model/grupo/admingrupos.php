@@ -31,7 +31,7 @@
             while ($row2 = mysqli_fetch_assoc($query3)) {
                 if($row['id_usuario']!=$outgoing_id){
                     $output .= '
-                    <div id="' . $row2['id'] . '">
+                    <div id="' . $row2['cedula'] . '">
                     <li >
 
                     <a>
@@ -45,7 +45,7 @@
                                 <h5 class="text-truncate font-size-14 mb-1">' . $row2['n_user'] . " " . $row2['l_user'] .'</h5>
                             </div>
                             <div class="flex-shrink-0">
-                            <button id="' . $row2['id'] . '" onclick="borraruser2(this.id)" type="button" class="btn btn-light"><i class=" fas fa-user-minus"></i></button>
+                            <button id="' . $row2['id'] . '" onclick="borraruser2(this.id, '.$row2['cedula'].')" type="button" class="btn btn-light"><i class=" fas fa-user-minus"></i></button>
                             </div>
                         </div>
                     </a>

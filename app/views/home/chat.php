@@ -326,7 +326,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                    <input type="text" id="nombre" placeholder="Nombre Grupo" class="form-control" require>
+                                                    <input type="text" id="nombre" placeholder="Nombre Grupo" class="form-control" autocomplete="off" require>
                                                     <div class="mb-3">
                                             
                                                 <label for="area" class="form-label font-size-13 text-muted">Personas:</label>
@@ -424,7 +424,7 @@
                                         </div>
                                     </div>
                                     <span>*Si este campo lo dejas vacio el nombre sera el mismo*</span>
-                                    <input type="text" id="nuevonombre" placeholder="Nuevo nombre del grupo" class="form-control">
+                                    <input type="text" id="nuevonombre" placeholder="Nuevo nombre del grupo" class="form-control">  
 
                                     <span id="mensaje9"></span>
                                     

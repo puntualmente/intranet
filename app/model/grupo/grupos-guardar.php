@@ -51,9 +51,9 @@ if(isset($_POST['actualizar'])){
         $insert_query = mysqli_query($conn, "INSERT INTO grupos_chat (n_grupo, propietario) VALUES ('{$ngrupo}','{$outgoing_id}')");
         echo "Grupo Creado con exito";
         
-        $sql = mysqli_query($conn, "SELECT * FROM grupos_chat WHERE n_grupo = '{$ngrupo}'");
-        $row = mysqli_fetch_assoc($sql);
-        $id_grupo = $row['id_grupo'];
+        $id_ultimo_insert = mysqli_insert_id ($conn);
+
+        $id_grupo = $id_ultimo_insert;
         $data = json_decode($_POST['array']);
         array_push($data, $outgoing_id);
     
