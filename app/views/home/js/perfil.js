@@ -14,10 +14,6 @@ function validar(id){
   
 }
 
-numtrabajos=document.getElementById('numtrabajos').value;
-numacademicos=document.getElementById('numacademicos').value;
-numref=document.getElementById('numref').value;
-
 
 const form = document.querySelector("#form_perfil"),
 continueBtn = document.querySelector("#buttoninput"),
