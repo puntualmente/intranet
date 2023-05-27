@@ -66,8 +66,7 @@ continueBtn.onclick = ()=>{
                   alertify.success(data);
                   setTimeout(() => {
                     location.href="perfil";;
-                  }, 2000);
-                  
+                  }, 2000); 
                 }else{
                   alertify.error(data);
                 }
@@ -94,7 +93,7 @@ continueBtn.onclick = ()=>{
     perfil=document.getElementById('perfil').value;
     tablatrabajo = document.getElementById('trabajos');
 
-    if(empresa==""&&cargo==""&&f_ini_emp==""&&f_fin_emp==""&&funciones==""&&perfil==""){
+    if(empresa==""||cargo==""||f_ini_emp==""||f_fin_emp==""||funciones==""||perfil==""){
         alertify.error("Llena todos los campos");
     }else{
 
@@ -133,7 +132,7 @@ continueBtn.onclick = ()=>{
     f_fin_escol=document.getElementById('f_fin_escol').value;
     tablaescolaridad = document.getElementById('escolaridad');
 
-    if(institucion==""&&titulo==""&&f_ini_escol==""&&f_fin_escol==""){
+    if(institucion==""||titulo==""||f_ini_escol==""||f_fin_escol==""){
       alertify.error("Llena todos los campos");
     }else{
     obj = [{ "institucion": `${institucion}`, "titulo": `${titulo}`, "f_ini_escol": `${f_ini_escol}`,"f_fin_escol": `${f_fin_escol}`, "opcion": 1}];
