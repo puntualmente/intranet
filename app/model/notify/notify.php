@@ -80,11 +80,6 @@ if(!isset($_POST['x'])){
 
     }   
      }
-        echo $output;*/
-
-    }
-}
-
 
 
 

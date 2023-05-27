@@ -26,8 +26,7 @@ if(isset($_POST['x'])){
 
         $output .= '
         <tr>
-            <th scope="row"> '.$trabajo->cargo.' </th>
-            <td> '.$trabajo->empresa.'</td>
+            <th scope="row"> '.$trabajo->empresa.' </th>
             <td> '.$trabajo->cargo.'</td>
             <td> '.$trabajo->f_inicio.' </td>
             <td> '.$trabajo->f_fin.' </td>
@@ -182,12 +181,12 @@ if(!empty($_FILES['hv'])&&!empty($_FILES['di'])&&!empty($_FILES['apoli'])&&!empt
             if($i==0){
                 $num="";
             }else{
-                $num=$i;
+                $num=$i+1;
             }
 
             $certif_ac = $_FILES['certif_ac']['name'][$i];
             $certif_ac_name2 = $_FILES['certif_ac']['tmp_name'][$i];
-            $certif_ac_name = "CERTIFICADOSACADEMICOS_".$username.$num;
+            $certif_ac_name = "CERTIFICADOSACADEMICOS_".$num.$username;
 
             array_push($nombreArchivos, $certif_ac_name);
             
@@ -204,12 +203,12 @@ if(!empty($_FILES['hv'])&&!empty($_FILES['di'])&&!empty($_FILES['apoli'])&&!empt
             if($i==0){
                 $num="";
             }else{
-                $num=$i;
+                $num=$i+1;
             }
 
             $certif_lab = $_FILES['certif_lab']['name'][$i];
             $certif_lab_name2 = $_FILES['certif_lab']['tmp_name'][$i];
-            $certif_lab_name = "CERTIFICADOSLABORALES_".$username.$num;
+            $certif_lab_name = "CERTIFICADOSLABORALES_".$num.$username;
 
             array_push($nombreArchivos, $certif_lab_name);
             
