@@ -358,7 +358,9 @@
                                                 </div>
                                                 <div class="mt-2">
                                                     <button type="submit" name="submit" id="buttoninput"class="btn btn-primary w-md" >Guardar</button>
-                                                    <span id="error-text"></span>
+                                                    <div class="spinner-border text-danger m-1" role="status" id="cargando" Style="Display:none;"> 
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
                                                 </div>
 
                                             </form>
