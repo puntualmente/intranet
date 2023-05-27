@@ -90,14 +90,13 @@ continueBtn.onclick = ()=>{
     f_ini_emp=document.getElementById('f_ini_emp').value;
     f_fin_emp=document.getElementById('f_fin_emp').value;
     funciones=document.getElementById('funciones').value;
-    perfil=document.getElementById('perfil').value;
     tablatrabajo = document.getElementById('trabajos');
 
-    if(empresa==""||cargo==""||f_ini_emp==""||f_fin_emp==""||funciones==""||perfil==""){
+    if(empresa==""||cargo==""||f_ini_emp==""||f_fin_emp==""||funciones==""){
         alertify.error("Llena todos los campos");
     }else{
 
-    obj = [{ "empresa": `${empresa}`, "cargo": `${cargo}`, "f_ini_emp": `${f_ini_emp}`,"f_fin_emp": `${f_fin_emp}`,"funciones": `${funciones}`, "perfil": `${perfil}`, "opcion": 0}];
+    obj = [{ "empresa": `${empresa}`, "cargo": `${cargo}`, "f_ini_emp": `${f_ini_emp}`,"f_fin_emp": `${f_fin_emp}`,"funciones": `${funciones}`, "opcion": 0}];
             console.log(obj)
             dbParam = JSON.stringify(obj);
           let xhr = new XMLHttpRequest();
@@ -114,7 +113,6 @@ continueBtn.onclick = ()=>{
                 f_ini_emp=document.getElementById('f_ini_emp').value="";
                 f_fin_emp=document.getElementById('f_fin_emp').value="";
                 funciones=document.getElementById('funciones').value="";
-                perfil=document.getElementById('perfil').value="";
                 document.getElementById('cerrarmodaltrabajo').click();
               }
           }
