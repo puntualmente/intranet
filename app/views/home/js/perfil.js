@@ -25,6 +25,7 @@ form.onsubmit = (e)=>{
 
 continueBtn.onclick = ()=>{
 
+
     nombre=document.getElementById('nombre').value;
     celular=document.getElementById('celular').value;
     direccion=document.getElementById('direccion').value;
@@ -51,6 +52,15 @@ continueBtn.onclick = ()=>{
       event.preventDefault(); // Evita el envío del formulario
       alert("Debes llenar Todos los campos.");
     }else{
+
+    buttoninput=document.getElementById('buttoninput');
+    buttoninput.disabled=true;
+
+    cargando=document.getElementById('cargando');
+    cargando.style.display = "";
+    buttoninput=document.getElementById('buttoninput');
+    buttoninput.disabled;
+    
     
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "perfildata", true);
@@ -67,6 +77,7 @@ continueBtn.onclick = ()=>{
                   setTimeout(() => {
                     location.href="perfil";;
                   }, 2000); 
+                  cargando.style.display = "none";
                 }else{
                   alertify.error(data);
                 }
