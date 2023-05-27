@@ -14,6 +14,9 @@ function validar(id){
   
 }
 
+numtrabajos=document.getElementById('numtrabajos').value;
+numacademicos=document.getElementById('numacademicos').value;
+numref=document.getElementById('numref').value;
 
 
 const form = document.querySelector("#form_perfil"),
@@ -63,10 +66,14 @@ continueBtn.onclick = ()=>{
                 location.href="registrar";
               }else{
 
-                if(data==="¡Todos los campos de entrada son obligatorios!"){
-                  alertify.error(data);
-                }else{
+                if(data==="Guardado con exito"){
                   alertify.success(data);
+                  setTimeout(() => {
+                    location.href="perfil";;
+                  }, 2000);
+                  
+                }else{
+                  alertify.error(data);
                 }
               
           }
@@ -91,7 +98,9 @@ continueBtn.onclick = ()=>{
     perfil=document.getElementById('perfil').value;
     tablatrabajo = document.getElementById('trabajos');
 
-    console.log(empresa, cargo, f_ini_emp, f_fin_emp, funciones)
+    if(empresa==""&&cargo==""&&f_ini_emp==""&&f_fin_emp==""&&funciones==""&&perfil==""){
+        alertify.error("Llena todos los campos");
+    }else{
 
     obj = [{ "empresa": `${empresa}`, "cargo": `${cargo}`, "f_ini_emp": `${f_ini_emp}`,"f_fin_emp": `${f_fin_emp}`,"funciones": `${funciones}`, "perfil": `${perfil}`, "opcion": 0}];
             console.log(obj)
@@ -104,13 +113,21 @@ continueBtn.onclick = ()=>{
                 let data = xhr.response;
                 //document.getElementById('nombrearea').value='';
                 tablatrabajo.innerHTML = data;
+                alertify.success("Cargado con exito");
+                empresa=document.getElementById('empresa').value="";
+                cargo=document.getElementById('cargo').value="";
+                f_ini_emp=document.getElementById('f_ini_emp').value="";
+                f_fin_emp=document.getElementById('f_fin_emp').value="";
+                funciones=document.getElementById('funciones').value="";
+                perfil=document.getElementById('perfil').value="";
+                document.getElementById('cerrarmodaltrabajo').click();
               }
           }
         }
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send("x=" + dbParam);
 
-
+      }
   }
 
   function agregarEscolaridad(){
@@ -120,8 +137,9 @@ continueBtn.onclick = ()=>{
     f_fin_escol=document.getElementById('f_fin_escol').value;
     tablaescolaridad = document.getElementById('escolaridad');
 
-    console.log(empresa, cargo, f_ini_emp, f_fin_emp, funciones)
-
+    if(institucion==""&&titulo==""&&f_ini_escol==""&&f_fin_escol==""){
+      alertify.error("Llena todos los campos");
+    }else{
     obj = [{ "institucion": `${institucion}`, "titulo": `${titulo}`, "f_ini_escol": `${f_ini_escol}`,"f_fin_escol": `${f_fin_escol}`, "opcion": 1}];
             console.log(obj)
             dbParam = JSON.stringify(obj);
@@ -133,12 +151,18 @@ continueBtn.onclick = ()=>{
                 let data = xhr.response;
                 //document.getElementById('nombrearea').value='';
                 tablaescolaridad.innerHTML = data;
+                alertify.success("Cargado con exito");
+                institucion=document.getElementById('institucion').value="";
+                titulo=document.getElementById('titulo').value="";
+                f_ini_escol=document.getElementById('f_ini_escol').value="";
+                f_fin_escol=document.getElementById('f_fin_escol').value="";
+                document.getElementById('cerrarmodalescolaridad').click();
               }
           }
         }
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send("x=" + dbParam);
-
+      }
   }
 
   function agregarRef(){
@@ -148,8 +172,9 @@ continueBtn.onclick = ()=>{
     parentesco=document.getElementById('parentesco').value;
     tablareferencias = document.getElementById('referencias');
 
-    console.log(empresa, cargo, f_ini_emp, f_fin_emp, funciones)
-
+    if(nombre_ref==""&&telefono==""&&parentesco==""){
+      alertify.error("Llena todos los campos");
+    }else{
     obj = [{ "nombre_ref": `${nombre_ref}`, "telefono": `${telefono}`, "parentesco": `${parentesco}`, "opcion": 2}];
             console.log(obj)
             dbParam = JSON.stringify(obj);
@@ -161,12 +186,18 @@ continueBtn.onclick = ()=>{
                 let data = xhr.response;
                 //document.getElementById('nombrearea').value='';
                 tablareferencias.innerHTML = data;
+                alertify.success("Cargado con exito");
+                nombre_ref=document.getElementById('nombre_ref').value="";
+                telefono=document.getElementById('telefono').value="";
+                parentesco=document.getElementById('parentesco').value="";
+                document.getElementById('cerrarmodalreferen').click();
+
               }
           }
         }
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send("x=" + dbParam);
-
+      }
   }
 
 

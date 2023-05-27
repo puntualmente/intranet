@@ -5,6 +5,17 @@
       include_once(__dir__."/../../model/admintablas/sqls_admin.php");
       require (__dir__."/../../model/data/pdo.php");
 
+    $consultarRegistros = $pdo->prepare("SELECT * FROM persona WHERE cedula = '{$_SESSION['cedula']}'");
+    $consultarRegistros->execute();
+
+      function cantidad($objetos){
+        $contador = 0;
+        foreach($objetos as $trabajo){
+            $contador = $contador + 1;
+        }
+        return $contador;
+      }
+
     $consultrabajos = $pdo->prepare("SELECT * FROM exp_laboral_persona WHERE cedula = '{$_SESSION['cedula']}'");
     $consultrabajos->execute();
 
@@ -84,6 +95,11 @@
                     <div class="card-header">
                                 
                             </div> <!-- end card header -->
+                        <?php if(cantidad($consultarRegistros)>0){?>
+                            <div class="alert alert-success" role="alert">
+                                    Gracias!! Datos Enviados Con Exito... 👍
+                                </div>
+                        <?php }else{ ?>
                             
                             <div class="card-body">
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -147,8 +163,8 @@
                                                     <div class="card">
                                                         <div class="card-header">
                                                             <h4 class="card-title">Ultimos Trabajos</h4>
-                                                                <p class="card-title-desc">Maximo 3 Trabajos <a type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#addtrabajo">
-                                                                Agregar</a>
+                                                                <p class="card-title-desc">Maximo 3 Trabajos <button id="agregartrabajo" type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#addtrabajo">
+                                                                Agregar</button>
                                                                 </p>
                                                         </div>
                                                         <div class="card-body">
@@ -167,16 +183,17 @@
                                                                     <tbody id="trabajos">
                                                                         <?php foreach($consultrabajos as $trabajo){?>
                                                                         <tr>
-                                                                            <th scope="row"><?php echo $trabajo->empresa?></th>
+                                                                            <th scope="row"><?php echo $trabajo->empresa ?></th>
                                                                             <td><?php echo $trabajo->cargo?></td>
                                                                             <td><?php echo $trabajo->f_inicio?></td>
                                                                             <td><?php echo $trabajo->f_fin?></td>
                                                                         </tr>
-                                                                        <?php }?>
+                                                                        <?php } ?>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
+                                                        
                                                         <!-- end card body -->
                                                     <!-- end card -->
                                                 </div>
@@ -352,7 +369,9 @@
                                     </div>
                                 </div><!-- end accordion -->
                             </div><!-- end card-body -->
-                        </div><!-- end card -->    
+                        </div><!-- end card -->  
+                        <?php } ?>
+  
                     
                     
 
@@ -395,7 +414,7 @@
                                                     
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalticket">Cerrar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodaltrabajo">Cerrar</button>
                                                         <button type="button" id="botoncambiar" onclick="agregarTrabajos()" class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
@@ -425,7 +444,7 @@
                                                     
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalticket">Cerrar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalescolaridad">Cerrar</button>
                                                         <button type="button" id="botoncambiar" onclick="agregarEscolaridad()" class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
@@ -453,7 +472,7 @@
                                                     
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalticket">Cerrar</button>
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarmodalreferen">Cerrar</button>
                                                         <button type="button" id="botoncambiar" onclick="agregarRef()" class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
