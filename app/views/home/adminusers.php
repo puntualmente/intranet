@@ -40,8 +40,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Buttons example</h4>
+                            <div class="card-header d-flex justify-content-between">
+                                <h4 class="card-title">Tabla Usuarios</h4>
+                                <div><a type="button" href="usersArchiv" class="btn btn-primary waves-effect waves-light">Ver Archivos Usuarios</a></div>
                             </div>
                             <div class="card-body">
                                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">

@@ -111,11 +111,11 @@
                                         </div>
                                             </div>
                                             
-                                            <div>
+                                        <!--    <div>
                                                 <label for="foto" class="form-label">Foto</label>
                                                 <input type="file" class="form-control" name="foto" id="foto" accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
-                                            </div>
-                                            <br>
+                                            </div> 
+                                            <br> -->
                                             <div class="mb-3">
                                                 <label for="sede" class="form-label font-size-13 text-muted">Sede:</label>
                                                 <select class="form-control" data-trigger name="sede" id="sede">
