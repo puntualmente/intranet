@@ -53,6 +53,12 @@ class controlador{
     public function subirArchivoUs(){
         include_once(__dir__."/../model/OtrasConfigs/subirArchivoUs.php");
     }
+
+    //Ver archivos users
+
+    public function usersArchiv(){
+        include_once(__dir__."/../views/opc_admin/usersArchiv.php");
+    }
   
 
 
