@@ -415,6 +415,50 @@ function limpiar(){
         }
     }
 
+    // Obtener todas las imágenes con la clase 'imagen-clickable'
+
+    function verimagen(src){
+        var rutaImagenAmpliada = src;
+        var imagenAmpliada = document.getElementById('imagen-ampliada');
+        imagenAmpliada.src = rutaImagenAmpliada;
+        var popup = document.getElementById('popupmostrarimagen');
+        popup.style.display = 'flex';
+
+        var popup = document.getElementById('popupmostrarimagen');
+        popup.addEventListener('click', function(event) {
+        // Si el clic se realiza fuera de la imagen ampliada, ocultar el popup
+        if (event.target === this) {
+            this.style.display = 'none';
+        }
+});
+    }
+
+
+// Recorrer todas las imágenes y agregar el evento de clic
+for (var i = 0; i < imagenes.length; i++) {
+  imagenes[i].addEventListener('click', function() {
+    // Obtener la ruta de la imagen ampliada desde el atributo 'src'
+    var rutaImagenAmpliada = this.src;
+
+    // Obtener el elemento de la imagen ampliada y establecer su 'src' a la ruta de la imagen
+    var imagenAmpliada = document.getElementById('imagen-ampliada');
+    imagenAmpliada.src = rutaImagenAmpliada;
+
+    // Mostrar el popup
+    var popup = document.getElementById('popup');
+    popup.style.display = 'flex';
+  });
+}
+
+// Agregar evento de clic al popup para ocultarlo cuando se hace clic fuera de la imagen
+var popup = document.getElementById('popup');
+popup.addEventListener('click', function(event) {
+  // Si el clic se realiza fuera de la imagen ampliada, ocultar el popup
+  if (event.target === this) {
+    this.style.display = 'none';
+  }
+});
+
 
     
 

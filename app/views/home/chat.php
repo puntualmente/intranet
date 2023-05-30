@@ -7,6 +7,27 @@
       ?>
 
 <head>
+<style>
+    /* Estilos para el popup */
+    #popupmostrarimagen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      display: none;
+    }
+
+    #popupmostrarimagen img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
     <!-- choices css -->
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
 
@@ -335,6 +356,10 @@
         <!-- End Page-content -->
     </div>
     <!-- end main content-->
+
+    <div id="popupmostrarimagen">
+        <img id="imagen-ampliada">
+    </div>
 
  
             <?php if($_SESSION['rol']==1 || $_SESSION['rol']==2){?>
