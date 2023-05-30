@@ -13,6 +13,10 @@ if($userPuntualmente->iniciar_sesion()){
         
         switch($_GET["action"]){
 
+            case 'mostrarpdf?archivo=':
+                $userPuntualmente->mostrarpdf();
+                break;
+
             case 'home':
                 $userPuntualmente->home();
                 break;
@@ -38,6 +42,12 @@ if($userPuntualmente->iniciar_sesion()){
             
             case 'updListado':
                 $userPuntualmente->updListado();
+                break;
+
+            // ver archivos user
+
+            case 'usersArchiv':
+                $userPuntualmente->usersArchiv();
                 break;
 
             case 'subirArchivoUs':
