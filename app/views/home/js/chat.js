@@ -433,33 +433,56 @@ function limpiar(){
 });
     }
 
+function enviarid1v1(id, value){
+    informacion_adicional=document.getElementById('informacion_adicional');
+    informacion_adicional.innerHTML= `
+        <label for="${id}" class="form-label font-size-13 text-muted">Mensaje a enviar:</label>
+        <input disabled name="msg_reenviar" class="form-control bg-success" id="msg_reenviar" value="${value}" type="text">
+        <input disabled name="esimagen" class="form-control bg-success" id="esimagen" value="0" type="text" hidden>
 
-// Recorrer todas las imágenes y agregar el evento de clic
-for (var i = 0; i < imagenes.length; i++) {
-  imagenes[i].addEventListener('click', function() {
-    // Obtener la ruta de la imagen ampliada desde el atributo 'src'
-    var rutaImagenAmpliada = this.src;
-
-    // Obtener el elemento de la imagen ampliada y establecer su 'src' a la ruta de la imagen
-    var imagenAmpliada = document.getElementById('imagen-ampliada');
-    imagenAmpliada.src = rutaImagenAmpliada;
-
-    // Mostrar el popup
-    var popup = document.getElementById('popup');
-    popup.style.display = 'flex';
-  });
+        `;
 }
 
-// Agregar evento de clic al popup para ocultarlo cuando se hace clic fuera de la imagen
-var popup = document.getElementById('popup');
-popup.addEventListener('click', function(event) {
-  // Si el clic se realiza fuera de la imagen ampliada, ocultar el popup
-  if (event.target === this) {
-    this.style.display = 'none';
-  }
-});
+function enviaridgrupo(id, value){
+    informacion_adicional=document.getElementById('informacion_adicional');
+    informacion_adicional.innerHTML= `
+        <label for="${id}" class="form-label font-size-13 text-muted">Mensaje a enviar:</label>
+        <input disabled name="msg_reenviar" class="form-control bg-success" id="msg_reenviar" value="${value}" type="text">
+        <input disabled name="esimagen" class="form-control bg-success" id="esimagen" value="1" type="text" hidden>
+        `;
+}
 
 
+reenviar = document.getElementById('reenviar');
+
+reenviar.onclick = ()=>{
+    inputField2 = document.getElementById('msg_reenviar').value;
+    esimagen=document.getElementById('esimagen').value;
+    form2 = document.getElementById('form_reenviar_msg');
+    console.log(inputField2);
+
+    let xhr = new XMLHttpRequest();
+        xhr.open("POST", "chat/insertchat", true);
+        xhr.onload = ()=>{
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status === 200){
+                let data = xhr.response;
+                alertify.success("Mensaje reenviado...", "", 0);
+            }else{
+                alertify.error("Error enviando el mensaje");
+            }
+            }
+        }
+        let formData = new FormData(form2);
+        if(esimagen==1){
+            formData.append("esimagen", esimagen);
+            formData.append("nombreimg", inputField2);
+
+        }else if(esimagen==0){
+            formData.append("msg", inputField2);
+        }
+        xhr.send(formData);
+    }
     
 
 

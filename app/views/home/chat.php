@@ -571,6 +571,39 @@
 
                                     </form>
 
+                                    <form method="post" id="form_reenviar_msg">
+                                        <div class="modal fade" id="modal_reenviar_msg" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Reenviar Mensaje a</h5>
+                                                        <button id="closemodaltkt" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
+                                                    </div>
+                                                    <div class="modal-body" style="height: 300px">
+                                                    
+                                                        <div class="mb-3">
+                                                            <label for="area" class="form-label font-size-13 text-muted">Enviar a:</label>
+                                                            <select class="form-control" data-trigger name="id_enviar" id="id_enviar">
+                                                                <option value="0" selected disabled>1. Elige un Usuario</option>
+                                                                <?php foreach($usuarios as $value){?>
+                                                                    <option value="<?php echo  $value['id']?>"><?php echo $value['n_user']." ".$value['l_user']?></option>
+                                                                <?php }?>
+                                                            </select>
+                                                        </div>
+                                                        <div id="informacion_adicional"></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
+                                                        <button type="button" id="reenviar" class="btn btn-primary">Enviar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
+                                    </form>
+
+
 
 
                                         <div>

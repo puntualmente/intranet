@@ -119,7 +119,11 @@ class controlador{
     }
 
     public function insertchat(){
-        include_once(__dir__."/../model/chat/insert-chat.php");
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            include_once(__dir__."/../model/chat/insert-chat.php");
+        }else{
+            header("location: registrar");
+        }
     }
     
     public function buscar(){

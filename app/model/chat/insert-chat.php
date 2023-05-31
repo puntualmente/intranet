@@ -92,6 +92,10 @@
                         } else {
                             echo "Cargue un archivo de imagen: jpeg, png, jpg 2";
                         }
+                    }elseif(empty($_FILES['image'] && $_POST['esimagen']==1 && isset($_POST['nombreimg']))){
+
+                        $insert_query = mysqli_query($conn, "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg, imagen, tipo, estado, fecha, hora, ip) VALUES ({$incoming_id}, {$outgoing_id},'', '{$_POST['nombreimg']}', '1', '0', '{$dia}','{$hora}','{$ip}')") or die();
+                        
                     }
                 }
             }
