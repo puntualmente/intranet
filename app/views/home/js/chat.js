@@ -415,23 +415,126 @@ function limpiar(){
         }
     }
 
+    var images = [];
+
+    function getimages(){
+
+        
+
+    }
+
     // Obtener todas las imágenes con la clase 'imagen-clickable'
 
-    function verimagen(src){
-        var rutaImagenAmpliada = src;
-        var imagenAmpliada = document.getElementById('imagen-ampliada');
-        imagenAmpliada.src = rutaImagenAmpliada;
-        var popup = document.getElementById('popupmostrarimagen');
-        popup.style.display = 'flex';
+    function verimagen(imagen){
 
-        var popup = document.getElementById('popupmostrarimagen');
-        popup.addEventListener('click', function(event) {
-        // Si el clic se realiza fuera de la imagen ampliada, ocultar el popup
-        if (event.target === this) {
-            this.style.display = 'none';
+        images1=[];
+
+
+        console.log(imagen)
+        id_enviar=document.getElementById('id_enviar').value;
+
+        obj = [{ "id_user": id_enviar, "tipo": 0}];
+        console.log(obj)
+        dbParam = JSON.stringify(obj);
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "mostrarimagenchat", true);
+      xhr.onload = ()=>{
+      if(xhr.readyState === XMLHttpRequest.DONE){
+          if(xhr.status === 200){
+            let data = xhr.response;
+            images1 = data.split(",");
+            console.log(images1);
+         
+
+        const popup = document.querySelector('.popupmostrarimagen');
+        const closeBtn = document.querySelector('.close');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const image = document.querySelector('.image');
+
+        let currentIndex = 0;
+
+            var images=[]
+
+            images = images1.filter(function(elemento) {
+            return elemento.trim() !== "";
+          });
+
+          console.log(images)
+
+        function openPopup(imagen) {
+
+                let indice = images.indexOf(imagen);
+                popup.style.display = 'flex';
+                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[indice]}`)
+                .then(function() {
+                    image.src = `/intranet/app/assets/images/chat/${images[indice]}`;
+                })
+                .catch(function() {
+                    image.src = `/intranet/app/assets/images/chatgrupos/${images[indice]}`;
+                });
         }
-});
-    }
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        function nextImage() {
+                currentIndex++;
+                if (currentIndex >= images.length) {
+                    currentIndex = 0;
+                }
+                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
+                .then(function() {
+                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
+                })
+                .catch(function() {
+                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
+                });
+        }
+
+        function prevImage() {
+                currentIndex--;
+                if (currentIndex < 0) {
+                    currentIndex = images.length - 1;
+                }
+                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
+                .then(function() {
+                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
+                })
+                .catch(function() {
+                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
+                });
+        }
+
+        closeBtn.addEventListener('click', closePopup);
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+        openPopup(imagen);
+
+        }
+    }}
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("x=" + dbParam);
+
+      } 
+
+
+      function verificarImagenDirectorio(urlImagen) {
+        return new Promise(function(resolve, reject) {
+          var img = new Image();
+          img.onload = function() {
+            resolve();
+          };
+          img.onerror = function() {
+            reject();
+          };
+          img.src = urlImagen;
+        });
+      }
+      
+      
+
 
 function enviarid1v1(id, value){
     informacion_adicional=document.getElementById('informacion_adicional');
@@ -459,6 +562,8 @@ reenviar.onclick = ()=>{
     inputField2 = document.getElementById('msg_reenviar').value;
     esimagen=document.getElementById('esimagen').value;
     form2 = document.getElementById('form_reenviar_msg');
+    tipo_chat = document.getElementById('tipo_chat').value;
+
     console.log(inputField2);
 
     let xhr = new XMLHttpRequest();
@@ -467,7 +572,40 @@ reenviar.onclick = ()=>{
         if(xhr.readyState === XMLHttpRequest.DONE){
             if(xhr.status === 200){
                 let data = xhr.response;
-                alertify.success("Mensaje reenviado...", "", 0);
+                alertify.success("Mensaje reenviado...", 0);
+
+                if(tipo_chat=="chat_1_1"){
+        
+                    let xhr3 = new XMLHttpRequest();
+                    xhr3.open("GET", "chat/users", true);
+                    xhr3.onload = ()=>{
+                      if(xhr3.readyState === XMLHttpRequest.DONE){
+                          if(xhr3.status === 200){
+                            let data = xhr3.response;
+                              usersList.innerHTML = data;
+                          }
+                      }
+                    }
+                    xhr3.send();
+                    setTimeout(function(){
+                    document.getElementById('final').scrollIntoView(true);
+                    }, 950);
+        
+                }else if(tipo_chat=="chat_grupo"){
+        
+                    let xhr3 = new XMLHttpRequest();
+                    xhr3.open("GET", "chat/mostrargrupos", true);
+                    xhr3.onload = ()=>{
+                      if(xhr3.readyState === XMLHttpRequest.DONE){
+                          if(xhr3.status === 200){
+                            let data3 = xhr3.response;
+                              listagrupos.innerHTML = data3;
+                          }
+                      }
+                    }
+                    xhr3.send();
+                }
+                
             }else{
                 alertify.error("Error enviando el mensaje");
             }
@@ -483,6 +621,38 @@ reenviar.onclick = ()=>{
         }
         xhr.send(formData);
     }
+
+    function pasarid(id){
+        mostrarmsgaetiquetar=document.getElementById('mostrarmsgaetiquetar');
+
+        mostrarmsgaetiquetar.innerHTML=`
+            <input disabled name="msg_a_etiquetar" class="form-control bg-success" id="msg_a_etiquetar" value="${id}" type="text">
+        `
+    }
+
+   function etiquetarelmsg(){
+
+        etiquetar_msg = document.getElementById('etiquetar_msg').value;
+        msg_a_etiquetar=document.getElementById('msg_a_etiquetar').value;
+
+        console.log(etiquetar_msg, msg_a_etiquetar)
+
+        obj = [{ "id_etiqueta": etiquetar_msg, "id_msg": msg_a_etiquetar, "tipo": 3}];
+        etiquetado = JSON.stringify(obj);
+        console.log(etiquetado)
+        let xhr5 = new XMLHttpRequest();
+        xhr5.open("POST", "chat/otrasconsultastick", true);
+        xhr5.onload = ()=>{
+        if(xhr5.readyState === XMLHttpRequest.DONE){
+            if(xhr5.status === 200){
+            let data5 = xhr5.response;
+            alertify.success(data5, 0);
+        }
+        }
+        }
+        xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr5.send("x=" + etiquetado);
+   }
     
 
 

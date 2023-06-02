@@ -73,7 +73,7 @@ if (isset($_SESSION['unique_id'])) {
 
 
             }else{
-            $output.=salidamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen'], $color, $row['msg_id']); 
+            $output.=salidamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen'], $color, $row['msg_id'], $incoming_id); 
             }
     } else {
         if($row['tipo']!=1){
@@ -84,7 +84,7 @@ if (isset($_SESSION['unique_id'])) {
 
 
         }else{
-            $output.=entradamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen'], $row['msg_id']); 
+            $output.=entradamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen'], $row['msg_id'], $incoming_id); 
         }
     }
 
@@ -125,7 +125,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     </a>
                                                     <div class="dropdown-menu">
                                                    
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">
+                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">
                                                     Etiquetar </button>
                                                     <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">
                                                     Reenviar </button>
@@ -159,7 +159,7 @@ if (isset($_SESSION['unique_id'])) {
                             </a>
                             <div class="dropdown-menu">
                                                    
-                                <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">Etiquetar </button>
+                                <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
                                 <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button>
  
                             </div>
@@ -172,7 +172,15 @@ if (isset($_SESSION['unique_id'])) {
         return $output;
     }
     
-    function entradamostrarimagen($nombre, $hora, $imagen, $id){
+    function entradamostrarimagen($nombre, $hora, $imagen, $id, $incoming_id){
+
+        $archivo = (__dir__."/../../assets/images/chat/$imagen");
+        if(file_exists($archivo)){
+            $ruta = controlador::$rutaAPP."app/assets/images/chat/".$imagen;
+        }else{
+            $ruta = controlador::$rutaAPP."app/assets/images/chatgrupos/".$imagen;
+        }
+
         $output='
         <li >
                                         <div class="conversation-list">
@@ -182,7 +190,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     <ul class="list-inline message-img mt-3  mb-0">
                                                         <li class="list-inline-item message-img-list">
                                                             <a class="d-inline-block m-1">
-                                                                <img onclick="verimagen(this.src)" type="button" src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail" ">
+                                                                <img onclick="verimagen(this.alt)" type="button" value="'.$incoming_id.'" src="'.$ruta.'" alt="'.$imagen.'" class="rounded img-thumbnail" ">
                                                             </a>                                                                  
                                                         </li>
 
@@ -194,7 +202,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     </a>
                                                     <div class="dropdown-menu">
                                                    
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">
+                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">
                                                     Etiquetar </button>
                                                     <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">
                                                     Reenviar </button>
@@ -209,7 +217,15 @@ if (isset($_SESSION['unique_id'])) {
         return $output;
     }
 
-    function salidamostrarimagen($nombre, $hora, $imagen, $color, $id){
+    function salidamostrarimagen($nombre, $hora, $imagen, $color, $id, $incoming_id){
+
+        $archivo = (__dir__."/../../assets/images/chat/$imagen");
+        if(file_exists($archivo)){
+            $ruta = controlador::$rutaAPP."app/assets/images/chat/".$imagen;
+        }else{
+            $ruta = controlador::$rutaAPP."app/assets/images/chatgrupos/".$imagen;
+        }
+
         $output='
         <li class="right">
                                         <div class="conversation-list">
@@ -219,7 +235,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     <ul class="list-inline message-img mt-3  mb-0">
                                                         <li class="list-inline-item message-img-list">
                                                             <a class="d-inline-block m-1">
-                                                                <img onclick="verimagen(this.src)" type="button"  src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail">
+                                                            <img onclick="verimagen(this.alt)" type="button" value="'.$incoming_id.'" src="'.$ruta.'" alt="'.$imagen.'" class="rounded img-thumbnail" ">
                                                             </a>                                                      <i class="fas fa-check-double" style="color: '.$color.'; font-size: 10px;"></i>
            
                                                         </li>
@@ -233,7 +249,7 @@ if (isset($_SESSION['unique_id'])) {
                                             </a>
                                             <div class="dropdown-menu">
                                            
-                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">
+                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">
                                             Etiquetar </button>
                                             <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">
                                             Reenviar </button>

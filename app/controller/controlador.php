@@ -42,6 +42,12 @@ class controlador{
         include_once(__dir__."/../model/usuarios/perfil_data.php");
     }
 
+    //mostrar imagen chat
+
+    public function mostrarimagenchat(){
+        include_once(__dir__."/../model/get_elementos/get-images.php");
+    }
+
 
 
     //Actualizar listado users

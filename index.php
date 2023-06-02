@@ -38,6 +38,13 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->perfildata();
                 break;
 
+            //mostrar imagen chat
+
+            case 'mostrarimagenchat':
+                $userPuntualmente->mostrarimagenchat();
+                break;
+
+
             //Listado de usuarios
             
             case 'updListado':
@@ -181,6 +188,12 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->perfildata();
                 break;
 
+            //mostrar imagen chat
+
+            case 'mostrarimagenchat':
+                $userPuntualmente->mostrarimagenchat();
+                break;
+
                 // CHAT
                 case 'chat':
                     $userPuntualmente->chat();
@@ -278,6 +291,12 @@ if($userPuntualmente->iniciar_sesion()){
             
             case 'perfildata':
                 $userPuntualmente->perfildata();
+                break;
+
+                //mostrar imagen chat
+
+            case 'mostrarimagenchat':
+                $userPuntualmente->mostrarimagenchat();
                 break;
     
                 // CHAT

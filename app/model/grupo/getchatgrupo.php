@@ -67,7 +67,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                         </div>
                         </div>';*/
                     }else{
-                        $output.=salidamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen']); 
+                        $output.=salidamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen'], $row['msg_id']); 
                     }
                     
                 } else {
@@ -77,7 +77,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
 
 
                 }else{
-                    $output.=entradamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen']); 
+                    $output.=entradamostrarimagen($row['n_user']." ".$row['l_user'],formatohora($row['hora']), $row['imagen'], $row['msg_id']); 
                 }
             }
             }
@@ -159,7 +159,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
             return $output;
         }
         
-        function entradamostrarimagen($nombre, $hora, $imagen){
+        function entradamostrarimagen($nombre, $hora, $imagen, $id){
             $output='
             <li >
                                             <div class="conversation-list">
@@ -175,6 +175,16 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
     
                                                         </ul>
                                                     </div>
+                                                    <div class="dropdown align-self-start">
+                                                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu">
+                                                                            
+                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">Etiquetar </button>
+                                                            <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button>
+                            
+                                                    </div>
                                                     
                                                 </div>
                                             </div>
@@ -183,7 +193,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
             return $output;
         }
     
-        function salidamostrarimagen($nombre, $hora, $imagen){
+        function salidamostrarimagen($nombre, $hora, $imagen, $id){
             $output='
             <li class="right">
                                             <div class="conversation-list">
@@ -200,6 +210,16 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         </ul>
                                                     
                                                 </div>
+                                                <div class="dropdown align-self-start">
+                                                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu">
+                                                                            
+                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">Etiquetar </button>
+                                                            <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button>
+                            
+                                                    </div>
                                             </div>
                                         </li>
                                     </ul>';

@@ -9,24 +9,58 @@
 <head>
 <style>
     /* Estilos para el popup */
-    #popupmostrarimagen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      display: none;
-    }
 
-    #popupmostrarimagen img {
-      max-width: 90%;
-      max-height: 90%;
-    }
+    .popupmostrarimagen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  align-items: center; /* Agregada esta línea */
+  justify-content: center; /* Agregada esta línea */
+}
+
+.popupmostrarimagen .content {
+  text-align: center;
+}
+
+
+.popupmostrarimagen .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.popupmostrarimagen .image {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.popupmostrarimagen .prev-btn,
+.popupmostrarimagen .next-btn {
+  position: absolute;
+  top: 50%;
+  font-size: 30px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.popupmostrarimagen .prev-btn {
+  left: 30px;
+}
+
+.popupmostrarimagen .next-btn {
+  right: 30px;
+}
+
   </style>
     <!-- choices css -->
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
@@ -356,10 +390,16 @@
         <!-- End Page-content -->
     </div>
     <!-- end main content-->
-
-    <div id="popupmostrarimagen">
-        <img id="imagen-ampliada">
+    <div class="popupmostrarimagen">
+    <span class="close">&times;</span>
+    <div class="content">
+        <img class="image">
+        <button class="prev-btn">&#8249;</button>
+        <button class="next-btn">&#8250;</button>
     </div>
+    </div>
+
+ 
 
  
             <?php if($_SESSION['rol']==1 || $_SESSION['rol']==2){?>
@@ -553,17 +593,20 @@
                                                     
                                                         <div class="mb-3">
                                                             <label for="area" class="form-label font-size-13 text-muted">Etiquetas:</label>
-                                                            <select class="form-control" data-trigger name="area" id="area">
+                                                            <select class="form-control" data-trigger name="etiquetar_msg" id="etiquetar_msg">
                                                                 <option value="0" selected disabled>1. Elige una etiqueta</option>
-                                                                <?php foreach($areas as $value){?>
-                                                                    <option value="<?php echo $value['id_area']?>"><?php echo $value['n_area']?></option>
+                                                                <?php 
+                                                                $sql = mysqli_query($conn, "SELECT * FROM etiquetas_list");
+                                                                foreach($sql as $value){?>
+                                                                    <option value="<?php echo $value['id']?>"><?php echo $value['n_etiqueta']?></option>
                                                                 <?php }?>
                                                             </select>
                                                         </div>
+                                                        <div id="mostrarmsgaetiquetar"></div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
-                                                        <button type="button" id="botoncambiar" onclick="" class="btn btn-primary">Guardar</button>
+                                                        <button type="button" onclick="etiquetarelmsg()" class="btn btn-primary">Etiquetar</button>
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->

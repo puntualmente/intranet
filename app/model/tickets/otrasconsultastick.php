@@ -86,6 +86,20 @@ if(isset($_POST['tipo'])){
             }
         $output .='</select>';
             echo $output;
+
+        }elseif($data[0]->tipo==3){
+
+            $id_etiqueta=$data[0]->id_etiqueta;
+            $id_msg=$data[0]->id_msg;
+
+            $sql=mysqli_query($conn, "INSERT INTO etiquetas_mensajes (id_mensaje, id_etiqueta, etiqueto) VALUES ('{$id_msg}', '{$id_etiqueta}','{$_SESSION['cedula']}')");
+
+                if($sql){
+                    $output='Mensaje Etiquetado...';
+                }else{
+                    $output= $sql;
+                }
+            echo $output;
         }
 
 }
