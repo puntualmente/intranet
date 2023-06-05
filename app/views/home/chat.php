@@ -37,6 +37,15 @@
   cursor: pointer;
 }
 
+.popupmostrarimagen .download {
+  position: absolute;
+  top: 20px;
+  right: 90px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
 .popupmostrarimagen .image {
   max-width: 90%;
   max-height: 90%;
@@ -391,7 +400,8 @@
     </div>
     <!-- end main content-->
     <div class="popupmostrarimagen">
-    <span class="close">&times;</span>
+        <a class="download" download><span>&darr;</span></a>
+        <span class="close">&times;</span>
     <div class="content">
         <img class="image">
         <button class="prev-btn">&#8249;</button>

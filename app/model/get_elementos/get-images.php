@@ -13,11 +13,28 @@ if (isset($_SESSION['unique_id'])) {
 
                 $sql = "SELECT * FROM messages LEFT JOIN users ON users.id = messages.outgoing_msg_id
                 WHERE (outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id})
-                OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) AND tipo = 0 ORDER BY msg_id";
+                OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) AND tipo = 1 ORDER BY msg_id";
                 $query = mysqli_query($conn, $sql);
                 
                 foreach($query as $q){
-                    if($q['imagen']!=""){
+                    if($q['imagen']!=''){
+                        $output.=$q['imagen'].",";  
+                    }
+                    
+                }
+                echo $output;
+
+        }elseif($data[0]->tipo==1){
+
+            $outgoing_id = $_SESSION['unique_id'];
+            $incoming_id = $data[0]->id_grupo;
+
+                $sql = "SELECT * FROM messages_grupos LEFT JOIN users ON users.id = messages_grupos.outgoing_msg_id
+                WHERE (incoming_msg_id = {$incoming_id}) AND tipo = 1 ORDER BY msg_id";
+                $query = mysqli_query($conn, $sql);
+                
+                foreach($query as $q){
+                    if($q['imagen']!=''){
                         $output.=$q['imagen'].",";  
                     }
                     

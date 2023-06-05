@@ -415,23 +415,21 @@ function limpiar(){
         }
     }
 
-    var images = [];
 
-    function getimages(){
+    const download = document.querySelector('.download');
 
-        
-
-    }
 
     // Obtener todas las imágenes con la clase 'imagen-clickable'
 
     function verimagen(imagen){
 
-        images1=[];
+        images = [];
+        images1 = [];
 
 
         console.log(imagen)
         id_enviar=document.getElementById('id_enviar').value;
+        
 
         obj = [{ "id_user": id_enviar, "tipo": 0}];
         console.log(obj)
@@ -442,7 +440,7 @@ function limpiar(){
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
             let data = xhr.response;
-            images1 = data.split(",");
+            const images1 = data.split(",");
             console.log(images1);
          
 
@@ -454,9 +452,8 @@ function limpiar(){
 
         let currentIndex = 0;
 
-            var images=[]
 
-            images = images1.filter(function(elemento) {
+            const images = images1.filter(function(elemento) {
             return elemento.trim() !== "";
           });
 
@@ -465,13 +462,21 @@ function limpiar(){
         function openPopup(imagen) {
 
                 let indice = images.indexOf(imagen);
+                cantimgs=images.length - 1
+
+                console.log(indice)
+                console.log(cantimgs)
+
+                    
+
                 popup.style.display = 'flex';
                 verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[indice]}`)
                 .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[indice]}`;
+                    image.src = `/intranet/app/assets/images/chatgrupos/${images[indice]}`;
                 })
                 .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[indice]}`;
+                    image.src = `/intranet/app/assets/images/chat/${images[indice]}`;
+                    download.href=`/intranet/app/assets/images/chat/${images[indice]}`;
                 });
         }
 
@@ -486,10 +491,12 @@ function limpiar(){
                 }
                 verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
                 .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
+                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
                 })
                 .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
+                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
+                    download.href=`/intranet/app/assets/images/chat/${images[currentIndex]}`;
+
                 });
         }
 
@@ -500,10 +507,124 @@ function limpiar(){
                 }
                 verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
                 .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
+                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
                 })
                 .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
+                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
+                    download.href=`/intranet/app/assets/images/chat/${images[currentIndex]}`;
+
+                });
+        }
+
+        closeBtn.addEventListener('click', closePopup);
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+        openPopup(imagen);
+
+        }
+    }}
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("x=" + dbParam);
+
+      } 
+
+      function ocultarbottonnxt(){
+        if(indice==cantimgs){
+            nextBtn.hidden=true;
+        }else{
+            nextBtn.hidden=false;
+        }
+      }
+
+
+
+function verimagengrupo(imagen){
+
+        console.log(imagen)
+
+        imagesgru = [];
+        images1gru = [];
+
+
+        console.log(imagen)
+        id_enviar=document.getElementById('id_enviar').value;
+
+        obj = [{ "id_grupo": id_enviar, "tipo": 1}];
+        console.log(obj)
+        dbParam = JSON.stringify(obj);
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "mostrarimagenchat", true);
+      xhr.onload = ()=>{
+      if(xhr.readyState === XMLHttpRequest.DONE){
+          if(xhr.status === 200){
+            let data = xhr.response;
+            const images1gru = data.split(",");
+            console.log(images1gru);
+         
+
+        const popup = document.querySelector('.popupmostrarimagen');
+        const closeBtn = document.querySelector('.close');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const image = document.querySelector('.image');
+
+        let currentIndex2 = 0;
+
+
+            const imagesgru = images1gru.filter(function(elemento) {
+            return elemento.trim() !== "";
+          });
+
+          console.log(imagesgru)
+
+        function openPopup(imagen) {
+
+            console.log(imagen)
+
+                let indice2 = imagesgru.indexOf(imagen);
+                popup.style.display = 'flex';
+                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[indice2]}`)
+                .then(function() {
+                    image.src = `/intranet/app/assets/images/chat/${imagesgru[indice2]}`;
+                })
+                .catch(function() {
+                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[indice2]}`;
+                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[indice2]}`;
+                });
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        function nextImage() {
+                currentIndex2++;
+                if (currentIndex2 >= imagesgru.length) {
+                    currentIndex2 = 0;
+                }
+                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`)
+                .then(function() {
+                    image.src = `/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`;
+                })
+                .catch(function() {
+                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
+                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
+                });
+        }
+
+        function prevImage() {
+                currentIndex2--;
+                if (currentIndex2 < 0) {
+                    currentIndex2 = imagesgru.length - 1;
+                }
+                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`)
+                .then(function() {
+                    image.src = `/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`;
+                })
+                .catch(function() {
+                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
+                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
+
                 });
         }
 
@@ -520,16 +641,16 @@ function limpiar(){
       } 
 
 
+
       function verificarImagenDirectorio(urlImagen) {
         return new Promise(function(resolve, reject) {
-          var img = new Image();
-          img.onload = function() {
+          image.onload = function() {
             resolve();
           };
-          img.onerror = function() {
+          image.onerror = function() {
             reject();
           };
-          img.src = urlImagen;
+          image.src = urlImagen
         });
       }
       
