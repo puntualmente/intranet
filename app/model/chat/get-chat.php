@@ -119,17 +119,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     <h5 class="conversation-name"><a href="#" class="user-name">'.$nombre.'</a> <span class="time">'.$hora.'</span></h5>
                                                     <p class="mb-0">'.$mensaje.'</p>
                                                 </div>
-                                                
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                    </li>
-
-        ';
-        return $output;
-        /*
-        <div class="dropdown align-self-start">
+                                                <div class="dropdown align-self-start">
                                                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </a>
@@ -141,7 +131,15 @@ if (isset($_SESSION['unique_id'])) {
                                                     Reenviar </button>
  
                                                     </div>
-                                                </div>*/
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </li>
+
+        ';
+        return $output;
     }
 
     function salida($nombre, $mensaje, $hora, $color, $id){
@@ -155,15 +153,7 @@ if (isset($_SESSION['unique_id'])) {
                             <p class="mb-0">'.$mensaje.'</p>
                             <i class="fas fa-check-double" style="color: '.$color.'; font-size: 10px;"></i>
                         </div>
-                        
-                        
-                </div>
-                
-            </li>    
-        ';
-        return $output;
-/*
-        <div class="dropdown align-self-start">
+                        <div class="dropdown align-self-start">
                             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="bx bx-dots-vertical-rounded"></i>
                             </a>
@@ -173,7 +163,13 @@ if (isset($_SESSION['unique_id'])) {
                                 <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button>
  
                             </div>
-                        </div>*/
+                        </div>
+                        
+                </div>
+                
+            </li>    
+        ';
+        return $output;
     }
     
     function entradamostrarimagen($nombre, $hora, $imagen, $id, $incoming_id){
@@ -200,14 +196,7 @@ if (isset($_SESSION['unique_id'])) {
 
                                                     </ul>
                                                 </div>
-                                                
-                                                
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>';
-        return $output;
-        /*<div class="dropdown align-self-start">
+                                                <div class="dropdown align-self-start">
                                                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </a>
@@ -220,7 +209,12 @@ if (isset($_SESSION['unique_id'])) {
  
                                                     </div>
                                                 </div>
-                                                */
+                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>';
+        return $output;
     }
 
     function salidamostrarimagen($nombre, $hora, $imagen, $color, $id, $incoming_id){
@@ -248,16 +242,8 @@ if (isset($_SESSION['unique_id'])) {
 
                                                     </ul>
                                                 
-                                        </div>
-                                            
-                                        </div>
-                                           
-                                        </div>
-                                    </li>
-                                </ul>';
-        return $output;
-        /*
-        <div class="dropdown align-self-start">
+                                            </div>
+                                            <div class="dropdown align-self-start">
                                             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </a>
@@ -269,7 +255,12 @@ if (isset($_SESSION['unique_id'])) {
                                             Reenviar </button>
 
                                             </div>
-                                            */
+                                        </div>
+                                           
+                                        </div>
+                                    </li>
+                                </ul>';
+        return $output;
     }
 
 
