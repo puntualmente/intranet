@@ -34,6 +34,15 @@ class controlador{
         include_once(__dir__."/../views/home/admint.php");
     }
 
+    public function perfil(){
+        include_once(__dir__."/../views/home/perfil.php");
+    }
+
+    public function perfildata(){
+        include_once(__dir__."/../model/usuarios/perfil_data.php");
+    }
+
+
 
     //Actualizar listado users
 
@@ -43,6 +52,12 @@ class controlador{
 
     public function subirArchivoUs(){
         include_once(__dir__."/../model/OtrasConfigs/subirArchivoUs.php");
+    }
+
+    //Ver archivos users
+
+    public function usersArchiv(){
+        include_once(__dir__."/../views/opc_admin/usersArchiv.php");
     }
   
 

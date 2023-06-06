@@ -13,6 +13,10 @@ if($userPuntualmente->iniciar_sesion()){
         
         switch($_GET["action"]){
 
+            case 'mostrarpdf?archivo=':
+                $userPuntualmente->mostrarpdf();
+                break;
+
             case 'home':
                 $userPuntualmente->home();
                 break;
@@ -25,11 +29,25 @@ if($userPuntualmente->iniciar_sesion()){
             case 'signup':
                 $userPuntualmente->signup();
                 break;
+            
+            case 'perfil':
+                $userPuntualmente->perfil();
+                break;
+
+            case 'perfildata':
+                $userPuntualmente->perfildata();
+                break;
 
             //Listado de usuarios
             
             case 'updListado':
                 $userPuntualmente->updListado();
+                break;
+
+            // ver archivos user
+
+            case 'usersArchiv':
+                $userPuntualmente->usersArchiv();
                 break;
 
             case 'subirArchivoUs':
@@ -154,7 +172,15 @@ if($userPuntualmente->iniciar_sesion()){
             case 'signup':
                 $userPuntualmente->signup();
                 break;
-    
+            
+            case 'perfil':
+                $userPuntualmente->perfil();
+                break;
+                
+            case 'perfildata':
+                $userPuntualmente->perfildata();
+                break;
+
                 // CHAT
                 case 'chat':
                     $userPuntualmente->chat();
@@ -244,6 +270,14 @@ if($userPuntualmente->iniciar_sesion()){
 
             case 'notify':
                 $userPuntualmente->notify();
+                break;
+
+            case 'perfil':
+                $userPuntualmente->perfil();
+                break;
+            
+            case 'perfildata':
+                $userPuntualmente->perfildata();
                 break;
     
                 // CHAT

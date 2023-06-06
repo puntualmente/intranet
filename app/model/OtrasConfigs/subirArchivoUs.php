@@ -29,7 +29,7 @@ foreach ($lineas as $linea) {
 
     if ($i != 0) {
 
-        $datos = explode(",", $linea);
+        $datos = explode(";", $linea);
        
         $nombre           = !empty($datos[0])  ? ($datos[0]) : '';
 		$apellido         = !empty($datos[1])  ? ($datos[1]) : '';
@@ -44,6 +44,8 @@ foreach ($lineas as $linea) {
         $rol              = !empty($datos[10])  ? ($datos[10]) : '';
         $img              = !empty($datos[11])  ? ($datos[11]) : '';
         $status           = !empty($datos[12])  ? ($datos[12]) : '';
+        $activo           = !empty($datos[13])  ? ($datos[13]) : '';
+
 
 
        
@@ -69,7 +71,8 @@ $insertarData = "INSERT INTO users(
             id_grupo,
             rol,
             img,
-            status
+            status,
+            activo
         ) VALUES(
             '$nombre',
             '$apellido',
@@ -83,7 +86,8 @@ $insertarData = "INSERT INTO users(
             '$id_grupo',
             '$rol',
             '$img',
-            '$status'
+            '$status',
+            '$activo'
         )";
 mysqli_query($conn, $insertarData);
     $nuevosUsuario+=1;
@@ -103,14 +107,14 @@ else{
 		id_grupo='" .$id_grupo. "',
 		rol='" .$rol. "',
         img='" .$img. "',  
-        status= '" .$status. "'
+        status= '" .$status. "',
+        activo= '".$activo."'
         WHERE cedula='".$cc."'
     ");
     $result_update = mysqli_query($conn, $updateData);
     $datosActualizados+=1;
     } 
   }
-
  $i++;
 }
 

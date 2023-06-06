@@ -159,8 +159,8 @@ if (isset($_SESSION['unique_id'])) {
                                                     <h5 class="conversation-name"><a href="#" class="user-name">'.$nombre.'</a> <span class="time">'.$hora.'</span></h5>
                                                     <ul class="list-inline message-img mt-3  mb-0">
                                                         <li class="list-inline-item message-img-list">
-                                                            <a class="d-inline-block m-1" href="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" target="_blank">
-                                                                <img src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail">
+                                                            <a class="d-inline-block m-1">
+                                                                <img onclick="verimagen(this.src)" type="button" src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail" ">
                                                             </a>                                                                  
                                                         </li>
 
@@ -183,8 +183,8 @@ if (isset($_SESSION['unique_id'])) {
                                                     <h5 class="conversation-name"><a href="#" class="user-name">'.$nombre.'</a> <span class="time">'.$hora.'</span></h5>
                                                     <ul class="list-inline message-img mt-3  mb-0">
                                                         <li class="list-inline-item message-img-list">
-                                                            <a class="d-inline-block m-1" href="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" target="_blank">
-                                                                <img onclick="mostrarimg(this.src)" src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail">
+                                                            <a class="d-inline-block m-1">
+                                                                <img onclick="verimagen(this.src)" type="button"  src="'.controlador::$rutaAPP.'app/assets/images/chat/'.$imagen.'" alt="" class="rounded img-thumbnail">
                                                             </a>                                                      <i class="fas fa-check-double" style="color: '.$color.'; font-size: 10px;"></i>
            
                                                         </li>

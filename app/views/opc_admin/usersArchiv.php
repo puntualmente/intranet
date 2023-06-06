@@ -1,13 +1,20 @@
                 
- <?php include_once(__dir__."/../layouts/session.php");  ?>
-<?php include_once(__dir__."/../../model/admintablas/sqls_admin.php"); ?>
+<?php include_once(__dir__."/../layouts/session.php");  ?>
 
 
-<?php include(__dir__."/../layouts/head-main.php");  ?>
+<?php include(__dir__."/../layouts/head-main.php");  
+
+require (__dir__."/../../model/data/pdo.php");
+
+$usuarios = $pdo->prepare("SELECT * FROM persona");
+$usuarios->execute();
+
+
+?>
 
 <head>
 
-    <title>Admin Etiquetas | Puntualmente</title>
+    <title>Admin Archivos | Puntualmente</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
 
      <!-- DataTables -->
@@ -42,46 +49,64 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title">Tabla Usuarios</h4>
-                                <div><a type="button" href="usersArchiv" class="btn btn-primary waves-effect waves-light">Ver Archivos Usuarios</a></div>
                             </div>
                             <div class="card-body">
                                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                     <thead>
                                         <tr>
-                                            <th>ID Usuario</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Telefono</th>
                                             <th>Cedula</th>
-                                            <th>F. Nacimiento</th>
-                                            <th>Area</th>
-                                            <th>Empresa</th>
-                                            <th>F. Ingreso Empresa</th>
-                                            <th>Grupo</th>
-                                            <th>Rol</th>
-                                            <th>Img</th>
+                                            <th>Nombre</th>
+                                            <th>Fecha_Actuali</th>
+                                            <th>Hoja_Vida</th>
+                                            <th>Doc_Iden</th>
+                                            <th>Ante_Pol</th>
+                                            <th>Ante_Procu</th>
+                                            <th>EPS</th>
+                                            <th>Banco</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 
-                                    <?php foreach($usuarios as $usuario){?>
+                                    <?php foreach($usuarios as $usuario){
+                                        
+                                        $archivos = $pdo->prepare("SELECT * FROM archivos_persona where cedula = '$usuario->cedula'");
+
+                                        $archivos->execute();
+
+                                        $archivos2 = $pdo->prepare("SELECT * FROM archivos_persona where cedula = '$usuario->cedula'");
+
+                                        $archivos2->execute();
+
+                                        foreach($archivos2 as $archivo2){
+                                            $fecha = $archivo2->f_subido;
+                                        }
+
+                                            
+                                        ?>
 
                                         <tr>
-                                            <td><?php echo $usuario['id']?></td>
-                                            <td><?php echo $usuario['n_user']?></td>
-                                            <td><?php echo $usuario['l_user']?></td>
-                                            <td><?php echo $usuario['tel_user']?></td>
-                                            <td><?php echo $usuario['cedula']?></td>
-                                            <td><?php echo $usuario['f_nacimiento']?></td>
-                                            <td><?php echo $usuario['id_area']?></td>
-                                            <td><?php echo $usuario['id_empresa']?></td>
-                                            <td><?php echo $usuario['f_ingreso_empre']?></td>
-                                            <td><?php echo $usuario['id_grupo']?></td>
-                                            <td><?php echo $usuario['rol']?></td>
-                                            <td><?php echo $usuario['img']?></td>
+                                            <td><?php echo $usuario->cedula?></td>
+                                            <td><?php echo $usuario->nombre?></td>
+                                            <td><?php echo $fecha?></td>
+                                            <?php foreach($archivos as $archivo){ ?>
+                                            <?php
+                                                if($archivo->tipo_archivo=="HOJADEVIDA"){?>
+                                                    <td><a href="mostrarpdf.php?dir=<?php echo $archivo->nombre_carpeta."/".$archivo->nombre_archivo?>.pdf" target="_blank"><i class="fas fa-file-pdf"></a></i></td>
+                                            <?php }elseif($archivo->tipo_archivo=="DOCUMENTODEIDENTIDAD"){ ?>
+                                                    <td><a href="mostrarpdf.php?dir=<?php echo $archivo->nombre_carpeta."/".$archivo->nombre_archivo?>.pdf" target="_blank"><i class="fas fa-file-pdf"></a></i></td>
+
+                                            <?php }elseif($archivo->tipo_archivo=="ANTECEDENTEPOLICIA"){ ?>
+                                                <td><a href="mostrarpdf.php?dir=<?php echo $archivo->nombre_carpeta."/".$archivo->nombre_archivo?>.pdf" target="_blank"><i class="fas fa-file-pdf"></a></i></td>
+                                            <?php }elseif($archivo->tipo_archivo=="ANTECEDENTEPROCURADURIA"){ ?>
+                                                <td><a href="mostrarpdf.php?dir=<?php echo $archivo->nombre_carpeta."/".$archivo->nombre_archivo?>.pdf" target="_blank"><i class="fas fa-file-pdf"></a></i></td>
+                                            <?php }elseif($archivo->tipo_archivo=="CERTIFICADOEPS"){ ?>
+                                                <td><a href="mostrarpdf.php?dir=<?php echo $archivo->nombre_carpeta."/".$archivo->nombre_archivo?>.pdf" target="_blank"><i class="fas fa-file-pdf"></a></i></td>
+                                            <?php }elseif($archivo->tipo_archivo=="CERTIFICADOCUENTABANCARIA"){ ?>
+                                                <td><a href="mostrarpdf.php?dir=<?php echo $archivo->nombre_carpeta."/".$archivo->nombre_archivo?>.pdf" target="_blank"><i class="fas fa-file-pdf"></a></i></td>
+                                            
                                         </tr>
-                                    <?php }?>
+                                    <?php }}}?>
                                     </tbody>
                                 </table>
                             </div>
