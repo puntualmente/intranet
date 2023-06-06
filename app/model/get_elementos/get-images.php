@@ -40,7 +40,27 @@ if (isset($_SESSION['unique_id'])) {
                     
                 }
                 echo $output;
-        }else{
+            }elseif($data[0]->tipo==2){
+
+                    
+                    $incoming_id = $data[0]->id_grupo;
+        
+                        $sql = "SELECT * FROM etiquetas_mensajes INNER JOIN messages_grupos ON etiquetas_mensajes.id_mensaje = messages_grupos.msg_id
+                        WHERE (etiquetas_mensajes.id_etiqueta = {$incoming_id}) AND messages_grupos.tipo = 1 ORDER BY etiquetas_mensajes.id";
+                        $query = mysqli_query($conn, $sql);
+
+                        $sql_2 = "SELECT * FROM etiquetas_mensajes INNER JOIN messages on etiquetas_mensajes.id_mensajes = messages.msg_id
+                        WHERE (etiquetas_mensajes.id_etiqueta = {$incoming_id}) AND messages_grupos.tipo = 1 ORDER BY etiquetas_mensajes.id";
+                        $query = mysqli_query($conn, $sql);
+                        
+                        foreach($query as $q){
+                            if($q['imagen']!=''){
+                                $output.=$q['imagen'].",";  
+                            }
+                            
+                        }
+                        echo $output;
+         }else{ 
             echo "No esta bien";
         }
 }

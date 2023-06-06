@@ -91,11 +91,92 @@ if(isset($_POST['tipo'])){
 
             $id_etiqueta=$data[0]->id_etiqueta;
             $id_msg=$data[0]->id_msg;
+            $tipo_chat=$data[0]->tipo_chat;
 
-            $sql=mysqli_query($conn, "INSERT INTO etiquetas_mensajes (id_mensaje, id_etiqueta, etiqueto) VALUES ('{$id_msg}', '{$id_etiqueta}','{$_SESSION['cedula']}')");
+            $sql=mysqli_query($conn, "INSERT INTO etiquetas_mensajes (id_mensaje, id_etiqueta, etiqueto, tipo) VALUES ('{$id_msg}', '{$id_etiqueta}','{$_SESSION['cedula']}', '{$tipo_chat}')");
 
                 if($sql){
                     $output='Mensaje Etiquetado...';
+                }else{
+                    $output= $sql;
+                }
+            echo $output;
+        }elseif($data[0]->tipo==4){
+
+            $id_etiqueta=$data[0]->id_etiqueta;
+
+            $mensajes_chat_normal=mysqli_query($conn, "SELECT * FROM etiquetas_mensajes INNER JOIN messages ON etiquetas_mensajes.id_mensaje = messages.msg_id WHERE etiquetas_mensajes.id_etiqueta = '{$id_etiqueta}' AND etiquetas_mensajes.tipo = 0");
+
+            $mensajes_grupos=mysqli_query($conn, "SELECT * FROM etiquetas_mensajes INNER JOIN messages_grupos ON etiquetas_mensajes.id_mensaje = messages_grupos.msg_id WHERE etiquetas_mensajes.id_etiqueta = '{$id_etiqueta}' AND etiquetas_mensajes.tipo = 1");
+
+                $output="";
+
+                if($mensajes_chat_normal && $mensajes_grupos){
+                    foreach($mensajes_chat_normal as $mensaje){
+
+                    if($mensaje['imagen']==""){
+                        $output.='
+                        <li >
+                        <a>
+                            <div class="d-flex align-items-start">
+                                
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">' . $mensaje['msg'] .'</h5>
+                                </div>
+                            </div>
+                        </a>
+    
+                        </li>';
+                    }else{
+                        $archivo = (__dir__."/../../assets/images/chat/".$mensaje['imagen']);
+                        if(file_exists($archivo)){
+                            $ruta = controlador::$rutaAPP."app/assets/images/chat/".$mensaje['imagen'];
+                        }else{
+                            $ruta = controlador::$rutaAPP."app/assets/images/chatgrupos/".$mensaje['imagen'];
+                        }
+
+                        $output.='
+                        <li class="list-inline-item message-img-list">
+                            <a class="d-inline-block m-1">
+                                <img onclick="verimagen_2(this.alt)" type="button" src="'.$ruta.'" alt="'.$mensaje['imagen'].'" class="rounded img-thumbnail" ">
+                            <a>                                                                  
+                        </li>';
+                    }
+                    }
+
+                    foreach($mensajes_grupos as $mensaje_grupo){
+
+                        if($mensaje_grupo['imagen']==""){
+                            $output.='
+                            <li >
+                            <a>
+                                <div class="d-flex align-items-start">
+                                    
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mb-1">' . $mensaje_grupo['msg'] .'</h5>
+                                    </div>
+                                </div>
+                            </a>
+        
+                            </li>';
+                        }else{
+                            $archivo = (__dir__."/../../assets/images/chat/".$mensaje_grupo['imagen']);
+                            if(file_exists($archivo)){
+                                $ruta2 = controlador::$rutaAPP."app/assets/images/chat/".$mensaje_grupo['imagen'];
+                            }else{
+                                $ruta2 = controlador::$rutaAPP."app/assets/images/chatgrupos/".$mensaje_grupo['imagen'];
+                            }
+    
+                            $output.='
+                            <li class="list-inline-item message-img-list">
+                                <a class="d-inline-block m-1">
+                                    <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta2.'" alt="'.$mensaje_grupo['imagen'].'" class="rounded img-thumbnail" ">
+                                <a>                                                                  
+                            </li>';
+                        }
+                        
+                    }
+                    
                 }else{
                     $output= $sql;
                 }

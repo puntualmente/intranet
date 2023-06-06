@@ -111,7 +111,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         </a>
                                                     <div class="dropdown-menu">
                                                    
-                                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">Etiquetar </button>
+                                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
                                                         <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button>
                         
                                                     </div>
@@ -144,7 +144,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                             </a>
                             <div class="dropdown-menu">
                                                    
-                                <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">Etiquetar </button>
+                                <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
                                 <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button>
  
                             </div>
@@ -181,7 +181,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         </a>
                                                         <div class="dropdown-menu">
                                                                             
-                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">Etiquetar </button>
+                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
                                                             <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button>
                             
                                                     </div>
@@ -216,7 +216,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         </a>
                                                         <div class="dropdown-menu">
                                                                             
-                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg">Etiquetar </button>
+                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
                                                             <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button>
                             
                                                     </div>

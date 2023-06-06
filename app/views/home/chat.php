@@ -333,7 +333,7 @@
                                     
                                     <?php
 
-                                        if($_SESSION['permisochat']==true){
+                        if($_SESSION['permisochat']==true){
 
                                     ?>
                                        
@@ -375,17 +375,42 @@
                                     </div>
                                     <div id="imagen"></div>
 
+
+
                                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                                     <div class="offcanvas-header">
                                       <h5 id="offcanvasRightLabel">Mensajes Etiquetas</h5>
                                       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
                                     <div class="offcanvas-body">
-                                      Aqui estaran las etiquetas y los mensajes...
+         
+                                                            <label for="area" class="form-label font-size-13 text-muted">Etiquetas:</label>
+                                                            <select class="form-control" data-trigger name="eti_msg" id="eti_msg" onchange="traer_msg(this.value)">
+                                                                <option value="0" selected disabled>1. Elige una etiqueta</option>
+                                                                <?php 
+                                                                $sql = mysqli_query($conn, "SELECT * FROM etiquetas_list");
+                                                                foreach($sql as $value){?>
+                                                                    <option value="<?php echo $value['id']?>"><?php echo $value['n_etiqueta']?></option>
+                                                                <?php }?>
+                                                            </select>
+                                                       
+                                
+                                    <div data-simplebar>
+                                        <div class="pt-3">
+                                            <div class="px-3">
+                                                <h5 class="font-size-14 mb-3">Mensajes Etiquetados:</h5>
+                                            </div>
+                                            <ul id="destacados">
+
+                                            <!-- se llena solo   -->
+
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                         </form>
                         
@@ -666,6 +691,8 @@
 
                             
 </div>
+
+                          
 <!-- END layout-wrapper -->
 
 
