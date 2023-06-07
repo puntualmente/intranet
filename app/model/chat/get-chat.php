@@ -190,7 +190,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     <ul class="list-inline message-img mt-3  mb-0">
                                                         <li class="list-inline-item message-img-list">
                                                             <a class="d-inline-block m-1">
-                                                                <img onclick="verimagen(this.alt)" type="button" value="'.$incoming_id.'" src="'.$ruta.'" alt="'.$imagen.'" class="rounded img-thumbnail" ">
+                                                                <img onclick="verimagen(this.alt)" type="button" value="'.$incoming_id.'" src="'.$ruta.'" alt="'.$ruta.'" class="rounded img-thumbnail" ">
                                                             </a>                                                                  
                                                         </li>
 
@@ -235,7 +235,7 @@ if (isset($_SESSION['unique_id'])) {
                                                     <ul class="list-inline message-img mt-3  mb-0">
                                                         <li class="list-inline-item message-img-list">
                                                             <a class="d-inline-block m-1">
-                                                            <img onclick="verimagen(this.alt)" type="button" value="'.$incoming_id.'" src="'.$ruta.'" alt="'.$imagen.'" class="rounded img-thumbnail" ">
+                                                            <img onclick="verimagen(this.alt)" type="button" value="'.$incoming_id.'" src="'.$ruta.'" alt="'.$ruta.'" class="rounded img-thumbnail" ">
                                                             </a>                                                      <i class="fas fa-check-double" style="color: '.$color.'; font-size: 10px;"></i>
            
                                                         </li>

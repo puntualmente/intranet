@@ -18,8 +18,13 @@ if (isset($_SESSION['unique_id'])) {
                 
                 foreach($query as $q){
                     if($q['imagen']!=''){
-                        $output.=$q['imagen'].",";  
+                        if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
+                            $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
+                        }else{
+                            $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
+                        }
                     }
+                    
                     
                 }
                 echo $output;
@@ -35,7 +40,11 @@ if (isset($_SESSION['unique_id'])) {
                 
                 foreach($query as $q){
                     if($q['imagen']!=''){
-                        $output.=$q['imagen'].",";  
+                        if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
+                            $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
+                        }else{
+                            $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
+                        }
                     }
                     
                 }
@@ -52,8 +61,10 @@ if (isset($_SESSION['unique_id'])) {
                         $output="";
                         
                         foreach($query as $q){
-                            if($q['imagen']!=''){
-                                $output.=$q['imagen'].",";  
+                            if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
+                                $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
+                            }else{
+                                $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
                             }
                             
                         }
@@ -63,8 +74,10 @@ if (isset($_SESSION['unique_id'])) {
                         $query_2 = mysqli_query($conn, $sql_2);
 
                         foreach($query_2 as $q){
-                            if($q['imagen']!=''){
-                                $output.=$q['imagen'].",";  
+                            if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
+                                $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
+                            }else{
+                                $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
                             }
                             
                         }

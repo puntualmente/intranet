@@ -138,7 +138,7 @@ if(isset($_POST['tipo'])){
                         $output.='
                         <li class="list-inline-item message-img-list">
                             <a class="d-inline-block m-1">
-                                <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta.'" alt="'.$mensaje['imagen'].'" class="rounded img-thumbnail" ">
+                                <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta.'" alt="'.$ruta.'" class="rounded img-thumbnail" ">
                             <a>                                                                  
                         </li>';
                     }
@@ -170,7 +170,7 @@ if(isset($_POST['tipo'])){
                             $output.='
                             <li class="list-inline-item message-img-list">
                                 <a class="d-inline-block m-1">
-                                    <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta2.'" alt="'.$mensaje_grupo['imagen'].'" class="rounded img-thumbnail" ">
+                                    <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta2.'" alt="'.$ruta2.'" class="rounded img-thumbnail" ">
                                 <a>                                                                  
                             </li>';
                         }
