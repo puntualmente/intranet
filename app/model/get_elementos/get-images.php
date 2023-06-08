@@ -88,35 +88,47 @@ if (isset($_SESSION['unique_id'])) {
 
                     
                             $incoming_id = $data[0]->id_grupo;
-                
-                                $sql = "SELECT * FROM messages_grupos WHERE (etiquetas_mensajes.id_etiqueta = {$incoming_id}) AND messages_grupos.tipo = 1 AND etiquetas_mensajes.tipo = 1";
-                                $query = mysqli_query($conn, $sql);
-        
-                                $output="";
+                            $outgoing_id = $_SESSION['unique_id'];
+                            $tipo_chat = $data[0]->tipo_chat;
+                            $etiquetar_msg = $data[0]->etiquetar_msg;
+
+                                if($tipo_chat==1){
+                                    $sql = "SELECT * FROM messages_grupos WHERE incoming_msg_id = {$incoming_id} AND tipo = 1 AND id_etiqueta = $etiquetar_msg";
+                                    $query = mysqli_query($conn, $sql);
+
+                                    $output="";
                                 
-                                foreach($query as $q){
-                                    if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
-                                        $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
-                                    }else{
-                                        $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
+                                    foreach($query as $q){
+                                        if($q['imagen']!=''){
+                                            if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
+                                                $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
+                                            }else{
+                                                $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
+                                            }
+                                        }
+                                        
                                     }
+                                }elseif($tipo_chat==0){
                                     
-                                }
-                                
-                                $sql_2 = "SELECT * FROM etiquetas_mensajes INNER JOIN messages on etiquetas_mensajes.id_mensaje = messages.msg_id
-                                WHERE (etiquetas_mensajes.id_etiqueta = {$incoming_id}) AND messages.tipo = 1 AND etiquetas_mensajes.tipo = 0";
-                                $query_2 = mysqli_query($conn, $sql_2);
-        
-                                foreach($query_2 as $q){
-                                    if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
-                                        $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
-                                    }else{
-                                        $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
+                                    $output="";
+
+                                    $sql_2 = "SELECT * FROM messages WHERE ((outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id}) OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id})) AND tipo = 1 AND id_etiqueta = $etiquetar_msg";
+
+                                    $query_2 = mysqli_query($conn, $sql_2);
+            
+                                    foreach($query_2 as $q){
+                                        if($q['imagen']!=''){
+                                            if(file_exists(__DIR__."/../../assets/images/chat/".$q['imagen'])){
+                                                $output.="/intranet/app/assets/images/chat/".$q['imagen'].",";  
+                                            }else{
+                                                $output.="/intranet/app/assets/images/chatgrupos/".$q['imagen'].","; 
+                                            }
+                                        }
                                     }
-                                    
+            
                                 }
-        
                                 echo $output;
+
          
          }else{ 
             echo "No esta bien";

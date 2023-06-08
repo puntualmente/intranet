@@ -603,12 +603,22 @@ function verimagengrupo(imagen){
 
         console.log(imagen)
 
+        if(tipo_chat=="chat_grupo"){
+            tipo=1
+        }else{
+            tipo=0
+        }
+
         imagesgru = [];
         images1gru = [];
 
-        id_enviar=document.getElementById('eti_msg').value;
+        id_enviar2=document.getElementById('eti_msg').value;
+        tipo_chat = document.getElementById('tipo_chat').value;
+        id_enviar=document.getElementById('id_enviar').value;
 
-        obj = [{ "id_grupo": id_enviar, "tipo": 3}];
+
+
+        obj = [{ "id_grupo": id_enviar, "tipo": 3, "tipo_chat":tipo, "etiquetar_msg":id_enviar2}];
         console.log(obj)
         dbParam = JSON.stringify(obj);
       let xhr = new XMLHttpRequest();
