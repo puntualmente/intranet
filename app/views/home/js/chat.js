@@ -423,7 +423,7 @@ function limpiar(){
 
     function verimagen(imagen){
 
-        images = [];
+        imagesgru = [];
         images1 = [];
 
 
@@ -449,188 +449,50 @@ function limpiar(){
         const prevBtn = document.querySelector('.prev-btn');
         const nextBtn = document.querySelector('.next-btn');
         const image = document.querySelector('.image');
+        let currentIndex2 = 0;
 
-        let currentIndex = 0;
 
+        const imagesgru = images1.filter(function(elemento) {
+        return elemento.trim() !== "";
+      });
 
-            const images = images1.filter(function(elemento) {
-            return elemento.trim() !== "";
-          });
+      console.log(imagesgru)
 
-          console.log(images)
-
-        function openPopup(imagen) {
-
-                let indice = images.indexOf(imagen);
-                cantimgs=images.length - 1
-
-                console.log(indice)
-                console.log(cantimgs)
-            /*
-                    if(indice==cantimgs){
-                        nextBtn.hidden=true;
-                    }else{
-                        nextBtn.hidden=false;
-                    }
-            */
-                popup.style.display = 'flex';
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[indice]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[indice]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[indice]}`;
-                    download.href=`/intranet/app/assets/images/chat/${images[indice]}`;
-                });
-        }
-
-        function closePopup() {
-            popup.style.display = 'none';
-        }
-
-        function nextImage() {
-                currentIndex++;
-                if (currentIndex >= images.length) {
-                    currentIndex = 0;
-                }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
-                    download.href=`/intranet/app/assets/images/chat/${images[currentIndex]}`;
-
-                });
-        }
-
-        function prevImage() {
-                currentIndex--;
-                if (currentIndex < 0) {
-                    currentIndex = images.length - 1;
-                }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
-                    download.href=`/intranet/app/assets/images/chat/${images[currentIndex]}`;
-
-                });
-        }
-
-        closeBtn.addEventListener('click', closePopup);
-        prevBtn.addEventListener('click', prevImage);
-        nextBtn.addEventListener('click', nextImage);
-        openPopup(imagen);
-
-        }
-    }}
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("x=" + dbParam);
-
-      } 
-
-/**Inicio funcion ver imagen 2 */
-      function verimagen_2(imagen){
-
-        images = [];
-        images1 = [];
-
+    function openPopup(imagen) {
 
         console.log(imagen)
-        id_enviar=document.getElementById('eti_msg').value;
-        
 
-        obj = [{ "id_user": id_enviar, "tipo": 3}];
-        console.log(obj)
-        dbParam = JSON.stringify(obj);
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", "mostrarimagenchat", true);
-      xhr.onload = ()=>{
-      if(xhr.readyState === XMLHttpRequest.DONE){
-          if(xhr.status === 200){
-            let data = xhr.response;
-            const images1 = data.split(",");
-            console.log(images1);
-         
+            let indice2 = imagesgru.indexOf(imagen);
+            popup.style.display = 'flex';
 
-        const popup = document.querySelector('.popupmostrarimagen');
-        const closeBtn = document.querySelector('.close');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        const image = document.querySelector('.image');
+            image.src = imagesgru[indice2];
 
-        let currentIndex = 0;
+    }
 
+    function closePopup() {
+        popup.style.display = 'none';
 
-            const images = images1.filter(function(elemento) {
-            return elemento.trim() !== "";
-          });
+    }
 
-          console.log(images)
+    function nextImage() {
+            currentIndex2++;
+            if (currentIndex2 >= imagesgru.length) {
+                currentIndex2 = 0;
+            }
+            
+                image.src = imagesgru[currentIndex2];
+    }
 
-        function openPopup(imagen) {
+    function prevImage() {
+            currentIndex2--;
+            if (currentIndex2 < 0) {
+                currentIndex2 = imagesgru.length - 1;
+            }
+            
+                image.src = imagesgru[currentIndex2];
+            
+    }
 
-                let indice = images.indexOf(imagen);
-                cantimgs=images.length - 1
-
-                console.log(indice)
-                console.log(cantimgs)
-            /*
-                    if(indice==cantimgs){
-                        nextBtn.hidden=true;
-                    }else{
-                        nextBtn.hidden=false;
-                    }
-            */
-                popup.style.display = 'flex';
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[indice]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[indice]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[indice]}`;
-                    download.href=`/intranet/app/assets/images/chat/${images[indice]}`;
-                });
-        }
-
-        function closePopup() {
-            popup.style.display = 'none';
-        }
-
-        function nextImage() {
-                currentIndex++;
-                if (currentIndex >= images.length) {
-                    currentIndex = 0;
-                }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
-                    download.href=`/intranet/app/assets/images/chat/${images[currentIndex]}`;
-
-                });
-        }
-
-        function prevImage() {
-                currentIndex--;
-                if (currentIndex < 0) {
-                    currentIndex = images.length - 1;
-                }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${images[currentIndex]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${images[currentIndex]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chat/${images[currentIndex]}`;
-                    download.href=`/intranet/app/assets/images/chat/${images[currentIndex]}`;
-
-                });
-        }
 
         closeBtn.addEventListener('click', closePopup);
         prevBtn.addEventListener('click', prevImage);
@@ -643,11 +505,6 @@ function limpiar(){
     xhr.send("x=" + dbParam);
 
       } 
-/**Final funcion ver imagen 2 */
-
-      function ocultarbottonnxt(){
-
-      }
 
 
 
@@ -694,18 +551,14 @@ function verimagengrupo(imagen){
 
                 let indice2 = imagesgru.indexOf(imagen);
                 popup.style.display = 'flex';
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[indice2]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${imagesgru[indice2]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[indice2]}`;
-                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[indice2]}`;
-                });
+
+                image.src = imagesgru[indice2];
+
         }
 
         function closePopup() {
             popup.style.display = 'none';
+
         }
 
         function nextImage() {
@@ -713,14 +566,8 @@ function verimagengrupo(imagen){
                 if (currentIndex2 >= imagesgru.length) {
                     currentIndex2 = 0;
                 }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-                });
+                
+                    image.src = imagesgru[currentIndex2];
         }
 
         function prevImage() {
@@ -728,15 +575,9 @@ function verimagengrupo(imagen){
                 if (currentIndex2 < 0) {
                     currentIndex2 = imagesgru.length - 1;
                 }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-
-                });
+                
+                    image.src = imagesgru[currentIndex2];
+                
         }
 
         closeBtn.addEventListener('click', closePopup);
@@ -753,23 +594,105 @@ function verimagengrupo(imagen){
 
 
 
-      function verificarImagenDirectorio(urlImagen) {
-        return new Promise(function(resolve, reject) {
-          image.onload = function() {
-            resolve();
-          };
-          image.onerror = function() {
-            reject();
-          };
-          image.src = urlImagen
-        });
-      }
       
 
       /*Nueva funcion para visualizacion de mensajes destacados*/ 
       
 
       function verimagengrupo_2(imagen){
+
+        console.log(imagen)
+
+        if(tipo_chat=="chat_grupo"){
+            tipo=1
+        }else{
+            tipo=0
+        }
+
+        imagesgru = [];
+        images1gru = [];
+
+        id_enviar2=document.getElementById('eti_msg').value;
+        tipo_chat = document.getElementById('tipo_chat').value;
+        id_enviar=document.getElementById('id_enviar').value;
+
+
+
+        obj = [{ "id_grupo": id_enviar, "tipo": 3, "tipo_chat":tipo, "etiquetar_msg":id_enviar2}];
+        console.log(obj)
+        dbParam = JSON.stringify(obj);
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "mostrarimagenchat", true);
+      xhr.onload = ()=>{
+      if(xhr.readyState === XMLHttpRequest.DONE){
+          if(xhr.status === 200){
+            let data = xhr.response;
+            const images1gru = data.split(",");
+            console.log(images1gru);
+         
+
+        const popup = document.querySelector('.popupmostrarimagen');
+        const closeBtn = document.querySelector('.close');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const image = document.querySelector('.image');
+
+        let currentIndex2 = 0;
+
+
+            const imagesgru = images1gru.filter(function(elemento) {
+            return elemento.trim() !== "";
+          });
+
+          console.log(imagesgru)
+
+        function openPopup(imagen) {
+
+            console.log(imagen)
+
+                let indice2 = imagesgru.indexOf(imagen);
+                popup.style.display = 'flex';
+
+                image.src = imagesgru[indice2];
+
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+
+        }
+
+        function nextImage() {
+                currentIndex2++;
+                if (currentIndex2 >= imagesgru.length) {
+                    currentIndex2 = 0;
+                }
+                
+                    image.src = imagesgru[currentIndex2];
+        }
+
+        function prevImage() {
+                currentIndex2--;
+                if (currentIndex2 < 0) {
+                    currentIndex2 = imagesgru.length - 1;
+                }
+                
+                    image.src = imagesgru[currentIndex2];
+                
+        }
+
+        closeBtn.addEventListener('click', closePopup);
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+        openPopup(imagen);
+
+        }
+    }}
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("x=" + dbParam);
+
+
+        /*
 
         console.log(imagen)
 
@@ -812,18 +735,14 @@ function verimagengrupo(imagen){
 
                 let indice2 = imagesgru.indexOf(imagen);
                 popup.style.display = 'flex';
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[indice2]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${imagesgru[indice2]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[indice2]}`;
-                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[indice2]}`;
-                });
+
+                image.src = imagesgru[indice2];
+
         }
 
         function closePopup() {
             popup.style.display = 'none';
+
         }
 
         function nextImage() {
@@ -831,14 +750,8 @@ function verimagengrupo(imagen){
                 if (currentIndex2 >= imagesgru.length) {
                     currentIndex2 = 0;
                 }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-                });
+                
+                    image.src = imagesgru[currentIndex2];
         }
 
         function prevImage() {
@@ -846,15 +759,9 @@ function verimagengrupo(imagen){
                 if (currentIndex2 < 0) {
                     currentIndex2 = imagesgru.length - 1;
                 }
-                verificarImagenDirectorio(`/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`)
-                .then(function() {
-                    image.src = `/intranet/app/assets/images/chat/${imagesgru[currentIndex2]}`;
-                })
-                .catch(function() {
-                    image.src = `/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-                    download.href=`/intranet/app/assets/images/chatgrupos/${imagesgru[currentIndex2]}`;
-
-                });
+                
+                    image.src = imagesgru[currentIndex2];
+                
         }
 
         closeBtn.addEventListener('click', closePopup);
@@ -866,7 +773,7 @@ function verimagengrupo(imagen){
     }}
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send("x=" + dbParam);
-
+*/
 
       } 
 
@@ -968,6 +875,8 @@ reenviar.onclick = ()=>{
         `
     }
 
+//PENDIENTE PARA UN FUTURO
+/*
    function etiquetarelmsg(){
 
         etiquetar_msg = document.getElementById('etiquetar_msg').value;
@@ -999,13 +908,58 @@ reenviar.onclick = ()=>{
         xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr5.send("x=" + etiquetado);
    }
+*/
+   //HASTA AQUI 
     
+   function etiquetarelmsg(){
+    
+        etiquetar_msg = document.getElementById('etiquetar_msg').value;
+        msg_a_etiquetar=document.getElementById('msg_a_etiquetar').value;
+        tipo_chat = document.getElementById('tipo_chat').value;
+
+
+        if(tipo_chat=="chat_grupo"){
+            tipo=1
+        }else{
+            tipo=0
+        }
+
+        console.log(etiquetar_msg, msg_a_etiquetar)
+
+        obj = [{ "id_etiqueta": etiquetar_msg, "id_msg": msg_a_etiquetar, "tipo": 5, "tipo_chat": tipo}];
+        etiquetado = JSON.stringify(obj);
+        console.log(etiquetado)
+        let xhr5 = new XMLHttpRequest();
+        xhr5.open("POST", "chat/otrasconsultastick", true);
+        xhr5.onload = ()=>{
+        if(xhr5.readyState === XMLHttpRequest.DONE){
+            if(xhr5.status === 200){
+            let data5 = xhr5.response;
+            alertify.success(data5, 0);
+        }
+        }
+        }
+        xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr5.send("x=" + etiquetado);
+   }
+
 
    destacados= document.getElementById('destacados');
+
     
    function traer_msg(id){
 
-    obj = [{ "id_etiqueta": id, "tipo": 4}];
+    id_enviar=document.getElementById('id_enviar').value;
+    tipo_chat = document.getElementById('tipo_chat').value;
+
+    if(tipo_chat=="chat_grupo"){
+        tipo=1
+    }else{
+        tipo=0
+    }
+
+
+    obj = [{ "id_etiqueta": id, "tipo": 4, "id_enviar": id_enviar, "tipo_chat": tipo }];
     etiqueta = JSON.stringify(obj);
     console.log(etiqueta)
     let xhr5 = new XMLHttpRequest();
@@ -1015,6 +969,9 @@ reenviar.onclick = ()=>{
         if(xhr5.status === 200){
         let data5 = xhr5.response;
         destacados.innerHTML=data5;
+        
+
+
     }
     }
     }

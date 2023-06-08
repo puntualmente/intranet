@@ -49,9 +49,7 @@ function headerchatuser($imagen, $nombre, $status, $id_user){
                         <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="bx bx-dots-horizontal-rounded"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" >Mensajes Destacados</button>
-                        </div>
+                        '.esadmin().'
                     </div>
                 </li>
             </ul>                                                                                                                                                                                                                                                                                        
@@ -62,6 +60,15 @@ function headerchatuser($imagen, $nombre, $status, $id_user){
 
     ';
     return $output;
+}
+
+function esadmin(){
+    if($_SESSION['rol']==1){
+        return '<div class="dropdown-menu dropdown-menu-end">
+        <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" >Mensajes Destacados</button>
+        </div>';
+    }
+    
 }
 
 
