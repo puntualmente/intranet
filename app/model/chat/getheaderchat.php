@@ -36,8 +36,25 @@ function headerchatuser($imagen, $nombre, $status, $id_user){
                     <h5 class="font-size-14 mb-1 text-truncate"><a href="#" class="text-dark">'.$nombre.'</a></h5>
                     <p class="text-muted text-truncate mb-0">'.$status.'</p>
                 </div>
+                
             </div>
+            
 
+        </div>
+        <div class="col-xl-8 col-5">
+            <ul class="list-inline user-chat-nav text-end mb-0">
+                
+                <li class="list-inline-item">
+                    <div class="dropdown">
+                        <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" >Mensajes Destacados</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>                                                                                                                                                                                                                                                                                        
         </div>
 
     </div>

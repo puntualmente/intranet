@@ -145,10 +145,6 @@ mensaje=document.getElementById('mensaje2');
 
 
 function datosgrupo(id){
-
-
-
-
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "chat/admingrupos", true);
   xhr.onload = ()=>{
