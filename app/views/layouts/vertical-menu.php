@@ -110,6 +110,13 @@
                                         <!-- <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span><?php //echo $language["3_min_ago"]; ?></span></p> -->
                                     </div>
                                 </div>
+                                <a href="campaña" class="text-reset notification-item">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 avatar-sm me-3">
+                                    <span class="avatar-title bg-warning rounded-circle font-size-16">
+                                        <i class="mdi mdi-ticket-account"></i>
+                                    </span>
+                                </div>
                                 
                             </div>
                         </a>
@@ -218,6 +225,13 @@
                         <span data-key="t-horizontal">Chat</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="campana">
+                        <i class=" fas fa-user-friends"></i>
+                        <span data-key="t-horizontal">Users Campaña</span>
+                    </a>
+                </li>
                 
 
                 <?php }elseif($_SESSION['rol']==3){ ?> 
@@ -249,9 +263,13 @@
                                 <span data-key="tickets">Tickets</span>
                             </a>
                         </li>
+
+                        
                     <?php } ?>
                     <li>
-                            <a>
+                        
+                    <li>
+                                                <a>
                                 <span data-key="m-tickets" type="button" data-bs-toggle="modal" data-bs-target="#modalcrearticket">Crear Tickets</span>
                             </a>
                         </li>

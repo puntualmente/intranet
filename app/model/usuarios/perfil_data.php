@@ -41,7 +41,7 @@ if(isset($_POST['x'])){
         $f_ini_escol = $data[0]->f_ini_escol;
         $f_fin_escol = $data[0]->f_fin_escol;
 
-        $guardarInfo = $pdo->prepare("INSERT INTO formacion_ac_persona (cedula, institucion, titulo, f_inicio, f_fin) VALUES ('{$_SESSION['cedula']}', '{$institucion}','{$titulo}', '{$f_ini_escol}', '{$f_fin_escol}')");
+        $guardarInfo = $pdo->prepare("UPDATE formacion_ac_persona (cedula, institucion, titulo, f_inicio, f_fin) VALUES ('{$_SESSION['cedula']}', '{$institucion}','{$titulo}', '{$f_ini_escol}', '{$f_fin_escol}')");
 
         $guardarInfo->execute();
 
