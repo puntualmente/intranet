@@ -101,8 +101,9 @@ if(isset($_POST['tipo'])){
                     $output= $sql;
                 }
             echo $output;
-        }elseif($data[0]->tipo==4){
 
+        }elseif($data[0]->tipo==4){
+            /*
             $id_etiqueta=$data[0]->id_etiqueta;
 
             $mensajes_chat_normal=mysqli_query($conn, "SELECT * FROM etiquetas_mensajes INNER JOIN messages ON etiquetas_mensajes.id_mensaje = messages.msg_id WHERE etiquetas_mensajes.id_etiqueta = '{$id_etiqueta}' AND etiquetas_mensajes.tipo = 0");
@@ -116,17 +117,21 @@ if(isset($_POST['tipo'])){
 
                     if($mensaje['imagen']==""){
                         $output.='
+                        
                         <li >
                         <a>
                             <div class="d-flex align-items-start">
                                 
-                                <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex justify-content-between flex-grow-1 overflow-hidden">
                                     <h5 class="text-truncate font-size-14 mb-1">' . $mensaje['msg'] .'</h5>
+                                    <span>'.$mensaje['fecha'].'</span>
                                 </div>
                             </div>
                         </a>
     
-                        </li>';
+                        </li>
+                        <hr>
+                        ';
                     }else{
                         $archivo = (__dir__."/../../assets/images/chat/".$mensaje['imagen']);
                         if(file_exists($archivo)){
@@ -137,10 +142,16 @@ if(isset($_POST['tipo'])){
 
                         $output.='
                         <li class="list-inline-item message-img-list">
+                            <div>
                             <a class="d-inline-block m-1">
-                                <img onclick="verimagen_2(this.alt)" type="button" src="'.$ruta.'" alt="'.$mensaje['imagen'].'" class="rounded img-thumbnail" ">
-                            <a>                                                                  
-                        </li>';
+                                <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta.'" alt="'.$ruta.'" class="rounded img-thumbnail" ">
+                            <a>
+                            </div>
+                            <div>
+                                <span class="d-flex justify-content-end" style="margin-bottom: 5px;">'.$mensaje['fecha'].'</span>
+                            </div>                                  
+                        </li>
+                        <hr>';
                     }
                     }
 
@@ -152,13 +163,15 @@ if(isset($_POST['tipo'])){
                             <a>
                                 <div class="d-flex align-items-start">
                                     
-                                    <div class="flex-grow-1 overflow-hidden">
+                                    <div class="d-flex justify-content-between flex-grow-1 overflow-hidden">
                                         <h5 class="text-truncate font-size-14 mb-1">' . $mensaje_grupo['msg'] .'</h5>
+                                        <span>'.$mensaje['fecha'].'</span>
                                     </div>
                                 </div>
                             </a>
         
-                            </li>';
+                            </li>
+                            <hr>';
                         }else{
                             $archivo = (__dir__."/../../assets/images/chat/".$mensaje_grupo['imagen']);
                             if(file_exists($archivo)){
@@ -169,18 +182,166 @@ if(isset($_POST['tipo'])){
     
                             $output.='
                             <li class="list-inline-item message-img-list">
+                                <div>
                                 <a class="d-inline-block m-1">
-                                    <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta2.'" alt="'.$mensaje_grupo['imagen'].'" class="rounded img-thumbnail" ">
-                                <a>                                                                  
-                            </li>';
+                                    <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta2.'" alt="'.$ruta2.'" class="rounded img-thumbnail" ">
+                                <a> 
+                                </div>
+
+                                <div>
+                                    <span class="d-flex justify-content-end" >'.$mensaje_grupo['fecha'].'</span>
+                                </div>     
+
+                            </li>
+                            <hr>';
                         }
                         
                     }
+
                     
                 }else{
                     $output= $sql;
                 }
             echo $output;
+            */
+            $id_etiqueta=$data[0]->id_etiqueta;
+            $outgoing_id=$data[0]->id_enviar;
+            $incoming_id=$_SESSION['unique_id'];
+
+            $output="";
+
+            
+
+            if($data[0]->tipo_chat){
+                $mensajes_grupos=mysqli_query($conn, "SELECT * FROM etiquetas_list INNER JOIN messages_grupos ON etiquetas_list.id = messages_grupos.id_etiqueta WHERE messages_grupos.id_etiqueta = '{$id_etiqueta}' AND (messages_grupos.incoming_msg_id = {$outgoing_id}) ORDER BY messages_grupos.msg_id");
+
+                foreach($mensajes_grupos as $mensaje){
+
+                    if($mensaje['imagen']==""){
+                        $output.='
+                        
+                        <li >
+                        <a>
+                            <div class="d-flex align-items-start">
+                                
+                                <div class="d-flex justify-content-between flex-grow-1 overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">' . $mensaje['msg'] .'</h5>
+                                    <span>'.$mensaje['fecha'].'</span>
+                                </div>
+                            </div>
+                        </a>
+    
+                        </li>
+                        <hr>
+                        ';
+                    }else{
+                        $archivo = (__dir__."/../../assets/images/chat/".$mensaje['imagen']);
+                        if(file_exists($archivo)){
+                            $ruta = controlador::$rutaAPP."app/assets/images/chat/".$mensaje['imagen'];
+                        }else{
+                            $ruta = controlador::$rutaAPP."app/assets/images/chatgrupos/".$mensaje['imagen'];
+                        }
+
+                        $output.='
+                        <li class="list-inline-item message-img-list">
+                            <div>
+                            <a class="d-inline-block m-1">
+                                <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta.'" alt="'.$ruta.'" class="rounded img-thumbnail" ">
+                            <a>
+                            </div>
+                            <div>
+                                <span class="d-flex justify-content-end" style="margin-bottom: 5px;">'.$mensaje['fecha'].'</span>
+                            </div>                                  
+                        </li>
+                        <hr>';
+                    }
+                    }
+            }else{
+                $mensajes_chat_normal=mysqli_query($conn, "SELECT * FROM etiquetas_list INNER JOIN messages ON etiquetas_list.id = messages.id_etiqueta WHERE (messages.outgoing_msg_id = {$outgoing_id} AND messages.incoming_msg_id = {$incoming_id}) OR (messages.outgoing_msg_id = {$incoming_id} AND messages.incoming_msg_id = {$outgoing_id}) AND messages.id_etiqueta = '{$id_etiqueta}' ORDER BY messages.msg_id");
+
+                foreach($mensajes_chat_normal as $mensaje_grupo){
+
+                    if($mensaje_grupo['imagen']==""){
+                        $output.='
+                        <li >
+                        <a>
+                            <div class="d-flex align-items-start">
+                                
+                                <div class="d-flex justify-content-between flex-grow-1 overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">' . $mensaje_grupo['msg'] .'</h5>
+                                    <span>'.$mensaje_grupo['fecha'].'</span>
+                                </div>
+                            </div>
+                        </a>
+    
+                        </li>
+                        <hr>';
+                    }else{
+                        $archivo = (__dir__."/../../assets/images/chat/".$mensaje_grupo['imagen']);
+                        if(file_exists($archivo)){
+                            $ruta2 = controlador::$rutaAPP."app/assets/images/chat/".$mensaje_grupo['imagen'];
+                        }else{
+                            $ruta2 = controlador::$rutaAPP."app/assets/images/chatgrupos/".$mensaje_grupo['imagen'];
+                        }
+
+                        $output.='
+                        <li class="list-inline-item message-img-list">
+                            <div>
+                            <a class="d-inline-block m-1">
+                                <img onclick="verimagengrupo_2(this.alt)" type="button" src="'.$ruta2.'" alt="'.$ruta2.'" class="rounded img-thumbnail" ">
+                            <a> 
+                            </div>
+
+                            <div>
+                                <span class="d-flex justify-content-end" >'.$mensaje_grupo['fecha'].'</span>
+                            </div>     
+
+                        </li>
+                        <hr>';
+                    }
+                    
+                }
+
+            }
+
+            
+
+
+
+                
+            echo $output;
+            
+
+        }elseif($data[0]->tipo==5){
+
+            $id_etiqueta=$data[0]->id_etiqueta;
+            $id_msg=$data[0]->id_msg;
+            $tipo_chat=$data[0]->tipo_chat;
+
+            if($tipo_chat==0){
+                //es grupo
+                $sql=mysqli_query($conn, "UPDATE messages SET id_etiqueta = '{$id_etiqueta}' WHERE msg_id = '{$id_msg}'");
+
+                if($sql){
+                    $output='Mensaje Etiquetado... NORMAL';
+                }else{
+                    $output= $sql;
+                }
+            echo $output;
+            }elseif($tipo_chat==1){
+                //no es grupo
+                $sql=mysqli_query($conn, "UPDATE messages_grupos SET id_etiqueta = '{$id_etiqueta}' WHERE msg_id = '{$id_msg}'");
+
+                if($sql){
+                    $output='Mensaje Etiquetado... GRUPO';
+                }else{
+                    $output= $sql;
+                }
+            echo $output;
+
+            }
+
+            
         }
 
 }

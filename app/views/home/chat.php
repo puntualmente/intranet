@@ -400,6 +400,7 @@
                                             <div class="px-3">
                                                 <h5 class="font-size-14 mb-3">Mensajes Etiquetados:</h5>
                                             </div>
+                                            <hr>
                                             <ul id="destacados">
 
                                             <!-- se llena solo   -->
