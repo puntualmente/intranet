@@ -1,5 +1,7 @@
 <?php
     include_once (__dir__."/../config.php");
+    include_once (__dir__."/../data/pdo.php");
+
 
 if(isset($_POST['x'])){
     $data = json_decode($_POST['x']);
@@ -19,7 +21,7 @@ if(isset($_POST['x'])){
         }else{
             $id = $data[0]->id;
 
-            $sql="DELETE FROM areas WHERE id_area = '{$id}'";
+            /* $sql="DELETE FROM areas WHERE id_area = '{$id}'";
             $status = mysqli_query($conn, $sql);
             if($status!=0){
                 $areas = mysqli_query($conn, "SELECT * FROM areas");
@@ -27,7 +29,7 @@ if(isset($_POST['x'])){
                 echo $output;
             }else{
                 echo "no se pudo eliminar el dato";
-            } 
+            }  */
         }
         
     }elseif($estado==1){
@@ -47,7 +49,7 @@ if(isset($_POST['x'])){
         }else{
             $id = $data[0]->id_grupo;
 
-                $sql="DELETE FROM grupos WHERE id_grupo = '{$id}'";
+                /* $sql="DELETE FROM grupos WHERE id_grupo = '{$id}'";
                 $status = mysqli_query($conn, $sql);
                 if($status!=0){
                     $grupos = mysqli_query($conn, "SELECT * FROM grupos");
@@ -55,7 +57,7 @@ if(isset($_POST['x'])){
                     echo $output;
                 }else{
                     echo "no se pudo eliminar el dato";
-                }
+                } */
             }
 }elseif($estado==2){
     $t_img = $data[0]->t_img;
@@ -157,7 +159,7 @@ if(isset($_POST['x'])){
         }else{
             $id = $data[0]->id;
 
-            $sql="DELETE FROM areas WHERE id_area = '{$id}'";
+            /* $sql="DELETE FROM areas WHERE id_area = '{$id}'";
             $status = mysqli_query($conn, $sql);
             if($status!=0){
                 $areas = mysqli_query($conn, "SELECT * FROM areas");
@@ -165,7 +167,7 @@ if(isset($_POST['x'])){
                 echo $output;
             }else{
                 echo "no se pudo eliminar el dato";
-            }
+            } */
         }
 }elseif($estado==5){
     $borrar=$data[0]->borrar;
@@ -180,7 +182,7 @@ if(isset($_POST['x'])){
     }else{
         $id = $data[0]->id;
 
-        $sql="DELETE FROM areas WHERE id_area = '{$id}'";
+        /* $sql="DELETE FROM areas WHERE id_area = '{$id}'";
         $status = mysqli_query($conn, $sql);
         if($status!=0){
             $areas = mysqli_query($conn, "SELECT * FROM areas");
@@ -188,8 +190,80 @@ if(isset($_POST['x'])){
             echo $output;
         }else{
             echo "no se pudo eliminar el dato";
-        }
+        } */
     }
+    }elseif($estado==6){
+
+        $cedula = $data[0]->id;
+
+        $hayregistros = $pdo->prepare("SELECT * FROM persona WHERE cedula = '$cedula'");
+        $hayregistros->execute();
+
+    if($hayregistros->rowCount()>0){
+
+     
+        $persona = mysqli_query($conn, "SELECT * FROM users WHERE cedula = '{$cedula}'");
+
+        $user = mysqli_fetch_assoc($persona);
+
+        $username="";
+        $users1= $user['n_user']." ". $user['l_user'];
+        $usernamearr = explode(' ', $users1); 
+
+        foreach($usernamearr as $user){
+            $username.=$user;
+        }
+
+        $micarpeta = __DIR__."/../../assets/archivosUsers/".$username;
+
+
+        $habilitarintento = $pdo->prepare("UPDATE persona SET validos = 0 WHERE cedula = '$cedula'");
+        $habilitarintento->execute();
+
+        $borarArchivosdb = $pdo->prepare("DELETE FROM archivos_persona WHERE cedula = '$cedula'");
+        $borarArchivosdb->execute();
+
+        function borrarCarpeta($ruta) {
+            if (!is_dir($ruta)) {
+                return false;
+            }
+
+            $archivos = scandir($ruta);
+            foreach ($archivos as $archivo) {
+                if ($archivo != '.' && $archivo != '..') {
+                    $rutaArchivo = $ruta . '/' . $archivo;
+                    if (is_dir($rutaArchivo)) {
+                        borrarCarpeta($rutaArchivo);
+                    } else {
+                        unlink($rutaArchivo);
+                    }
+                }
+            }
+
+            rmdir($ruta);
+            return true;
+        }
+
+            // Ejemplo de uso:
+            $carpetaABorrar = $micarpeta;
+
+        if($habilitarintento && $borarArchivosdb){
+            if (borrarCarpeta($carpetaABorrar)) {
+                echo "Se habilito el intento correctamente a $username";
+            } else {
+                echo "Ya fue habilitado el intento a $username";
+            }
+        }else{
+            echo 2;
+        }
+
+            
+
+        
+
+    }else{
+        echo 1;
+}
 }
 }else{
     echo "no hay datos de envio";
