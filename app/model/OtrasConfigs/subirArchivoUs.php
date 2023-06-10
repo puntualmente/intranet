@@ -78,7 +78,7 @@ $insertarData = "INSERT INTO users(
             '$apellido',
             '$telefono',
             '$cc',
-            '$password',
+            MD5('$password'),
             '$f_nacimiento',
             '$id_area',
             '$id_empresa',

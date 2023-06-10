@@ -323,7 +323,7 @@ if(isset($_POST['tipo'])){
                 $sql=mysqli_query($conn, "UPDATE messages SET id_etiqueta = '{$id_etiqueta}' WHERE msg_id = '{$id_msg}'");
 
                 if($sql){
-                    $output='Mensaje Etiquetado... NORMAL';
+                    $output='Mensaje Etiquetado...';
                 }else{
                     $output= $sql;
                 }
@@ -333,7 +333,7 @@ if(isset($_POST['tipo'])){
                 $sql=mysqli_query($conn, "UPDATE messages_grupos SET id_etiqueta = '{$id_etiqueta}' WHERE msg_id = '{$id_msg}'");
 
                 if($sql){
-                    $output='Mensaje Etiquetado... GRUPO';
+                    $output='Mensaje Etiquetado...';
                 }else{
                     $output= $sql;
                 }

@@ -127,8 +127,7 @@ if (isset($_SESSION['unique_id'])) {
                                                    
                                                     <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">
                                                     Etiquetar </button>
-                                                    <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">
-                                                    Reenviar </button>
+                                                   
  
                                                     </div>
                                                 </div>
@@ -140,6 +139,9 @@ if (isset($_SESSION['unique_id'])) {
 
         ';
         return $output;
+        /* Reenviar boton */
+        /*  <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">
+                                                    Reenviar </button> */
     }
 
     function salida($nombre, $mensaje, $hora, $color, $id){
@@ -160,7 +162,7 @@ if (isset($_SESSION['unique_id'])) {
                             <div class="dropdown-menu">
                                                    
                                 <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
-                                <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button>
+                                
  
                             </div>
                         </div>
@@ -170,6 +172,7 @@ if (isset($_SESSION['unique_id'])) {
             </li>    
         ';
         return $output;
+        /* <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button> */
     }
     
     function entradamostrarimagen($nombre, $hora, $imagen, $id, $incoming_id){
@@ -204,8 +207,7 @@ if (isset($_SESSION['unique_id'])) {
                                                    
                                                     <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">
                                                     Etiquetar </button>
-                                                    <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">
-                                                    Reenviar </button>
+                                                    
  
                                                     </div>
                                                 </div>
@@ -215,6 +217,8 @@ if (isset($_SESSION['unique_id'])) {
                                     </li>
                                 </ul>';
         return $output;
+        /* <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">
+                                                    Reenviar </button> */
     }
 
     function salidamostrarimagen($nombre, $hora, $imagen, $color, $id, $incoming_id){
@@ -251,8 +255,7 @@ if (isset($_SESSION['unique_id'])) {
                                            
                                             <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">
                                             Etiquetar </button>
-                                            <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">
-                                            Reenviar </button>
+                                            
 
                                             </div>
                                         </div>
@@ -261,6 +264,8 @@ if (isset($_SESSION['unique_id'])) {
                                     </li>
                                 </ul>';
         return $output;
+        /* <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">
+                                            Reenviar </button> */
     }
 
 
