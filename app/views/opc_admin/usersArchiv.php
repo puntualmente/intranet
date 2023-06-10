@@ -6,7 +6,7 @@
 
 require (__dir__."/../../model/data/pdo.php");
 
-$usuarios = $pdo->prepare("SELECT * FROM persona");
+$usuarios = $pdo->prepare("SELECT * FROM persona WHERE validos = 1");
 $usuarios->execute();
 
 
@@ -18,6 +18,12 @@ $usuarios->execute();
     <?php include(__dir__."/../layouts/head.php");  ?>
 
      <!-- DataTables -->
+     <!-- alertifyjs Css -->
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+
      <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
@@ -47,8 +53,9 @@ $usuarios->execute();
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between">
+                        <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title">Tabla Usuarios</h4>
+                                <div><a type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Habilitar Nuevo Intento</a></div>
                             </div>
                             <div class="card-body">
                                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
@@ -120,7 +127,24 @@ $usuarios->execute();
 </div>
 <!-- END layout-wrapper -->
 
-
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Habilitar Nuevo intento</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label for="ced_intento">Cedula</label>
+                                                    <input class="form-control" autocomplete="off" type="text" id="ced_intento" name="ced_intento">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="recargar()">Close</button>
+                                                    <button type="button" onclick="guardarIntento()" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 <!-- Right Sidebar -->
 <?php include (__dir__."/../layouts/right-sidebar.php")?>
@@ -146,9 +170,12 @@ $usuarios->execute();
 <script src="<?php echo controlador::$rutaAPP?>app/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <!-- Datatable init js -->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/pages/datatables.init.js"></script>
+<!-- Alertify -->
+<script src="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/alertify.min.js"></script>
 
 
 <script src="<?php echo controlador::$rutaAPP?>app/assets/js/app.js"></script>
+<script src="<?php echo controlador::$rutaAPP?>app/views/opc_admin/js/nuevoIntento.js"></script>
 
 
 
