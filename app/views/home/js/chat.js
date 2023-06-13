@@ -910,8 +910,13 @@ reenviar.onclick = ()=>{
    }
 */
    //HASTA AQUI 
+
+   destacados= document.getElementById('destacados');
+
     
    function etiquetarelmsg(){
+
+    destacados.innerHTML="";
     
         etiquetar_msg = document.getElementById('etiquetar_msg').value;
         msg_a_etiquetar=document.getElementById('msg_a_etiquetar').value;
@@ -935,7 +940,7 @@ reenviar.onclick = ()=>{
         if(xhr5.readyState === XMLHttpRequest.DONE){
             if(xhr5.status === 200){
             let data5 = xhr5.response;
-            alertify.success(data5, 0);
+            alertify.success(data5, 3);
         }
         }
         }
@@ -944,10 +949,11 @@ reenviar.onclick = ()=>{
    }
 
 
-   destacados= document.getElementById('destacados');
 
     
    function traer_msg(id){
+
+    destacados.innerHTML="";
 
     id_enviar=document.getElementById('id_enviar').value;
     tipo_chat = document.getElementById('tipo_chat').value;
