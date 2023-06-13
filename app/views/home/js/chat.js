@@ -421,6 +421,8 @@ function limpiar(){
 
     // Obtener todas las imágenes con la clase 'imagen-clickable'
 
+    download=document.querySelector('.download');
+
     function verimagen(imagen){
 
         imagesgru = [];
@@ -466,6 +468,7 @@ function limpiar(){
             popup.style.display = 'flex';
 
             image.src = imagesgru[indice2];
+            download.href=`${imagesgru[indice2]}`;
 
     }
 
@@ -481,6 +484,7 @@ function limpiar(){
             }
             
                 image.src = imagesgru[currentIndex2];
+                download.href=`${imagesgru[currentIndex2]}`;
     }
 
     function prevImage() {
@@ -490,6 +494,8 @@ function limpiar(){
             }
             
                 image.src = imagesgru[currentIndex2];
+                download.href=`${imagesgru[currentIndex2]}`;
+                
             
     }
 
@@ -553,6 +559,8 @@ function verimagengrupo(imagen){
                 popup.style.display = 'flex';
 
                 image.src = imagesgru[indice2];
+                download.href=`${imagesgru[indice2]}`;
+
 
         }
 
@@ -568,6 +576,8 @@ function verimagengrupo(imagen){
                 }
                 
                     image.src = imagesgru[currentIndex2];
+                    download.href=`${imagesgru[currentIndex2]}`;
+
         }
 
         function prevImage() {
@@ -577,6 +587,8 @@ function verimagengrupo(imagen){
                 }
                 
                     image.src = imagesgru[currentIndex2];
+                    download.href=`${imagesgru[currentIndex2]}`;
+
                 
         }
 
@@ -654,6 +666,8 @@ function verimagengrupo(imagen){
                 popup.style.display = 'flex';
 
                 image.src = imagesgru[indice2];
+                download.href=`${imagesgru[indice2]}`;
+
 
         }
 
@@ -669,6 +683,8 @@ function verimagengrupo(imagen){
                 }
                 
                     image.src = imagesgru[currentIndex2];
+                    download.href=`${imagesgru[currentIndex2]}`;
+
         }
 
         function prevImage() {
@@ -678,6 +694,8 @@ function verimagengrupo(imagen){
                 }
                 
                     image.src = imagesgru[currentIndex2];
+                    download.href=`${imagesgru[currentIndex2]}`;
+
                 
         }
 
