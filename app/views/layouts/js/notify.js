@@ -2,6 +2,7 @@
 notyIcon=document.getElementById('notify');
 notycontentnormal=document.getElementById('notify2');
 notycontentgrupo=document.getElementById('notify3');
+mensajes_tkt=document.getElementById('mensajes_tkt');
 
 var numnotys=0;
 var mensajes_n=0;
@@ -16,10 +17,21 @@ setInterval(() =>{
     if(xhr.readyState === XMLHttpRequest.DONE){
         if(xhr.status === 200){
           var dato_notys = xhr.response;
+          console.log(dato_notys);
+          cant=dato_notys.length;
+          if(cant>1000){
+            window.location.reload()
+            console.log(cant)
+          }else{
             if(dato_notys==0){
               notyIcon.innerHTML = "";
+              mensajes_tkt.innerHTML="Intranet | Puntualmente";
             }else{
               notyIcon.innerHTML = dato_notys;
+              mensajes_tkt.innerHTML=`(`+dato_notys+`) Intranet | Puntualmente`;
+          }
+
+            
 
     if(total_notys==dato_notys){
 
@@ -27,7 +39,7 @@ setInterval(() =>{
 
           tipo_chat = document.getElementById('tipo_chat').value;
           total_notys=dato_notys;
-          var URLactual = window. location;
+          var URLactual = window.location;
           if(tipo_chat=="chat_1_1"){
               obj = [{ "estado": 0 }];
               mensajes = JSON.stringify(obj);

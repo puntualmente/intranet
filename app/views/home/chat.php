@@ -54,7 +54,7 @@
 
 .popupmostrarimagen .prev-btn,
 .popupmostrarimagen .next-btn {
-  position: absolute;
+  position: fixed;
   top: 50%;
   font-size: 30px;
   color: #fff;
@@ -87,8 +87,6 @@
 
     <!-- alertifyjs default themes  Css -->
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
-
-    <title>Chat | Puntualmente</title>
     
     <?php include(__dir__."/../layouts/head.php");  ?>
     <?php include(__dir__."/../layouts/head-style.php");  ?>

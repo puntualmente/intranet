@@ -257,7 +257,7 @@ if(isset($_POST['tipo'])){
                     }
                     }
             }else{
-                $mensajes_chat_normal=mysqli_query($conn, "SELECT * FROM messages INNER JOIN etiquetas_list ON etiquetas_list.id = messages.id_etiqueta WHERE (messages.outgoing_msg_id = {$outgoing_id} AND messages.incoming_msg_id = {$incoming_id}) OR (messages.outgoing_msg_id = {$incoming_id} AND messages.incoming_msg_id = {$outgoing_id}) AND messages.id_etiqueta = '{$id_etiqueta}' ORDER BY messages.msg_id");
+                $mensajes_chat_normal=mysqli_query($conn, "SELECT * FROM messages INNER JOIN etiquetas_list ON etiquetas_list.id = messages.id_etiqueta WHERE ((messages.outgoing_msg_id = {$outgoing_id} AND messages.incoming_msg_id = {$incoming_id}) OR (messages.outgoing_msg_id = {$incoming_id} AND messages.incoming_msg_id = {$outgoing_id})) AND messages.id_etiqueta = '{$id_etiqueta}' ORDER BY messages.msg_id");
 
                 foreach($mensajes_chat_normal as $mensaje_grupo){
 

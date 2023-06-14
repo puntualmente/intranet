@@ -19,9 +19,18 @@ if(!isset($_POST['x'])){
 
         }
         echo $total;
+        //$_SESSION['activo']=0;
+       // header("Location: home");
+
     }else{
         echo 0;
+       // $_SESSION['activo']=1;
+      
+
+
     }
+
+
     
 
 }else{

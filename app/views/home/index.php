@@ -3,7 +3,6 @@
 <?php include(__dir__."/../layouts/head-main.php");  ?>
 
 <head>
-    <title><?php echo $language["Dashboard"]; ?> | Puntualmente</title>
 
     <?php include(__dir__."/../layouts/head.php");  ?>
 

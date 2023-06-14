@@ -41,19 +41,33 @@ if (!empty($cedula) && !empty($password)) {
 
                 //solo cree este pedaso
 
-                $sqlpermisochat = mysqli_query($conn, "SELECT * FROM permisos WHERE tipo_permiso = 'chat' and id_grupo = '{$row['id_grupo']}' and rol = '{$row['rol']}' and id_area = '{$row['id_area']}' and activo = '{$row['activo']}'");
+                $sqlpermisochat = mysqli_query($conn, "SELECT * FROM permisos WHERE id_grupo = '{$row['id_grupo']}' and rol = '{$row['rol']}' and id_area = '{$row['id_area']}' and activo = '{$row['activo']}'");
 
                     if(mysqli_num_rows($sqlpermisochat)>0){
-                        
+
                         $permiso = mysqli_fetch_assoc($sqlpermisochat);
 
-                        if($permiso['value']==0){
-                            $_SESSION['permisochat']=false;
-                        }else{
-                            $_SESSION['permisochat']=true;
+                        switch($permiso['tipo_permiso']){
+                            case 'chat':
+
+                                if($permiso['value']==0){
+                                    $_SESSION['permisochat']=false;
+                                }else{
+                                    $_SESSION['permisochat']=true;
+                                }
+                            case 'etiquetado':
+
+                                if($permiso['value']==0){
+                                    $_SESSION['permisoetiquetado']=false;
+                                }else{
+                                    $_SESSION['permisoetiquetado']=true;
+                                }
+                        
                         }
+                        
                     }else{
                         $_SESSION['permisochat']=true;
+                        $_SESSION['permisoetiquetado']=true;
                     }
                 
                 //
