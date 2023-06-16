@@ -272,8 +272,6 @@ function limpiar(){
 
     // Obtener todas las imágenes con la clase 'imagen-clickable'
 
-    download=document.querySelector('.download');
-
     function verimagen(imagen){
 
         imagesgru = [];
