@@ -23,8 +23,6 @@
 
     <?php include(__dir__."/../layouts/head-style.php");  ?>
 
-    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-
 </head>
 
 <?php  include(__dir__."/../layouts/body.php");  ?>

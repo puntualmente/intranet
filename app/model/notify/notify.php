@@ -5,6 +5,8 @@
 
       $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE id_jefe = '{$_SESSION['unique_id']}' and estado = 1");
       $redir_tickets=mysqli_query($conn, "SELECT * FROM ticket_redireccion where id_jefe = '{$_SESSION['unique_id']}' and estado = 1");
+      $user_status=mysqli_query($conn, "SELECT (mantenimiento) FROM users WHERE cedula = '{$_SESSION['cedula']}'");
+      $status = mysqli_fetch_assoc($user_status);
 
 if(!isset($_POST['x'])){
 
@@ -19,16 +21,19 @@ if(!isset($_POST['x'])){
 
         }
         echo $total;
-        //$_SESSION['activo']=0;
-       // header("Location: home");
 
     }else{
+        
         echo 0;
-       // $_SESSION['activo']=1;
-      
-
-
+    
     }
+
+        if($status['mantenimiento']){
+            $_SESSION['mantenimiento']=1;
+            header("Location: home");
+        }else{
+            $_SESSION['mantenimiento']=0;
+        }
 
 
     
@@ -51,7 +56,6 @@ if(!isset($_POST['x'])){
         }else{
             echo 0;
         }
-
     }elseif($estado==3){
         /*
         $notys_dinam=mysqli_query($conn, "SELECT * FROM notificaciones WHERE id_destino = '{$_SESSION['unique_id']}' and visto = 0");
