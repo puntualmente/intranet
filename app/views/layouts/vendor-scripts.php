@@ -1,5 +1,3 @@
-
-
 <!------------------------------------------------------------------CREAR TICKETS -->
 <!-- Scrollable modal -->
 <form method="post" id="formcrearticket">
@@ -11,6 +9,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
                 </div>
                 <div class="modal-body">
+
+                    <div>
+                        <div class="btn-group btn-group-example mb-3 d-flex justify-cotent-center" role="group">
+                            <button type="button" class="btn btn-primary w-xs"><i class="mdi mdi-thumb-up"></i>Persona</button>
+                            <button type="button" class="btn btn-danger w-xs"><i class="mdi mdi-thumb-down">Grupo</i></button>
+                        </div>
+                    </div>
 
                     <div class="mb-3">
                         <label for="area" class="form-label font-size-13 text-muted">Area destino ticket:</label>
@@ -112,8 +117,8 @@
                         if (enviarticket.status === 200) {
                             let data = enviarticket.response;
 
-                            areaDestTkt.value=0;
-                            descrip.value="";
+                            areaDestTkt.value = 0;
+                            descrip.value = "";
 
 
                             Swal.fire({
