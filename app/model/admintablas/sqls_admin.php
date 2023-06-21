@@ -19,9 +19,9 @@ $redirigidosporarea=mysqli_query($conn, "SELECT * FROM ticket_redireccion WHERE 
 if($_SESSION['rol']==2||$_SESSION['rol']==1){
 
     if($_SESSION['id_area']==3){
-        $ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE id_jefe='{$_SESSION['unique_id']}'");
+        $ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE (id_jefe = '{$_SESSION['unique_id']}' AND es_grupo = 0) OR (id_jefe = '{$_SESSION['id_grupo']}' AND es_grupo = 1)");
     }else{
-        $ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE id_jefe = '{$_SESSION['unique_id']}'");
+        $ticketsPorArea = mysqli_query($conn, "SELECT * FROM tickets WHERE (id_jefe = '{$_SESSION['unique_id']}' AND es_grupo = 0) OR (id_jefe = '{$_SESSION['id_grupo']}' AND es_grupo = 1)");
     }
 
     

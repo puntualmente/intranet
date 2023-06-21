@@ -6,17 +6,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalScrollableTitle">Crear Ticket</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                     <div>
                         <div class="btn-group btn-group-example mb-3 d-flex justify-cotent-center" role="group">
-                            <button type="button" class="btn btn-primary w-xs"><i class="mdi mdi-thumb-up"></i>Persona</button>
-                            <button type="button" class="btn btn-danger w-xs"><i class="mdi mdi-thumb-down">Grupo</i></button>
+                            <button id="tkt_persona" type="button" class="btn btn-primary w-xs" disabled><i class="fas fa-id-badge"></i> Persona</button>
+                            <button id="tkt_grupo" type="button" class="btn btn-danger w-xs"><i class="fas fa-user-friends"> Grupo</i></button>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <span id="tkt_a_quien" style="text-align:center"><b>***Tu ticket será dirigido a una persona***</b></span>
+                            <input type="hidden" id="es_grupo_persona" value="persona">
                         </div>
                     </div>
-
                     <div class="mb-3">
                         <label for="area" class="form-label font-size-13 text-muted">Area destino ticket:</label>
                         <select class="form-control" data-trigger name="area" id="area" onchange="areaselect(this.value)">
@@ -83,11 +86,48 @@
 <script src="<?php echo controlador::$rutaAPP ?>app/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
 
 <script>
+    tkt_persona = document.getElementById('tkt_persona');
+    tkt_grupo = document.getElementById('tkt_grupo');
+    tkt_a_quien = document.getElementById('tkt_a_quien');
+    es_grupo_persona =document.getElementById('es_grupo_persona');
+
+    tkt_persona.onclick = () => {
+        tkt_persona.disabled = true;
+        tkt_grupo.disabled = false;
+        tkt_a_quien.innerHTML = `<b>***Tu ticket será dirigido a una persona***</b>`;
+        es_grupo_persona.value="persona";
+        mostrar_users_areas = document.getElementById('users_area');
+        mostrar_users_areas.innerHTML="";
+        mostrar_etiqueta = document.getElementById('etiqueta');
+        mostrar_etiqueta.innerHTML="";
+
+        let select = document.getElementById("area");
+        select.value = "0";  
+
+    }
+
+    tkt_grupo.onclick = () => {
+        tkt_grupo.disabled = true;
+        tkt_persona.disabled = false;
+        tkt_a_quien.innerHTML = `<b>***Tu ticket será enviado a un grupo, Cualquier miembro del grupo lo puede resolver***</b>`;
+        es_grupo_persona.value="grupo";
+        mostrar_users_areas = document.getElementById('users_area');
+        mostrar_users_areas.innerHTML="";
+        mostrar_etiqueta = document.getElementById('etiqueta');
+        mostrar_etiqueta.innerHTML="";
+
+        let select = document.getElementById("area");
+        select.value = "0";  
+
+    }
+
     function crearTicket() {
 
         areaDestTkt = document.getElementById('area').value;
         descrip = document.getElementById('descripticket').value;
         mensajetkt = document.getElementById('mensajeticket');
+        const es_grupo_persona = document.getElementById('es_grupo_persona').value;
+
 
         mensajetkt.innerHTML = " <span> Campos Obligatorios</span> ";
 
@@ -106,6 +146,7 @@
                     "etiqueta": select_etk,
                     "descrip": descrip,
                     "user_destino": user_destino,
+                    "es_grupo_persona": es_grupo_persona,
                     "estado": 0
                 }];
                 console.log(obj)
@@ -150,11 +191,15 @@
 
         mostrar_etiqueta = document.getElementById('etiqueta');
         mostrar_users_areas = document.getElementById('users_area');
+        const es_grupo_persona = document.getElementById('es_grupo_persona').value;
+
+        
         console.log(id);
 
         obj = [{
             "id_area": id,
-            "tipo": 1
+            "tipo": 1,
+            "es_grupo_persona": es_grupo_persona,
         }];
         console.log(obj)
         dbParam = JSON.stringify(obj);
@@ -253,6 +298,7 @@
                         addItems: false,
                         removeItems: false,
                     }).disable();
+                    
                 } else {}
             }
         }

@@ -20,52 +20,107 @@ if (isset($_POST['tipo'])) {
     $nams = implode(", ", $nombre);
     echo $nams;
 } else {
+
     $data = json_decode($_POST['x']);
 
     if ($data[0]->tipo == 1) {
-        $output = '    
-            <label for="sel_user" class="form-label font-size-13 text-muted">Elige un usuario:</label>
-            <select class="form-control" data-trigger name="sel_user" id="sel_user">
-            <option value="0" selected disabled>1. Seleccione una etiqueta</option>';
 
-        $id_area = $data[0]->id_area;
+        $es_grupo_persona = $data[0]->es_grupo_persona;
 
-        if ($_SESSION['id_area'] == 3 && $id_area == 3) {
+        if($es_grupo_persona=="persona"){
 
-            $sql = "SELECT * FROM jefe_grupo INNER JOIN users ON jefe_grupo.id_jefe = users.id WHERE jefe_grupo.id_area= '{$id_area}' and jefe_grupo.id_grupo = '{$_SESSION['id_grupo']}'";
-            $users_area_jefes = mysqli_query($conn, $sql);
-            foreach ($users_area_jefes as $jefes) {
+            $output = '    
+                <label for="sel_user" class="form-label font-size-13 text-muted">Elige un usuario:</label>
+                <select class="form-control" data-trigger name="sel_user" id="sel_user">
+                <option value="0" selected disabled>1. Seleccione un usuario</option>';
+
+            $id_area = $data[0]->id_area;
+
+            if ($_SESSION['id_area'] == 3 && $id_area == 3) {
+
+                $sql = "SELECT * FROM jefe_grupo INNER JOIN users ON jefe_grupo.id_jefe = users.id WHERE jefe_grupo.id_area= '{$id_area}' and jefe_grupo.id_grupo = '{$_SESSION['id_grupo']}'";
+                $users_area_jefes = mysqli_query($conn, $sql);
+                foreach ($users_area_jefes as $jefes) {
+                    $output .= '
+                            <option value="' . $jefes['id'] . '">' . $jefes['n_user'] . " " . $jefes['l_user'] . '</option>
+                        ';
+                }
+            } else {
+                $sql = "SELECT * FROM jefe_grupo INNER JOIN users ON jefe_grupo.id_jefe = users.id WHERE jefe_grupo.id_area= '{$id_area}'";
+                $users_area_jefes = mysqli_query($conn, $sql);
+                foreach ($users_area_jefes as $jefes) {
+                    $output .= '
+                            <option value="' . $jefes['id'] . '">' . $jefes['n_user'] . " " . $jefes['l_user'] . '</option>
+                        ';
+                }
+            }
+
+            $output .= '</select>';
+
+            $output .= '    
+                <label for="sel_etiqueta" class="form-label font-size-13 text-muted">Etiqueta:</label>
+                <select class="form-control" data-trigger name="sel_etiqueta" id="sel_etiqueta">
+                <option value="0" selected disabled>1. Seleccione una etiqueta</option>';
+
+            $id_area = $data[0]->id_area;
+            $sql = "SELECT * FROM etiquetas WHERE id_area= {$id_area}";
+            $etiquetas_area = mysqli_query($conn, $sql);
+            foreach ($etiquetas_area as $value) {
                 $output .= '
-                        <option value="' . $jefes['id'] . '">' . $jefes['n_user'] . " " . $jefes['l_user'] . '</option>
+                        <option value="' . $value['id_etiqueta'] . '">' . $value['descrip_etiq'] . '</option>
                     ';
             }
-        } else {
-            $sql = "SELECT * FROM jefe_grupo INNER JOIN users ON jefe_grupo.id_jefe = users.id WHERE jefe_grupo.id_area= '{$id_area}'";
-            $users_area_jefes = mysqli_query($conn, $sql);
-            foreach ($users_area_jefes as $jefes) {
-                $output .= '
-                        <option value="' . $jefes['id'] . '">' . $jefes['n_user'] . " " . $jefes['l_user'] . '</option>
-                    ';
-            }
-        }
+            $output .= '</select>';
+            echo $output;
+        }elseif($es_grupo_persona=="grupo"){
 
-        $output .= '</select>';
+            $output = '    
+                <label for="sel_user" class="form-label font-size-13 text-muted">Elige un grupo:</label>
+                <select class="form-control" data-trigger name="sel_user" id="sel_user">
+                <option value="0" selected disabled>1. Seleccione un grupo</option>';
 
-        $output .= '    
-            <label for="sel_etiqueta" class="form-label font-size-13 text-muted">Etiqueta:</label>
-            <select class="form-control" data-trigger name="sel_etiqueta" id="sel_etiqueta">
-            <option value="0" selected disabled>1. Seleccione una etiqueta</option>';
+            $id_area = $data[0]->id_area;
 
-        $id_area = $data[0]->id_area;
-        $sql = "SELECT * FROM etiquetas WHERE id_area= {$id_area}";
-        $etiquetas_area = mysqli_query($conn, $sql);
-        foreach ($etiquetas_area as $value) {
-            $output .= '
-                    <option value="' . $value['id_etiqueta'] . '">' . $value['descrip_etiq'] . '</option>
+            if ($_SESSION['id_area'] == 3 && $id_area == 3) {
+
+                $sql = "SELECT * FROM grupos WHERE id_grupo = '{$_SESSION['id_grupo']}'";
+                $my_grupo = mysqli_query($conn, $sql);
+                foreach ($my_grupo as $grupo) {
+                    $output .= '
+                            <option value="' . $grupo['id_grupo'] . '">' . $grupo['n_grupo'] .'</option>
+                        ';
+                }
+            } else {
+
+                $sql = mysqli_query($conn,"SELECT *FROM grupos WHERE id_area = '{$id_area}'");
+               
+                foreach($sql as $grupo){
+                    $output .= '
+                    <option value="'.$grupo['id_grupo'].'">'.$grupo['n_grupo'].'</option>
                 ';
+                }
+                    
+                
+            }
+
+            $output .= '</select>';
+
+            $output .= '    
+                <label for="sel_etiqueta" class="form-label font-size-13 text-muted">Etiqueta:</label>
+                <select class="form-control" data-trigger name="sel_etiqueta" id="sel_etiqueta">
+                <option value="0" selected disabled>1. Seleccione una etiqueta</option>';
+
+            $id_area = $data[0]->id_area;
+            $sql = "SELECT * FROM etiquetas WHERE id_area= {$id_area}";
+            $etiquetas_area = mysqli_query($conn, $sql);
+            foreach ($etiquetas_area as $value) {
+                $output .= '
+                        <option value="' . $value['id_etiqueta'] . '">' . $value['descrip_etiq'] . '</option>
+                    ';
+            }
+            $output .= '</select>';
+            echo $output;
         }
-        $output .= '</select>';
-        echo $output;
     } elseif ($data[0]->tipo == 2) {
         $output = "";
         $output .= '    
