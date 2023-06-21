@@ -314,12 +314,7 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
                                                 </div>
                                             </div>
 
-
-                                            <?php
-
-                                            if ($_SESSION['permisochat'] == true) {
-
-                                            ?>
+                                                <input type="hidden" id="permiso" value="<?php echo $_SESSION['permisochat']?>" disabled>
 
                                                 <input id="file-input" style="display:none" type="file" name="image" accept="image/png,image/jpeg">
 
@@ -335,28 +330,8 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
                                                     <button type="submit" class="btn btn-primary chat-send w-md waves-effect waves-light" id="enviar" disabled><span class="d-none d-sm-inline-block me-2">Enviar</span> <i class="mdi mdi-send float-end"></i></button>
                                                 </div>
 
-                                            <?php
-
-                                            } else {
-
-                                            ?>
-                                                <div class="col">
-                                                    <div class="position-relative">
-                                                        <input type="text" name="msg" id="msg" class="form-control border bg-light-subtle" placeholder="Tienes deshabilitado el chat" autocomplete="off">
-                                                        <input type="hidden" name="">
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="submit" class="btn btn-primary chat-send w-md waves-effect waves-light" disabled><span class="d-none d-sm-inline-block me-2">Enviar</span> <i class="mdi mdi-send float-end"></i></button>
-                                                </div>
-                                            <?php
-                                            }
-                                            ?>
-
-                                            <div id="texto_error">
-
-                                            </div>
+                                            
+                                      
                                             <div id="imagen"></div>
 
 
@@ -398,6 +373,11 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
                                     </div>
                                 </div>
                         </form>
+                                        <?php if($_SESSION['rol']==3){?>
+                                            <div id="texto_error"><span class="text-danger"> Tienes deshabilitado el Chat :(</span><div>
+                                        <?php }else{?>
+                                            <div id="texto_error"><div>
+                                        <?php }?>
 
                     </div>
                     <!-- end user chat -->

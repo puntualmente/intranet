@@ -1,3 +1,9 @@
+$( document ).ready(function() {
+    const permiso=document.getElementById('permiso').value;
+    contenidodeenvio=document.getElementById('contenidodeenvio');
+        contenidodeenvio.hidden=true;
+});
+
 
 inputField = document.getElementById('msg');
 sendBtn = document.getElementById('enviar');
@@ -118,21 +124,28 @@ sendBtn.onclick = ()=>{
 
 var divImagen = document.getElementById("imagen");
 
-document.addEventListener("paste", function(event){
-   var items = event.clipboardData.items;
-   for (var i = 0; i < items.length; i++) {
-      if (items[i].type.indexOf("image") !== -1) {
-         var blob = items[i].getAsFile();
-         var url = URL.createObjectURL(blob);
-         var img = new Image();
-         img.src = url;
-         //divImagen.appendChild(img);
-         console.log(blob);
-         //enviarImagenAlServidor(blob);
-         enviarImagen(blob);
-      }
-   }
-});
+const permiso=document.getElementById('permiso').value;
+contenidodeenvio=document.getElementById('contenidodeenvio');
+if(permiso==0){
+    
+}else{
+    document.addEventListener("paste", function(event){
+        var items = event.clipboardData.items;
+        for (var i = 0; i < items.length; i++) {
+           if (items[i].type.indexOf("image") !== -1) {
+              var blob = items[i].getAsFile();
+              var url = URL.createObjectURL(blob);
+              var img = new Image();
+              img.src = url;
+              //divImagen.appendChild(img);
+              console.log(blob);
+              //enviarImagenAlServidor(blob);
+              enviarImagen(blob);
+           }
+        }
+     });
+    }
+
 
 function enviarImagen(imagen){
     var formData = new FormData(form);

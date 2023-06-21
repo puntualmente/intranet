@@ -60,7 +60,7 @@ if (!empty($cedula) && !empty($password)) {
                                     }else{
                                         $_SESSION['permisochat']=true;
                                     }
-                                    
+
                                 case 'etiquetado':
 
                                     if($permiso['value']==0){
@@ -72,8 +72,13 @@ if (!empty($cedula) && !empty($password)) {
                             }
                             
                         }else{
-                            $_SESSION['permisochat']=true;
-                            $_SESSION['permisoetiquetado']=true;
+                            if($_SESSION['rol']==3){
+                                $_SESSION['permisochat']=0;
+                            }elseif($_SESSION['rol']==1||$_SESSION['rol']==2){
+                                $_SESSION['permisochat']=1;
+                                $_SESSION['permisoetiquetado']=1;
+                            }
+
                         }
                     
                     //
