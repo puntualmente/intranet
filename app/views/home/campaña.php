@@ -37,33 +37,104 @@
                 <div class="container-fluid">
                     <div class="mt-3 mt-lg-0">
                         <div class="mb-3">
-                            <label for="empresa" class="form-label font-size-13 text-muted">Campaña</label>
-                            <select onchange="observar_grupos(this.value)" class="form-control" data-trigger name="empresa" id="empresa">
-                                <option value="0" disabled selected>1. Elige una Campaña</option>
-                                <?php foreach ($grupos as $grupo) { ?>
-                                    <option value="<?php echo $grupo['id_grupo'] ?>"><?php echo $grupo['n_grupo'] ?></option>
-                                <?php } ?>
+
                             </select>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-body">
-                                    <table id="datos_impresos" class="table table-bordered dt-responsive nowrap w-100">
+                                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
+                                                
                                                 <th>Nombre</th>
                                                 <th>Fecha y Hora de Logueo</th>
                                                 <th>Observaciones</th>
                                                 <th>Campaña</th>
+                                                
                                             </tr>
                                         </thead>
 
                                         <tbody id="vista_grupos">
+                                            <?php
+                                              error_reporting(E_ERROR | E_PARSE ); 
+                                            date_default_timezone_set('America/Bogota');
+                                            $hoy = date("Y-m-d ");
 
+                                            
+                                            function ingreso($hora)
+                                            {
+                                                $timestamp = strtotime($hora); // Convertir la fecha en un timestamp    
+                                                $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+
+                                                return $hora;
+                                            }
+
+                                            $hora_ingreso_1 = "7:01:00";
+                                            $hora_ingreso_2 = "7:10:59";
+                                            $hora_ingreso_3 = "7:11:00";
+                                            
+
+                                            
+                                            if (isset($_SESSION['unique_id'])) {
+                                                $output = '';
+                                            
+                                                $data = json_decode($_POST['x']);
+                                                if ($data[0]->tipo == 0) {
+                                                    $incoming_id = $data[0]->id_grupo;
+                                                    $campana = mysqli_query($conn, "SELECT * FROM users u, log_session l
+                                                    WHERE l.id_user=u.cedula
+                                                    AND DATE(f_h)  = '{$hoy}' 
+                                                    AND l.accion='login'
+                                                    GROUP BY l.id_user
+                                                    ORDER BY l.f_h DESC;");
+
+
+                                            foreach ($campana as $user) {
+                                                $grupos = mysqli_query($conn, "SELECT * FROM grupos WHERE id_grupo='{$user['id_grupo']}'");
+                                                $group = mysqli_fetch_assoc($grupos);                                        
+                                                
+                                                $timestamp = strtotime($user['f_h']); // Convertir la fecha en un timestamp    
+                                                $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+
+                                                if ($hora < ingreso($hora_ingreso_1)) {
+                                                    $class = "text-success";
+                                                } elseif ($hora <= ingreso($hora_ingreso_2)) {
+                                                    $class = "text-warning";
+                                                } elseif ($hora >= ingreso($hora_ingreso_3)) {
+                                                    $class = "text-danger";
+                                                } else {
+                                                    echo "error";
+                                                } 
+                                            ?>
+                                                <tr>
+                                                    
+                                                    <td scope="row" class="<?php echo $class?>"> <?php echo $user['n_user'] . " " .  $user['l_user'] ?> </td>
+                                                    <td > <?php echo $user['f_h'] ?> </td>
+                                                    <td> 
+                                                              <select class="form-control" onchange="imprimirTabla(this.value);" id="ausencia">
+                                                                  <option value="0" > Elige una opción </option>                        
+                                                                  <option value="1">Ausencia Justificada</option>
+                                                                  <option value="2">Ausencia Injustificada</option>
+                                                                  <option value="3">Incapacidad</option>
+                                                                  <option value="4">Permiso</option>
+                                                                  <option value="5">Sanción</option>
+                                                                  <option value="6">Vacaciones</option>
+                                                                  <option value="7">Licencia de Maternidad</option>
+                                                                  <option value="8">Licencia de Paternidad</option>
+                                                                  <option value="9">Sanción</option>         
+                                                                  <br> 
+                                                                  <span id="ausencia_2"></span>                                               
+                                                    </td>
+                                                    <td> <?php echo $group['n_grupo'] ?> </td>
+                                                </tr>
+                                            <?php } } } ?>
                                         </tbody>
-
                                     </table>
-                                    <button type="button" class="btn btn-primary" id="btn_observa">Guardar cambios</button>
+
+                                    <button type="submit"  class="btn btn-primary" id="btn_observa" name=btn_observa >Guardar cambios</button>
+                                    <!-- <button type="submit" onchange="observaciones()" class="btn btn-primary" id="btn_actualizar" name=actualizar>Actualizar</button> -->
+
                                 </div>
                             </div>
                             <!-- end cardaa -->
