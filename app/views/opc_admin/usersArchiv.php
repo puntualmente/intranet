@@ -13,7 +13,6 @@
 
                 <head>
 
-                    <title>Admin Archivos | Puntualmente</title>
                     <?php include(__dir__ . "/../layouts/head.php");  ?>
 
                     <!-- DataTables -->

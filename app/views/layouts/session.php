@@ -1,8 +1,8 @@
 <?php
 
-// cambiar $_SESSION['activo'] a 0 para expulsarlos a todos de la session
+// cambiar $_SESSION['mantenimiento'] a 1 para expulsar al usuarios de la session
 
-if($_SESSION['activo']==1){
+if($_SESSION['mantenimiento']==0){
     // Initialize the session
     if(!isset($_SESSION)){
         session_start();

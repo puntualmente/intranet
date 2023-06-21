@@ -63,7 +63,7 @@ function headerchatuser($imagen, $nombre, $status, $id_user){
 }
 
 function esadmin(){
-    if($_SESSION['rol']==1){
+    if($_SESSION['rol']==1||$_SESSION['rol']==2){
         return '<div class="dropdown-menu dropdown-menu-end">
         <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" >Mensajes Destacados</button>
         </div>';
