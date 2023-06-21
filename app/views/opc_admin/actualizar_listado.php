@@ -13,7 +13,6 @@
     
     <!-- datepicker css -->
     <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/flatpickr/flatpickr.min.css">
-    <title>Actualizar U | Admin-Puntualmente</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
     <?php include(__dir__."/../layouts/head-style.php");?>
 

@@ -1,9 +1,18 @@
-<?php include_once(__dir__."/../layouts/session.php");  ?>
+<?php 
 
-<?php include(__dir__."/../layouts/head-main.php");  ?>
+include_once(__dir__."/../layouts/session.php");  
+
+?>
+
+<?php 
+
+include(__dir__."/../layouts/head-main.php");  
+
+include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
+
+?>
 
 <head>
-    <title><?php echo $language["Dashboard"]; ?> | Puntualmente</title>
 
     <?php include(__dir__."/../layouts/head.php");  ?>
 

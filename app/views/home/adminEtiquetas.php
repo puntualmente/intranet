@@ -7,14 +7,12 @@
 
 <head>
 
-    <title>Admin Etiquetas | Puntualmente</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
 
     <!-- choices css -->
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
        <!-- datepicker css -->
        <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/flatpickr/flatpickr.min.css">
-    <title>Registro | Admin-Puntualmente</title>
      <!-- DataTables -->
      <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />

@@ -16,55 +16,83 @@ if (!empty($cedula) && !empty($password)) {
         $user_pass = md5($password);
         $enc_pass = $row['password'];
         if ($user_pass === $enc_pass) {
-            $status = "Disponible";
-            if(!isset($_SESSION)){
-                session_start();
-            }
-            $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE id = {$row['id']}");
-            if ($sql2) {
 
-                
-                $hoy = date("Y-m-d H:i:s"); 
-                $ip=getRealIP();
+            if($row['mantenimiento']==0){
 
-                $log_session= mysqli_query($conn, "INSERT INTO log_session (id_user, f_h, ip , accion) VALUES ('{$row['cedula']}', '{$hoy}', '{$ip}', 'login')");
-                
-                $_SESSION['unique_id'] = $row['id'];
-                $_SESSION['username'] = $row['n_user'] . " " . $row['l_user'];
-                $_SESSION['rol'] = $row['rol'];
-                $_SESSION['img'] = $row['img'];
-                $_SESSION['id_area']=$row['id_area'];
-                //$_SESSION['id_jefe']=$row['id_jefe'];
-                $_SESSION['id_grupo']=$row['id_grupo'];
-                $_SESSION['cedula']=$row['cedula'];
-                $_SESSION['activo']=$row['activo'];
+                $status = "Disponible";
+                if(!isset($_SESSION)){
+                    session_start();
+                }
+                $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE id = {$row['id']}");
+                if ($sql2) {
 
-                //solo cree este pedaso
+                    
+                    $hoy = date("Y-m-d H:i:s"); 
+                    $ip=getRealIP();
 
-                $sqlpermisochat = mysqli_query($conn, "SELECT * FROM permisos WHERE tipo_permiso = 'chat' and id_grupo = '{$row['id_grupo']}' and rol = '{$row['rol']}' and id_area = '{$row['id_area']}' and activo = '{$row['activo']}'");
+                    $log_session= mysqli_query($conn, "INSERT INTO log_session (id_user, f_h, ip , accion) VALUES ('{$row['cedula']}', '{$hoy}', '{$ip}', 'login')");
+                    
+                    $_SESSION['unique_id'] = $row['id'];
+                    $_SESSION['username'] = $row['n_user'] . " " . $row['l_user'];
+                    $_SESSION['rol'] = $row['rol'];
+                    $_SESSION['img'] = $row['img'];
+                    $_SESSION['id_area']=$row['id_area'];
+                    //$_SESSION['id_jefe']=$row['id_jefe'];
+                    $_SESSION['id_grupo']=$row['id_grupo'];
+                    $_SESSION['cedula']=$row['cedula'];
+                    $_SESSION['activo']=$row['activo'];
+                    $_SESSION['mantenimiento']=$row['mantenimiento'];
 
-                    if(mysqli_num_rows($sqlpermisochat)>0){
-                        
-                        $permiso = mysqli_fetch_assoc($sqlpermisochat);
+                    //solo cree este pedaso
 
-                        if($permiso['value']==0){
-                            $_SESSION['permisochat']=false;
+                    $sqlpermisochat = mysqli_query($conn, "SELECT * FROM permisos WHERE id_grupo = '{$row['id_grupo']}' and rol = '{$row['rol']}' and id_area = '{$row['id_area']}' and activo = '{$row['activo']}'");
+
+                        if(mysqli_num_rows($sqlpermisochat)>0){
+
+                            $permiso = mysqli_fetch_assoc($sqlpermisochat);
+
+                            switch($permiso['tipo_permiso']){
+
+                                case 'chat':
+
+                                    if($permiso['value']==0){
+                                        $_SESSION['permisochat']=false;
+                                    }else{
+                                        $_SESSION['permisochat']=true;
+                                    }
+
+                                case 'etiquetado':
+
+                                    if($permiso['value']==0){
+                                        $_SESSION['permisoetiquetado']=false;
+                                    }else{
+                                        $_SESSION['permisoetiquetado']=true;
+                                    }
+                            
+                            }
+                            
                         }else{
-                            $_SESSION['permisochat']=true;
-                        }
-                    }else{
-                        $_SESSION['permisochat']=true;
-                    }
-                
-                //
-                $status = mysqli_query($conn, "SELECT (status) FROM users WHERE cedula = '{$cedula}'");
-                $row3 = mysqli_fetch_assoc($status);
+                            if($_SESSION['rol']==3){
+                                $_SESSION['permisochat']=0;
+                            }elseif($_SESSION['rol']==1||$_SESSION['rol']==2){
+                                $_SESSION['permisochat']=1;
+                                $_SESSION['permisoetiquetado']=1;
+                            }
 
-                $_SESSION['status']= $row3['status'];
-                
-                echo "Proceso Exitoso";
-            } else {
-                echo "Algo salió mal. ¡Inténtalo de nuevo!";
+                        }
+                    
+                    //
+                    $status = mysqli_query($conn, "SELECT (status) FROM users WHERE cedula = '{$cedula}'");
+                    $row3 = mysqli_fetch_assoc($status);
+
+                    $_SESSION['status']= $row3['status'];
+                    
+                    echo "Proceso Exitoso";
+                } else {
+                    echo "Algo salió mal. ¡Inténtalo de nuevo!";
+                }
+            }else{
+                echo "Un momentos estamos ajustando algo! 🛠";
             }
         } else {
             echo "¡Cedula o la contraseña incorrectas!";
