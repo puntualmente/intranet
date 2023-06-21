@@ -374,7 +374,7 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
                                 </div>
                         </form>
                                         <?php if($_SESSION['rol']==3){?>
-                                            <div id="texto_error"><span class="text-danger"> Tienes deshabilitado el Chat :(</span><div>
+                                            <div id="texto_error"><span class="text-danger"> Tienes deshabilitado el Chat :(... Solo puedes leer</span><div>
                                         <?php }else{?>
                                             <div id="texto_error"><div>
                                         <?php }?>
