@@ -1,47 +1,101 @@
 <?php
-// require (__dir__."/../data/pdo.php");
-include_once(__dir__ . "/../config.php");
+require(__dir__ . "/../data/pdo.php");
+/* include_once(__dir__ . "/../config.php"); */
+/* 
 
-date_default_timezone_set('America/Bogota');
-$hoy = date("Y-m-d ");
 $hora_ingreso_1 = "7:01:00";
 $hora_ingreso_2 = "7:10:59";
-$hora_ingreso_3 = "7:11:00";
+$hora_ingreso_3 = "7:11:00"; */
+date_default_timezone_set('America/Bogota');
+$hoy = date("Y-m-d ");
 
 
+foreach ($_POST['ids_login'] as $key => $id_login) {
+    $user = $_POST['user_' . $id_login];
+    $n_user = $_POST['n_user_' . $id_login];
+    $l_user = $_POST['l_user_' . $id_login];
+    $fecha = $_POST['fecha_' . $id_login];
+    $grupo = $_POST['grupo_' . $id_login];
+    $ausencia = $_POST['ausencia_' . $id_login];
+    if ($ausencia == 1) {
+        $texto = 'Ausencia Justificada';
+    } elseif ($ausencia == 2) {
+        $texto = 'Ausencia Injustificada';
+    } elseif ($ausencia == 3) {
+        $texto = 'Incapacidad';
+    } elseif ($ausencia == 4) {
+        $texto = 'Permiso';
+    } elseif ($ausencia == 5) {
+        $texto = 'Sancion';
+    } elseif ($ausencia == 6) {
+        $texto = 'Vacaciones';
+    } elseif ($ausencia == 7) {
+        $texto = 'Licencia de Maternidad';
+    } elseif ($ausencia == 8) {
+        $texto = 'Licencia de Paternidad';
+    } elseif ($ausencia == 9) {
+        $texto = 'Sancion';
+    }
 
-if ($data[0]->tipo == 1) {
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+    if (floatval($ausencia) != 0) {
 
-        $incoming_id = $data[0]->id;
-    if (isset($_POST['submit'])) {
-        // Obtener los valores del formulario
-        $n_user = $_POST['n_user'];
-        $l_user = $_POST['l_user'];
-        $f_h = $_POST['f_h'];
-        $observaciones = $_POST['observaciones'];
-        $campaña = $_POST['campaña'];
+        $response = array(
+            'success' => true,
+            'message' => 'Operación exitosa',
+            'data' => array(
+                'n_user' => $n_user,
+                'l_user' => $l_user,
+                'fecha' => $fecha,
+                'texto' => $texto,
+                'grupo' => $grupo
+            )
+        );
 
-        if ($cedula != 0) {
-            $insertar = ("INSERT INTO observacion_coordinadores (n_user,l_user,f_h,observaciones,campaña) VALUES ('{$n_user}', '{$l_user}','{$f_h}','{$observaciones}','{$campaña}'");
-            mysqli_query($conn, $insertar);
-            
-        }
+        // Envía la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
         
-    }
-
-    if ($conn->query($insertar) === true) {
-        echo "Datos insertados correctamente.";
+        
+        $sql = $pdo->prepare("INSERT INTO observacion_coordinadores ( n_user, l_user,f_h,observaciones, campana) VALUES ('{$n_user}','{$l_user}', '{$fecha}', '{$texto}','{$grupo}')");
+        $sql->execute();
+        
+       
     } else {
-        echo "Error al insertar los datos: " . $conn->error;
+        echo "HOLAAAA";
     }
+} 
+    
 
 
-    $conn->close();
+/* 
+if($data[0]->opcion==2){
+$tabla_observa = $pdo->prepare ("SELECT * FROM  observacion_coordinadores WHERE f_h  = '{$hoy}'");
+$tabla_observa->execute();
+
+foreach($tabla_observa as $tr){
+
+$output .= '
+<tr>
+    <th scope="row" id="vis"> '.$tr['n_user'].' </th>
+    <td> '.$tr['l_user'].' </td>
+    <td> '.$tr['f_h'].' </td>
+    <td> '.$tr['observaciones'].' </td>
+    <td> '.$tr['campaña'].' </td>
+</tr>';
+echo $output;
 }
-}
 
+} */
+/* if (isset($_SESSION['unique_id'])) {
+    $output = '';
+
+    $data = json_decode($_POST['x']);
+
+    if ($data[0]->tipo == 0) {
+        $incoming_id = $data[0]->id_grupo;
+    }
+}
+  */
 
 
 
