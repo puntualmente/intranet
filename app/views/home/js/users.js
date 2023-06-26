@@ -227,11 +227,18 @@ function holagrupos(id){
   const permiso=document.getElementById('permiso').value;
   contenidodeenvio=document.getElementById('contenidodeenvio');
   const tipo_chat = document.getElementById('tipo_chat').value;
+  texto_error=document.getElementById('texto_error');
+
+
+
 
   if(permiso != 0 || tipo_chat=="chat_grupo"){
       contenidodeenvio.hidden=false;
+      texto_error.hidden = true;
   }else{
       contenidodeenvio.hidden=true;
+      texto_error.hidden = false;
+
   }
   document.getElementById('iniciodelchat').hidden=true;
   
@@ -267,6 +274,8 @@ function holagrupos(id){
 
           if(permiso != 0 || tipo_chat=="chat_grupo"){
               contenidodeenvio.hidden=false;
+              texto_error.hidden = true;
+
           }else{
               contenidodeenvio.hidden=true;
           }
