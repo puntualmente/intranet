@@ -365,7 +365,7 @@
            
                     $('#ticketstable').DataTable({
            
-                               aaSorting: [[2, 'desc']],
+                               aaSorting: [[4, 'asc']],
                             
                     });                      
                    
