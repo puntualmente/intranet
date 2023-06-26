@@ -165,6 +165,21 @@ function holausers(id){
         if(xhr.status === 200){
           let data2 = xhr.response;
           headerchat.innerHTML = data2;
+
+          const es_mi_jefe=document.getElementById('es_mi_jefe').value;
+          contenidodeenvio=document.getElementById('contenidodeenvio');
+          const permiso=document.getElementById('permiso').value;
+          texto_error=document.getElementById('texto_error');
+          if(permiso == 0){
+            if(es_mi_jefe == 0){
+                contenidodeenvio.hidden=true;
+                texto_error.hidden=false;
+
+            }else{
+                contenidodeenvio.hidden=false;
+                texto_error.hidden=true;
+            }
+          }
         }
     }
   }
@@ -211,10 +226,12 @@ function holagrupos(id){
   document.getElementById('msg').disabled=false;
   const permiso=document.getElementById('permiso').value;
   contenidodeenvio=document.getElementById('contenidodeenvio');
-  if(permiso == 0){
-      contenidodeenvio.hidden=true;
-  }else{
+  const tipo_chat = document.getElementById('tipo_chat').value;
+
+  if(permiso != 0 || tipo_chat=="chat_grupo"){
       contenidodeenvio.hidden=false;
+  }else{
+      contenidodeenvio.hidden=true;
   }
   document.getElementById('iniciodelchat').hidden=true;
   
@@ -245,6 +262,14 @@ function holagrupos(id){
         if(xhr2.status === 200){
           let data2 = xhr2.response;
           contenidochat.innerHTML = data2;
+
+          const tipo_chat = document.getElementById('tipo_chat').value;
+
+          if(permiso != 0 || tipo_chat=="chat_grupo"){
+              contenidodeenvio.hidden=false;
+          }else{
+              contenidodeenvio.hidden=true;
+          }
         }
     }
   }

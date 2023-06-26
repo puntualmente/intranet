@@ -13,10 +13,7 @@ continueBtn.onclick = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
               let data = xhr.response;
-              if(data === "success"){
-                location.href = "home";
-              }else{
-                if(data=="Proceso Exitoso"){
+                if(data==="Proceso Exitoso"){
                   location.href = "home";
                 }else{
                   errorText.textContent = data;
@@ -24,7 +21,6 @@ continueBtn.onclick = ()=>{
               }
           }
       }
-    }
     let formData = new FormData(form);
     xhr.send(formData);
 }

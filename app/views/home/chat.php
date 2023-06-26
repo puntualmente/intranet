@@ -73,7 +73,7 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
             right: 30px;
         }
     </style>
-  
+
 
     <?php include(__dir__ . "/../layouts/head.php");  ?>
     <?php include(__dir__ . "/../layouts/head-style.php");  ?>
@@ -274,6 +274,7 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
 
                                     <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value="nada">
                                     <input type="text" id="tipo_chat" name="tipo_chat" hidden dissabled value="nada">
+                                    <input type="text" id="es_mi_jefe" name="es_mi_jefe" hidden dissabled value ="0">
 
 
                                 </div>
@@ -314,24 +315,24 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
                                                 </div>
                                             </div>
 
-                                                <input type="hidden" id="permiso" value="<?php echo $_SESSION['permisochat']?>" disabled>
+                                            <input type="hidden" id="permiso" value="<?php echo $_SESSION['permisochat'] ?>" disabled>
 
-                                                <input id="file-input" style="display:none" type="file" name="image" accept="image/png,image/jpeg">
+                                            <input id="file-input" style="display:none" type="file" name="image" accept="image/png,image/jpeg">
 
 
-                                                <div class="col">
-                                                    <div class="position-relative">
-                                                        <input type="text" name="msg" id="msg" class="form-control border bg-light-subtle" placeholder="Escribe tu mensaje..." autocomplete="off" disabled>
-                                                        <input type="hidden" id="imagen_codificada" name="imagen_codificada">
+                                            <div class="col">
+                                                <div class="position-relative">
+                                                    <input type="text" name="msg" id="msg" class="form-control border bg-light-subtle" placeholder="Escribe tu mensaje..." autocomplete="off" disabled>
+                                                    <input type="hidden" id="imagen_codificada" name="imagen_codificada">
 
-                                                    </div>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <button type="submit" class="btn btn-primary chat-send w-md waves-effect waves-light" id="enviar" disabled><span class="d-none d-sm-inline-block me-2">Enviar</span> <i class="mdi mdi-send float-end"></i></button>
-                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="submit" class="btn btn-primary chat-send w-md waves-effect waves-light" id="enviar" disabled><span class="d-none d-sm-inline-block me-2">Enviar</span> <i class="mdi mdi-send float-end"></i></button>
+                                            </div>
 
-                                            
-                                      
+
+
                                             <div id="imagen"></div>
 
 
@@ -373,260 +374,262 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
                                     </div>
                                 </div>
                         </form>
-                                        <?php if($_SESSION['rol']==3){?>
-                                            <div id="texto_error"><span class="text-danger"> Tienes deshabilitado el Chat :(... Solo puedes leer</span><div>
-                                        <?php }else{?>
-                                            <div id="texto_error"><div>
-                                        <?php }?>
+                        <?php if ($_SESSION['rol'] == 3) { ?>
+                            <div id="texto_error"><span class="text-danger"> Solo puedes enviarle mensajes a tus lideres :)</span>
+                                <div>
+                                <?php } else { ?>
+                                    <div id="texto_error">
+                                        <div>
+                                        <?php } ?>
+
+                                        </div>
+                                        <!-- end user chat -->
+                                    </div>
+                                    <!-- End d-lg-flex  -->
+
+                                </div> <!-- container-fluid -->
+                            </div>
+                            <!-- End Page-content -->
+                    </div>
+                    <!-- end main content-->
+                    <div class="popupmostrarimagen">
+                        <a class="download" download><span>&darr;</span></a>
+                        <span class="close">&times;</span>
+                        <div class="content">
+                            <img class="image">
+                            <button class="prev-btn">&#8249;</button>
+                            <button class="next-btn">&#8250;</button>
+                        </div>
+                    </div>
+
+
+
+
+                    <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                        <!-- Scrollable modal -->
+                        <form method="post" id="crear">
+                            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Crear Grupos</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" id="nombre" placeholder="Nombre Grupo" class="form-control" autocomplete="off" require>
+                                            <div class="mb-3">
+
+                                                <label for="area" class="form-label font-size-13 text-muted">Personas:</label>
+                                                <div class="d-flex">
+                                                    <div class="w-100">
+                                                        <select class="form-control" data-trigger name="usuario" id="usuario">
+                                                            <?php foreach ($usuarios as $user) { ?>
+                                                                <option value="<?php echo $user['id'] ?>"><?php echo $user['n_user'] . " " . $user['l_user'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <button onclick="myfuncion()" type="button" class="btn btn-light"><i class=" fas fa-user-plus"></i></button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="chat-message-list" data-simplebar>
+                                                    <div class="pt-3">
+                                                        <div class="px-3">
+                                                            <h5 class="font-size-14 mb-3">Integrantes del grupo</h5>
+                                                        </div>
+                                                        <ul class="list-unstyled chat-list" id="list-grupo">
+
+                                                            <!-- se llena solo   -->
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div id="mensaje"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
+                                            <button type="submit" id="botoncrear" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
+                        </form>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                ...
+                            </div>
+                        </div>
+                        <!-- -----------------------------------------------------------------Editar grupos -->
+                        <!-- Scrollable modal -->
+                        <form method="post" id="guardargrupos">
+                            <div class="modal fade" id="popupeditargrupos" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Editar Grupo</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="mb-3">
+
+
+                                                <div class="d-flex">
+                                                    <div class="w-100">
+                                                        <select class="form-control" data-trigger name="usuario2" id="usuario2">
+                                                            <?php foreach ($usuarios as $user) { ?>
+                                                                <option value="<?php echo $user['id'] ?>"><?php echo $user['n_user'] . " " . $user['l_user'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <button onclick="myfuncion2()" type="button" class="btn btn-light"><i class=" fas fa-user-plus"></i></button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="chat-message-list" data-simplebar>
+                                                    <div class="pt-3">
+                                                        <div class="px-3">
+                                                            <h5 class="font-size-14 mb-3">Integrantes del grupo</h5>
+                                                        </div>
+                                                        <ul class="list-unstyled chat-list" id="mensaje2">
+
+                                                            <!-- se llena solo   -->
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <span>*Si este campo lo dejas vacio el nombre sera el mismo*</span>
+                                                <input type="text" id="nuevonombre" placeholder="Nuevo nombre del grupo" class="form-control">
+
+                                                <span id="mensaje9"></span>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" id="botoncambiar" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
+                        </form>
+
+                    <?php } ?>
+
+                    <form method="post" id="form_etiq_msg">
+                        <div class="modal fade" id="modal_etiq_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Asigna Una Etiqueta</h5>
+                                        <button id="closemodaltkt" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
+                                    </div>
+                                    <div class="modal-body" style="height: 300px">
+
+                                        <div class="mb-3">
+                                            <label for="area" class="form-label font-size-13 text-muted">Etiquetas:</label>
+                                            <select class="form-control" data-trigger name="etiquetar_msg" id="etiquetar_msg">
+                                                <option value="0" selected disabled>1. Elige una etiqueta</option>
+                                                <?php
+                                                $sql = mysqli_query($conn, "SELECT * FROM etiquetas_list");
+                                                foreach ($sql as $value) { ?>
+                                                    <option value="<?php echo $value['id'] ?>"><?php echo $value['n_etiqueta'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div id="mostrarmsgaetiquetar"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
+                                        <button type="button" onclick="etiquetarelmsg()" class="btn btn-primary">Etiquetar</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
+                    </form>
+
+                    <form method="post" id="form_reenviar_msg">
+                        <div class="modal fade" id="modal_reenviar_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Reenviar Mensaje a</h5>
+                                        <button id="closemodaltkt" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
+                                    </div>
+                                    <div class="modal-body" style="height: 300px">
+
+                                        <div class="mb-3">
+                                            <label for="area" class="form-label font-size-13 text-muted">Enviar a:</label>
+                                            <select class="form-control" data-trigger name="id_enviar" id="id_enviar">
+                                                <option value="0" selected disabled>1. Elige un Usuario</option>
+                                                <?php foreach ($usuarios as $value) { ?>
+                                                    <option value="<?php echo  $value['id'] ?>"><?php echo $value['n_user'] . " " . $value['l_user'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div id="informacion_adicional"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
+                                        <button type="button" id="reenviar" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
+                    </form>
+
+
+
+
+                    <div>
 
                     </div>
-                    <!-- end user chat -->
+
+
+
                 </div>
-                <!-- End d-lg-flex  -->
-
-            </div> <!-- container-fluid -->
-        </div>
-        <!-- End Page-content -->
-    </div>
-    <!-- end main content-->
-    <div class="popupmostrarimagen">
-        <a class="download" download><span>&darr;</span></a>
-        <span class="close">&times;</span>
-        <div class="content">
-            <img class="image">
-            <button class="prev-btn">&#8249;</button>
-            <button class="next-btn">&#8250;</button>
-        </div>
-    </div>
 
 
+                <!-- END layout-wrapper -->
 
 
-    <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
-        <!-- Scrollable modal -->
-        <form method="post" id="crear">
-            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalScrollableTitle">Crear Grupos</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" id="nombre" placeholder="Nombre Grupo" class="form-control" autocomplete="off" require>
-                            <div class="mb-3">
+                <!-- Right Sidebar -->
+                <?php include(__dir__ . "/../layouts/right-sidebar.php") ?>
+                <!-- /Right-bar -->
 
-                                <label for="area" class="form-label font-size-13 text-muted">Personas:</label>
-                                <div class="d-flex">
-                                    <div class="w-100">
-                                        <select class="form-control" data-trigger name="usuario" id="usuario">
-                                            <?php foreach ($usuarios as $user) { ?>
-                                                <option value="<?php echo $user['id'] ?>"><?php echo $user['n_user'] . " " . $user['l_user'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <button onclick="myfuncion()" type="button" class="btn btn-light"><i class=" fas fa-user-plus"></i></button>
+                <!-- JAVASCRIPT -->
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="chat-message-list" data-simplebar>
-                                    <div class="pt-3">
-                                        <div class="px-3">
-                                            <h5 class="font-size-14 mb-3">Integrantes del grupo</h5>
-                                        </div>
-                                        <ul class="list-unstyled chat-list" id="list-grupo">
-
-                                            <!-- se llena solo   -->
-
-                                        </ul>
-                                    </div>
-                                </div>
+                <?php include(__dir__ . "/../layouts/vendor-scripts.php") ?>
 
 
-                            </div>
-                            <div id="mensaje"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
-                            <button type="submit" id="botoncrear" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+                <!-- init js -->
+                <script src="<?php echo controlador::$rutaAPP ?>app/assets/js/pages/form-advanced.init.js"></script>
+                <script src="<?php echo controlador::$rutaAPP ?>app/assets/js/app.js"></script>
 
-        </form>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-                <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                ...
-            </div>
-        </div>
-        <!-- -----------------------------------------------------------------Editar grupos -->
-        <!-- Scrollable modal -->
-        <form method="post" id="guardargrupos">
-            <div class="modal fade" id="popupeditargrupos" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalScrollableTitle">Editar Grupo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
-                        </div>
-                        <div class="modal-body">
+                <script src="<?php echo controlador::$rutaAPP ?>app/views/home/js/crearGrupos.js"></script>
 
-                            <div class="mb-3">
+                <script src="<?php echo controlador::$rutaAPP ?>app/views/home/js/users.js"></script>
+                <script src="<?php echo controlador::$rutaAPP ?>app/views/home/js/chat.js"></script>
 
 
-                                <div class="d-flex">
-                                    <div class="w-100">
-                                        <select class="form-control" data-trigger name="usuario2" id="usuario2">
-                                            <?php foreach ($usuarios as $user) { ?>
-                                                <option value="<?php echo $user['id'] ?>"><?php echo $user['n_user'] . " " . $user['l_user'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <button onclick="myfuncion2()" type="button" class="btn btn-light"><i class=" fas fa-user-plus"></i></button>
+                </body>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="chat-message-list" data-simplebar>
-                                    <div class="pt-3">
-                                        <div class="px-3">
-                                            <h5 class="font-size-14 mb-3">Integrantes del grupo</h5>
-                                        </div>
-                                        <ul class="list-unstyled chat-list" id="mensaje2">
-
-                                            <!-- se llena solo   -->
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <span>*Si este campo lo dejas vacio el nombre sera el mismo*</span>
-                                <input type="text" id="nuevonombre" placeholder="Nuevo nombre del grupo" class="form-control">
-
-                                <span id="mensaje9"></span>
-
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" id="botoncambiar" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-
-        </form>
-
-    <?php } ?>
-    
-    <form method="post" id="form_etiq_msg">
-        <div class="modal fade" id="modal_etiq_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle">Asigna Una Etiqueta</h5>
-                        <button id="closemodaltkt" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
-                    </div>
-                    <div class="modal-body" style="height: 300px">
-
-                        <div class="mb-3">
-                            <label for="area" class="form-label font-size-13 text-muted">Etiquetas:</label>
-                            <select class="form-control" data-trigger name="etiquetar_msg" id="etiquetar_msg">
-                                <option value="0" selected disabled>1. Elige una etiqueta</option>
-                                <?php
-                                $sql = mysqli_query($conn, "SELECT * FROM etiquetas_list");
-                                foreach ($sql as $value) { ?>
-                                    <option value="<?php echo $value['id'] ?>"><?php echo $value['n_etiqueta'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div id="mostrarmsgaetiquetar"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
-                        <button type="button" onclick="etiquetarelmsg()" class="btn btn-primary">Etiquetar</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-    </form>
-
-    <form method="post" id="form_reenviar_msg">
-        <div class="modal fade" id="modal_reenviar_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle">Reenviar Mensaje a</h5>
-                        <button id="closemodaltkt" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiar()"></button>
-                    </div>
-                    <div class="modal-body" style="height: 300px">
-
-                        <div class="mb-3">
-                            <label for="area" class="form-label font-size-13 text-muted">Enviar a:</label>
-                            <select class="form-control" data-trigger name="id_enviar" id="id_enviar">
-                                <option value="0" selected disabled>1. Elige un Usuario</option>
-                                <?php foreach ($usuarios as $value) { ?>
-                                    <option value="<?php echo  $value['id'] ?>"><?php echo $value['n_user'] . " " . $value['l_user'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div id="informacion_adicional"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="cerrarTicket69">Cerrar</button>
-                        <button type="button" id="reenviar" class="btn btn-primary">Enviar</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-    </form>
-
-
-
-
-    <div>
-
-    </div>
-
-
-
-</div>
-
-
-<!-- END layout-wrapper -->
-
-
-<!-- Right Sidebar -->
-<?php include(__dir__ . "/../layouts/right-sidebar.php") ?>
-<!-- /Right-bar -->
-
-<!-- JAVASCRIPT -->
-
-<?php include(__dir__ . "/../layouts/vendor-scripts.php") ?>
-
-
-<!-- init js -->
-<script src="<?php echo controlador::$rutaAPP ?>app/assets/js/pages/form-advanced.init.js"></script>
-<script src="<?php echo controlador::$rutaAPP ?>app/assets/js/app.js"></script>
-
-<script src="<?php echo controlador::$rutaAPP ?>app/views/home/js/crearGrupos.js"></script>
-
-<script src="<?php echo controlador::$rutaAPP ?>app/views/home/js/users.js"></script>
-<script src="<?php echo controlador::$rutaAPP ?>app/views/home/js/chat.js"></script>
-
-
-</body>
-
-</html>
+                </html>

@@ -40,7 +40,7 @@ if(mysqli_num_rows($sql2) == 0){
             }else{
                 $newDate = date("d-m-Y", strtotime($info_chat['fecha']));
                 $tiempo = $newDate;
-                $msg = "";
+                $msg= '<i class="fas fa-image">  Foto </i>';
             }
         }else{
             $tiempo = "";
