@@ -4,6 +4,7 @@ const form = document.querySelector("#reg_observa"),
 
   function guardarRespuesta(){
     var data= $("#reg_observa").serialize();
+    
     $.ajax({
       url: baseurl+'app/model/observaciones/observaciones.php',
       type: 'POST',
@@ -15,19 +16,26 @@ const form = document.querySelector("#reg_observa"),
       console.log(r);     
       if (r.success) {
             console.log(r.message); // Mensaje de éxito
+            var alerta = document.getElementById('alerta');
+      
+            // Actualiza el contenido y las clases de la alerta
+            alerta.innerHTML = 'Gracias!! Datos Enviados Con Exito... 👍';
+            alerta.className = 'alert alert-success';
             
             
         } else {
             console.log(r.message); // Mensaje de error
+            console.log("error");
+            var alerta_2 = document.getElementById('alerta_2');
+      
+            // Actualiza el contenido y las clases de la alerta
+            alerta.innerHTML = 'Este usuario ya se encuentra registrado en la base de datos';
+            alerta.className = 'alert alert-success';
+          
         }
     })
     .fail(function() {
-      console.log("error");
-      var alerta = document.getElementById('alerta');
-
-      // Actualiza el contenido y las clases de la alerta
-      alerta.innerHTML = 'Gracias!! Datos Enviados Con Exito... 👍';
-      alerta.className = 'alert alert-success';
+   
     
       // Devuelve false para evitar que el formulario se envíe o la página se recargue
       return false;
@@ -35,7 +43,7 @@ const form = document.querySelector("#reg_observa"),
     
   }
 
-/*   function actualizarRes(){ 
+  function actualizarRes(){ 
   let xhr2 = new XMLHttpRequest();
                 xhr2.open("POST", "/../model/observaciones/observaciones.php", true);
                 xhr2.onload = ()=>{
@@ -49,8 +57,10 @@ const form = document.querySelector("#reg_observa"),
                 }
                 xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr2.send("x=");
-              } */
-  /* function VerTabla(){
+              }
+
+
+ /* function VerTabla(){
        vista_grupos=document.getElementById('vista_grupos')
        obj = [{ "tipo": 0, "id_grupo": id_grupo}];
        traerReasig = JSON.stringify(obj);

@@ -10,6 +10,9 @@ date_default_timezone_set('America/Bogota');
 $hoy = date("Y-m-d ");
 
 
+
+
+
 foreach ($_POST['ids_login'] as $key => $id_login) {
     $user = $_POST['user_' . $id_login];
     $n_user = $_POST['n_user_' . $id_login];
@@ -17,31 +20,32 @@ foreach ($_POST['ids_login'] as $key => $id_login) {
     $fecha = $_POST['fecha_' . $id_login];
     $grupo = $_POST['grupo_' . $id_login];
     $ausencia = $_POST['ausencia_' . $id_login];
+
+    $validar = $pdo->prepare("SELECT n_user FROM observacion_coordinadores WHERE n_user = ?");
+    $validar->execute([$n_user]);
+
     if ($ausencia == 1) {
         $texto = 'Ausencia Justificada';
     } elseif ($ausencia == 2) {
         $texto = 'Ausencia Injustificada';
     } elseif ($ausencia == 3) {
         $texto = 'Incapacidad';
-    } elseif ($ausencia == 4) {
+    } elseif ($ausencia == 4) { 
         $texto = 'Permiso';
     } elseif ($ausencia == 5) {
-        $texto = 'Sancion';
+        $texto = 'Sancion'; 
     } elseif ($ausencia == 6) {
         $texto = 'Vacaciones';
     } elseif ($ausencia == 7) {
         $texto = 'Licencia de Maternidad';
     } elseif ($ausencia == 8) {
         $texto = 'Licencia de Paternidad';
-    } elseif ($ausencia == 9) {
-        $texto = 'Sancion';
     }
 
     if (floatval($ausencia) != 0) {
-
         $response = array(
             'success' => true,
-            'message' => 'Operación exitosa',
+            'message' => 'Operacion exitosa',
             'data' => array(
                 'n_user' => $n_user,
                 'l_user' => $l_user,
@@ -54,18 +58,18 @@ foreach ($_POST['ids_login'] as $key => $id_login) {
         // Envía la respuesta en formato JSON
         header('Content-Type: application/json');
         echo json_encode($response);
-        
-        
-        $sql = $pdo->prepare("INSERT INTO observacion_coordinadores ( n_user, l_user,f_h,observaciones, campana) VALUES ('{$n_user}','{$l_user}', '{$fecha}', '{$texto}','{$grupo}')");
-        $sql->execute();
-        
-       
-    } else {
-        echo "HOLAAAA";
-    }
-} 
-    
 
+        $resultado = $validar->fetch(PDO::FETCH_ASSOC); // Obtengo los resultados como un array asociativo
+
+        if ($resultado && $resultado['n_user'] === $n_user) {
+            echo "El usuario ya existe en la base de datos";
+            break;
+        } else {
+            $sql = $pdo->prepare("INSERT INTO observacion_coordinadores (n_user, l_user, f_h, observaciones, campana) VALUES (?, ?, ?, ?, ?)");
+            $sql->execute([$n_user, $l_user, $fecha, $texto, $grupo]);
+        }
+    }
+}
 
 /* 
 if($data[0]->opcion==2){

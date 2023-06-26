@@ -37,6 +37,13 @@ if($userPuntualmente->iniciar_sesion()){
             case 'perfildata':
                 $userPuntualmente->perfildata();
                 break;
+                case 'campana':
+                    $userPuntualmente->campana();
+                    break;
+                    
+                case 'observaciones':
+                    $userPuntualmente->observaciones();
+                    break;
 
             //mostrar imagen chat
 

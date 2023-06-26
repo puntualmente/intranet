@@ -206,7 +206,14 @@
                                 <span data-key="t-admin">Tabla Etiquetas</span>
                             </a>
                         </li>
+                        
                     </ul>
+                    <li>
+                    <a href="campana">
+                        <i class=" fas fa-user-friends"></i>
+                        <span data-key="t-horizontal">Users  Campaña</span>
+                    </a>
+                </li>
                 </li>
 
                 <li>
@@ -242,9 +249,12 @@
                         <span data-key="t-horizontal">Chat</span>
                     </a>
                 </li>
-                    
+                
+                   
                     <?php }?>
 
+                
+                    
                     <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="mdi mdi-ticket-account"></i>
@@ -263,6 +273,7 @@
                                 <span data-key="tickets">Tickets</span>
                             </a>
                         </li>
+                        
 
                         
                     <?php } ?>
