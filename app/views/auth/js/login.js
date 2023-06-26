@@ -15,6 +15,7 @@ continueBtn.onclick = ()=>{
               let data = xhr.response;
                 if(data==="Proceso Exitoso"){
                   location.href = "home";
+                  window.location.reload()
                 }else{
                   errorText.textContent = data;
                 }
