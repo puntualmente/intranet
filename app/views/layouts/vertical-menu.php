@@ -167,6 +167,19 @@
 
             <?php if($_SESSION['rol']==1){?>
 
+                <li>
+                    <a href="campana">
+                        <i class=" fas fa-user-friends"></i>
+                        <span>Users  Campaña</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tabla">
+                        <i class=" fas fa-user-friends"></i>
+                        <span   >Tabla</span>
+                    </a>
+                </li>
+
                 <li class="menu-title" data-key="t-menu"><?php echo $language["Menu"]; ?></li>
                 <li>
                     <a href="home">
@@ -206,22 +219,23 @@
                                 <span data-key="t-admin">Tabla Etiquetas</span>
                             </a>
                         </li>
-                        
-                    </ul>
-                    <li>
-                    <a href="campana">
-                        <i class=" fas fa-user-friends"></i>
-                        <span data-key="t-horizontal">Users  Campaña</span>
-                    </a>
-                </li>
                 </li>
 
+                  
+
+                    
+                    <!--  -->
+                    
+                
+                   
                 <li>
                     <a href="chat">
                         <i class="fas fa-comments"></i>
                         <span data-key="t-horizontal">Chat</span>
                     </a>
                 </li>
+
+                
 
                 <?php }elseif($_SESSION['rol']==2){ ?>
 
@@ -236,9 +250,11 @@
                 <li>
                     <a href="campana">
                         <i class=" fas fa-user-friends"></i>
-                        <span data-key="t-horizontal">Users Campaña</span>
+                        <span data-key="t-horizontal">Users  Campaña</span>
                     </a>
                 </li>
+                
+
                 
 
                 <?php }elseif($_SESSION['rol']==3){ ?> 
@@ -286,7 +302,7 @@
                         </li>
                     </ul>
                 </li>
-
+    
             </ul>
         </div>
         <!-- Sidebar -->
