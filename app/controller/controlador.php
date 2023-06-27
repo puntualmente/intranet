@@ -67,6 +67,9 @@ class controlador{
             header("location: registrar");
         }
     }
+    public function tabla(){
+        include_once(__dir__."/../views/home/tabla.php");
+    }
 
     public function subirArchivoUs(){
         include_once(__dir__."/../model/OtrasConfigs/subirArchivoUs.php");

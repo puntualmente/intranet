@@ -45,6 +45,9 @@ if($userPuntualmente->iniciar_sesion()){
                     $userPuntualmente->observaciones();
                     break;
 
+                    case 'tabla':
+                        $userPuntualmente->tabla();
+                        break;
             //mostrar imagen chat
 
             case 'mostrarimagenchat':

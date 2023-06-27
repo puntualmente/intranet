@@ -12,6 +12,14 @@ $hoy = date("Y-m-d ");
 
 
 
+$response = array();
+$existeUser = array(); // Almacena los nombres de usuarios existentes
+
+$response = array();
+$existeUser = array(); // Almacena los n_user de usuarios existentes
+
+$response = array();
+$existeUser = array(); // Almacena los usuarios existentes
 
 foreach ($_POST['ids_login'] as $key => $id_login) {
     $user = $_POST['user_' . $id_login];
@@ -21,7 +29,7 @@ foreach ($_POST['ids_login'] as $key => $id_login) {
     $grupo = $_POST['grupo_' . $id_login];
     $ausencia = $_POST['ausencia_' . $id_login];
 
-    $validar = $pdo->prepare("SELECT n_user FROM observacion_coordinadores WHERE n_user = ?");
+    $validar = $pdo->prepare("SELECT n_user, f_h FROM observacion_coordinadores WHERE n_user = ? AND DATE(f_h)  = '{$hoy}'");
     $validar->execute([$n_user]);
 
     if ($ausencia == 1) {
@@ -43,35 +51,48 @@ foreach ($_POST['ids_login'] as $key => $id_login) {
     }
 
     if (floatval($ausencia) != 0) {
-        $response = array(
-            'success' => true,
-            'message' => 'Operacion exitosa',
-            'data' => array(
-                'n_user' => $n_user,
-                'l_user' => $l_user,
-                'fecha' => $fecha,
-                'texto' => $texto,
-                'grupo' => $grupo
-            )
-        );
-
-        // Envía la respuesta en formato JSON
-        header('Content-Type: application/json');
-        echo json_encode($response);
-
         $resultado = $validar->fetch(PDO::FETCH_ASSOC); // Obtengo los resultados como un array asociativo
 
         if ($resultado && $resultado['n_user'] === $n_user) {
-            echo "El usuario ya existe en la base de datos";
-            break;
+            $existeUser[] = array(
+                'n_user' => $n_user,
+                'l_user' => $l_user
+            ); // Agrega el usuario existente a la lista
         } else {
             $sql = $pdo->prepare("INSERT INTO observacion_coordinadores (n_user, l_user, f_h, observaciones, campana) VALUES (?, ?, ?, ?, ?)");
             $sql->execute([$n_user, $l_user, $fecha, $texto, $grupo]);
+
+            $response[] = array(
+                'success' => true,
+                'message' => 'Inserción exitosa para el usuario con n_user ' . $n_user
+            );
         }
     }
 }
 
-/* 
+// Envía la respuesta en formato JSON
+header('Content-Type: application/json');
+
+if (!empty($existeUser)) {
+    $errorMessage = 'Los siguientes usuarios ya existen en la base de datos:';
+    foreach ($existeUser as $user) {
+        $errorMessage .= "\n " . $user['n_user'] . " " . $user['l_user'] . " ,";
+    }
+    
+    $response[] = array(
+        'success' => false,
+        'message' => $errorMessage
+    );
+}
+
+echo json_encode($response);
+
+// tabla observaciones 
+
+
+
+
+/*
 if($data[0]->opcion==2){
 $tabla_observa = $pdo->prepare ("SELECT * FROM  observacion_coordinadores WHERE f_h  = '{$hoy}'");
 $tabla_observa->execute();

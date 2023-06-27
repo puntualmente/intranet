@@ -1,8 +1,8 @@
 <?php include_once(__dir__ . "/../layouts/session.php");  ?>
 <?php include_once(__dir__ . "/../../model/admintablas/sqls_admin.php"); ?>
-
-
 <?php include(__dir__ . "/../layouts/head-main.php");  ?>
+<?php require(__dir__ . "/../../model/data/pdo.php");?>
+
 
 <head>
 
@@ -43,9 +43,6 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-body">
-
-
-
                                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
@@ -136,7 +133,7 @@
                                                                         <option value="5">Sanción</option>
                                                                         <option value="6">Vacaciones</option>
                                                                         <option value="7">Licencia de Maternidad</option>
-                                                                        <option value="8">Licencia de Paternidad</option>                                                                        
+                                                                        <option value="8">Licencia de Paternidad</option>
                                                                         <br>
 
                                                                 </td>
@@ -248,36 +245,32 @@
 
                                         </tbody>
                                     </table>
-
-
                                     <button type="button" onclick="guardarRespuesta()" class="btn btn-primary" id="btn_observa" name=btn_observa>Guardar cambios</button>
+                                    <div id="alerta" class="alert" role="alert" style="margin-top: 10px;"></div>
 
-                                    <button type="button" onclick="actualizarRes()" class="btn btn-primary" id="btn_tabla" name=btn_tabla> Tabla Observaciones</button>
-                                    
-                                    
 
-                                    <!-- <button type="submit" onchange="observaciones()" class="btn btn-primary" id="btn_actualizar" name=actualizar>Actualizar</button> -->
+
+                                        <!-- <button type="submit" onchange="observaciones()" class="btn btn-primary" id="btn_actualizar" name=actualizar>Actualizar</button> -->
 
                                 </div>
                             </div>
                             <!-- end cardaa -->
                         </div> <!-- end col -->
                     </div> <!-- end row -->
-                    
+
                 </div>
-                <div id="alerta" class="alert" role="alert" style="margin-top: 10px;"></div>
-                <div id="alerta_2" class="alert" role="alert" style="margin-top: 10px;"></div>
+              
             </div>
-            
+
         </div>
-        
+
     </form>
 </div>
 
 
 <!-- Right Sidebar -->
 <script>
-    var  baseurl= <?php echo controlador::$rutaAPP ?>;
+    var baseurl = <?php echo controlador::$rutaAPP ?>;
 </script>
 <?php include(__dir__ . "/../layouts/right-sidebar.php") ?>
 <!-- JAVASCRIPT -->

@@ -3,47 +3,66 @@ const form = document.querySelector("#reg_observa"),
   errorText = document.querySelector("#error-text");
 
   function guardarRespuesta(){
-    var data= $("#reg_observa").serialize();
-    
-    $.ajax({
-      url: baseurl+'app/model/observaciones/observaciones.php',
-      type: 'POST',
-      dataType: 'json',
-      data: data,
-      
-    })
-    .done(function(r) {
-      console.log(r);     
-      if (r.success) {
-            console.log(r.message); // Mensaje de éxito
-            var alerta = document.getElementById('alerta');
-      
-            // Actualiza el contenido y las clases de la alerta
-            alerta.innerHTML = 'Gracias!! Datos Enviados Con Exito... 👍';
-            alerta.className = 'alert alert-success';
-            
-            
-        } else {
-            console.log(r.message); // Mensaje de error
-            console.log("error");
-            var alerta_2 = document.getElementById('alerta_2');
-      
-            // Actualiza el contenido y las clases de la alerta
-            alerta.innerHTML = 'Este usuario ya se encuentra registrado en la base de datos';
-            alerta.className = 'alert alert-success';
-          
-        }
-    })
-    .fail(function() {
-   
-    
-      // Devuelve false para evitar que el formulario se envíe o la página se recargue
-      return false;
-    });
-    
-  }
+    var data = $("#reg_observa").serialize();
 
-  function actualizarRes(){ 
+    $.ajax({
+        url: baseurl + 'app/model/observaciones/observaciones.php',
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+    })
+        .done(function (r) {
+            console.log(r);
+            var alerta = document.getElementById('alerta');
+            var successCount = 0;
+
+            for (var i = 0; i < r.length; i++) {
+                if (r[i].success) {
+                    successCount++;
+                    console.log(r[i].message); // Mensaje de éxito
+                } else {
+                    console.log("error");
+                    alerta.innerHTML = r[i].message;
+                    alerta.className = 'alert alert-danger';
+                }
+            }
+
+            if (successCount > 0) {
+                alerta.innerHTML = 'Gracias!! ' + successCount + ' datos fueron enviados con éxito... 👍';
+                alerta.className = 'alert alert-success';
+            }
+        })
+        .fail(function () {
+            var alerta = document.getElementById('alerta');
+            alerta.innerHTML = 'Error de comunicación con el servidor. Por favor, intente nuevamente más tarde.';
+            alerta.className = 'alert alert-danger';
+        });
+
+    // Devuelve false para evitar que el formulario se envíe o la página se recargue
+    return false;
+}
+
+//imprimir la tabla completa
+  
+function obtenerDatosObservaciones() {
+  $.ajax({
+      url: 'app/model/observaciones/observaciones.php', // Reemplaza 'ruta_a_tu_php.php' por la ruta correcta a tu archivo PHP
+      type: 'GET', // Opcional: ajusta el método HTTP según tus necesidades
+      dataType: 'html', // Espera una respuesta HTML
+      success: function(response) {
+          // Actualiza el contenido de la tabla con los datos recibidos
+          $('#vistaObservaciones').html(response);
+      },
+      error: function() {
+          // Manejo de errores si la solicitud falla
+          alert('Error al obtener los datos de observaciones.');
+      }
+  });
+}
+    
+    
+    
+  /* function actualizarRes(){ 
   let xhr2 = new XMLHttpRequest();
                 xhr2.open("POST", "/../model/observaciones/observaciones.php", true);
                 xhr2.onload = ()=>{
@@ -57,7 +76,7 @@ const form = document.querySelector("#reg_observa"),
                 }
                 xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr2.send("x=");
-              }
+              } */
 
 
  /* function VerTabla(){
