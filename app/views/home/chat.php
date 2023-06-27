@@ -375,7 +375,7 @@ include_once(__dir__ . "/../../model/admintablas/sqls_admin.php");
                                 </div>
                         </form>
                         <?php if ($_SESSION['rol'] == 3) { ?>
-                            <div id="texto_error"><span class="text-danger"> Solo puedes enviarle mensajes a tus lideres :)</span>
+                            <div id="texto_error"><span class="text-danger"> Solo puedes enviarle mensajes a tus lideres y a los grupos que seas parte 👌</span>
                                 <div>
                                 <?php } else { ?>
                                     <div id="texto_error">
