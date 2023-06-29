@@ -99,7 +99,7 @@ else{
 		l_user='" .$apellido. "',
         tel_user='" .$telefono. "',
 		cedula='" .$cc. "',
-		password='" .$password. "',
+		password= MD5('" .$password. "'),
 		f_nacimiento='" .$f_nacimiento. "',
 		id_area='" .$id_area. "',
 		id_empresa='" .$id_empresa. "',
