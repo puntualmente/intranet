@@ -7,7 +7,6 @@
 
 <head>
 
-    <title> Tickets | Puntualmente</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
 
     <!-- choices css -->
@@ -23,8 +22,6 @@
 
 
     <?php include(__dir__."/../layouts/head-style.php");  ?>
-
-    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 

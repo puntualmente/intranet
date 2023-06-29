@@ -36,16 +36,23 @@ if(isset($_POST['x'])){
         $areaTkt = $data[0]->area_dest_tkt;
         $etiqueta = $data[0]->etiqueta;
         $descrip = $data[0]->descrip;
-        $user_destino = $data[0]->user_destino;
         $estado = 1;
         $redireccion = "";
         $id_redireccion = 0;
         $f_cierre=0;
         $ip_cierre="";
         $id_user_cierre="0";
+        $es_grupo_persona = $data[0]->es_grupo_persona;
 
+        if($es_grupo_persona=="persona"){
+            $es_grupo = 0;
+            $user_destino = $data[0]->user_destino;
+        }else{
+            $es_grupo = 1;
+            $user_destino = $data[0]->user_destino;
+        }
 
-    $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_jefe, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$user_destino}', '{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_h_actual}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
+    $guardartkt=mysqli_query($conn, "INSERT INTO tickets (fecha_hora, ip_origen, id_empresa, id_grupo_proyecto, id_propietario_tck, id_area, id_jefe, es_grupo, id_etiqueta ,descrip, estado, descrip_solucion, id_area_redireccion, f_h_cierre, ip_cierre, id_user_cierre )  VALUES ( '{$f_h_actual}', '{$ip}', '{$id_empresa}', '{$id_grupo_proyecto}','{$id_propietario_tkt}','{$areaTkt}', '{$user_destino}', '{$es_grupo}','{$etiqueta}','{$descrip}','{$estado}','{$redireccion}','{$id_redireccion}','{$f_h_actual}','{$ip_cierre}','{$id_user_cierre}')")or die(mysqli_error($conn));
 
     $id_ultimo_insert = mysqli_insert_id ($conn);
     

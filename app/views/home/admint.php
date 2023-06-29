@@ -6,7 +6,6 @@
 
 <head>
 
-    <title>Admin tablas | Puntualmnte</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
     <?php include(__dir__."/../layouts/head-style.php");  ?>
 

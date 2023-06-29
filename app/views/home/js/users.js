@@ -140,7 +140,14 @@ function holausers(id){
   document.getElementById('botonopciones').disabled=false;
   document.getElementById('enviar').disabled=false;
   document.getElementById('msg').disabled=false;
-  document.getElementById('contenidodeenvio').hidden=false;
+
+  const permiso=document.getElementById('permiso').value;
+  contenidodeenvio=document.getElementById('contenidodeenvio');
+  if(permiso == 0){
+      contenidodeenvio.hidden=true;
+  }else{
+      contenidodeenvio.hidden=false;
+  }
   document.getElementById('iniciodelchat').hidden=true;
 
   destacados.innerHTML="";
@@ -202,7 +209,13 @@ function holagrupos(id){
   document.getElementById('botonopciones').disabled=false;
   document.getElementById('enviar').disabled=false;
   document.getElementById('msg').disabled=false;
-  document.getElementById('contenidodeenvio').hidden=false;
+  const permiso=document.getElementById('permiso').value;
+  contenidodeenvio=document.getElementById('contenidodeenvio');
+  if(permiso == 0){
+      contenidodeenvio.hidden=true;
+  }else{
+      contenidodeenvio.hidden=false;
+  }
   document.getElementById('iniciodelchat').hidden=true;
   
   clearInterval(chat);
