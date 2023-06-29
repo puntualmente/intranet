@@ -1,6 +1,7 @@
 <?php
     include_once (__dir__."/../config.php");
 
+        $arrayJefes = [];
 
         $id = mysqli_real_escape_string($conn, $_POST['id_user']);
 
@@ -9,7 +10,15 @@
     
         $data= mysqli_fetch_assoc($datos);
 
-        $header = headerchatuser($data['img'], $data['n_user']." ".$data['l_user'], $data['status'], $id);
+        $EsMiJefeSql = mysqli_query($conn, "SELECT * FROM jefe_grupo WHERE id_jefe = '{$id}' AND id_grupo = '{$_SESSION['id_grupo']}'");
+
+        if(mysqli_num_rows($EsMiJefeSql)>0){
+            $esjefe = true;
+        }else{
+            $esjefe = 0;
+        }
+
+        $header = headerchatuser($data['img'], $data['n_user']." ".$data['l_user'], $data['status'], $id, $esjefe);
         echo $header;
 
 
@@ -19,10 +28,12 @@
   
 
 
-function headerchatuser($imagen, $nombre, $status, $id_user){
+function headerchatuser($imagen, $nombre, $status, $id_user, $es_mi_jefe){
     $output='
-        <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value ="'.$id_user.'">
-        <input type="text" id="tipo_chat" name="tipo_chat" hidden dissabled value ="chat_1_1">
+        <input type="hidden" id="id_enviar" name="id_enviar" dissabled value ="'.$id_user.'">
+        <input type="hidden" id="tipo_chat" name="tipo_chat" dissabled value ="chat_1_1">
+        <input type="hidden" id="es_mi_jefe" name="es_mi_jefe" dissabled value ="'.$es_mi_jefe.'">
+
 
     <div class="row">
             
@@ -114,4 +125,3 @@ function esadmin(){
             </ul>                                                                                                                                                                                                                                                                                        
         </div>
         */
-?>

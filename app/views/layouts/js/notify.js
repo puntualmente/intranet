@@ -20,7 +20,8 @@ setInterval(() => {
         console.log(dato_notys);
         cant = dato_notys.length;
         if (cant > 1000) {
-          window.location.reload()
+          //window.location.reload()
+          location.href = "cerrar";
           console.log(cant)
         } else {
           if (dato_notys == 0) {
