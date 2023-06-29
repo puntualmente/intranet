@@ -1,56 +1,44 @@
 <?php
 require(__dir__ . "/../data/pdo.php");
-/* include_once(__dir__ . "/../config.php"); */
-/* 
 
-$hora_ingreso_1 = "7:01:00";
-$hora_ingreso_2 = "7:10:59";
-$hora_ingreso_3 = "7:11:00"; */
 date_default_timezone_set('America/Bogota');
 $hoy = date("Y-m-d ");
-
-
-
 
 $response = array();
 $existeUser = array(); // Almacena los nombres de usuarios existentes
 
-$response = array();
-$existeUser = array(); // Almacena los n_user de usuarios existentes
-
-$response = array();
-$existeUser = array(); // Almacena los usuarios existentes
-
 foreach ($_POST['ids_login'] as $key => $id_login) {
+    $cedula = $_POST['cedula_' . $id_login];
     $user = $_POST['user_' . $id_login];
     $n_user = $_POST['n_user_' . $id_login];
     $l_user = $_POST['l_user_' . $id_login];
     $fecha = $_POST['fecha_' . $id_login];
     $grupo = $_POST['grupo_' . $id_login];
-    $ausencia = $_POST['ausencia_' . $id_login];
+    $ausencia = $_POST['ausencia_' . $id_login]; // Nuevo campo para obtener el valor del select
 
     $validar = $pdo->prepare("SELECT n_user, f_h FROM observacion_coordinadores WHERE n_user = ? AND DATE(f_h)  = '{$hoy}'");
     $validar->execute([$n_user]);
 
-    if ($ausencia == 1) {
-        $texto = 'Ausencia Justificada';
-    } elseif ($ausencia == 2) {
-        $texto = 'Ausencia Injustificada';
-    } elseif ($ausencia == 3) {
-        $texto = 'Incapacidad';
-    } elseif ($ausencia == 4) { 
-        $texto = 'Permiso';
-    } elseif ($ausencia == 5) {
-        $texto = 'Sancion'; 
-    } elseif ($ausencia == 6) {
-        $texto = 'Vacaciones';
-    } elseif ($ausencia == 7) {
-        $texto = 'Licencia de Maternidad';
-    } elseif ($ausencia == 8) {
-        $texto = 'Licencia de Paternidad';
-    }
-
     if (floatval($ausencia) != 0) {
+        $texto = '';
+        if ($ausencia == 1) {
+            $texto = 'Ausencia Justificada';
+        } elseif ($ausencia == 2) {
+            $texto = 'Ausencia Injustificada';
+        } elseif ($ausencia == 3) {
+            $texto = 'Incapacidad';
+        } elseif ($ausencia == 4) {
+            $texto = 'Permiso';
+        } elseif ($ausencia == 5) {
+            $texto = 'Sancion';
+        } elseif ($ausencia == 6) {
+            $texto = 'Vacaciones';
+        } elseif ($ausencia == 7) {
+            $texto = 'Licencia de Maternidad';
+        } elseif ($ausencia == 8) {
+            $texto = 'Licencia de Paternidad';
+        }
+
         $resultado = $validar->fetch(PDO::FETCH_ASSOC); // Obtengo los resultados como un array asociativo
 
         if ($resultado && $resultado['n_user'] === $n_user) {
@@ -59,8 +47,8 @@ foreach ($_POST['ids_login'] as $key => $id_login) {
                 'l_user' => $l_user
             ); // Agrega el usuario existente a la lista
         } else {
-            $sql = $pdo->prepare("INSERT INTO observacion_coordinadores (n_user, l_user, f_h, observaciones, campana) VALUES (?, ?, ?, ?, ?)");
-            $sql->execute([$n_user, $l_user, $fecha, $texto, $grupo]);
+            $sql = $pdo->prepare("INSERT INTO observacion_coordinadores (cedula, n_user, l_user, f_h, observaciones, campana) VALUES (?, ?, ?, ?, ?, ?)");
+            $sql->execute([$cedula, $n_user, $l_user, $fecha, $texto, $grupo]);
 
             $response[] = array(
                 'success' => true,
@@ -78,7 +66,7 @@ if (!empty($existeUser)) {
     foreach ($existeUser as $user) {
         $errorMessage .= "\n " . $user['n_user'] . " " . $user['l_user'] . " ,";
     }
-    
+
     $response[] = array(
         'success' => false,
         'message' => $errorMessage
@@ -86,6 +74,7 @@ if (!empty($existeUser)) {
 }
 
 echo json_encode($response);
+
 
 // tabla observaciones 
 

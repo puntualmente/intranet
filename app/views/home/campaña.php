@@ -1,7 +1,7 @@
 <?php include_once(__dir__ . "/../layouts/session.php");  ?>
 <?php include_once(__dir__ . "/../../model/admintablas/sqls_admin.php"); ?>
 <?php include(__dir__ . "/../layouts/head-main.php");  ?>
-<?php require(__dir__ . "/../../model/data/pdo.php");?>
+<?php require(__dir__ . "/../../model/data/pdo.php"); ?>
 
 
 <head>
@@ -46,7 +46,7 @@
                                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
-
+                                                <th>Cedula</th>
                                                 <th>Nombre</th>
                                                 <th>Fecha y Hora de Logueo</th>
                                                 <th>Observaciones</th>
@@ -115,12 +115,15 @@
                                             ?>
                                                             <tr>
                                                                 <input type="hidden" name="ids_login[]" value="<?php echo $user['id_login'] ?>">
+                                                                <input type="hidden" name="cedula_<?php echo $user['id_login'] ?>" value="<?php echo $user['cedula'] ?>">
                                                                 <input type="hidden" name="user_<?php echo $user['id_login'] ?>" value="<?php echo $user['id_user'] ?>">
                                                                 <input type="hidden" name="grupo_<?php echo $user['id_login'] ?>" value="<?php echo $group['n_grupo'] ?>">
                                                                 <input type="hidden" name="n_user_<?php echo $user['id_login'] ?>" value="<?php echo $user['n_user'] ?>">
                                                                 <input type="hidden" name="l_user_<?php echo $user['id_login'] ?>" value="<?php echo $user['l_user'] ?>">
                                                                 <input type="hidden" name="fecha_<?php echo $user['id_login'] ?>" value="<?php echo $user['f_h'] ?>">
 
+
+                                                                <td><?php echo $user['cedula']; ?></td>
                                                                 <td scope="row" class="<?php echo $class ?>" id=""> <?php echo $user['n_user'] . " " .  $user['l_user'] ?> </td>
                                                                 <td> <?php echo $user['f_h'] ?> </td>
                                                                 <td>
@@ -250,7 +253,7 @@
 
 
 
-                                        <!-- <button type="submit" onchange="observaciones()" class="btn btn-primary" id="btn_actualizar" name=actualizar>Actualizar</button> -->
+                                    <!-- <button type="submit" onchange="observaciones()" class="btn btn-primary" id="btn_actualizar" name=actualizar>Actualizar</button> -->
 
                                 </div>
                             </div>
@@ -259,7 +262,7 @@
                     </div> <!-- end row -->
 
                 </div>
-              
+
             </div>
 
         </div>

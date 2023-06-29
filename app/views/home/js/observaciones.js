@@ -1,65 +1,66 @@
 const form = document.querySelector("#reg_observa"),
   continueBtn = document.querySelector("#btn_observa"),
   errorText = document.querySelector("#error-text");
-
-  function guardarRespuesta(){
+  function guardarRespuesta() {
     var data = $("#reg_observa").serialize();
-
+  
     $.ajax({
-        url: baseurl + 'app/model/observaciones/observaciones.php',
-        type: 'POST',
-        dataType: 'json',
-        data: data,
+      url: 'app/model/observaciones/observaciones.php', // Ruta relativa al archivo PHP
+      type: 'POST',
+      dataType: 'json',
+      data: data,
     })
-        .done(function (r) {
-            console.log(r);
-            var alerta = document.getElementById('alerta');
-            var successCount = 0;
-
-            for (var i = 0; i < r.length; i++) {
-                if (r[i].success) {
-                    successCount++;
-                    console.log(r[i].message); // Mensaje de éxito
-                } else {
-                    console.log("error");
-                    alerta.innerHTML = r[i].message;
-                    alerta.className = 'alert alert-danger';
-                }
-            }
-
-            if (successCount > 0) {
-                alerta.innerHTML = 'Gracias!! ' + successCount + ' datos fueron enviados con éxito... 👍';
-                alerta.className = 'alert alert-success';
-            }
-        })
-        .fail(function () {
-            var alerta = document.getElementById('alerta');
-            alerta.innerHTML = 'Error de comunicación con el servidor. Por favor, intente nuevamente más tarde.';
+      .done(function (r) {
+        console.log(r);
+        var alerta = document.getElementById('alerta');
+        var successCount = 0;
+  
+        for (var i = 0; i < r.length; i++) {
+          if (r[i].success) {
+            successCount++;
+            console.log(r[i].message); // Mensaje de éxito
+          } else {
+            console.log("error");
+            alerta.innerHTML = r[i].message;
             alerta.className = 'alert alert-danger';
-        });
-
+          }
+        }
+  
+        if (successCount > 0) {
+          alerta.innerHTML = '¡Gracias! ' + successCount + ' datos fueron enviados con éxito... 👍';
+          alerta.className = 'alert alert-success';
+        }
+      })
+      .fail(function () {
+        var alerta = document.getElementById('alerta');
+        alerta.innerHTML = 'Error de comunicación con el servidor. Por favor, intente nuevamente más tarde.';
+        alerta.className = 'alert alert-danger';
+      });
+  
     // Devuelve false para evitar que el formulario se envíe o la página se recargue
     return false;
-}
-
+  }
 //imprimir la tabla completa
   
 function obtenerDatosObservaciones() {
   $.ajax({
-      url: 'app/model/observaciones/observaciones.php', // Reemplaza 'ruta_a_tu_php.php' por la ruta correcta a tu archivo PHP
-      type: 'GET', // Opcional: ajusta el método HTTP según tus necesidades
-      dataType: 'html', // Espera una respuesta HTML
+      url: 'app/model/observaciones/observaciones.php', 
+      type: 'GET', 
+      dataType: 'html', 
       success: function(response) {
-          // Actualiza el contenido de la tabla con los datos recibidos
+          
           $('#vistaObservaciones').html(response);
       },
       error: function() {
-          // Manejo de errores si la solicitud falla
+          // Me imprime esto si hay algun error 
           alert('Error al obtener los datos de observaciones.');
       }
   });
 }
     
+
+
+
     
     
   /* function actualizarRes(){ 
