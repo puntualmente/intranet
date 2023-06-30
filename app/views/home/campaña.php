@@ -56,195 +56,225 @@
                                         </thead>
 
                                         <tbody id="vista_grupos">
-                                            <?php if ($_SESSION['rol'] == 2) {
-                                                error_reporting(E_ERROR | E_PARSE);
+                                            <?php
+                                            if ($_SESSION['rol'] == 2) {
+                                                /* error_reporting(E_ERROR | E_PARSE); */
                                                 date_default_timezone_set('America/Bogota');
                                                 $hoy = date("Y-m-d ");
-
-
-
 
                                                 function ingreso($hora)
                                                 {
                                                     $timestamp = strtotime($hora); // Convertir la fecha en un timestamp    
-                                                    $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+                                                    $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"	
 
                                                     return $hora;
                                                 }
-
                                                 $hora_ingreso_1 = "7:01:00";
                                                 $hora_ingreso_2 = "7:10:59";
                                                 $hora_ingreso_3 = "7:11:00";
 
+                                                $campana = mysqli_query($conn, "SELECT * FROM users WHERE users.id_grupo = $_SESSION[id_grupo]");
+
+                                                foreach ($campana as $user_2) {
+                                                    $campana_2 = mysqli_query($conn, "SELECT  u.*,l.*,l.id AS id_login FROM users u, log_session l
+                                            WHERE l.id_user = '{$user_2['cedula']}'                                                    
+                                            AND DATE(f_h)  = '{$hoy}' 
+                                            AND u.id_grupo = $_SESSION[id_grupo]
+                                            AND l.accion='login'
+                                            GROUP BY l.id_user
+                                            ORDER BY l.f_h DESC;");
+
+                                                    if (mysqli_num_rows($campana_2) > 0) {
+                                                        $user = mysqli_fetch_assoc($campana_2);
+                                                        $timestamp = strtotime($user['f_h']); // Convertir la fecha en un timestamp    
+                                                        $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+
+                                                        if ($hora < ingreso($hora_ingreso_1)) {
+                                                            $class = "text-success";
+                                                        } elseif ($hora <= ingreso($hora_ingreso_2)) {
+                                                            $class = "text-warning";
+                                                        } elseif ($hora >= ingreso($hora_ingreso_3)) {
+                                                            $class = "text-danger";
+                                                        } else {
+                                                            echo "error";
+                                                        }
+
+                                                        $f_h = $user['f_h'];
 
 
-                                                if (isset($_SESSION['unique_id'])) {
-                                                    $output = '';
+                                                        $selectOptions = '
+                    <select class="form-control" name="ausencia_' . $user['id_user'] . '">
+                        <option value="0"> Elige una opción </option>
+                        <option value="1">Ausencia Justificada</option>
+                        <option value="2">Ausencia Injustificada</option>
+                        <option value="3">Incapacidad</option>
+                        <option value="4">Permiso</option>
+                        <option value="5">Sanción</option>
+                        <option value="6">Vacaciones</option>
+                        <option value="7">Licencia de Maternidad</option>
+                        <option value="8">Licencia de Paternidad</option>
+                    </select>
+                ';
 
-                                                    $data = json_decode($_POST['x']);
-                                                    if ($data[0]->tipo == 0) {
-                                                        $incoming_id = $data[0]->id_grupo;
-                                                        $campana = mysqli_query($conn, "SELECT  u.*,l.*,l.id AS id_login FROM users u, log_session l
-                                                    WHERE l.id_user =u.cedula                                                    
-                                                    AND DATE(f_h)  = '{$hoy}' 
-                                                    AND u.id_grupo = $_SESSION[id_grupo]
-                                                    AND l.accion='login'
-                                                    GROUP BY l.id_user
-                                                    ORDER BY l.f_h DESC;");
-
-
-                                                        foreach ($campana as $user) {
-                                                            $grupos = mysqli_query($conn, "SELECT * FROM grupos WHERE id_grupo='{$user['id_grupo']}'");
-                                                            $group = mysqli_fetch_assoc($grupos);
-
-
-
-                                                            $timestamp = strtotime($user['f_h']); // Convertir la fecha en un timestamp    
-                                                            $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
-
-                                                            if ($hora < ingreso($hora_ingreso_1)) {
-                                                                $class = "text-success";
-                                                            } elseif ($hora <= ingreso($hora_ingreso_2)) {
-                                                                $class = "text-warning";
-                                                            } elseif ($hora >= ingreso($hora_ingreso_3)) {
-                                                                $class = "text-danger";
-                                                            } else {
-                                                                echo "error";
-                                                            }
-
-                                            ?>
-                                                            <tr>
-                                                                <input type="hidden" name="ids_login[]" value="<?php echo $user['id_login'] ?>">
-                                                                <input type="hidden" name="cedula_<?php echo $user['id_login'] ?>" value="<?php echo $user['cedula'] ?>">
-                                                                <input type="hidden" name="user_<?php echo $user['id_login'] ?>" value="<?php echo $user['id_user'] ?>">
-                                                                <input type="hidden" name="grupo_<?php echo $user['id_login'] ?>" value="<?php echo $group['n_grupo'] ?>">
-                                                                <input type="hidden" name="n_user_<?php echo $user['id_login'] ?>" value="<?php echo $user['n_user'] ?>">
-                                                                <input type="hidden" name="l_user_<?php echo $user['id_login'] ?>" value="<?php echo $user['l_user'] ?>">
-                                                                <input type="hidden" name="fecha_<?php echo $user['id_login'] ?>" value="<?php echo $user['f_h'] ?>">
-
-
-                                                                <td><?php echo $user['cedula']; ?></td>
-                                                                <td scope="row" class="<?php echo $class ?>" id=""> <?php echo $user['n_user'] . " " .  $user['l_user'] ?> </td>
-                                                                <td> <?php echo $user['f_h'] ?> </td>
-                                                                <td>
-                                                                    <select class="form-control" name="ausencia_<?php echo $user['id_login'] ?>">
-                                                                        <option value="0"> Elige una opción </option>
-                                                                        <option value="1">Ausencia Justificada</option>
-                                                                        <option value="2">Ausencia Injustificada</option>
-                                                                        <option value="3">Incapacidad</option>
-                                                                        <option value="4">Permiso</option>
-                                                                        <option value="5">Sanción</option>
-                                                                        <option value="6">Vacaciones</option>
-                                                                        <option value="7">Licencia de Maternidad</option>
-                                                                        <option value="8">Licencia de Paternidad</option>
-                                                                        <br>
-
-                                                                </td>
-                                                                <td> <?php echo $group['n_grupo'] ?> </td>
-                                                            </tr>
-                                            <?php }
+                                                        $esta = 1;
+                                                        $cedula = $user['id_user'];
+                                                    } else {
+                                                        $esta = 0;
+                                                        $f_h = "No se ha logueado hoy";
+                                                        $cedula = $user_2['cedula'];
+                                                        $selectOptions = '
+                    <select class="form-control" name="ausencia_' . $user_2['cedula'] . '">
+                        <option value="0"> Elige una opción </option>
+                        <option value="1">Ausencia Justificada</option>
+                        <option value="2">Ausencia Injustificada</option>
+                        <option value="3">Incapacidad</option>
+                        <option value="4">Permiso</option>
+                        <option value="5">Sanción</option>
+                        <option value="6">Vacaciones</option>
+                        <option value="7">Licencia de Maternidad</option>
+                        <option value="8">Licencia de Paternidad</option>
+                    </select>
+                ';
                                                     }
+
+                                                    $grupos = mysqli_query($conn, "SELECT * FROM grupos WHERE id_grupo='{$user['id_grupo']}' ");
+                                                    $group = mysqli_fetch_assoc($grupos);
+                                            ?>
+                                                    <tr>
+                                                        <input type="hidden" name="ids_login[]" value="<?php echo $cedula ?>">
+                                                        <input type="hidden" name="n_user_<?php echo $cedula ?>" value="<?php echo $user_2['n_user']  ?>">
+                                                        <input type="hidden" name="l_user_<?php echo $cedula ?>" value="<?php echo $user_2['l_user'] ?>">
+                                                        <input type="hidden" name="grupo_<?php echo $cedula ?>" value="<?php echo $group['n_grupo'] ?>">
+                                                        <input type="hidden" name="fecha_<?php echo $cedula ?>" value="<?php echo $f_h ?>">
+                                                        <td><?php echo $cedula ?></td>
+                                                        <td scope="row" class="<?php echo $class ?>"><?php echo $user_2['n_user'] . " " . $user_2['l_user'] ?></td>
+                                                        <?php if ($esta == 1) { ?>
+                                                            <td><?php echo $f_h; ?></td>
+                                                            <td><?php echo $selectOptions ?></td>
+                                                            <td><?php echo $group['n_grupo'] ?></td>
+                                                        <?php } else { ?>
+                                                            <td><?php echo $f_h; ?></td>
+                                                            <td><?php echo $selectOptions ?></td>
+                                                            <td><?php echo $group['n_grupo'] ?></td>
+                                                        <?php } ?>
+                                                    </tr>
+
+                                            <?php
                                                 }
                                             }
-                                            /*        }
-                                            } */
+
 
                                             ?>
 
-                                            <!-- // rol 1 admin  -->
+                                            <!-- // rol 1 admin  ACA EMPIEZA TODO EL ROL 1  rol 1 admin  ACA EMPIEZA TODO EL ROL 1   -rol 1 admin  ACA EMPIEZA TODO EL ROL 1   - -->
                                             <?php if ($_SESSION['rol'] == 1) {
-                                                error_reporting(E_ERROR | E_PARSE);
+                                                /* error_reporting(E_ERROR | E_PARSE); */
                                                 date_default_timezone_set('America/Bogota');
                                                 $hoy = date("Y-m-d ");
-
-
-
 
                                                 function ingreso($hora)
                                                 {
                                                     $timestamp = strtotime($hora); // Convertir la fecha en un timestamp    
-                                                    $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+                                                    $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"	
 
                                                     return $hora;
                                                 }
-
                                                 $hora_ingreso_1 = "7:01:00";
                                                 $hora_ingreso_2 = "7:10:59";
                                                 $hora_ingreso_3 = "7:11:00";
 
+                                                $campana = mysqli_query($conn, "SELECT * FROM users ");
+
+                                                foreach ($campana as $user_2) {
+                                                    $campana_2 = mysqli_query($conn, "SELECT  u.*,l.*,l.id AS id_login FROM users u, log_session l
+                                            WHERE l.id_user = '{$user_2['cedula']}'                                                    
+                                            AND DATE(f_h)  = '{$hoy}' 
+                                            AND u.id_grupo = $_SESSION[id_grupo]
+                                            AND l.accion='login'
+                                            GROUP BY l.id_user
+                                            ORDER BY l.f_h DESC;");
+
+                                                    if (mysqli_num_rows($campana_2) > 0) {
+                                                        $user = mysqli_fetch_assoc($campana_2);
+                                                        $timestamp = strtotime($user['f_h']); // Convertir la fecha en un timestamp    
+                                                        $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+
+                                                        if ($hora < ingreso($hora_ingreso_1)) {
+                                                            $class = "text-success";
+                                                        } elseif ($hora <= ingreso($hora_ingreso_2)) {
+                                                            $class = "text-warning";
+                                                        } elseif ($hora >= ingreso($hora_ingreso_3)) {
+                                                            $class = "text-danger";
+                                                        } else {
+                                                            echo "error";
+                                                        }
+
+                                                        $f_h = $user['f_h'];
 
 
-                                                if (isset($_SESSION['unique_id'])) {
-                                                    $output = '';
+                                                        $selectOptions = '
+                    <select class="form-control" name="ausencia_' . $user['id_user'] . '">
+                        <option value="0"> Elige una opción </option>
+                        <option value="1">Ausencia Justificada</option>
+                        <option value="2">Ausencia Injustificada</option>
+                        <option value="3">Incapacidad</option>
+                        <option value="4">Permiso</option>
+                        <option value="5">Sanción</option>
+                        <option value="6">Vacaciones</option>
+                        <option value="7">Licencia de Maternidad</option>
+                        <option value="8">Licencia de Paternidad</option>
+                    </select>
+                ';
 
-                                                    $data = json_decode($_POST['x']);
-                                                    if ($data[0]->tipo == 0) {
-                                                        $incoming_id = $data[0]->id_grupo;
-                                                        $campana = mysqli_query($conn, "SELECT  u.*,l.*,l.id AS id_login FROM users u, log_session l
-                                                    WHERE l.id_user =u.cedula                                                    
-                                                    AND DATE(f_h)  = '{$hoy}' 
-                                                    AND l.accion='login'
-                                                    GROUP BY l.id_user
-                                                    ORDER BY l.f_h DESC;");
-
-
-                                                        foreach ($campana as $user) {
-                                                            $grupos = mysqli_query($conn, "SELECT * FROM grupos WHERE id_grupo='{$user['id_grupo']}'");
-                                                            $group = mysqli_fetch_assoc($grupos);
-
-
-
-                                                            $timestamp = strtotime($user['f_h']); // Convertir la fecha en un timestamp    
-                                                            $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
-
-                                                            if ($hora < ingreso($hora_ingreso_1)) {
-                                                                $class = "text-success";
-                                                            } elseif ($hora <= ingreso($hora_ingreso_2)) {
-                                                                $class = "text-warning";
-                                                            } elseif ($hora >= ingreso($hora_ingreso_3)) {
-                                                                $class = "text-danger";
-                                                            } else {
-                                                                echo "error";
-                                                            }
-
-                                            ?>
-                                                            <tr>
-                                                                <input type="hidden" name="ids_login[]" value="<?php echo $user['id_login'] ?>">
-                                                                <input type="hidden" name="user_<?php echo $user['id_login'] ?>" value="<?php echo $user['id_user'] ?>">
-                                                                <input type="hidden" name="grupo_<?php echo $user['id_login'] ?>" value="<?php echo $group['n_grupo'] ?>">
-                                                                <input type="hidden" name="n_user_<?php echo $user['id_login'] ?>" value="<?php echo $user['n_user'] ?>">
-                                                                <input type="hidden" name="l_user_<?php echo $user['id_login'] ?>" value="<?php echo $user['l_user'] ?>">
-                                                                <input type="hidden" name="fecha_<?php echo $user['id_login'] ?>" value="<?php echo $user['f_h'] ?>">
-
-                                                                <td scope="row" class="<?php echo $class ?>" id=""> <?php echo $user['n_user'] . " " .  $user['l_user'] ?> </td>
-                                                                <td> <?php echo $user['f_h'] ?> </td>
-                                                                <td>
-                                                                    <select class="form-control" name="ausencia_<?php echo $user['id_login'] ?>">
-                                                                        <option value="0"> Elige una opción </option>
-                                                                        <option value="1">Ausencia Justificada</option>
-                                                                        <option value="2">Ausencia Injustificada</option>
-                                                                        <option value="3">Incapacidad</option>
-                                                                        <option value="4">Permiso</option>
-                                                                        <option value="5">Sanción</option>
-                                                                        <option value="6">Vacaciones</option>
-                                                                        <option value="7">Licencia de Maternidad</option>
-                                                                        <option value="8">Licencia de Paternidad</option>
-                                                                        <br>
-
-                                                                </td>
-                                                                <td> <?php echo $group['n_grupo'] ?> </td>
-                                                            </tr>
-                                            <?php }
+                                                        $esta = 1;
+                                                        $cedula = $user['id_user'];
+                                                    } else {
+                                                        $esta = 0;
+                                                        $f_h = "No se ha logueado hoy";
+                                                        $cedula = $user_2['cedula'];
+                                                        $selectOptions = '
+                    <select class="form-control" name="ausencia_' . $user_2['cedula'] . '">
+                        <option value="0"> Elige una opción </option>
+                        <option value="1">Ausencia Justificada</option>
+                        <option value="2">Ausencia Injustificada</option>
+                        <option value="3">Incapacidad</option>
+                        <option value="4">Permiso</option>
+                        <option value="5">Sanción</option>
+                        <option value="6">Vacaciones</option>
+                        <option value="7">Licencia de Maternidad</option>
+                        <option value="8">Licencia de Paternidad</option>
+                    </select>
+                ';
                                                     }
+
+                                                    $grupos = mysqli_query($conn, "SELECT * FROM grupos WHERE id_grupo='{$user_2['id_grupo']}' ");
+                                                    $group = mysqli_fetch_assoc($grupos);
+                                            ?>
+                                                    <tr>
+                                                        <input type="hidden" name="ids_login[]" value="<?php echo $cedula ?>">
+                                                        <input type="hidden" name="n_user_<?php echo $cedula ?>" value="<?php echo $user_2['n_user']  ?>">
+                                                        <input type="hidden" name="l_user_<?php echo $cedula ?>" value="<?php echo $user_2['l_user'] ?>">
+                                                        <input type="hidden" name="grupo_<?php echo $cedula ?>" value="<?php echo $group['n_grupo'] ?>">
+                                                        <input type="hidden" name="fecha_<?php echo $cedula ?>" value="<?php echo $f_h ?>">
+                                                        <td><?php echo $cedula ?></td>
+                                                        <td scope="row" class="<?php echo $class ?>"><?php echo $user_2['n_user'] . " " . $user_2['l_user'] ?></td>
+                                                        <?php if ($esta == 1) { ?>
+                                                            <td><?php echo $f_h; ?></td>
+                                                            <td><?php echo $selectOptions ?></td>
+                                                            <td><?php echo $group['n_grupo'] ?></td>
+                                                        <?php } else { ?>
+                                                            <td><?php echo $f_h; ?></td>
+                                                            <td><?php echo $selectOptions ?></td>
+                                                            <td><?php echo $group['n_grupo'] ?></td>
+                                                        <?php } ?>
+                                                    </tr>
+
+                                            <?php
                                                 }
                                             }
 
-                                            /*        }
-                                            } */
 
                                             ?>
-
-
 
                                         </tbody>
                                     </table>

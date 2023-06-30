@@ -7,17 +7,16 @@ $hoy = date("Y-m-d ");
 $response = array();
 $existeUser = array(); // Almacena los nombres de usuarios existentes
 
-foreach ($_POST['ids_login'] as $key => $id_login) {
-    $cedula = $_POST['cedula_' . $id_login];
-    $user = $_POST['user_' . $id_login];
-    $n_user = $_POST['n_user_' . $id_login];
-    $l_user = $_POST['l_user_' . $id_login];
-    $fecha = $_POST['fecha_' . $id_login];
-    $grupo = $_POST['grupo_' . $id_login];
-    $ausencia = $_POST['ausencia_' . $id_login]; // Nuevo campo para obtener el valor del select
-
-    $validar = $pdo->prepare("SELECT n_user, f_h FROM observacion_coordinadores WHERE n_user = ? AND DATE(f_h)  = '{$hoy}'");
-    $validar->execute([$n_user]);
+foreach ($_POST['ids_login'] as $key => $cedula) {
+    
+    $n_user = $_POST['n_user_' . $cedula];
+    $l_user = $_POST['l_user_' . $cedula];
+    $fecha = $_POST['fecha_' . $cedula];
+    $grupo = $_POST['grupo_' . $cedula];
+    $ausencia = $_POST['ausencia_' . $cedula]; // Nuevo campo para obtener el valor del select
+    
+    $validar = $pdo->prepare("SELECT n_user, f_h FROM observacion_coordinadores WHERE n_user = ? AND (DATE(f_h) = ? OR f_h = 'No se ha logueado hoy')");
+    $validar->execute([$n_user, $hoy]);
 
     if (floatval($ausencia) != 0) {
         $texto = '';

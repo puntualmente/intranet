@@ -14,7 +14,7 @@ const form = document.querySelector("#reg_observa"),
         console.log(r);
         var alerta = document.getElementById('alerta');
         var successCount = 0;
-  
+    
         for (var i = 0; i < r.length; i++) {
           if (r[i].success) {
             successCount++;
@@ -25,7 +25,7 @@ const form = document.querySelector("#reg_observa"),
             alerta.className = 'alert alert-danger';
           }
         }
-  
+    
         if (successCount > 0) {
           alerta.innerHTML = '¡Gracias! ' + successCount + ' datos fueron enviados con éxito... 👍';
           alerta.className = 'alert alert-success';

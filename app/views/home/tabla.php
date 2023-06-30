@@ -58,13 +58,44 @@
                                             date_default_timezone_set('America/Bogota');
                                             $hoy = date("Y-m-d ");
 
+                                            function ingreso($hora)
+                                            {
+                                                $timestamp = strtotime($hora); // Convertir la fecha en un timestamp    
+                                                $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+
+                                                return $hora;
+                                            }
+
+                                            $hora_ingreso_1 = "7:01:00";
+                                            $hora_ingreso_2 = "7:10:59";
+                                            $hora_ingreso_3 = "7:11:00";
+
+
+                                            
+                                            
+
                                             // Obtengo los datos de la tabla observacion_coordinadores y les hago un assoc para guardarlos
-                                            $query = $pdo->query("SELECT cedula,n_user, l_user, f_h, observaciones,campana FROM observacion_coordinadores WHERE DATE(f_h)  = '{$hoy}'");
+                                            $query = $pdo->query("SELECT cedula,n_user, l_user, f_h, observaciones,campana FROM observacion_coordinadores");
                                             $observaciones = $query->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach ($observaciones as $observacion) { ?>
+                                            foreach ($observaciones as $observacion) { 
+                                                
+                                                $timestamp = strtotime($observacion['f_h']); // Convertir la fecha en un timestamp    
+                                            $hora = date("H:i", $timestamp); // Obtener la hora en formato "HH:MM"
+
+                                            if ($hora < ingreso($hora_ingreso_1)) {
+                                                $class = "text-success";
+                                            } elseif ($hora <= ingreso($hora_ingreso_2)) {
+                                                $class = "text-warning";
+                                            } elseif ($hora >= ingreso($hora_ingreso_3)) {
+                                                $class = "text-danger";
+                                            } else {
+                                                echo "error";
+                                            }?>
+
+                                            
                                                 <tr>
-                                                    <td><?php echo $observacion['cedula']; ?></td>
-                                                    <td><?php echo $observacion['n_user'] . " " . $observacion['l_user']; ?></td>
+                                                    <td class="<?php echo $class ?>"><?php echo $observacion['cedula']; ?></td>
+                                                    <td class="<?php echo $class ?>"><?php echo $observacion['n_user'] . " " . $observacion['l_user']; ?></td>
                                                     <td><?php echo $observacion['f_h']; ?></td>
                                                     <td><?php echo $observacion['observaciones']; ?></td>
                                                     <td><?php echo $observacion['campana']; ?></td>

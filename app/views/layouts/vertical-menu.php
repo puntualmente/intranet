@@ -231,7 +231,8 @@
 
                     <li> 
                     <a href="campana">
-                            
+                            <i class="bx bxs-user-detail"></i>
+                        
                             <span data-key="t-horizontal">Mi Campaña</span>
                         </a>
                     </li>
