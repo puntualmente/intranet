@@ -37,12 +37,24 @@ if($userPuntualmente->iniciar_sesion()){
             case 'perfildata':
                 $userPuntualmente->perfildata();
                 break;
+                case 'campana':
+                    $userPuntualmente->campana();
+                    break;
+                    
+                case 'observaciones':
+                    $userPuntualmente->observaciones();
+                    break;
 
+                    case 'tabla':
+                        $userPuntualmente->tabla();
+                        break;
             //mostrar imagen chat
 
             case 'mostrarimagenchat':
                 $userPuntualmente->mostrarimagenchat();
                 break;
+
+           
 
 
             //Listado de usuarios
@@ -121,6 +133,7 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->adminusers();
                 break;
 
+
                 //ETICKETAS
 
             case 'adetiquetas':
@@ -193,7 +206,10 @@ if($userPuntualmente->iniciar_sesion()){
             case 'mostrarimagenchat':
                 $userPuntualmente->mostrarimagenchat();
                 break;
-
+ 
+                //Tabla Observaciones
+ 
+               
                 // CHAT
                 case 'chat':
                     $userPuntualmente->chat();
@@ -260,6 +276,15 @@ if($userPuntualmente->iniciar_sesion()){
                 $userPuntualmente->guardar_etiqueta();
                 break;
 
+                /** TABLAS CAMPAÑA */
+
+            case 'campana':
+                $userPuntualmente->campana();
+                break;
+                
+            case 'observaciones':
+                $userPuntualmente->observaciones();
+                break;
 
 
             
