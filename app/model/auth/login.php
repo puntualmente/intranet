@@ -74,6 +74,7 @@ if (!empty($cedula) && !empty($password)) {
                         }else{
                             if($_SESSION['rol']==3){
                                 $_SESSION['permisochat']=0;
+                                $_SESSION['permisoetiquetado']=1;
                             }elseif($_SESSION['rol']==1||$_SESSION['rol']==2){
                                 $_SESSION['permisochat']=1;
                                 $_SESSION['permisoetiquetado']=1;
