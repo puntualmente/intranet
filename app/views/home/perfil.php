@@ -36,7 +36,7 @@
 ?>
     
 <head>
-    <!-- choices css -->
+    <!-- choices css --> 
     <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
 
     <!-- color picker css -->
