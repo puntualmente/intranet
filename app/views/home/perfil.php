@@ -5,8 +5,14 @@
       include_once(__dir__."/../../model/admintablas/sqls_admin.php");
       require (__dir__."/../../model/data/pdo.php");
 
-    $consultarRegistros = $pdo->prepare("SELECT * FROM persona WHERE cedula = '{$_SESSION['cedula']}'");
+    $consultarRegistros = $pdo->prepare("SELECT * FROM persona WHERE cedula = '{$_SESSION['cedula']}' AND validos = 1");
     $consultarRegistros->execute();
+
+    $cuantosdatos = $pdo->prepare("SELECT * FROM persona WHERE cedula = '{$_SESSION['cedula']}'");
+    $cuantosdatos->execute();
+
+    $traerdatos = $pdo->prepare("SELECT * FROM persona WHERE cedula = '{$_SESSION['cedula']}'");
+    $traerdatos->execute();
 
       function cantidad($objetos){
         $contador = 0;
@@ -40,7 +46,6 @@
 
     <!-- datepicker css -->
     <link rel="stylesheet" href="<?php echo controlador::$rutaAPP?>app/assets/libs/flatpickr/flatpickr.min.css">
-    <title>Registro | Admin-Puntualmente</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
     <?php include(__dir__."/../layouts/head-style.php");?>
 
@@ -97,9 +102,36 @@
                             </div> <!-- end card header -->
                         <?php if(cantidad($consultarRegistros)>0){?>
                             <div class="alert alert-success" role="alert">
-                                    Gracias!! Datos Enviados Con Exito... 👍
-                                </div>
-                        <?php }else{ ?>
+                                Gracias!! Datos Enviados Con Éxito, Tus documentos serán validados... 👍                                
+                            </div>
+                        <?php }else{ 
+                            
+                            if(cantidad($cuantosdatos)>0){
+
+                                foreach($traerdatos as $dato){
+
+                                    $celular = $dato->celular;
+                                    $correo = $dato->correo;
+                                    $direccion = $dato->direccion;
+                                    $idiomas = $dato->idiomas;
+                                    $informaticos = $dato->conoci_informa;
+                                    $aptitudes = $dato->aptitudes_habili;
+                                    $perfil =  $dato->perfil;
+
+                                }
+                              
+                            }else{
+                                    $celular = "";
+                                    $correo = "";
+                                    $direccion = "";
+                                    $idiomas = "";
+                                    $informaticos = "";
+                                    $aptitudes = "";
+                                    $perfil =  "";
+                            }
+                            ?>
+
+                                
                             
                             <div class="card-body">
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -123,15 +155,15 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="celular" class="form-label">Celular</label>
-                                                        <input class="form-control" name="celular" type="text" id="celular" autocomplete="off">
+                                                        <input class="form-control" name="celular" type="text" id="celular" autocomplete="off" value="<?php echo $celular?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="direccion" class="form-label">Dirección</label>
-                                                        <input class="form-control" name="direccion" type="text" id="direccion" autocomplete="off">
+                                                        <input class="form-control" name="direccion" type="text" id="direccion" autocomplete="off" value="<?php echo $direccion?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="con_info" class="form-label">Conocimientos Informáticos</label>
-                                                        <textarea class="form-control" name="con_info" type="text" id="con_info" autocomplete="off"></textarea>
+                                                        <textarea class="form-control" name="con_info" type="text" id="con_info" autocomplete="off"><?php echo $informaticos ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -142,22 +174,22 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="correo" class="form-label">Correo</label>
-                                                            <input class="form-control" name="correo" type="email" id="correo" autocomplete="off">
+                                                            <input class="form-control" name="correo" type="email" id="correo" autocomplete="off" value="<?php echo $correo ?>">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="idiomas" class="form-label">Idiomas</label>
-                                                            <input class="form-control" name="idiomas" type="text" id="idiomas" placeholder="Ingresa los idiomas separados por comas" autocomplete="off">
+                                                            <input class="form-control" name="idiomas" type="text" id="idiomas" placeholder="Ingresa los idiomas separados por comas" autocomplete="off" value="<?php echo $idiomas ?>">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="ap_hab" class="form-label">Aptitudes y Habilidades</label>
-                                                            <textarea class="form-control" name="ap_hab" type="text" id="ap_hab" autocomplete="off"></textarea>
+                                                            <textarea class="form-control" name="ap_hab" type="text" id="ap_hab" autocomplete="off"><?php echo $aptitudes?></textarea>
                                                         </div>
                                                     </div>
 
                                                 </div class="col-lg-6">
                                                     <div class="mb-3">
                                                         <label for="perfil" class="form-label">Tu Perfil</label>
-                                                        <textarea class="form-control" name="perfil" type="text" id="perfil" autocomplete="off"></textarea>
+                                                        <textarea class="form-control" name="perfil" type="text" id="perfil" autocomplete="off"><?php echo $perfil ?></textarea>
                                                     </div>
                                                 <div>
                                                     <div class="card">

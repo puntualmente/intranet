@@ -2,6 +2,26 @@
 
 require (__dir__."/../data/pdo.php");
 
+$username="";
+$usernamearr = explode(' ', $_SESSION['username']); 
+
+foreach($usernamearr as $user){
+    $username.=$user;
+}
+
+$micarpeta = __DIR__."/../../assets/archivosUsers/".$username;
+
+function cantidad($objetos){
+    $contador = 0;
+    foreach($objetos as $trabajo){
+        $contador = $contador + 1;
+    }
+    return $contador;
+  }
+
+  $consultarRegistros = $pdo->prepare("SELECT * FROM persona WHERE cedula = '{$_SESSION['cedula']}'");
+  $consultarRegistros->execute();
+
 if(isset($_POST['x'])){
 
     $data = json_decode($_POST['x']);
@@ -13,6 +33,8 @@ if(isset($_POST['x'])){
         $f_ini_emp = $data[0]->f_ini_emp;
         $f_fin_emp = $data[0]->f_fin_emp;
         $funciones = $data[0]->funciones;
+
+
 
         $guardarInfo = $pdo->prepare("INSERT INTO exp_laboral_persona (cedula, empresa, cargo, funciones, f_inicio, f_fin) VALUES ('{$_SESSION['cedula']}', '{$empresa}','{$cargo}', '{$funciones}', '{$f_ini_emp}', '{$f_fin_emp}')");
 
@@ -92,9 +114,21 @@ if(isset($_POST['x'])){
 
 if(!empty($_POST['nombre'])&&!empty($_POST['celular'])&&!empty($_POST['direccion'])&&!empty($_POST['con_info'])&&!empty($_POST['cedula'])&&!empty($_POST['correo'])&&!empty($_POST['idiomas'])&&!empty($_POST['ap_hab'])&&!empty($_POST['perfil'])){
 
-    $guardarInfo = $pdo->prepare("INSERT INTO persona (nombre, cedula, celular, correo, direccion, idiomas, aptitudes_habili, conoci_informa, perfil) VALUES ('{$_POST['nombre']}', '{$_POST['cedula']}','{$_POST['celular']}', '{$_POST['correo']}', '{$_POST['direccion']}', '{$_POST['idiomas']}', '{$_POST['ap_hab']}', '{$_POST['con_info']}', '{$_POST['perfil']}')");
+    if(cantidad($consultarRegistros)==0){
 
-    $guardarInfo->execute();
+        $guardarInfo = $pdo->prepare("INSERT INTO persona (nombre, cedula, celular, correo, direccion, idiomas, aptitudes_habili, conoci_informa, perfil, validos) VALUES ('{$_POST['nombre']}', '{$_POST['cedula']}','{$_POST['celular']}', '{$_POST['correo']}', '{$_POST['direccion']}', '{$_POST['idiomas']}', '{$_POST['ap_hab']}', '{$_POST['con_info']}', '{$_POST['perfil']}', 1)");
+
+        $guardarInfo->execute();
+
+    }else{
+
+
+        $guardarInfo = $pdo->prepare("UPDATE persona SET nombre = '{$_POST['nombre']}', celular = '{$_POST['celular']}', correo = '{$_POST['correo']}', direccion = '{$_POST['direccion']}', idiomas = '{$_POST['idiomas']}', aptitudes_habili = '{$_POST['ap_hab']}', conoci_informa = '{$_POST['con_info']}', perfil = '{$_POST['perfil']}', validos = 1 WHERE cedula = '{$_SESSION['cedula']}'");
+
+        $guardarInfo->execute();
+
+        
+    } 
 
 }else{
     echo "No estan los datos";

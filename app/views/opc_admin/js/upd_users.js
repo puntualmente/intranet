@@ -23,7 +23,8 @@ function validar() {
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
             data=xhr.response;
-            console.log(data);
+            alertify.success(data, 0);
+
       }
     }
   }

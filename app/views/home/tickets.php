@@ -7,7 +7,6 @@
 
 <head>
 
-    <title> Tickets | Puntualmente</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
 
     <!-- choices css -->
@@ -23,8 +22,6 @@
 
 
     <?php include(__dir__."/../layouts/head-style.php");  ?>
-
-    <link href="<?php echo controlador::$rutaAPP?>app/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -51,7 +48,7 @@
                             </div>
                             <div class="card-body">
 
-                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style="width:100%; " >
+                                <table id="ticketstable" class="table table-bordered dt-responsive  nowrap w-100" style="width:100%; " >
                                     <thead>
                                         <tr>
                                             <th>ID Ticket</th>
@@ -361,6 +358,21 @@
 <!-- JAVASCRIPT -->
 
 <?php include (__dir__."/../layouts/vendor-scripts.php")?>
+
+<script>
+               
+               $( document ).ready( function() {
+           
+                    $('#ticketstable').DataTable({
+           
+                               aaSorting: [[4, 'asc']],
+                            
+                    });                      
+                   
+               } )
+
+           
+</script>
 
 <!-- Required datatable js -->
 <script src="<?php echo controlador::$rutaAPP?>app/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>

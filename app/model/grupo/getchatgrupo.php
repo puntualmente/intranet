@@ -112,7 +112,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                     <div class="dropdown-menu">
                                                    
                                                         <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
-                                                        <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button>
+                                                        
                         
                                                     </div>
                                                 </div>
@@ -126,6 +126,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
     
             ';
             return $output;
+            /* <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button> */
         }
     
         function salida($nombre, $mensaje, $hora, $id){
@@ -145,7 +146,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                             <div class="dropdown-menu">
                                                    
                                 <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
-                                <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button>
+                               
  
                             </div>
                         </div>
@@ -157,6 +158,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                 </li>    
             ';
             return $output;
+            /*  <button type="button" id="'.$id.'" value="'.$mensaje.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviarid1v1(this.id, this.value)">Reenviar </button> */
         }
         
         function entradamostrarimagen($nombre, $hora, $imagen, $id){
@@ -169,7 +171,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <ul class="list-inline message-img mt-3  mb-0">
                                                             <li class="list-inline-item message-img-list">
                                                                 <a class="d-inline-block m-1">
-                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="'.$imagen.'" class="rounded img-thumbnail" onclick="verimagengrupo(this.alt)" type="button">
+                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" class="rounded img-thumbnail" onclick="verimagengrupo(this.alt)" type="button">
                                                                 </a>                                                                  
                                                             </li>
     
@@ -182,7 +184,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <div class="dropdown-menu">
                                                                             
                                                             <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
-                                                            <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button>
+                                                            
                             
                                                     </div>
                                                     
@@ -191,6 +193,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                         </li>
                                     </ul>';
             return $output;
+            /* <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button> */
         }
     
         function salidamostrarimagen($nombre, $hora, $imagen, $id){
@@ -203,7 +206,7 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <ul class="list-inline message-img mt-3  mb-0">
                                                             <li class="list-inline-item message-img-list">
                                                                 <a class="d-inline-block m-1">
-                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="'.$imagen.'" class="rounded img-thumbnail" onclick="verimagengrupo(this.alt)" type="button">
+                                                                    <img src="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" alt="'.controlador::$rutaAPP.'app/assets/images/chatgrupos/'.$imagen.'" class="rounded img-thumbnail" onclick="verimagengrupo(this.alt)" type="button">
                                                                 </a>                                                                  
                                                             </li>
     
@@ -217,12 +220,14 @@ $vistos="UPDATE mensajes_grupos SET estado = 1 WHERE (id_grupo = {$incoming_id})
                                                         <div class="dropdown-menu">
                                                                             
                                                             <button type="button" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_etiq_msg" onclick="pasarid('.$id.')">Etiquetar </button>
-                                                            <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button>
+                                                            
                             
                                                     </div>
                                             </div>
                                         </li>
                                     </ul>';
             return $output;
+
+            /* <button type="button" id="'.$id.'" value="'.$imagen.'" class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#modal_reenviar_msg" onclick="enviaridgrupo(this.id, this.value)">Reenviar </button> */
         }
 ?>

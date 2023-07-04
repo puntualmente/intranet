@@ -30,6 +30,8 @@ function headerchatgrupo($letra, $nombre, $id_grupo, $soyadmin){
     $output='
         <input type="text" id="id_enviar" name="id_enviar" hidden dissabled value ="'.$id_grupo.'">
         <input type="text" id="tipo_chat" name="tipo_chat" hidden dissabled value ="chat_grupo">
+        <input type="hidden" id="es_mi_jefe" name="es_mi_jefe" dissabled value ="0">
+
 
     <div class="row">
     <input type="text" id="esgrupo" name="esgrupo" hidden dissabled value ="true">
@@ -70,6 +72,7 @@ function headerchatgrupo($letra, $nombre, $id_grupo, $soyadmin){
 
                 '.admin($soyadmin, $id_grupo).'
                 
+                
             </ul>                                                                                                                                                                                                                                                                                        
         </div>
     </div>
@@ -82,7 +85,7 @@ function headerchatgrupo($letra, $nombre, $id_grupo, $soyadmin){
 
 function admin($soyadmin, $id){
 
-    if($soyadmin){
+    if($soyadmin||$_SESSION['rol']==1){
         $output='
         <li class="list-inline-item">
             <div class="dropdown">
@@ -92,7 +95,9 @@ function admin($soyadmin, $id){
                 <div class="dropdown-menu dropdown-menu-end">
                     <a id="'.$id.'" onclick="datosgrupo(this.id)" class="dropdown-item" type="button" class="dropdown-item" data-bs-toggle="modal"
                     data-bs-target="#popupeditargrupos">Editar Grupo</a>
+                    <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" >Mensajes Destacados</button>
                 </div>
+                
             </div>
         </li>
     ';

@@ -7,7 +7,6 @@
 
 <head>
 
-    <title>Mis Tickets | Puntualmente</title>
     <?php include(__dir__."/../layouts/head.php");  ?>
 
     <!-- choices css -->

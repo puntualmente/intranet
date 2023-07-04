@@ -3,8 +3,10 @@
       include_once(__dir__."/../admintablas/sqls_admin.php");
       include_once (__dir__."/../config.php");
 
-      $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE id_jefe = '{$_SESSION['unique_id']}' and estado = 1");
+      $tickets=mysqli_query($conn, "SELECT * FROM tickets WHERE (id_jefe = '{$_SESSION['unique_id']}' AND es_grupo = 0 AND estado = 1) OR (id_jefe = '{$_SESSION['id_grupo']}' AND es_grupo = 1 AND estado = 1)");
       $redir_tickets=mysqli_query($conn, "SELECT * FROM ticket_redireccion where id_jefe = '{$_SESSION['unique_id']}' and estado = 1");
+      $user_status=mysqli_query($conn, "SELECT (mantenimiento) FROM users WHERE cedula = '{$_SESSION['cedula']}'");
+      $status = mysqli_fetch_assoc($user_status);
 
 if(!isset($_POST['x'])){
 
@@ -19,9 +21,21 @@ if(!isset($_POST['x'])){
 
         }
         echo $total;
+
     }else{
+        
         echo 0;
+    
     }
+
+        if($status['mantenimiento']){
+            $_SESSION['mantenimiento']=1;
+            header("Location: home");
+        }else{
+            $_SESSION['mantenimiento']=0;
+        }
+
+
     
 
 }else{
@@ -42,7 +56,6 @@ if(!isset($_POST['x'])){
         }else{
             echo 0;
         }
-
     }elseif($estado==3){
         /*
         $notys_dinam=mysqli_query($conn, "SELECT * FROM notificaciones WHERE id_destino = '{$_SESSION['unique_id']}' and visto = 0");
