@@ -56,6 +56,21 @@ class controlador{
         include_once(__dir__."/../views/opc_admin/actualizar_listado.php");
     }
 
+    public function campana(){
+        include_once(__dir__."/../views/home/campaña.php");
+    }
+
+    public function observaciones(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            include_once(__dir__."/../model/observaciones/observaciones.php");
+        }else{
+            header("location: registrar");
+        }
+    }
+    public function tabla(){
+        include_once(__dir__."/../views/home/tabla.php");
+    }
+
     public function subirArchivoUs(){
         include_once(__dir__."/../model/OtrasConfigs/subirArchivoUs.php");
     }

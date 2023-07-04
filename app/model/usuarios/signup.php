@@ -17,6 +17,7 @@ $grupo = mysqli_real_escape_string($conn, $_POST['grupo']);
 
 
 
+
 if (!empty($fname) && !empty($lname) && !empty($cedula) && !empty($f_nacimiento) && !empty($telefono) && !empty($password) && !empty($rol) && $area!=0 && $grupo!=0 && $empresa!=0 && $sede!=0) {
         $sql = mysqli_query($conn, "SELECT * FROM users WHERE cedula = '{$cedula}'");
         if (mysqli_num_rows($sql) > 0) {

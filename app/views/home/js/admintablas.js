@@ -48,6 +48,9 @@ function agregararea(){
         xhr.send("x=" + dbParam);
     }
 
+    //Funcion boton confirmar
+
+
 
 //------------------------SEDES--------------------
 function agregarsede(){
@@ -147,6 +150,57 @@ function agregarsede(){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("x=" + dbParam);
     }
+/** 
+    function agregareobserva(){
+      empresatabla=document.getElementById('');
+      enombre=document.getElementById('').value;
+  
+      console.log(enombre);
+  
+      obj = [{ "nombre": `${enombre}`, "estado": 5, borrar: false }];
+          console.log(obj)
+          dbParam = JSON.stringify(obj);
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "admintablas", true);
+        xhr.onload = ()=>{
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status === 200){
+              let data = xhr.response;
+              document.getElementById('nombrempresa').value='';
+              empresatabla.innerHTML = data;
+            }
+        }
+      }
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send("x=" + dbParam);
+  }
+*/
+
+    //Funcion agregar observaciones
+  //   function aggobserva(){
+  //     sedetabla=document.getElementById('sedetabla');
+  //     snombre=document.getElementById('nombresede').value;
+      
+  //     console.log(snombre);
+      
+  //         obj = [{ "nombre": `${snombre}`, "estado": 4, borrar: false }];
+  //             console.log(obj)
+  //             dbParam = JSON.stringify(obj);
+  //           let xhr = new XMLHttpRequest();
+  //           xhr.open("POST", "admintablas", true);
+  //           xhr.onload = ()=>{
+  //           if(xhr.readyState === XMLHttpRequest.DONE){
+  //               if(xhr.status === 200){
+  //                 let data = xhr.response;
+  //                 document.getElementById('nombresede').value='';
+  //                 sedetabla.innerHTML = data;
+  //               }
+  //           }
+  //         }
+  //         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  //         xhr.send("x=" + dbParam);
+  // }
+
     /*
     function cambtamaño(){
       msgtamaño=document.getElementById("msjtamaño");
