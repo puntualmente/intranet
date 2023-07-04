@@ -137,7 +137,7 @@
                 ';
                                                     }
 
-                                                    $grupos = mysqli_query($conn, "SELECT * FROM grupos WHERE id_grupo='{$user['id_grupo']}' ");
+                                                    $grupos = mysqli_query($conn, "SELECT * FROM grupos WHERE id_grupo='{$user_2['id_grupo']}' ");
                                                     $group = mysqli_fetch_assoc($grupos);
                                             ?>
                                                     <tr>
