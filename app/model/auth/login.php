@@ -4,15 +4,47 @@
     include_once (__dir__."/../OtrasConfigs/get-ip.php");
 
 
-
-//include_once "get-ip.php";
+$ip=getRealIP();
 
 $cedula = mysqli_real_escape_string($conn, $_POST['cedula']);
 $password = mysqli_real_escape_string($conn, $_POST['contraseña']);
+
 if (!empty($cedula) && !empty($password)) {
+
     $sql = mysqli_query($conn, "SELECT * FROM users WHERE cedula = '{$cedula}'");
-    if (mysqli_num_rows($sql) > 0) {
+    $lista_ips = mysqli_query($conn, "SELECT * FROM ips_list");
+
+    $ip_session = explode(".", $ip);
+
+    if(mysqli_num_rows($sql)>0){
         $row = mysqli_fetch_assoc($sql);
+    }
+    
+    if($row['login_externo']==1){
+
+        $session_valida=true;
+       
+    }else{
+        foreach(arrayIps($lista_ips) as $ip_v){
+        
+            $ip_valida = explode(".", $ip_v);
+    
+            if($ip_session[0] == $ip_valida[0] && $ip_session[1] == $ip_valida[1] && $ip_session[2] == $ip_valida[2]){
+                $session_valida = true;
+                break;
+            }else{
+                $session_valida = false;
+                $ip_valida="";
+    
+            }
+        }
+    }
+    
+
+if ($session_valida) {
+
+    if (mysqli_num_rows($sql) > 0) {
+
         $user_pass = md5($password);
         $enc_pass = $row['password'];
         if ($user_pass === $enc_pass) {
@@ -28,7 +60,6 @@ if (!empty($cedula) && !empty($password)) {
 
                     
                     $hoy = date("Y-m-d H:i:s"); 
-                    $ip=getRealIP();
 
                     $log_session= mysqli_query($conn, "INSERT INTO log_session (id_user, f_h, ip , accion) VALUES ('{$row['cedula']}', '{$hoy}', '{$ip}', 'login')");
                     
@@ -43,7 +74,6 @@ if (!empty($cedula) && !empty($password)) {
                     $_SESSION['activo']=$row['activo'];
                     $_SESSION['mantenimiento']=$row['mantenimiento'];
 
-                    //solo cree este pedaso
 
                     $sqlpermisochat = mysqli_query($conn, "SELECT * FROM permisos WHERE id_grupo = '{$row['id_grupo']}' and rol = '{$row['rol']}' and id_area = '{$row['id_area']}' and activo = '{$row['activo']}'");
 
@@ -102,5 +132,23 @@ if (!empty($cedula) && !empty($password)) {
         echo "$cedula - ¡Esta cedula no existe!";
     }
 } else {
+    echo "No tienes autorización para iniciar sesión desde tu ip";
+}
+
+} else {
     echo "¡Todos los campos de entrada son obligatorios!";
+}
+
+function arrayIps($lista_ips){
+
+    $array = [];
+
+    foreach($lista_ips as $ips){
+
+        array_push($array, $ips['ip']);
+
+    }
+
+    return $array;
+    
 }
