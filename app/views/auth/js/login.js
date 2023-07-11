@@ -13,7 +13,7 @@ continueBtn.onclick = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
               let data = xhr.response;
-                if(data==="Proceso Exitoso"){
+                if(data==="Proceso Exitoso"||data.length>1000){
                   location.href = "home";
                   window.location.reload()
                 }else{

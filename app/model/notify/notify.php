@@ -30,10 +30,22 @@ if(!isset($_POST['x'])){
 
         if($status['mantenimiento']){
             $_SESSION['mantenimiento']=1;
-            header("Location: home");
+            header("Location: cerrar");
         }else{
             $_SESSION['mantenimiento']=0;
         }
+
+        $hora_limite = strtotime('23:00:00'); 
+
+        $hora_actual = time();
+
+        if ($hora_actual >= $hora_limite) {
+            $_SESSION['vencer_session']=true;
+            header("Location: cerrar");
+        } else {
+            $_SESSION['vencer_session']=false;
+        }
+        
 
 
     

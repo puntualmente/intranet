@@ -23,6 +23,11 @@ if (!empty($cedula) && !empty($password)) {
         die();
     }
     
+    if($row['activo']==0){
+        echo "$cedula - Tu usuario esta inactivo";
+        die();
+    }
+
     if($row['login_externo']==1){
 
         $session_valida=true;
@@ -122,6 +127,7 @@ if ($session_valida) {
                     $_SESSION['status']= $row3['status'];
                     
                     echo "Proceso Exitoso";
+                    
                 } else {
                     echo "Algo salió mal. ¡Inténtalo de nuevo!";
                 }

@@ -2,7 +2,7 @@
 
 // cambiar $_SESSION['mantenimiento'] a 1 para expulsar al usuarios de la session
 
-if($_SESSION['mantenimiento']==0){
+if($_SESSION['mantenimiento']==0||$_SESSION['vencer_session']==false){
     // Initialize the session
     if(!isset($_SESSION)){
         session_start();
