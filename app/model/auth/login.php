@@ -18,6 +18,9 @@ if (!empty($cedula) && !empty($password)) {
 
     if(mysqli_num_rows($sql)>0){
         $row = mysqli_fetch_assoc($sql);
+    }else{
+        echo "$cedula - ¡Esta cedula no existe!";
+        die();
     }
     
     if($row['login_externo']==1){
